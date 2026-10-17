@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinanceGuru — Learn Money, Build Wealth</title>
+  <meta name="description" content="Free, interactive lessons and calculators that teach you budgeting, saving, debt payoff, credit, and investing — in minutes a day.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/">
+  <meta property="og:title" content="FinanceGuru — Learn Money, Build Wealth">
+  <meta property="og:description" content="Free, interactive lessons and calculators that teach you budgeting, saving, debt payoff, credit, and investing — in minutes a day.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Free money lessons</span>
+          <h1>Master your money in 5 minutes a day.</h1>
+          <p class="lead">Bite-sized interactive lessons, quick quizzes, and powerful calculators. No jargon, no sales pitch — just the money skills school never taught you.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="learn.html">Start learning →</a>
+            <a class="btn btn-ghost" href="tools.html">Try the calculators</a>
+          </div>
+        </div>
+        <div class="hero-card" id="hero-demo">
+          <div class="small muted">If you invest <strong id="demo-amt">$300</strong>/month at 8% for <strong id="demo-yrs">30</strong> years…</div>
+          <div class="hero-number" id="demo-result">$447,108</div>
+          <div class="small muted" style="margin-bottom:12px">…you'd put in <span id="demo-in">$108,000</span>. Compounding does the rest.</div>
+          <div class="scene3d" id="hero-3d" hidden>
+            <div class="scene-labels" aria-hidden="true"></div>
+            <div class="tooltip scene-tip"></div>
+            <span class="scene-hint">Drag to rotate · hover a stack (or focus it and press ← →)</span>
+          </div>
+          <div class="chart-legend" style="margin-top:8px">
+            <span><i style="background:#3987e5"></i>What you put in</span>
+            <span><i style="background:#e2b23c"></i>Compound growth</span>
+          </div>
+          <label class="small" for="demo-slider-amt">Monthly amount</label>
+          <input type="range" id="demo-slider-amt" min="50" max="2000" step="50" value="300">
+          <label class="small" for="demo-slider-yrs">Years</label>
+          <input type="range" id="demo-slider-yrs" min="5" max="45" step="1" value="30">
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="container">
+        <div class="card daily-card" id="daily" data-focus-root></div>
+        <p class="small muted" style="margin-top:8px">New question every day. <a href="badges.html">See your streak &amp; badges →</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Deep dives, powered by real data</h2>
+          <p class="muted">Interactive hubs built on 98 years of market returns and official salary statistics.</p>
+        </div>
+        <div class="grid hub-grid">
+          <a class="card hub-card" href="invest.html">
+            <div class="card-icon">📈</div><h3>Investing Hub</h3>
+            <p class="muted small">Asset classes, a stocks-vs-bonds dial, a historical time machine back to 1928, a fee calculator, account types, and a risk quiz.</p>
+            <span class="hub-link">Explore investing →</span>
+          </a>
+          <a class="card hub-card" href="college.html">
+            <div class="card-icon">🎓</div><h3>College &amp; Career ROI</h3>
+            <p class="muted small">Salaries for 73 majors, a degree ROI calculator with your breakeven age, and high-paying careers without a 4-year degree.</p>
+            <span class="hub-link">Is college worth it? →</span>
+          </a>
+          <a class="card hub-card" href="credit.html">
+            <div class="card-icon">💳</div><h3>Credit &amp; Debt</h3>
+            <p class="muted small">A credit score simulator, the minimum-payment trap visualized, and the new 2026 student loan plans compared.</p>
+            <span class="hub-link">Master your credit →</span>
+          </a>
+          <a class="card hub-card" href="taxes.html">
+            <div class="card-icon">🧾</div><h3>Taxes 101</h3>
+            <p class="muted small">See how tax brackets really work, where every dollar of your paycheck goes, and how to fill out a W-4.</p>
+            <span class="hub-link">Decode your taxes →</span>
+          </a>
+          <a class="card hub-card" href="housing.html">
+            <div class="card-icon">🏡</div><h3>Housing</h3>
+            <p class="muted small">A mortgage calculator with this month's rates, a rent-vs-buy showdown, and the true cost of owning a home.</p>
+            <span class="hub-link">Rent or buy? →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Your learning path</h2>
+          <p class="muted">Short lessons that cover the foundations of personal finance, from budgeting to investing to college. Earn XP for every quiz. <a href="learn.html?lang=es" lang="es">También en español →</a></p>
+          <div class="progress" aria-label="Course progress"><span id="home-progress" style="width:0%"></span></div>
+          <p class="small muted" id="home-progress-label" style="margin-top:6px"></p>
+        </div>
+        <div class="grid" id="lesson-grid"><a class="card" href="lessons/budgeting.html"><div class="card-icon">🧾</div><h3>1. Budgeting Basics</h3><p class="muted small">Tell your money where to go instead of wondering where it went.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/emergency-fund.html"><div class="card-icon">🛟</div><h3>2. Your Emergency Fund</h3><p class="muted small">The cushion that stops a bad week from becoming a bad year.</p><div class="card-meta"><span>3 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/debt.html"><div class="card-icon">⛓️</div><h3>3. Crushing Debt</h3><p class="muted small">How interest works against you — and two proven ways to fight back.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/compound-interest.html"><div class="card-icon">📈</div><h3>4. The Magic of Compound Interest</h3><p class="muted small">Why starting early matters more than starting big.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/credit.html"><div class="card-icon">💳</div><h3>5. Understanding Credit Scores</h3><p class="muted small">The three-digit number that affects your rent, loans, and more.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/investing.html"><div class="card-icon">🌱</div><h3>6. Investing 101</h3><p class="muted small">Stocks, index funds, and why boring is beautiful.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/inflation.html"><div class="card-icon">🎈</div><h3>7. Inflation: The Invisible Tax</h3><p class="muted small">Why a dollar buys less every year — and how to keep up.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/risk-time.html"><div class="card-icon">⏳</div><h3>8. Risk, Time &amp; Diversification</h3><p class="muted small">Why stocks are scary for a year but surprisingly reliable for 20.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/retirement-accounts.html"><div class="card-icon">🏦</div><h3>9. Retirement Accounts 101</h3><p class="muted small">401(k), Roth IRA, HSA — the tax-advantaged containers for your investments.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/college-roi.html"><div class="card-icon">🎓</div><h3>10. Is College Worth It?</h3><p class="muted small">Think about a degree like an investment: cost, payoff, and alternatives.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/taxes-101.html"><div class="card-icon">🧾</div><h3>11. Taxes 101: Brackets &amp; Paychecks</h3><p class="muted small">Why a raise never shrinks your paycheck, and what FICA is.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/rent-vs-buy.html"><div class="card-icon">🏡</div><h3>12. Renting vs Buying a Home</h3><p class="muted small">Mortgages, equity, and the hidden costs of owning.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/student-loans-2026.html"><div class="card-icon">📜</div><h3>13. Student Loans: The 2026 Rules</h3><p class="muted small">RAP vs. the Tiered Standard Plan — what changed and how to choose.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a></div><!-- lesson-grid-end -->
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Play your way to smarter money</h2>
+          <p class="muted">Games that teach real lessons. Beat your high score, earn XP.</p>
+        </div>
+        <div class="grid">
+          <a class="card game-card" href="play.html#catcher"><div class="card-icon">🐷</div><h3>Piggy Bank Catcher <span class="badge">3D</span></h3><p class="muted small">Catch coins, dodge impulse buys.</p></a>
+          <a class="card game-card" href="play.html#sorter"><div class="card-icon">⚡</div><h3>Needs vs Wants</h3><p class="muted small">Sort as fast as you can in 30 seconds.</p></a>
+          <a class="card game-card" href="play.html#life"><div class="card-icon">📅</div><h3>Payday: Life Sim</h3><p class="muted small">Survive 12 months of bills, surprises, and temptations.</p></a>
+          <a class="card game-card" href="play.html#market"><div class="card-icon">🎢</div><h3>Market Rollercoaster</h3><p class="muted small">20 years of crashes. Will you panic-sell?</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Free money tools</h2>
+          <p class="muted">Run the numbers on your own life.</p>
+        </div>
+        <div class="grid">
+          <a class="card" href="tools.html#compound"><div class="card-icon">📈</div><h3>Compound Growth</h3><p class="muted small">See how your savings snowball over time.</p></a>
+          <a class="card" href="tools.html#budget"><div class="card-icon">🧾</div><h3>Budget Planner</h3><p class="muted small">Split your paycheck with the 50/30/20 rule.</p></a>
+          <a class="card" href="tools.html#debt"><div class="card-icon">⛓️</div><h3>Debt Payoff</h3><p class="muted small">Avalanche vs. snowball — find your debt-free date.</p></a>
+          <a class="card" href="tools.html#emergency"><div class="card-icon">🛟</div><h3>Emergency Fund</h3><p class="muted small">How big should your safety net be?</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="container">
+        <a class="card cert-cta" href="teachers.html">
+          <div><strong>👩‍🏫 Teacher or parent?</strong><div class="small muted">Free 45-minute lesson plans, printable quizzes with answer keys, and conversation starters for home.</div></div>
+          <span class="btn btn-primary">See the guides →</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2>Get one money tip every week.</h2>
+            <p style="margin:0;opacity:.9">Short, practical, free. Unsubscribe anytime.</p>
+          </div>
+          <form data-signup>
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" type="email" required placeholder="you@example.com">
+            <button class="btn" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/daily.js"></script>
+  <script>Daily.render(document.getElementById("daily"));</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/hero3d.js"></script>
+  <script>
+    // Lesson cards + progress
+    (function () {
+      const p = FG.getProgress();
+      const grid = document.getElementById("lesson-grid");
+      grid.innerHTML = LESSONS.map((l, i) => {
+        const done = p.done[l.id];
+        return `<a class="card" href="lessons/${l.id}.html">
+          <div class="card-icon">${l.icon}</div>
+          <h3>${i + 1}. ${l.title}</h3>
+          <p class="muted small">${l.summary}</p>
+          <div class="card-meta"><span>${l.minutes} min</span>
+            <span class="badge ${done ? "done" : ""}">${done ? `✓ ${done.score}/${done.total}` : "Not started"}</span></div>
+        </a>`;
+      }).join("");
+      const count = LESSONS.filter((l) => p.done[l.id]).length;
+      document.getElementById("home-progress").style.width = (count / LESSONS.length) * 100 + "%";
+      document.getElementById("home-progress-label").textContent = `${count} of ${LESSONS.length} lessons complete`;
+    })();
+
+    // Hero mini-calculator
+    (function () {
+      const a = document.getElementById("demo-slider-amt");
+      const y = document.getElementById("demo-slider-yrs");
+      function update() {
+        const pmt = +a.value, n = +y.value * 12, r = 0.08 / 12;
+        const fv = pmt * ((Math.pow(1 + r, n) - 1) / r);
+        document.getElementById("demo-amt").textContent = FG.money(pmt);
+        document.getElementById("demo-yrs").textContent = y.value;
+        document.getElementById("demo-result").textContent = FG.money(fv);
+        document.getElementById("demo-in").textContent = FG.money(pmt * n);
+        if (Hero3D) Hero3D.update(pmt, +y.value);
+      }
+      a.addEventListener("input", update);
+      y.addEventListener("input", update);
+      update();
+    })();
+  </script>
+</body>
+</html>

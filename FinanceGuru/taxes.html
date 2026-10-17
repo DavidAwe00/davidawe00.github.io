@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taxes 101 — FinanceGuru</title>
+  <meta name="description" content="How tax brackets really work, where your paycheck goes (federal tax, Social Security, Medicare), and how to fill out a W-4 — with 2026 IRS numbers.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/taxes.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/taxes.html">
+  <meta property="og:title" content="Taxes 101 — FinanceGuru">
+  <meta property="og:description" content="How tax brackets really work, where your paycheck goes (federal tax, Social Security, Medicare), and how to fill out a W-4 — with 2026 IRS numbers.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html" aria-current="page">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Taxes 101</span>
+        <h1>Taxes, finally explained.</h1>
+        <p class="lead muted">Why a raise never lowers your take-home pay, where every dollar of your paycheck goes, and how to fill out a W-4 — with 2026 IRS numbers.</p>
+        <div class="stats" style="margin-top:20px">
+          <div class="stat hero"><div class="label">Federal tax brackets</div><div class="value">10%–37%</div><div class="small muted">Seven brackets in 2026</div></div>
+          <div class="stat"><div class="label">Standard deduction</div><div class="value">$16,100</div><div class="small muted">Single · $32,200 married jointly</div></div>
+          <div class="stat"><div class="label">FICA payroll tax</div><div class="value">7.65%</div><div class="small muted">6.2% Social Security + 1.45% Medicare</div></div>
+          <div class="stat"><div class="label">Social Security wage cap</div><div class="value">$184,500</div><div class="small muted">2026</div></div>
+        </div>
+        <nav class="jump" aria-label="On this page">
+          <a href="#brackets">🪣 How brackets work</a>
+          <a href="#paycheck">🧾 Paycheck breakdown</a>
+          <a href="#w4">📝 W-4 basics</a>
+          <a href="#new">🆕 New deductions</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Brackets -->
+    <section id="brackets">
+      <div class="container">
+        <div class="section-head">
+          <h2>🪣 How tax brackets <em>really</em> work</h2>
+          <p class="muted">Think of brackets as buckets. Your income fills the 10% bucket first, then the 12% bucket, and so on. <strong>Only the dollars inside each bucket</strong> are taxed at that bucket's rate — so moving into a higher bracket never taxes all your income at the higher rate.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="tb-status">Filing status</label><select class="select" id="tb-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+            <div class="field"><label for="tb-income">Income: <span id="tb-income-l"></span></label><input type="range" id="tb-income" min="0" max="400000" step="1000" value="75000"></div>
+            <div class="stat"><div class="label">Taxable income (after standard deduction)</div><div class="value" id="tb-taxable">—</div></div>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat"><div class="label">Federal income tax</div><div class="value" id="tb-tax">—</div></div>
+              <div class="stat"><div class="label">Top (marginal) rate</div><div class="value" id="tb-marg">—</div></div>
+              <div class="stat hero"><div class="label">Effective rate on all income</div><div class="value" id="tb-eff">—</div></div>
+            </div>
+            <div class="buckets" id="tb-buckets"></div>
+            <p class="callout small" id="tb-raise" style="margin-bottom:0"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paycheck -->
+    <section id="paycheck">
+      <div class="container">
+        <div class="section-head">
+          <h2>🧾 Where does my paycheck go?</h2>
+          <p class="muted">Your salary isn't your take-home pay. See what comes out of each check — and how pre-tax savings lower your income tax.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="pc-salary">Annual salary</label><div class="input-wrap"><span>$</span><input id="pc-salary" type="number" min="0" value="60000"></div></div>
+            <div class="field"><label for="pc-freq">Paid</label><select class="select" id="pc-freq"><option value="52">Weekly</option><option value="26" selected>Every two weeks</option><option value="24">Twice a month</option><option value="12">Monthly</option></select></div>
+            <div class="field"><label for="pc-status">Filing status</label><select class="select" id="pc-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+            <div class="field"><label for="pc-401k">Pre-tax 401(k): <span id="pc-401k-l">6</span>% of pay</label><input type="range" id="pc-401k" min="0" max="30" value="6"></div>
+            <div class="field"><label for="pc-health">Pre-tax health insurance per year</label><div class="input-wrap"><span>$</span><input id="pc-health" type="number" min="0" value="1800"></div></div>
+            <div class="field"><label for="pc-state">State income tax (approx.)</label><div class="input-wrap"><input id="pc-state" type="number" step="0.1" min="0" value="4"><span>%</span></div><span class="hint">Varies a lot by state — some have none. Enter your own estimate.</span></div>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat"><div class="label">Gross pay per check</div><div class="value" id="pc-gross">—</div></div>
+              <div class="stat hero"><div class="label">Take-home per check</div><div class="value" id="pc-net">—</div></div>
+              <div class="stat"><div class="label">You keep</div><div class="value" id="pc-keep">—</div></div>
+            </div>
+            <div class="budget-bar" id="pc-bar" role="img" style="height:34px"></div>
+            <div class="pc-list" id="pc-list"></div>
+            <p class="callout small" id="pc-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:8px">Estimate only: annualizes your pay and applies 2026 federal brackets and the standard deduction. Real withholding follows IRS Publication 15-T and your W-4, so your paycheck will differ a bit. Pre-tax 401(k) and health premiums lower federal income tax; 401(k) contributions do not lower Social Security and Medicare tax.</p>
+      </div>
+    </section>
+
+    <!-- W-4 -->
+    <section id="w4">
+      <div class="container">
+        <div class="section-head">
+          <h2>📝 Filling out a W-4 (new job checklist)</h2>
+          <p class="muted">The W-4 tells your employer how much federal tax to withhold. Since 2020 it has no "allowances" — just five steps. Only Steps 1 and 5 are required.</p>
+        </div>
+        <div class="grid">
+          <div class="card"><div class="card-icon">1️⃣</div><h3>Personal info</h3><p class="muted small">Name, address, Social Security number, and filing status. Required.</p></div>
+          <div class="card"><div class="card-icon">2️⃣</div><h3>Multiple jobs or working spouse</h3><p class="muted small">Skip if you have one job. Otherwise check the box or use the IRS estimator so you don't under-withhold.</p></div>
+          <div class="card"><div class="card-icon">3️⃣</div><h3>Claim dependents</h3><p class="muted small">If you qualify for credits like the child tax credit, enter them here to lower withholding.</p></div>
+          <div class="card"><div class="card-icon">4️⃣</div><h3>Other adjustments</h3><p class="muted small">Optional: other income (like interest), extra deductions, or extra tax to withhold each paycheck.</p></div>
+          <div class="card"><div class="card-icon">5️⃣</div><h3>Sign it</h3><p class="muted small">Unsigned forms don't count. Required.</p></div>
+          <div class="card"><div class="card-icon">💡</div><h3>Big refund? Not a win.</h3><p class="muted small">A large refund means you lent the government money interest-free all year. Owing a lot means you under-withheld. Aim close to zero — the IRS Tax Withholding Estimator helps.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- New -->
+    <section id="new">
+      <div class="container">
+        <div class="section-head"><h2>🆕 New deductions for 2025–2028</h2><p class="muted">The One Big Beautiful Bill Act added temporary deductions you can take even if you don't itemize.</p></div>
+        <div class="grid">
+          <div class="card"><div class="card-icon">💵</div><h3>No tax on tips</h3><p class="muted small">Deduct up to <strong>$25,000</strong> of qualified tips per year (tax years 2025–2028), if your job is on Treasury's list of tipped occupations. Phases out above $150,000 of modified AGI ($300,000 joint). Social Security and Medicare tax still apply.</p></div>
+          <div class="card"><div class="card-icon">⏱️</div><h3>No tax on overtime</h3><p class="muted small">Deduct up to <strong>$12,500</strong> ($25,000 joint) of qualified overtime — only the extra "half" of FLSA-required time-and-a-half pay. Same income phase-out. Payroll taxes still apply.</p></div>
+        </div>
+        <p class="small muted" style="margin-top:12px">Source: IRS Publication 6133 and IRS newsroom guidance. Rules have details and limits — check IRS.gov or a tax professional.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <p class="small muted">Sources: IRS, tax year 2026 inflation adjustments (Rev. Proc. 2025-32) — brackets and standard deduction; Social Security Administration 2026 wage base ($184,500); IRS Topic 751 / Form 8959 (Social Security 6.2%, Medicare 1.45%, Additional Medicare Tax 0.9% withheld on wages over $200,000); IRS Form W-4 (2026); IRS Publication 6133. Educational content only — not tax advice.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/data/tax2026.js"></script>
+  <script src="js/taxes.js"></script>
+</body>
+</html>

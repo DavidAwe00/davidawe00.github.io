@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play — FinanceGuru</title>
+  <meta name="description" content="Money games that teach: a 3D piggy bank catcher, needs vs wants, a 12-month life simulator, and a stock market rollercoaster.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/play.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/play.html">
+  <meta property="og:title" content="Play — FinanceGuru">
+  <meta property="og:description" content="Money games that teach: a 3D piggy bank catcher, needs vs wants, a 12-month life simulator, and a stock market rollercoaster.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html" aria-current="page">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:32px;padding-bottom:48px">
+    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Play &amp; learn</h1>
+    <p class="muted">Every game teaches a real money lesson. Beat your best score to earn more XP.</p>
+
+    <div class="grid game-hub">
+      <button class="card game-card" data-game="catcher" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">🐷</div><h3>Piggy Bank Catcher <span class="badge">3D</span></h3>
+        <p class="muted small" style="margin:0">Catch coins & cash, dodge impulse buys.</p><div class="best" data-best="catcher"></div>
+      </button>
+      <button class="card game-card" data-game="sorter" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">⚡</div><h3>Needs vs Wants</h3>
+        <p class="muted small" style="margin:0">Sort as many as you can in 30 seconds.</p><div class="best" data-best="sorter"></div>
+      </button>
+      <button class="card game-card" data-game="life" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">📅</div><h3>Payday: Life Sim</h3>
+        <p class="muted small" style="margin:0">Survive 12 months of bills, surprises, and temptations.</p><div class="best" data-best="life"></div>
+      </button>
+      <button class="card game-card" data-game="market" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">🎢</div><h3>Market Rollercoaster</h3>
+        <p class="muted small" style="margin:0">Ride 20 years of booms and crashes. Will you panic?</p><div class="best" data-best="market"></div>
+      </button>
+      <button class="card game-card" data-game="salary" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">💼</div><h3>Salary Showdown <span class="badge">New</span></h3>
+        <p class="muted small" style="margin:0">Higher or lower? Guess which career or major pays more.</p><div class="best" data-best="salary"></div>
+      </button>
+      <button class="card game-card" data-game="prices" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">🛒</div><h3>Price Time Machine <span class="badge">New</span></h3>
+        <p class="muted small" style="margin:0">Eggs cost 84¢ in 1980. What do they cost now? Real BLS prices.</p><div class="best" data-best="prices"></div>
+      </button>
+      <button class="card game-card" data-game="credit" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">📊</div><h3>Credit Score Quest <span class="badge">New</span></h3>
+        <p class="muted small" style="margin:0">12 months of real-life credit choices. Can you reach "Very good"?</p><div class="best" data-best="credit"></div>
+      </button>
+      <button class="card game-card" data-game="envelope" style="text-align:left;font:inherit;color:inherit">
+        <div class="card-icon">✉️</div><h3>Envelope Budget <span class="badge">New</span></h3>
+        <p class="muted small" style="margin:0">Drag every expense into Needs, Wants, or Savings before payday.</p><div class="best" data-best="envelope"></div>
+      </button>
+    </div>
+
+    <!-- 3D Piggy Bank Catcher -->
+    <section class="game-panel" id="game-catcher" hidden style="padding:0">
+      <header>
+        <div><h2>🐷 Piggy Bank Catcher</h2><p class="muted small" style="margin:0">Move with your mouse, finger, or <span class="key">←</span> <span class="key">→</span></p></div>
+      </header>
+      <div class="stage" id="catcher-stage" data-focus-root>
+        <div class="sr-only" aria-live="polite" id="catcher-sr"></div>
+        <div class="hud">
+          <span class="pill" id="catcher-score">💰 $0</span>
+          <span class="pill" id="catcher-time">⏱ 45</span>
+          <span class="pill" id="catcher-lives">❤️❤️❤️</span>
+        </div>
+        <div class="overlay" id="catcher-overlay">
+          <div class="card">
+            <div class="card-icon">🐷</div>
+            <h3>Fill your piggy bank!</h3>
+            <ul class="small">
+              <li>🪙 Coin = <strong>+$10</strong> &nbsp; 💵 Cash = <strong>+$50</strong></li>
+              <li>⭐ Interest star = <strong>+10%</strong> of your savings</li>
+              <li>🛍️ Impulse buys cost <strong>$25 and a life</strong></li>
+            </ul>
+            <button class="btn btn-primary" data-start>Start game</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Needs vs Wants -->
+    <section class="game-panel" id="game-sorter" hidden style="padding:0">
+      <header>
+        <div><h2>⚡ Needs vs Wants</h2><p class="muted small" style="margin:0">Swipe, click, or press <span class="key">←</span> Need / <span class="key">→</span> Want</p></div>
+        <div class="hud" style="position:static"><label class="small relaxed-toggle"><input type="checkbox" id="sorter-relaxed"> No time limit</label><span class="pill" id="sorter-score">0 pts</span><span class="pill" id="sorter-streak">🔥 x1</span></div>
+      </header>
+      <div class="card sorter" id="sorter-root" data-focus-root>
+        <div class="sr-only" aria-live="polite" id="sorter-sr"></div>
+        <div class="timer-bar"><span id="sorter-timer" style="width:100%"></span></div>
+        <div class="sort-card" id="sorter-card"><div class="emoji">🧾</div><div class="name">Ready?</div></div>
+        <div class="sort-buttons">
+          <button class="btn btn-need" data-sort="need">← Need</button>
+          <button class="btn btn-want" data-sort="want">Want →</button>
+        </div>
+        <div class="sort-feedback muted small" id="sorter-feedback" aria-live="polite"></div>
+        <div class="overlay" id="sorter-overlay">
+          <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Need or want?</h3>
+            <p class="muted small">Needs keep you safe, healthy, housed, and employed. Everything else is a want. Build a streak for bonus points!</p>
+            <button class="btn btn-primary" data-start>Start (30 seconds)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Life sim -->
+    <section class="game-panel" id="game-life" hidden style="padding:0">
+      <header>
+        <div><h2>📅 Payday: Life Sim</h2><p class="muted small" style="margin:0">$3,200 take-home a month. $2,000 goes to rent, food & bills. The rest is up to you.</p></div>
+      </header>
+      <div class="life" id="life-root" data-focus-root></div>
+    </section>
+
+    <!-- Market -->
+    <section class="game-panel" id="game-market" hidden style="padding:0">
+      <header>
+        <div><h2>🎢 Market Rollercoaster</h2><p class="muted small" style="margin:0">You start with $10,000 invested in an index fund. Sell to cash whenever you're scared, buy back when you're brave.</p></div>
+      </header>
+      <div class="card" id="market-root" data-focus-root>
+        <div class="stats">
+          <div class="stat hero"><div class="label">Your portfolio</div><div class="value" id="mk-you">$10,000</div></div>
+          <div class="stat"><div class="label">Buy &amp; hold</div><div class="value" id="mk-hold">$10,000</div></div>
+          <div class="stat"><div class="label">Year</div><div class="value" id="mk-year">0</div></div>
+        </div>
+        <div class="headline" id="mk-headline" aria-live="polite"></div>
+        <div class="chart-legend">
+          <span><i style="background:var(--series-2)"></i>You</span>
+          <span><i style="background:var(--series-1)"></i>Buy &amp; hold</span>
+        </div>
+        <div class="chart chart-wrap" id="mk-chart"></div>
+        <div class="market-controls">
+          <button class="btn btn-primary" id="mk-start">▶ Start the ride</button>
+          <button class="btn btn-sell" id="mk-toggle" hidden>😱 SELL everything</button>
+          <span class="small muted" id="mk-status"></span>
+        </div>
+      </div>
+    </section>
+    <!-- Salary Showdown -->
+    <section class="game-panel" id="game-salary" hidden style="padding:0">
+      <header>
+        <div><h2>💼 Salary Showdown</h2><p class="muted small" style="margin:0">Does the right side pay <strong>higher</strong> or <strong>lower</strong>? Real data from the NY Fed and BLS. Keys: <span class="key">↑</span> higher / <span class="key">↓</span> lower</p></div>
+        <div class="hud" style="position:static"><span class="pill" id="hl-streak">🔥 Streak 0</span></div>
+      </header>
+      <div class="card" id="hl-root" style="position:relative" data-focus-root></div>
+    </section>
+    <!-- Price Time Machine -->
+    <section class="game-panel" id="game-prices" hidden style="padding:0">
+      <header>
+        <div><h2>🛒 Price Time Machine</h2><p class="muted small" style="margin:0">Guess today's price from the past one. Real U.S. average prices from the Bureau of Labor Statistics.</p></div>
+      </header>
+      <div class="card" id="ptm-root" data-focus-root></div>
+      <p class="small muted" style="margin-top:8px">Source: BLS Average Price Data and CPI-U. 2025 figures average 11 months (no October 2025 data was collected due to the government shutdown).</p>
+    </section>
+    <!-- Credit Score Quest -->
+    <section class="game-panel" id="game-credit" hidden style="padding:0">
+      <header>
+        <div><h2>📊 Credit Score Quest</h2><p class="muted small" style="margin:0">You're 22 with a credit card and a student loan. Make a year of choices and watch your score move.</p></div>
+      </header>
+      <div id="cq-root" data-focus-root></div>
+      <p class="small muted" style="margin-top:8px">Illustrative model weighted by myFICO's published factor importance — not a real FICO score. APR: Federal Reserve G.19 (Aug 2026). Late payments are typically reported once 30 days past due, and most negative items can stay on a report up to 7 years (CFPB).</p>
+    </section>
+    <!-- Envelope Budget -->
+    <section class="game-panel" id="game-envelope" hidden style="padding:0">
+      <header>
+        <div><h2>✉️ Envelope Budget</h2><p class="muted small" style="margin:0">Drag each expense into an envelope (or tap one). Keys: <span class="key">1</span> Needs <span class="key">2</span> Wants <span class="key">3</span> Savings <span class="key">S</span> Skip</p></div>
+      </header>
+      <div class="card" id="env-root" data-focus-root></div>
+      <p class="small muted" style="margin-top:8px">Sample budget for practice. The 50/30/20 guideline comes from Elizabeth Warren and Amelia Warren Tyagi's book <em>All Your Worth</em> (2005).</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/games/catcher.js"></script>
+  <script src="js/games/sorter.js"></script>
+  <script src="js/games/life.js"></script>
+  <script src="js/games/market.js"></script>
+  <script src="js/data/majors.js"></script>
+  <script src="js/data/careers.js"></script>
+  <script src="js/data/occupations.js"></script>
+  <script src="js/games/higherlower.js"></script>
+  <script src="js/data/inflation.js"></script>
+  <script src="js/games/prices.js"></script>
+  <script src="js/creditmodel.js"></script>
+  <script src="js/games/creditquest.js"></script>
+  <script src="js/games/envelope.js"></script>
+  <script src="js/play.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credit &amp; Debt Hub — FinanceGuru</title>
+  <meta name="description" content="See what moves a credit score, how credit card interest snowballs, and how the new 2026 student loan repayment plans (RAP and Tiered Standard) compare.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/credit.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/credit.html">
+  <meta property="og:title" content="Credit &amp; Debt Hub — FinanceGuru">
+  <meta property="og:description" content="See what moves a credit score, how credit card interest snowballs, and how the new 2026 student loan repayment plans (RAP and Tiered Standard) compare.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html" aria-current="page">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Credit &amp; debt hub</span>
+        <h1>Make credit work for you, not against you.</h1>
+        <p class="lead muted">Your credit score affects the rates you pay for decades. High-interest debt quietly drains your future. Here's how both work — with real 2026 numbers.</p>
+        <div class="stats" style="margin-top:20px">
+          <div class="stat hero"><div class="label">Avg. credit card APR (paying interest)</div><div class="value">22.36%</div><div class="small muted">Federal Reserve, Aug 2026</div></div>
+          <div class="stat"><div class="label">FICO score range</div><div class="value">300–850</div><div class="small muted">670+ is generally "good"</div></div>
+          <div class="stat"><div class="label">Biggest score factor</div><div class="value">35%</div><div class="small muted">Payment history</div></div>
+          <div class="stat"><div class="label">New federal loan plans</div><div class="value">2</div><div class="small muted">RAP &amp; Tiered Standard (since Jul 2026)</div></div>
+        </div>
+        <nav class="jump" aria-label="On this page">
+          <a href="#score">📊 Credit score simulator</a>
+          <a href="#cards">💳 Credit card interest</a>
+          <a href="#student">🎓 Student loan plans</a>
+          <a href="#habits">✅ Smart credit habits</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Credit score simulator -->
+    <section id="score">
+      <div class="container">
+        <div class="section-head">
+          <h2>📊 What moves a credit score?</h2>
+          <p class="muted">Slide the habits and watch an <strong>illustrative</strong> score respond. It's weighted like FICO's published factor importance — the real formula is secret, so treat this as a teaching model, not your actual score.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="cs-late">Late payments (last 2 years): <span id="cs-late-l">0</span></label><input type="range" id="cs-late" min="0" max="6" value="0"></div>
+            <div class="field"><label for="cs-util">Card balances vs. limits: <span id="cs-util-l">25</span>%</label><input type="range" id="cs-util" min="0" max="100" step="5" value="25"><span class="hint">Called “utilization.” Lower is better.</span></div>
+            <div class="field"><label for="cs-age">Average account age: <span id="cs-age-l">4</span> years</label><input type="range" id="cs-age" min="0" max="20" value="4"></div>
+            <div class="field"><label for="cs-inq">New credit applications (last year): <span id="cs-inq-l">1</span></label><input type="range" id="cs-inq" min="0" max="8" value="1"></div>
+            <div class="field"><label for="cs-mix">Types of credit: <span id="cs-mix-l">2</span></label><input type="range" id="cs-mix" min="0" max="3" value="2"><span class="hint">e.g., a credit card, a car loan, a student loan.</span></div>
+          </div>
+          <div class="card">
+            <div class="score-gauge" id="cs-gauge" aria-live="polite"></div>
+            <h3 style="margin:16px 0 8px">How each factor contributes</h3>
+            <div class="hbars" id="cs-bars"></div>
+            <p class="callout small" id="cs-tip" style="margin-bottom:0"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credit cards -->
+    <section id="cards">
+      <div class="container">
+        <div class="section-head">
+          <h2>💳 The minimum-payment trap</h2>
+          <p class="muted">Card companies are happy to let you pay the minimum. See why — compare minimum payments with a fixed monthly payment.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="cc-bal">Card balance</label><div class="input-wrap"><span>$</span><input id="cc-bal" type="number" min="0" value="5000"></div></div>
+            <div class="field"><label for="cc-apr">APR</label><div class="input-wrap"><input id="cc-apr" type="number" step="0.01" min="0" value="22.36"><span>%</span></div><span class="hint">Average for accounts paying interest, Aug 2026 (Federal Reserve G.19).</span></div>
+            <div class="field"><label for="cc-fixed">Your fixed payment</label><div class="input-wrap"><span>$</span><input id="cc-fixed" type="number" min="0" value="250"></div></div>
+            <p class="small muted" style="margin:0">Minimum payment modeled as a common formula: 1% of the balance plus that month's interest, or $25, whichever is more. Check your own statement — by law (the CARD Act) it must show how long minimum payments will take.</p>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat"><div class="label">Minimum payments: time</div><div class="value" id="cc-min-time">—</div></div>
+              <div class="stat"><div class="label">Minimum payments: interest</div><div class="value" id="cc-min-int">—</div></div>
+              <div class="stat hero"><div class="label" id="cc-fix-label">Fixed payment: time</div><div class="value" id="cc-fix-time">—</div></div>
+              <div class="stat hero"><div class="label">Fixed payment: interest</div><div class="value" id="cc-fix-int">—</div></div>
+            </div>
+            <div class="chart" id="cc-chart"></div>
+            <p class="callout small" id="cc-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student loans -->
+    <section id="student">
+      <div class="container">
+        <div class="section-head">
+          <h2>🎓 Student loan repayment plans (2026 rules)</h2>
+          <p class="muted">For federal loans made on or after July 1, 2026, borrowers choose between two plans: the <strong>Tiered Standard Plan</strong> (fixed payments, term set by balance) and the income-based <strong>Repayment Assistance Plan (RAP)</strong>. Compare them with your numbers.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="sl-bal">Total federal loan balance</label><div class="input-wrap"><span>$</span><input id="sl-bal" type="number" min="0" value="30000"></div></div>
+            <div class="field"><label for="sl-rate">Interest rate</label><div class="input-wrap"><input id="sl-rate" type="number" step="0.01" min="0" value="6.52"><span>%</span></div><span class="hint">2026–27 undergraduate Direct Loan rate.</span></div>
+            <div class="field"><label for="sl-agi">Your income (AGI) when repayment starts</label><div class="input-wrap"><span>$</span><input id="sl-agi" type="number" min="0" value="50000"></div></div>
+            <div class="field"><label for="sl-growth">Income growth per year: <span id="sl-growth-l">3</span>%</label><input type="range" id="sl-growth" min="0" max="8" step="0.5" value="3"><span class="hint">Your assumption. Raises push RAP payments up over time.</span></div>
+            <div class="field"><label for="sl-dep">Dependents: <span id="sl-dep-l">0</span></label><input type="range" id="sl-dep" min="0" max="4" value="0"></div>
+          </div>
+          <div class="card">
+            <div class="plan-grid" id="sl-plans"></div>
+            <div class="chart" id="sl-chart"></div>
+            <p class="callout small" id="sl-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+        <details class="card table-view" style="margin-top:16px">
+          <summary><strong>How the plans work</strong></summary>
+          <ul class="small">
+            <li><strong>Tiered Standard:</strong> fixed monthly payments over a term based on what you owe — under $25,000: 10 years; $25,000–$49,999: 15 years; $50,000–$99,999: 20 years; $100,000+: 25 years. No forgiveness.</li>
+            <li><strong>RAP:</strong> pay 1%–10% of your AGI a year (1% at $10,001–$20,000, rising one point per $10,000, up to 10% above $100,000), divided by 12, minus $50 per dependent; at least $10/month. Interest your payment doesn't cover is waived, and if a payment cuts principal by less than $50, the government adds up to $50 so principal falls by at least what you paid. Any balance left after 360 payments (30 years) is forgiven — and may be taxable.</li>
+            <li>This model assumes on-time payments, a single filer, and your income growth assumption. Use the official <a href="https://studentaid.gov/loan-simulator/" rel="noopener">StudentAid.gov Loan Simulator</a> before making decisions. Parent PLUS loans have different rules.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- Habits -->
+    <section id="habits">
+      <div class="container">
+        <div class="section-head"><h2>✅ Smart credit habits</h2></div>
+        <div class="grid">
+          <div class="card"><div class="card-icon">⏰</div><h3>Never miss a payment</h3><p class="muted small">Set autopay for at least the minimum. Payment history is the single biggest factor in a FICO score.</p></div>
+          <div class="card"><div class="card-icon">📉</div><h3>Keep utilization low</h3><p class="muted small">Use a small slice of your limits — under 30% is a common guideline, and lower is better.</p></div>
+          <div class="card"><div class="card-icon">💯</div><h3>Pay cards in full</h3><p class="muted small">Pay the statement balance every month and you'll typically owe no interest at all.</p></div>
+          <div class="card"><div class="card-icon">🕰️</div><h3>Keep old accounts open</h3><p class="muted small">A longer credit history helps. A no-fee card you've had for years is worth keeping.</p></div>
+          <div class="card"><div class="card-icon">🧐</div><h3>Check your reports</h3><p class="muted small">Get free reports from all three bureaus at AnnualCreditReport.com and dispute errors.</p></div>
+          <div class="card"><div class="card-icon">🛑</div><h3>Apply sparingly</h3><p class="muted small">Each application can trigger a “hard inquiry.” Space them out, especially before a big loan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <p class="small muted">Sources: Federal Reserve Board, G.19 Consumer Credit (Oct 7, 2026 release), commercial bank credit card rates; myFICO, “What's in my FICO Scores” (factor weights); Federal Student Aid (studentaid.gov servicer site), Repayment Assistance Plan; NASFAA, One Big Beautiful Bill Act repayment plan chart (Tiered Standard terms); Federal Student Aid, 2026–27 interest rates. Educational content only — not financial or legal advice.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/creditmodel.js"></script>
+  <script src="js/credit.js"></script>
+</body>
+</html>

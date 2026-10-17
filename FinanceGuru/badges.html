@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Progress — FinanceGuru</title>
+  <meta name="description" content="Your FinanceGuru level, daily challenge streak, and badges.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/badges.html">
+  <meta name="robots" content="noindex,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/badges.html">
+  <meta property="og:title" content="My Progress — FinanceGuru">
+  <meta property="og:description" content="Your FinanceGuru level, daily challenge streak, and badges.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:32px;padding-bottom:48px">
+    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">My progress</h1>
+    <p class="muted">Your level, streak, and badges. Progress is saved in this browser.</p>
+
+    <div class="tool" style="margin-top:16px">
+      <div class="card" id="lvl"></div>
+      <div class="card"><div class="stats" id="pstats" style="margin:0"></div></div>
+    </div>
+
+    <section style="padding:24px 0 0">
+      <div class="card cert-cta">
+        <div><strong>🎓 FinanceGuru Fundamentals certificate</strong><div class="small muted" id="cert-status"></div></div>
+        <a class="btn btn-primary" href="certificate.html" id="cert-link">View certificate →</a>
+      </div>
+    </section>
+
+    <section style="padding:24px 0 0">
+      <div class="card daily-card" id="daily" data-focus-root></div>
+    </section>
+
+    <section style="padding:32px 0 0">
+      <div class="section-head" style="margin-bottom:12px"><h2>🏅 Badges</h2><p class="muted" id="badge-count"></p></div>
+      <div class="badge-grid" id="badge-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/daily.js"></script>
+  <script src="js/badges.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>College &amp; Career ROI — FinanceGuru</title>
+  <meta name="description" content="Is college worth it? Compare salaries for 73 majors, calculate your degree's ROI and breakeven age, and explore high-paying careers without a 4-year degree. Real data from the NY Fed, BLS, and College Board.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/college.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/college.html">
+  <meta property="og:title" content="College &amp; Career ROI — FinanceGuru">
+  <meta property="og:description" content="Is college worth it? Compare salaries for 73 majors, calculate your degree's ROI and breakeven age, and explore high-paying careers without a 4-year degree. Real data from the NY Fed, BLS, and College Board.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html" aria-current="page">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">College &amp; careers</span>
+        <h1>Is college worth it? Run the real numbers.</h1>
+        <p class="lead muted">A degree is one of the biggest investments you'll ever make. Treat it like one: know the cost, the likely payoff, and the alternatives.</p>
+        <div class="stats" id="edu-stats" style="margin-top:20px"></div>
+        <nav class="jump" aria-label="On this page">
+          <a href="#majors">🎓 Salaries by major</a>
+          <a href="#roi">🧮 Degree ROI calculator</a>
+          <a href="#explorer">🔎 Career explorer</a>
+          <a href="#states">📍 Pay by state</a>
+          <a href="#paths">🛠️ Careers without a 4-year degree</a>
+          <a href="#ladder">🪜 Education pays</a>
+          <a href="#tips">✂️ Cut the cost</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Majors explorer -->
+    <section id="majors">
+      <div class="container">
+        <div class="section-head">
+          <h2>🎓 What 73 majors actually earn</h2>
+          <p class="muted">Median salaries for bachelor's-only graduates working full time, early career (ages 22–27) and mid-career (35–45). Hover a row for unemployment and underemployment.</p>
+        </div>
+        <div class="filter-row">
+          <div class="chips" id="major-groups" role="group" aria-label="Filter by field"></div>
+          <div class="filter-controls">
+            <input class="search" id="major-search" type="search" placeholder="Search majors…" aria-label="Search majors">
+            <select class="select" id="major-sort" aria-label="Sort by">
+              <option value="mid">Sort: mid-career pay</option>
+              <option value="early">Sort: early-career pay</option>
+              <option value="growth">Sort: pay growth</option>
+              <option value="unemp">Sort: lowest unemployment</option>
+              <option value="underemp">Sort: lowest underemployment</option>
+            </select>
+          </div>
+        </div>
+        <div class="card">
+          <div class="chart-legend">
+            <span><i style="background:var(--series-1)"></i>Early career (22–27)</span>
+            <span><i style="background:var(--series-2)"></i>Mid-career (35–45)</span>
+            <span><i style="background:var(--muted);width:2px;border-radius:0"></i>All-majors mid-career median ($87K)</span>
+          </div>
+          <div class="dumbbell" id="major-chart"></div>
+          <button class="btn btn-ghost" id="major-more" style="margin-top:12px">Show all</button>
+          <details class="table-view"><summary>Show as table</summary><div class="table-scroll" id="major-table"></div></details>
+        </div>
+        <p class="small muted" style="margin-top:8px"><strong>Underemployment</strong> = working a job that typically doesn't require a degree. Source: Federal Reserve Bank of New York, “The Labor Market for Recent College Graduates” (Feb 2026 release, 2024 data). Medians are not promises — your school, effort, location, and network matter.</p>
+      </div>
+    </section>
+
+    <!-- ROI calculator -->
+    <section id="roi">
+      <div class="container">
+        <div class="section-head">
+          <h2>🧮 Degree ROI calculator</h2>
+          <p class="muted">Compare two paths from age 18 to 65: get a bachelor's degree, or start working with a high school diploma. We count tuition, the earnings you give up while in school, and student loan interest.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="roi-major">Major</label><select class="select" id="roi-major"></select></div>
+            <div class="field"><label for="roi-school">School type</label><select class="select" id="roi-school"></select><span class="hint" id="roi-tuition-hint"></span></div>
+            <div class="field"><label for="roi-aid">Grants &amp; scholarships per year</label><div class="input-wrap"><span>$</span><input id="roi-aid" type="number" min="0" value="5000"></div><span class="hint">Free money you don't repay. Most students get some.</span></div>
+            <div class="field"><label for="roi-borrow">Borrow <span id="roi-borrow-label">60</span>% of what's left</label><input type="range" id="roi-borrow" min="0" max="100" step="5" value="60"></div>
+            <div class="field"><label for="roi-rate">Loan interest rate</label><div class="input-wrap"><input id="roi-rate" type="number" step="0.01" min="0" value="6.52"><span>%</span></div><span class="hint">Federal undergrad rate for 2026–27.</span></div>
+            <details>
+              <summary class="small" style="cursor:pointer;margin-bottom:8px">Advanced assumptions</summary>
+              <div class="field"><label for="roi-hs18">No-degree earnings, ages 18–21</label><div class="input-wrap"><span>$</span><input id="roi-hs18" type="number" min="0" value="32000"></div><span class="hint">Your estimate. Full-time at ~$15–16/hr ≈ $32K.</span></div>
+              <div class="field"><label for="roi-parttime">Part-time earnings while in school</label><div class="input-wrap"><span>$</span><input id="roi-parttime" type="number" min="0" value="8000"></div></div>
+            </details>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat hero"><div class="label">Lifetime earnings boost (to 65)</div><div class="value" id="roi-premium">—</div></div>
+              <div class="stat"><div class="label">Breakeven age</div><div class="value" id="roi-break">—</div></div>
+              <div class="stat"><div class="label">Total cost of the degree</div><div class="value" id="roi-cost">—</div></div>
+              <div class="stat"><div class="label">Loan payment (10 yrs)</div><div class="value" id="roi-payment">—</div></div>
+            </div>
+            <div class="chart" id="roi-chart"></div>
+            <div id="roi-verdict"></div>
+            <details class="table-view"><summary>How this is calculated</summary>
+              <ul class="small muted">
+                <li><strong>Degree path:</strong> 4 years of tuition minus grants; part-time pay during school; salary starts at the major's early-career median at 22, rises to its mid-career median by 40, then holds flat. Loan payments over 10 years after graduation.</li>
+                <li><strong>No-degree path:</strong> your 18–21 earnings estimate; then $40,000 at 22–27 (NY Fed median for high-school-only workers, 2025), rising to $48,360 by 40 (BLS 2024 median for high-school graduates age 25+).</li>
+                <li>Living costs are left out because you pay them on either path. Figures are pre-tax and not adjusted for inflation or investment returns. Some of the earnings gap reflects differences between people who do and don't go to college, not just the degree itself.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Career explorer -->
+    <section id="explorer">
+      <div class="container">
+        <div class="section-head">
+          <h2>🔎 Career explorer: 85 jobs, real pay</h2>
+          <p class="muted">Filter by how much school it takes, by field, or by growth. Pay is the national median for each job; the line marks the median for <em>all</em> U.S. jobs ($50,980).</p>
+        </div>
+        <div class="card">
+          <div class="field" style="margin-bottom:10px"><label>Education needed to start</label><div class="chips" id="ex-edu" role="group" aria-label="Filter by education"></div></div>
+          <div class="filter-row">
+            <div class="chips" id="ex-group" role="group" aria-label="Filter by field"></div>
+            <div class="filter-controls">
+              <input class="search" id="ex-search" type="search" placeholder="Search jobs…" aria-label="Search jobs">
+              <select class="select" id="ex-sort" aria-label="Sort by">
+                <option value="pay">Sort: highest pay</option>
+                <option value="growth">Sort: fastest growth</option>
+                <option value="school">Sort: least school</option>
+                <option value="value">Sort: pay per year of school</option>
+              </select>
+            </div>
+          </div>
+          <label class="switch" style="margin:4px 0 12px"><input type="checkbox" id="ex-fast"><span class="switch-ui" aria-hidden="true"></span> Only fast-growing jobs (BLS fastest-growing list, 2025–35)</label>
+          <div class="stats" id="ex-stats"></div>
+          <div class="hbars" id="ex-list" style="margin-top:12px"></div>
+          <button class="btn btn-ghost" id="ex-more" style="margin-top:12px">Show all</button>
+          <p class="small muted" style="margin:12px 0 0">Source: U.S. Bureau of Labor Statistics, Occupational Outlook Handbook (median pay May 2025, typical entry-level education) and Employment Projections 2025–35 (fastest-growing occupations; all jobs: +3.5%). "Years of school" is an approximation of typical schooling after high school for each education level. Apprenticeships and on-the-job training are often paid.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pay by state -->
+    <section id="states">
+      <div class="container">
+        <div class="section-head">
+          <h2>📍 Same job, different state, different pay</h2>
+          <p class="muted">Where you work can matter as much as what you do. Compare 17 careers and the all-jobs median across all 50 states and D.C.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="sp-occ">Job</label><select class="select" id="sp-occ"></select></div>
+            <div class="field"><label for="sp-state">Your state</label><select class="select" id="sp-state"></select></div>
+            <div class="stat hero"><div class="label" id="sp-label">Median pay</div><div class="value" id="sp-pay">—</div><div class="small muted" id="sp-vs"></div></div>
+            <div class="stat" style="margin-top:12px"><div class="label">Rank among states</div><div class="value" id="sp-rank">—</div></div>
+            <p class="small muted" style="margin-top:12px">Higher-paying states often cost more to live in, too — compare rent and prices before you move.</p>
+          </div>
+          <div class="card">
+            <div class="chart-legend"><span><i style="background:var(--series-1)"></i>State median</span><span><i style="background:var(--series-2)"></i>Your state</span><span><i style="background:var(--muted);width:2px;border-radius:0"></i>U.S. median</span></div>
+            <div class="hbars state-bars" id="sp-bars"></div>
+            <button class="btn btn-ghost" id="sp-more" style="margin-top:12px">Show all states</button>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:8px">Source: U.S. Bureau of Labor Statistics, <a href="https://www.bls.gov/oes/2025/may/oessrcst.htm">May 2025 Occupational Employment and Wage Statistics (OEWS)</a>, median annual wages from the <a href="https://download.bls.gov/pub/time.series/oe/">official bulk text files</a>. Unpublished or top-coded figures are shown as n/a. Teacher salaries reflect their typical school-year schedule; annual pay does not imply year-round work. These employee wage estimates exclude self-employed workers.</p>
+      </div>
+    </section>
+
+    <!-- Alternatives -->
+    <section id="paths">
+      <div class="container">
+        <div class="section-head">
+          <h2>🛠️ High-paying careers without a 4-year degree</h2>
+          <p class="muted">Apprenticeships pay you while you learn, and many 2-year healthcare programs out-earn the typical bachelor's degree. Median annual pay, May 2025.</p>
+        </div>
+        <div class="card">
+          <div class="chart-legend"><span><i style="background:var(--series-1)"></i>Median pay</span><span><i style="background:var(--muted);width:2px;border-radius:0"></i>Median for all bachelor's holders 25+ ($80K, 2024)</span></div>
+          <div class="hbars" id="career-bars"></div>
+          <p class="small muted" style="margin:12px 0 0">Source: U.S. Bureau of Labor Statistics, Occupational Outlook Handbook (May 2025 wages); bachelor's benchmark from BLS “Education pays,” 2024. Pay varies a lot by state and experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education ladder -->
+    <section id="ladder">
+      <div class="container">
+        <div class="section-head">
+          <h2>🪜 Education pays — on average</h2>
+          <p class="muted">Median earnings and unemployment for full-time workers age 25 and older, by highest level of education (2024).</p>
+        </div>
+        <div class="card"><div class="hbars" id="edu-bars"></div>
+          <p class="small muted" style="margin:12px 0 0">Source: U.S. Bureau of Labor Statistics, Current Population Survey, 2024. Weekly medians × 52.</p></div>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section id="tips">
+      <div class="container">
+        <div class="section-head"><h2>✂️ Seven ways to cut the cost of college</h2></div>
+        <div class="grid">
+          <div class="card"><div class="card-icon">📝</div><h3>File the FAFSA — every year</h3><p class="muted small">It unlocks federal grants, work-study, and many school scholarships. Lots of families who'd qualify never apply.</p></div>
+          <div class="card"><div class="card-icon">🏫</div><h3>Try the 2 + 2 route</h3><p class="muted small">Two years at community college ($4,150/yr average tuition) then transfer. Same diploma at the end.</p></div>
+          <div class="card"><div class="card-icon">📍</div><h3>Stay in-state</h3><p class="muted small">Public in-state tuition averages $11,950 vs $31,880 out-of-state — about $80,000 saved over four years.</p></div>
+          <div class="card"><div class="card-icon">🎯</div><h3>Look at net price, not sticker price</h3><p class="muted small">After grants, the average private college student pays far less than the $45,000 list price. Use each school's net price calculator.</p></div>
+          <div class="card"><div class="card-icon">⚡</div><h3>Earn credit early</h3><p class="muted small">AP, IB, CLEP, and dual-enrollment classes can knock out a semester or more.</p></div>
+          <div class="card"><div class="card-icon">📏</div><h3>Follow the debt rule</h3><p class="muted small">Try to borrow no more in total than your expected first-year salary. Federal loans before private ones.</p></div>
+          <div class="card"><div class="card-icon">⏱️</div><h3>Finish in four</h3><p class="muted small">A fifth year costs another year of tuition <em>and</em> a year of lost salary.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <p class="small muted">Sources: Federal Reserve Bank of New York, The Labor Market for Recent College Graduates (2026); U.S. Bureau of Labor Statistics, Occupational Outlook Handbook and Education Pays (2024–2025); College Board, Trends in College Pricing 2025; Federal Student Aid, 2026–27 Direct Loan interest rates. Educational content only.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/data/majors.js"></script>
+  <script src="js/data/careers.js"></script>
+  <script src="js/data/occupations.js"></script>
+  <script src="js/data/statepay.js"></script>
+  <script src="js/college.js"></script>
+</body>
+</html>

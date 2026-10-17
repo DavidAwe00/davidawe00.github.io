@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investing Hub — FinanceGuru</title>
+  <meta name="description" content="Learn investing with 98 years of real market data: asset classes, portfolio builder, historical time machine, fee calculator, account types, and a risk quiz.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/invest.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/invest.html">
+  <meta property="og:title" content="Investing Hub — FinanceGuru">
+  <meta property="og:description" content="Learn investing with 98 years of real market data: asset classes, portfolio builder, historical time machine, fee calculator, account types, and a risk quiz.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html" aria-current="page">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Investing hub</span>
+        <h1>Investing, explained with 98 years of real data.</h1>
+        <p class="lead muted">Every number on this page is calculated live from actual U.S. market returns, 1928–2025. Play with the history — it's the best teacher there is.</p>
+        <nav class="jump" aria-label="On this page">
+          <a href="#assets">📊 Asset classes</a>
+          <a href="#inflation">🎈 Inflation</a>
+          <a href="#portfolio">⚖️ Build a portfolio</a>
+          <a href="#time">⏳ Time machine</a>
+          <a href="#fees">💸 Fees</a>
+          <a href="#accounts">🏦 Accounts</a>
+          <a href="#quiz">🧭 Risk quiz</a>
+          <a href="#glossary">📖 Glossary</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Asset classes -->
+    <section id="assets">
+      <div class="container">
+        <div class="section-head">
+          <h2>The main asset classes</h2>
+          <p class="muted">What you own decides your returns <em>and</em> your bumps. Click one to see every year since 1928.</p>
+        </div>
+        <label class="switch"><input type="checkbox" id="real-toggle"><span class="switch-ui" aria-hidden="true"></span> Show returns <strong>after inflation</strong> (what your money can actually buy)</label>
+        <div class="grid asset-grid" id="asset-cards"></div>
+        <div class="card" style="margin-top:16px">
+          <h3 id="asset-chart-title" style="margin-bottom:4px"></h3>
+          <p class="small muted" id="asset-chart-note" style="margin:0 0 8px"></p>
+          <div class="chart" id="asset-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inflation -->
+    <section id="inflation">
+      <div class="container">
+        <div class="section-head">
+          <h2>🎈 Inflation: the invisible tax</h2>
+          <p class="muted">Prices rise a little almost every year, so a dollar buys less over time. Since 1928, U.S. inflation has averaged about <strong>3% a year</strong> — enough to cut a dollar's buying power in half roughly every 23 years.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <h3>Inflation calculator</h3>
+            <div class="field"><label for="inf-amount">Amount</label><div class="input-wrap"><span>$</span><input id="inf-amount" type="number" min="0" value="100"></div></div>
+            <div class="field"><label for="inf-from">In the year</label><select class="select" id="inf-from"></select></div>
+            <div class="field"><label for="inf-to">Is worth this much in</label><select class="select" id="inf-to"></select></div>
+            <div class="stat hero"><div class="label" id="inf-label">Same buying power</div><div class="value" id="inf-result">—</div><div class="small muted" id="inf-detail"></div></div>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:2px">What $10,000 could buy over time</h3>
+            <p class="small muted" style="margin:0 0 8px">Buying power in <span id="inf-start-label"></span> dollars, after inflation. Pick a starting year:</p>
+            <div class="preset-row" id="inf-presets" style="margin-bottom:8px">
+              <button class="chip" data-inf-start="1970">1970</button>
+              <button class="chip" data-inf-start="1980">1980</button>
+              <button class="chip" data-inf-start="1995" aria-pressed="true">1995</button>
+              <button class="chip" data-inf-start="2005">2005</button>
+              <button class="chip" data-inf-start="2015">2015</button>
+            </div>
+            <div class="chart" id="inf-chart"></div>
+            <p class="callout small" id="inf-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h3 style="margin-bottom:2px">Inflation every year, 1928–2025</h3>
+          <p class="small muted" style="margin:0 0 8px">December-to-December change in consumer prices. Orange = above 5% (high inflation). Below zero = deflation, as in the Great Depression.</p>
+          <div class="chart" id="inf-bars"></div>
+        </div>
+        <p class="small muted" style="margin-top:8px">Source: U.S. Bureau of Labor Statistics, Consumer Price Index for All Urban Consumers (CPI-U), series CUUR0000SA0.</p>
+      </div>
+    </section>
+
+    <!-- Portfolio builder -->
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <h2>Build a portfolio: the stocks-vs-bonds dial</h2>
+          <p class="muted">More stocks = more growth and bigger drops. More bonds = smoother ride, slower growth. Slide the dial and see how every mix actually behaved.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field">
+              <label for="mix">Stocks <span id="mix-s">60</span>% · Bonds <span id="mix-b">40</span>%</label>
+              <input type="range" id="mix" min="0" max="100" step="10" value="60">
+              <div class="mix-bar" aria-hidden="true"><span id="mix-bar-s"></span><span id="mix-bar-b"></span></div>
+            </div>
+            <div class="field">
+              <label for="hold">If you hold for <span id="hold-label">10</span> years…</label>
+              <input type="range" id="hold" min="1" max="30" value="10">
+            </div>
+            <p class="small muted">Not sure what mix fits you? <a href="#quiz">Take the risk quiz →</a></p>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat hero"><div class="label">Average yearly return</div><div class="value" id="pf-cagr">—</div></div>
+              <div class="stat"><div class="label">Worst single year</div><div class="value" id="pf-worst">—</div></div>
+              <div class="stat"><div class="label">Losing years</div><div class="value" id="pf-loss">—</div></div>
+              <div class="stat"><div class="label" id="pf-hold-label">Chance of loss over 10 yrs</div><div class="value" id="pf-holdloss">—</div></div>
+            </div>
+            <h3 style="margin-bottom:2px" id="pf-chart-title">Every 10-year period since 1928</h3>
+            <p class="small muted" style="margin:0 0 8px">Each bar is the average yearly return you'd have earned starting that year. Orange bars lost money.</p>
+            <div class="chart" id="pf-chart"></div>
+            <p class="callout small" id="pf-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Time machine -->
+    <section id="time">
+      <div class="container">
+        <div class="section-head">
+          <h2>⏳ The investing time machine</h2>
+          <p class="muted">Pick a year to start investing and replay real history — crashes and all.</p>
+        </div>
+        <div class="preset-row" id="tm-presets">
+          <button class="chip" data-start="1929">🎩 Right before the 1929 crash</button>
+          <button class="chip" data-start="1973">⛽ The 1970s oil shock</button>
+          <button class="chip" data-start="2000">💻 Dot-com peak (2000)</button>
+          <button class="chip" data-start="2007">🏦 Just before 2008</button>
+          <button class="chip" data-start="2015">📱 Last 10 years</button>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="tm-start">Start investing in</label><select id="tm-start" class="select"></select></div>
+            <div class="field"><label for="tm-years">For how many years: <span id="tm-years-label">20</span></label><input type="range" id="tm-years" min="1" max="60" value="20"></div>
+            <div class="field"><label for="tm-initial">Starting amount</label><div class="input-wrap"><span>$</span><input id="tm-initial" type="number" min="0" value="1000"></div></div>
+            <div class="field"><label for="tm-yearly">Added every year</label><div class="input-wrap"><span>$</span><input id="tm-yearly" type="number" min="0" value="3000"></div></div>
+            <div class="field"><label for="tm-mix">Mix: <span id="tm-mix-label">100% stocks</span></label><input type="range" id="tm-mix" min="0" max="100" step="10" value="100"></div>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat hero"><div class="label">You'd end with</div><div class="value" id="tm-final">—</div></div>
+              <div class="stat"><div class="label">You put in</div><div class="value" id="tm-in">—</div></div>
+              <div class="stat"><div class="label">Biggest drop along the way</div><div class="value" id="tm-dd">—</div></div>
+            </div>
+            <div class="chart" id="tm-chart"></div>
+            <p class="small muted" id="tm-story" style="margin:8px 0 0"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fees -->
+    <section id="fees">
+      <div class="container">
+        <div class="section-head">
+          <h2>💸 The silent wealth killer: fees</h2>
+          <p class="muted">A 1% fee sounds tiny. Over decades, it can eat a quarter of your money. Compare a low-cost index fund to a pricier option.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="fee-monthly">Invest per month</label><div class="input-wrap"><span>$</span><input id="fee-monthly" type="number" min="0" value="500"></div></div>
+            <div class="field"><label for="fee-years">Years: <span id="fee-years-label">35</span></label><input type="range" id="fee-years" min="5" max="50" value="35"></div>
+            <div class="field"><label for="fee-return">Return before fees</label><div class="input-wrap"><input id="fee-return" type="number" step="0.1" value="7"><span>%</span></div></div>
+            <div class="field"><label for="fee-low">Low-cost fund fee</label><div class="input-wrap"><input id="fee-low" type="number" step="0.01" min="0" value="0.05"><span>%/yr</span></div><span class="hint">Broad index funds often charge 0.03–0.10%.</span></div>
+            <div class="field"><label for="fee-high">Higher-cost option fee</label><div class="input-wrap"><input id="fee-high" type="number" step="0.01" min="0" value="1"><span>%/yr</span></div><span class="hint">Many actively managed funds and advisors charge ~1%.</span></div>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat hero"><div class="label">Fees cost you</div><div class="value" id="fee-lost">—</div></div>
+              <div class="stat"><div class="label">Low-cost ending balance</div><div class="value" id="fee-a">—</div></div>
+              <div class="stat"><div class="label">Higher-cost ending balance</div><div class="value" id="fee-b">—</div></div>
+            </div>
+            <div class="chart" id="fee-chart"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accounts -->
+    <section id="accounts">
+      <div class="container">
+        <div class="section-head">
+          <h2>🏦 Where to invest: account types (U.S., 2026)</h2>
+          <p class="muted">The account is the container; the investments go inside it. Tax-advantaged containers can be worth hundreds of thousands over a lifetime.</p>
+        </div>
+        <div class="grid" id="account-cards"></div>
+        <div class="card" style="margin-top:16px">
+          <h3>A common order of operations</h3>
+          <ol class="steps">
+            <li><strong>Starter emergency fund</strong> ($1,000 or one month of expenses).</li>
+            <li><strong>401(k) up to the employer match</strong> — it's an instant 50–100% return.</li>
+            <li><strong>Pay off high-interest debt</strong> (anything above ~8%, like credit cards).</li>
+            <li><strong>Full emergency fund</strong> (3–6 months).</li>
+            <li><strong>Roth IRA</strong> (or traditional) — up to $7,500 in 2026.</li>
+            <li><strong>HSA</strong> if you have a high-deductible health plan.</li>
+            <li><strong>Max the 401(k)</strong>, then a <strong>taxable brokerage</strong> account.</li>
+          </ol>
+          <p class="small muted" style="margin:0">Limits: IRS Notice 2025-67. Income limits apply to Roth IRA contributions. This is education, not personal advice.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk quiz -->
+    <section id="quiz">
+      <div class="container">
+        <div class="section-head">
+          <h2>🧭 What's your risk style?</h2>
+          <p class="muted">Five quick questions. We'll show a sample stocks/bonds mix people with your answers often consider — and load it into the portfolio builder.</p>
+        </div>
+        <div class="card quiz-card" id="risk-quiz"></div>
+      </div>
+    </section>
+
+    <!-- Glossary -->
+    <section id="glossary">
+      <div class="container">
+        <div class="section-head"><h2>📖 Investing glossary</h2><p class="muted">The jargon, translated.</p></div>
+        <div class="glossary" id="glossary-list"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <p class="small muted">Sources: annual returns 1928–2025 from Aswath Damodaran, NYU Stern, “Historical Returns on Stocks, Bonds and Bills” (S&amp;P 500 with dividends; 10-year U.S. Treasury bonds; 3-month T-bills; Baa corporate bonds; U.S. real estate; gold). Inflation from the BLS Consumer Price Index (CPI-U). Returns are nominal (before inflation) unless the "after inflation" switch is on, and before taxes and fees. Past performance does not guarantee future results. Educational content only — not investment advice.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/data/market-history.js"></script>
+  <script src="js/data/inflation.js"></script>
+  <script src="js/invest.js"></script>
+</body>
+</html>

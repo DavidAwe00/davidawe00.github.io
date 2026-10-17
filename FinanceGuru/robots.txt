@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://davidawe00.github.io/FinanceGuru/sitemap.xml

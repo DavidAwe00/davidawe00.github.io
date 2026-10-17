@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Money Tools — FinanceGuru</title>
+  <meta name="description" content="Free calculators: compound growth, 50/30/20 budget planner, debt payoff (avalanche vs snowball), and emergency fund target.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/tools.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/tools.html">
+  <meta property="og:title" content="Money Tools — FinanceGuru">
+  <meta property="og:description" content="Free calculators: compound growth, 50/30/20 budget planner, debt payoff (avalanche vs snowball), and emergency fund target.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <div class="nav-links">
+        <a href="learn.html">Learn</a>
+        <a href="invest.html">Invest</a>
+        <a href="college.html">College</a>
+        <a href="credit.html">Credit</a>
+        <a href="taxes.html">Taxes</a>
+        <a href="housing.html">Housing</a>
+        <a href="play.html">Play</a>
+        <a href="tools.html" aria-current="page">Tools</a>
+      </div>
+      <span class="xp-pill" data-xp>0 XP</span>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:32px;padding-bottom:48px">
+    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Money tools</h1>
+    <p class="muted">Plug in your own numbers. Nothing you type leaves your browser.</p>
+
+    <div class="tool-tabs" role="tablist">
+      <button role="tab" data-tab="compound">📈 Compound Growth</button>
+      <button role="tab" data-tab="budget">🧾 Budget Planner</button>
+      <button role="tab" data-tab="debt">⛓️ Debt Payoff</button>
+      <button role="tab" data-tab="emergency">🛟 Emergency Fund</button>
+      <button role="tab" data-tab="retire">🏖️ Retirement Check</button>
+      <button role="tab" data-tab="roth">⚖️ Roth vs Traditional</button>
+    </div>
+
+    <!-- Compound growth -->
+    <section class="tool" id="panel-compound" role="tabpanel" style="padding:0">
+      <div class="card">
+        <div class="field"><label for="c-initial">Starting amount</label><div class="input-wrap"><span>$</span><input id="c-initial" type="number" min="0" value="1000"></div></div>
+        <div class="field"><label for="c-monthly">Monthly contribution</label><div class="input-wrap"><span>$</span><input id="c-monthly" type="number" min="0" value="300"></div></div>
+        <div class="field"><label for="c-rate">Annual return</label><div class="input-wrap"><input id="c-rate" type="number" min="0" max="30" step="0.1" value="7"><span>%</span></div><span class="hint">Broad stock market has averaged ~7% after inflation historically. Not guaranteed.</span></div>
+        <div class="field"><label for="c-years">Years: <span id="c-years-label">30</span></label><input id="c-years" type="range" min="1" max="50" value="30"></div>
+      </div>
+      <div class="card">
+        <div class="stats">
+          <div class="stat hero"><div class="label">Final balance</div><div class="value" id="c-final">—</div></div>
+          <div class="stat"><div class="label">You contributed</div><div class="value" id="c-contrib">—</div></div>
+          <div class="stat"><div class="label">Growth earned</div><div class="value" id="c-growth">—</div></div>
+        </div>
+        <div class="chart-legend">
+          <span><i style="background:var(--series-1)"></i>Contributions</span>
+          <span><i style="background:var(--series-2)"></i>Growth</span>
+        </div>
+        <div class="chart chart-wrap" id="c-chart"></div>
+        <details class="table-view"><summary>Show as table</summary><div class="table-scroll" id="c-table"></div></details>
+      </div>
+    </section>
+
+    <!-- Budget -->
+    <section class="tool" id="panel-budget" role="tabpanel" style="padding:0" hidden>
+      <div class="card">
+        <div class="field"><label for="b-income">Monthly take-home pay</label><div class="input-wrap"><span>$</span><input id="b-income" type="number" min="0" value="4000"></div><span class="hint">After taxes and deductions.</span></div>
+        <div class="field"><label for="b-needs">Needs: <span id="b-needs-label">50</span>%</label><input id="b-needs" type="range" min="0" max="100" value="50"></div>
+        <div class="field"><label for="b-wants">Wants: <span id="b-wants-label">30</span>%</label><input id="b-wants" type="range" min="0" max="100" value="30"></div>
+        <p class="small muted">Savings gets whatever is left: <strong id="b-save-label">20</strong>%</p>
+        <button class="btn btn-ghost" id="b-reset" type="button">Reset to 50/30/20</button>
+      </div>
+      <div class="card">
+        <div class="stats">
+          <div class="stat"><div class="label"><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--series-1);margin-right:6px"></i>Needs</div><div class="value" id="b-needs-out">—</div></div>
+          <div class="stat"><div class="label"><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--series-2);margin-right:6px"></i>Wants</div><div class="value" id="b-wants-out">—</div></div>
+          <div class="stat hero"><div class="label"><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--series-3);margin-right:6px"></i>Savings & debt</div><div class="value" id="b-save-out">—</div></div>
+        </div>
+        <div class="budget-bar" id="b-bar" role="img"></div>
+        <p class="muted" id="b-insight"></p>
+      </div>
+    </section>
+
+    <!-- Debt -->
+    <section id="panel-debt" role="tabpanel" style="padding:0" hidden>
+      <div class="card" style="margin-bottom:16px">
+        <h3>Your debts</h3>
+        <div class="debt-row small muted" style="font-weight:600"><span class="name">Name</span><span>Balance ($)</span><span>APR (%)</span><span>Min. payment ($)</span><span></span></div>
+        <div id="d-list"></div>
+        <button class="btn btn-ghost" id="d-add" type="button">+ Add debt</button>
+        <div class="field" style="margin-top:20px;max-width:320px"><label for="d-extra">Extra you can pay each month</label><div class="input-wrap"><span>$</span><input id="d-extra" type="number" min="0" value="200"></div></div>
+      </div>
+      <div class="grid" id="d-results"></div>
+    </section>
+
+    <!-- Emergency -->
+    <section class="tool" id="panel-emergency" role="tabpanel" style="padding:0" hidden>
+      <div class="card">
+        <div class="field"><label for="e-expenses">Essential monthly expenses</label><div class="input-wrap"><span>$</span><input id="e-expenses" type="number" min="0" value="2500"></div><span class="hint">Rent, food, utilities, insurance, minimum payments.</span></div>
+        <div class="field"><label for="e-months">Months of cushion: <span id="e-months-label">6</span></label><input id="e-months" type="range" min="1" max="12" value="6"></div>
+        <div class="field"><label for="e-saved">Already saved</label><div class="input-wrap"><span>$</span><input id="e-saved" type="number" min="0" value="2000"></div></div>
+        <div class="field"><label for="e-monthly">You can save per month</label><div class="input-wrap"><span>$</span><input id="e-monthly" type="number" min="0" value="400"></div></div>
+      </div>
+      <div class="card">
+        <div class="stats">
+          <div class="stat hero"><div class="label">Your target</div><div class="value" id="e-target">—</div></div>
+          <div class="stat"><div class="label">Still to save</div><div class="value" id="e-gap">—</div></div>
+          <div class="stat"><div class="label">Time to goal</div><div class="value" id="e-time">—</div></div>
+        </div>
+        <div class="progress" style="height:14px"><span id="e-bar"></span></div>
+        <p class="small muted" id="e-pct" style="margin-top:6px"></p>
+        <p class="muted" id="e-insight"></p>
+      </div>
+    </section>
+    <!-- Retirement check -->
+    <section id="panel-retire" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="rt-age">Your age: <span id="rt-age-l">30</span></label><input type="range" id="rt-age" min="18" max="66" value="30"></div>
+          <div class="field"><label for="rt-salary">Salary</label><div class="input-wrap"><span>$</span><input id="rt-salary" type="number" min="0" value="65000"></div></div>
+          <div class="field"><label for="rt-saved">Saved for retirement so far</label><div class="input-wrap"><span>$</span><input id="rt-saved" type="number" min="0" value="40000"></div></div>
+          <div class="field"><label for="rt-rate">Saving <span id="rt-rate-l">12</span>% of pay (incl. employer match)</label><input type="range" id="rt-rate" min="0" max="40" value="12"></div>
+          <div class="field"><label for="rt-retire">Retire at: <span id="rt-retire-l">67</span></label><input type="range" id="rt-retire" min="62" max="70" value="67"><span class="hint">Also when you claim Social Security in this model.</span></div>
+          <details>
+            <summary class="small" style="cursor:pointer;margin-bottom:8px">Assumptions</summary>
+            <div class="field"><label for="rt-spend">Yearly spending in retirement (today's $)</label><div class="input-wrap"><span>$</span><input id="rt-spend" type="number" min="0" value="52000"></div><span class="hint">Default: 80% of salary. Use your own estimate.</span></div>
+            <div class="field"><label for="rt-return">Return after inflation</label><div class="input-wrap"><input id="rt-return" type="number" step="0.1" value="5"><span>%/yr</span></div><span class="hint">A 60/40 stock/bond mix earned ~5.2%/yr after inflation, 1928–2025.</span></div>
+            <div class="field"><label for="rt-wr">Withdrawal rate: <span id="rt-wr-l">4</span>%</label><input type="range" id="rt-wr" min="3" max="6" step="0.5" value="4"></div>
+          </details>
+        </div>
+        <div class="card">
+          <div id="rt-status"></div>
+          <div class="stats" style="margin-top:16px">
+            <div class="stat hero"><div class="label">Projected savings at <span id="rt-at"></span></div><div class="value" id="rt-proj">—</div></div>
+            <div class="stat"><div class="label">Savings you'll need</div><div class="value" id="rt-need">—</div></div>
+            <div class="stat"><div class="label">Est. Social Security</div><div class="value" id="rt-ss">—</div></div>
+            <div class="stat"><div class="label">Fidelity benchmark for your age</div><div class="value" id="rt-bench">—</div></div>
+          </div>
+          <div class="chart" id="rt-chart"></div>
+          <p class="callout small" id="rt-insight" style="margin-bottom:0"></p>
+          <details class="table-view"><summary>How this works &amp; sources</summary>
+            <ul class="small muted">
+              <li>All amounts are in today's dollars; growth uses your after-inflation return. Contributions assume your salary keeps pace with inflation.</li>
+              <li><strong>Social Security</strong> is a rough estimate: it treats your current salary (capped at the 2026 taxable maximum, $184,500) as your average indexed earnings and applies SSA's 2026 formula — 90% of the first $1,286/month, 32% up to $7,749, 15% above — then adjusts for claiming age (full retirement age is 67 if born 1960 or later; claiming at 62 cuts benefits 30%, waiting to 70 adds 24%). Get your real estimate at ssa.gov/myaccount.</li>
+              <li><strong>Savings needed</strong> = (spending − Social Security) ÷ withdrawal rate. The "4% rule" comes from William Bengen's 1994 research; the success rates here are recomputed from 1928–2025 data (60% S&amp;P 500 / 40% 10-year Treasuries, rebalanced yearly, inflation-adjusted withdrawals, 30-year retirements).</li>
+              <li><strong>Benchmarks</strong>: Fidelity's guideline of saving 1× salary by 30, 3× by 40, 6× by 50, 8× by 60, and 10× by 67.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roth vs Traditional -->
+    <section id="panel-roth" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="rv-status">Filing status</label><select class="select" id="rv-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+          <div class="field"><label for="rv-income">Income (before the standard deduction)</label><div class="input-wrap"><span>$</span><input id="rv-income" type="number" min="0" value="65000"></div></div>
+          <div class="field"><label for="rv-contrib">Yearly contribution</label><div class="input-wrap"><span>$</span><input id="rv-contrib" type="number" min="0" value="7500"></div><span class="hint">2026 IRA limit: $7,500. 401(k): $24,500.</span></div>
+          <div class="field"><label for="rv-later">Expected tax rate in retirement</label><select class="select" id="rv-later"><option value="0.10">10%</option><option value="0.12" selected>12%</option><option value="0.22">22%</option><option value="0.24">24%</option><option value="0.32">32%</option><option value="0.35">35%</option><option value="0.37">37%</option></select><span class="hint">Nobody knows future tax rates — try a few.</span></div>
+          <div class="field"><label for="rv-years">Years until retirement: <span id="rv-years-l">35</span></label><input type="range" id="rv-years" min="1" max="45" value="35"></div>
+          <div class="field"><label for="rv-return">Annual return</label><div class="input-wrap"><input id="rv-return" type="number" step="0.1" value="7"><span>%</span></div></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat"><div class="label">Your 2026 tax bracket now</div><div class="value" id="rv-now">—</div></div>
+            <div class="stat"><div class="label">Roth: spendable in retirement</div><div class="value" id="rv-roth">—</div></div>
+            <div class="stat"><div class="label">Traditional: spendable in retirement</div><div class="value" id="rv-trad">—</div></div>
+          </div>
+          <div class="chart" id="rv-chart"></div>
+          <p class="callout small" id="rv-insight" style="margin-bottom:0"></p>
+          <details class="table-view"><summary>How this works &amp; sources</summary>
+            <ul class="small muted">
+              <li><strong>Traditional:</strong> you contribute pre-tax, it grows, and withdrawals are taxed at your future rate. <strong>Roth:</strong> you pay tax now (your current bracket), then growth and qualified withdrawals are tax-free. To compare fairly, both cost the same out of your take-home pay: the Roth contribution is reduced by today's tax.</li>
+              <li>Tax brackets and the standard deduction ($16,100 single / $32,200 joint) are 2026 figures from the IRS (Rev. Proc. 2025-32). Roth IRA contributions phase out at $153,000–$168,000 (single) and $242,000–$252,000 (joint) of modified AGI in 2026 (IRS Notice 2025-67).</li>
+              <li>Simplified: uses your marginal bracket for the whole contribution and ignores state taxes, credits, and required minimum distributions.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/data/market-history.js"></script>
+  <script src="js/data/inflation.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/data/tax2026.js"></script>
+  <script src="js/retire.js"></script>
+</body>
+</html>
