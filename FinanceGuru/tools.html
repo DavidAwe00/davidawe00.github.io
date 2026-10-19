@@ -13,7 +13,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/tools.html">
-  
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FinanceGuru">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/tools.html">
@@ -32,11 +32,16 @@
       <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
-        <a href="invest.html">Invest</a>
-        <a href="college.html">College</a>
-        <a href="credit.html">Credit</a>
-        <a href="taxes.html">Taxes</a>
-        <a href="housing.html">Housing</a>
+        <details class="nav-menu">
+          <summary>Topics</summary>
+          <div class="nav-menu-panel">
+            <a href="invest.html"><span class="nav-menu-icon" aria-hidden="true">📈</span><span><strong>Investing</strong><span class="small muted">Returns, fees, and accounts</span></span></a>
+            <a href="college.html"><span class="nav-menu-icon" aria-hidden="true">🎓</span><span><strong>College &amp; careers</strong><span class="small muted">Majors, pay, and ROI</span></span></a>
+            <a href="credit.html"><span class="nav-menu-icon" aria-hidden="true">💳</span><span><strong>Credit &amp; debt</strong><span class="small muted">Scores, cards, and loans</span></span></a>
+            <a href="taxes.html"><span class="nav-menu-icon" aria-hidden="true">🧾</span><span><strong>Taxes</strong><span class="small muted">Brackets and paychecks</span></span></a>
+            <a href="housing.html"><span class="nav-menu-icon" aria-hidden="true">🏡</span><span><strong>Housing</strong><span class="small muted">Mortgages and rent vs buy</span></span></a>
+          </div>
+        </details>
         <a href="play.html">Play</a>
         <a href="tools.html" aria-current="page">Tools</a>
       </div>
@@ -49,6 +54,9 @@
     <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Money tools</h1>
     <p class="muted">Plug in your own numbers. Nothing you type leaves your browser.</p>
 
+    <div class="field tool-picker"><label for="tool-picker">Choose a tool</label><select class="select" id="tool-picker">
+      <option value="compound">📈 Compound Growth</option><option value="budget">🧾 Budget Planner</option><option value="debt">⛓️ Debt Payoff</option><option value="emergency">🛟 Emergency Fund</option><option value="retire">🏖️ Retirement Check</option><option value="roth">⚖️ Roth vs Traditional</option><option value="car">🚗 Car Cost</option>
+    </select></div>
     <div class="tool-tabs" role="tablist">
       <button role="tab" data-tab="compound">📈 Compound Growth</button>
       <button role="tab" data-tab="budget">🧾 Budget Planner</button>
@@ -56,6 +64,7 @@
       <button role="tab" data-tab="emergency">🛟 Emergency Fund</button>
       <button role="tab" data-tab="retire">🏖️ Retirement Check</button>
       <button role="tab" data-tab="roth">⚖️ Roth vs Traditional</button>
+      <button role="tab" data-tab="car">🚗 Car Cost</button>
     </div>
 
     <!-- Compound growth -->
@@ -199,6 +208,40 @@
         </div>
       </div>
     </section>
+    <!-- Car cost -->
+    <section id="panel-car" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="car-price">Car price (out the door)</label><div class="input-wrap"><span>$</span><input id="car-price" type="number" min="0" step="500" value="27235"></div><span class="hint">Average used-car listing: $27,235. Average new car: $50,562 (Sept 2026).</span></div>
+          <div class="field"><label for="car-down">Down payment + trade-in</label><div class="input-wrap"><span>$</span><input id="car-down" type="number" min="0" step="500" value="5000"></div></div>
+          <div class="field"><label for="car-apr">Loan APR</label><div class="input-wrap"><input id="car-apr" type="number" min="0" max="40" step="0.1" value="9"><span>%</span></div><span class="hint">New-car loans averaged about 7% in Q3 2026; used-car loans usually cost more, and rates rise with lower credit scores.</span></div>
+          <div class="field"><label for="car-term">Loan length</label><select class="select" id="car-term"><option value="36">36 months (3 yrs)</option><option value="48" selected>48 months (4 yrs)</option><option value="60">60 months (5 yrs)</option><option value="72">72 months (6 yrs)</option><option value="84">84 months (7 yrs)</option></select></div>
+          <div class="field"><label for="car-ins">Insurance per month</label><div class="input-wrap"><span>$</span><input id="car-ins" type="number" min="0" value="175"></div><span class="hint">Young drivers often pay much more. Get quotes before you buy.</span></div>
+          <div class="field"><label for="car-gas">Gas or charging per month</label><div class="input-wrap"><span>$</span><input id="car-gas" type="number" min="0" value="216"></div></div>
+          <div class="field"><label for="car-maint">Maintenance, repairs &amp; tires per month</label><div class="input-wrap"><span>$</span><input id="car-maint" type="number" min="0" value="146"></div></div>
+          <div class="field"><label for="car-income">Your yearly income (before taxes)</label><div class="input-wrap"><span>$</span><input id="car-income" type="number" min="0" step="1000" value="45000"></div></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat"><div class="label">Monthly loan payment</div><div class="value" id="car-pay">—</div></div>
+            <div class="stat hero"><div class="label">Total cost per month</div><div class="value" id="car-total">—</div><div class="small muted" id="car-pct"></div></div>
+            <div class="stat"><div class="label">Interest over the loan</div><div class="value" id="car-int">—</div></div>
+          </div>
+          <div id="car-status"></div>
+          <h3 style="margin:16px 0 4px;font-size:1rem">Same car, different loan lengths</h3>
+          <div class="table-scroll" style="max-height:none"><table class="car-terms" id="car-table"></table></div>
+          <p class="callout small" id="car-insight" style="margin-bottom:0"></p>
+          <details class="table-view"><summary>How this works &amp; sources</summary>
+            <ul class="small muted">
+              <li>Payment uses the standard loan formula on price minus down payment. Taxes and fees are assumed to be in the out-the-door price.</li>
+              <li>Prices: Kelley Blue Book average new-vehicle transaction price ($50,562) and Cox Automotive average used listing price ($27,235), September 2026. Loans: Edmunds Q3 2026 (new-car APR about 7%, average payment $787, 25.5% of new-car loans 84 months or longer).</li>
+              <li>Default running costs are AAA's 2026 <em>Your Driving Costs</em> averages for a new car at 15,000 miles a year: fuel 17.3¢ and maintenance, repairs, and tires 11.7¢ per mile, and insurance $2,098 a year. Your costs will differ.</li>
+              <li>The 20/4/10 guideline (20% down, 4-year loan or shorter, total car costs under 10% of gross income) is a common rule of thumb, not a law. Many people can't hit 10% with today's prices; treat it as a target.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -215,5 +258,6 @@
   <script src="js/tools.js"></script>
   <script src="js/data/tax2026.js"></script>
   <script src="js/retire.js"></script>
+  <script src="js/car.js"></script>
 </body>
 </html>

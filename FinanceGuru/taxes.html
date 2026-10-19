@@ -13,7 +13,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/taxes.html">
-  
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FinanceGuru">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/taxes.html">
@@ -32,11 +32,16 @@
       <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
-        <a href="invest.html">Invest</a>
-        <a href="college.html">College</a>
-        <a href="credit.html">Credit</a>
-        <a href="taxes.html" aria-current="page">Taxes</a>
-        <a href="housing.html">Housing</a>
+        <details class="nav-menu">
+          <summary class="active">Topics</summary>
+          <div class="nav-menu-panel">
+            <a href="invest.html"><span class="nav-menu-icon" aria-hidden="true">📈</span><span><strong>Investing</strong><span class="small muted">Returns, fees, and accounts</span></span></a>
+            <a href="college.html"><span class="nav-menu-icon" aria-hidden="true">🎓</span><span><strong>College &amp; careers</strong><span class="small muted">Majors, pay, and ROI</span></span></a>
+            <a href="credit.html"><span class="nav-menu-icon" aria-hidden="true">💳</span><span><strong>Credit &amp; debt</strong><span class="small muted">Scores, cards, and loans</span></span></a>
+            <a href="taxes.html" aria-current="page"><span class="nav-menu-icon" aria-hidden="true">🧾</span><span><strong>Taxes</strong><span class="small muted">Brackets and paychecks</span></span></a>
+            <a href="housing.html"><span class="nav-menu-icon" aria-hidden="true">🏡</span><span><strong>Housing</strong><span class="small muted">Mortgages and rent vs buy</span></span></a>
+          </div>
+        </details>
         <a href="play.html">Play</a>
         <a href="tools.html">Tools</a>
       </div>
@@ -60,6 +65,7 @@
         <nav class="jump" aria-label="On this page">
           <a href="#brackets">🪣 How brackets work</a>
           <a href="#paycheck">🧾 Paycheck breakdown</a>
+          <a href="#gig">🛵 Side hustle taxes</a>
           <a href="#w4">📝 W-4 basics</a>
           <a href="#new">🆕 New deductions</a>
         </nav>
@@ -123,6 +129,37 @@
       </div>
     </section>
 
+    <!-- Side hustle -->
+    <section id="gig">
+      <div class="container">
+        <div class="section-head">
+          <h2>🛵 Side hustle taxes: how much to set aside</h2>
+          <p class="muted">Delivery, rideshare, freelancing, reselling, tutoring: nobody withholds taxes from gig pay. Find out what to save from every dollar.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="g-income">Side hustle income this year</label><div class="input-wrap"><span>$</span><input id="g-income" type="number" min="0" step="100" value="8000"></div><span class="hint">Everything you were paid, with or without a 1099.</span></div>
+            <div class="field"><label for="g-exp">Business expenses</label><div class="input-wrap"><span>$</span><input id="g-exp" type="number" min="0" step="50" value="400"></div><span class="hint">Supplies, phone share, app fees, insulated bags… not personal spending.</span></div>
+            <div class="field"><label for="g-miles">Business miles driven</label><div class="input-wrap"><input id="g-miles" type="number" min="0" step="100" value="3000"><span>mi</span></div></div>
+            <div class="field"><label for="g-rate">IRS standard mileage rate</label><select class="select" id="g-rate"><option value="0.725">72.5¢ (Jan–Jun 2026)</option><option value="0.76" selected>76¢ (Jul–Dec 2026)</option></select></div>
+            <div class="field"><label for="g-wages">Wages from a regular job (W-2)</label><div class="input-wrap"><span>$</span><input id="g-wages" type="number" min="0" step="1000" value="20000"></div><span class="hint">Sets your tax bracket. Enter 0 if the side hustle is your only income.</span></div>
+            <div class="field"><label for="g-status">Filing status</label><select class="select" id="g-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+            <div class="field"><label for="g-state">State income tax (approx.)</label><div class="input-wrap"><input id="g-state" type="number" min="0" step="0.1" value="4"><span>%</span></div></div>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat"><div class="label">Profit (what's taxed)</div><div class="value" id="g-profit">—</div></div>
+              <div class="stat"><div class="label">Extra tax you'll owe</div><div class="value" id="g-tax">—</div></div>
+              <div class="stat hero"><div class="label">Set aside from each $100 of profit</div><div class="value" id="g-pct">—</div></div>
+            </div>
+            <div class="pc-list" id="g-list"></div>
+            <p class="callout small" id="g-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:8px">Estimate only. Self-employment tax is 15.3% (12.4% Social Security up to the $184,500 wage base, shared with your W-2 wages, plus 2.9% Medicare) on 92.35% of net profit, and it applies once net earnings reach $400. You can deduct half of it, and the qualified business income deduction (20% of qualified profit) is included in simplified form. Mileage rates: IRS Notice 2026-10 and Announcement 2026-11. Ignores credits, the additional Medicare tax, and other deductions.</p>
+      </div>
+    </section>
+
     <!-- W-4 -->
     <section id="w4">
       <div class="container">
@@ -170,5 +207,6 @@
   <script src="js/site.js"></script>
   <script src="js/data/tax2026.js"></script>
   <script src="js/taxes.js"></script>
+  <script src="js/sidehustle.js"></script>
 </body>
 </html>

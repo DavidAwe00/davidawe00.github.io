@@ -13,7 +13,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/">
-  
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FinanceGuru">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/">
@@ -32,11 +32,16 @@
       <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
-        <a href="invest.html">Invest</a>
-        <a href="college.html">College</a>
-        <a href="credit.html">Credit</a>
-        <a href="taxes.html">Taxes</a>
-        <a href="housing.html">Housing</a>
+        <details class="nav-menu">
+          <summary>Topics</summary>
+          <div class="nav-menu-panel">
+            <a href="invest.html"><span class="nav-menu-icon" aria-hidden="true">📈</span><span><strong>Investing</strong><span class="small muted">Returns, fees, and accounts</span></span></a>
+            <a href="college.html"><span class="nav-menu-icon" aria-hidden="true">🎓</span><span><strong>College &amp; careers</strong><span class="small muted">Majors, pay, and ROI</span></span></a>
+            <a href="credit.html"><span class="nav-menu-icon" aria-hidden="true">💳</span><span><strong>Credit &amp; debt</strong><span class="small muted">Scores, cards, and loans</span></span></a>
+            <a href="taxes.html"><span class="nav-menu-icon" aria-hidden="true">🧾</span><span><strong>Taxes</strong><span class="small muted">Brackets and paychecks</span></span></a>
+            <a href="housing.html"><span class="nav-menu-icon" aria-hidden="true">🏡</span><span><strong>Housing</strong><span class="small muted">Mortgages and rent vs buy</span></span></a>
+          </div>
+        </details>
         <a href="play.html">Play</a>
         <a href="tools.html">Tools</a>
       </div>
@@ -127,21 +132,33 @@
           <h2>Your learning path</h2>
           <p class="muted">Short lessons that cover the foundations of personal finance, from budgeting to investing to college. Earn XP for every quiz. <a href="learn.html?lang=es" lang="es">También en español →</a></p>
           <div class="progress" aria-label="Course progress"><span id="home-progress" style="width:0%"></span></div>
-          <p class="small muted" id="home-progress-label" style="margin-top:6px"></p>
+          <p class="small muted units-bar" style="margin-top:6px"><span id="home-progress-label"></span><button type="button" class="link-btn" id="units-toggle">Show all lessons</button></p>
         </div>
-        <div class="grid" id="lesson-grid"><a class="card" href="lessons/budgeting.html"><div class="card-icon">🧾</div><h3>1. Budgeting Basics</h3><p class="muted small">Tell your money where to go instead of wondering where it went.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/emergency-fund.html"><div class="card-icon">🛟</div><h3>2. Your Emergency Fund</h3><p class="muted small">The cushion that stops a bad week from becoming a bad year.</p><div class="card-meta"><span>3 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/debt.html"><div class="card-icon">⛓️</div><h3>3. Crushing Debt</h3><p class="muted small">How interest works against you — and two proven ways to fight back.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/compound-interest.html"><div class="card-icon">📈</div><h3>4. The Magic of Compound Interest</h3><p class="muted small">Why starting early matters more than starting big.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/credit.html"><div class="card-icon">💳</div><h3>5. Understanding Credit Scores</h3><p class="muted small">The three-digit number that affects your rent, loans, and more.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/investing.html"><div class="card-icon">🌱</div><h3>6. Investing 101</h3><p class="muted small">Stocks, index funds, and why boring is beautiful.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/inflation.html"><div class="card-icon">🎈</div><h3>7. Inflation: The Invisible Tax</h3><p class="muted small">Why a dollar buys less every year — and how to keep up.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/risk-time.html"><div class="card-icon">⏳</div><h3>8. Risk, Time &amp; Diversification</h3><p class="muted small">Why stocks are scary for a year but surprisingly reliable for 20.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/retirement-accounts.html"><div class="card-icon">🏦</div><h3>9. Retirement Accounts 101</h3><p class="muted small">401(k), Roth IRA, HSA — the tax-advantaged containers for your investments.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/college-roi.html"><div class="card-icon">🎓</div><h3>10. Is College Worth It?</h3><p class="muted small">Think about a degree like an investment: cost, payoff, and alternatives.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/taxes-101.html"><div class="card-icon">🧾</div><h3>11. Taxes 101: Brackets &amp; Paychecks</h3><p class="muted small">Why a raise never shrinks your paycheck, and what FICA is.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/rent-vs-buy.html"><div class="card-icon">🏡</div><h3>12. Renting vs Buying a Home</h3><p class="muted small">Mortgages, equity, and the hidden costs of owning.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
-<a class="card" href="lessons/student-loans-2026.html"><div class="card-icon">📜</div><h3>13. Student Loans: The 2026 Rules</h3><p class="muted small">RAP vs. the Tiered Standard Plan — what changed and how to choose.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a></div><!-- lesson-grid-end -->
+        <div class="units" id="lesson-grid"><details class="unit" data-unit="earn" open><summary><span class="unit-icon" aria-hidden="true">💵</span><span class="unit-text"><strong>Unit 1: Earn &amp; spend</strong><span class="small muted">Budgets, bank accounts, paychecks, and side hustles. · 4 lessons</span></span><span class="unit-status">4 lessons</span></summary>
+<div class="grid"><a class="card" href="lessons/budgeting.html"><div class="card-icon">🧾</div><h3>1. Budgeting Basics</h3><p class="muted small">Tell your money where to go instead of wondering where it went.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/banking.html"><div class="card-icon">🏦</div><h3>2. Banking Basics: Accounts, Interest &amp; Fees</h3><p class="muted small">Pick the right accounts, earn real interest, and stop paying fees you don't have to.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/taxes-101.html"><div class="card-icon">🧾</div><h3>3. Taxes 101: Brackets &amp; Paychecks</h3><p class="muted small">Why a raise never shrinks your paycheck, and what FICA is.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/side-hustle.html"><div class="card-icon">🛵</div><h3>4. Side Hustles &amp; Self-Employment Taxes</h3><p class="muted small">Gig money is real income. Here's how it's taxed and how to keep more of it.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a></div></details>
+<details class="unit" data-unit="protect"><summary><span class="unit-icon" aria-hidden="true">🛡️</span><span class="unit-text"><strong>Unit 2: Save &amp; protect</strong><span class="small muted">Emergency funds, insurance, scams, and betting. · 4 lessons</span></span><span class="unit-status">4 lessons</span></summary>
+<div class="grid"><a class="card" href="lessons/emergency-fund.html"><div class="card-icon">🛟</div><h3>5. Your Emergency Fund</h3><p class="muted small">The cushion that stops a bad week from becoming a bad year.</p><div class="card-meta"><span>3 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/insurance.html"><div class="card-icon">☂️</div><h3>6. Insurance 101: Health, Car, Renters &amp; Life</h3><p class="muted small">Pay a little now so one bad day can't wipe you out.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/scams.html"><div class="card-icon">🎣</div><h3>7. Spotting Scams &amp; Protecting Your Identity</h3><p class="muted small">The red flags every scam shares, and what to do if one gets you.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/betting.html"><div class="card-icon">🎲</div><h3>8. The Math of Sports Betting &amp; Gambling</h3><p class="muted small">Why the house always wins over time, and how betting apps keep you playing.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a></div></details>
+<details class="unit" data-unit="borrow"><summary><span class="unit-icon" aria-hidden="true">💳</span><span class="unit-text"><strong>Unit 3: Borrow wisely</strong><span class="small muted">Debt, credit scores, and student loans. · 4 lessons</span></span><span class="unit-status">4 lessons</span></summary>
+<div class="grid"><a class="card" href="lessons/debt.html"><div class="card-icon">⛓️</div><h3>9. Crushing Debt</h3><p class="muted small">How interest works against you — and two proven ways to fight back.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/credit.html"><div class="card-icon">💳</div><h3>10. Understanding Credit Scores</h3><p class="muted small">The three-digit number that affects your rent, loans, and more.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/bnpl-payday.html"><div class="card-icon">⏳</div><h3>11. Buy Now, Pay Later &amp; Payday Loans</h3><p class="muted small">Easy money at checkout can get expensive fast. Learn to see the real price.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/student-loans-2026.html"><div class="card-icon">📜</div><h3>12. Student Loans: The 2026 Rules</h3><p class="muted small">RAP vs. the Tiered Standard Plan — what changed and how to choose.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a></div></details>
+<details class="unit" data-unit="grow"><summary><span class="unit-icon" aria-hidden="true">📈</span><span class="unit-text"><strong>Unit 4: Grow your money</strong><span class="small muted">Compounding, investing, inflation, and retirement. · 5 lessons</span></span><span class="unit-status">5 lessons</span></summary>
+<div class="grid"><a class="card" href="lessons/compound-interest.html"><div class="card-icon">📈</div><h3>13. The Magic of Compound Interest</h3><p class="muted small">Why starting early matters more than starting big.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/investing.html"><div class="card-icon">🌱</div><h3>14. Investing 101</h3><p class="muted small">Stocks, index funds, and why boring is beautiful.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/inflation.html"><div class="card-icon">🎈</div><h3>15. Inflation: The Invisible Tax</h3><p class="muted small">Why a dollar buys less every year — and how to keep up.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/risk-time.html"><div class="card-icon">⏳</div><h3>16. Risk, Time &amp; Diversification</h3><p class="muted small">Why stocks are scary for a year but surprisingly reliable for 20.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/retirement-accounts.html"><div class="card-icon">🏦</div><h3>17. Retirement Accounts 101</h3><p class="muted small">401(k), Roth IRA, HSA — the tax-advantaged containers for your investments.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a></div></details>
+<details class="unit" data-unit="decide"><summary><span class="unit-icon" aria-hidden="true">🧭</span><span class="unit-text"><strong>Unit 5: Big decisions</strong><span class="small muted">College, housing, and other big purchases. · 3 lessons</span></span><span class="unit-status">3 lessons</span></summary>
+<div class="grid"><a class="card" href="lessons/college-roi.html"><div class="card-icon">🎓</div><h3>18. Is College Worth It?</h3><p class="muted small">Think about a degree like an investment: cost, payoff, and alternatives.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/rent-vs-buy.html"><div class="card-icon">🏡</div><h3>19. Renting vs Buying a Home</h3><p class="muted small">Mortgages, equity, and the hidden costs of owning.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
+<a class="card" href="lessons/car-buying.html"><div class="card-icon">🚗</div><h3>20. Buying Your First Car</h3><p class="muted small">The real cost of a car, new vs used, and how to not get burned on the loan.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a></div></details></div><!-- lesson-grid-end -->
       </div>
     </section>
 
@@ -215,20 +232,41 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="js/hero3d.js"></script>
   <script>
-    // Lesson cards + progress
+    // Lesson units (collapsible) + progress. The unit holding your next lesson starts open.
     (function () {
       const p = FG.getProgress();
       const grid = document.getElementById("lesson-grid");
-      grid.innerHTML = LESSONS.map((l, i) => {
+      const nextUp = LESSONS.find((l) => !p.done[l.id]);
+      const card = (l) => {
         const done = p.done[l.id];
         return `<a class="card" href="lessons/${l.id}.html">
           <div class="card-icon">${l.icon}</div>
-          <h3>${i + 1}. ${l.title}</h3>
+          <h3>${LESSONS.indexOf(l) + 1}. ${l.title}</h3>
           <p class="muted small">${l.summary}</p>
           <div class="card-meta"><span>${l.minutes} min</span>
-            <span class="badge ${done ? "done" : ""}">${done ? `✓ ${done.score}/${done.total}` : "Not started"}</span></div>
+            <span class="badge ${done ? "done" : ""}">${done ? `✓ ${done.score}/${done.total}` : l === nextUp ? "Up next" : "Not started"}</span></div>
         </a>`;
+      };
+      grid.innerHTML = UNITS.map((u, n) => {
+        const ls = u.lessons.map((id) => LESSONS.find((l) => l.id === id));
+        const finished = ls.filter((l) => p.done[l.id]).length;
+        const open = nextUp ? u.lessons.includes(nextUp.id) : n === 0;
+        const status = finished === ls.length ? "✓ Complete" : finished ? `${finished}/${ls.length} done` : `${ls.length} lessons`;
+        return `<details class="unit" data-unit="${u.id}"${open ? " open" : ""}>
+          <summary><span class="unit-icon" aria-hidden="true">${u.icon}</span>
+            <span class="unit-text"><strong>Unit ${n + 1}: ${u.title}</strong><span class="small muted">${u.blurb} · ${ls.length} lessons</span></span>
+            <span class="unit-status ${finished === ls.length ? "done" : ""}">${status}</span></summary>
+          <div class="grid">${ls.map(card).join("")}</div></details>`;
       }).join("");
+      const toggle = document.getElementById("units-toggle");
+      const sync = () => (toggle.textContent = [...grid.querySelectorAll("details")].every((d) => d.open) ? "Collapse all" : "Show all lessons");
+      toggle.addEventListener("click", () => {
+        const openAll = toggle.textContent === "Show all lessons";
+        grid.querySelectorAll("details").forEach((d) => (d.open = openAll));
+        sync();
+      });
+      grid.addEventListener("toggle", sync, true);
+      sync();
       const count = LESSONS.filter((l) => p.done[l.id]).length;
       document.getElementById("home-progress").style.width = (count / LESSONS.length) * 100 + "%";
       document.getElementById("home-progress-label").textContent = `${count} of ${LESSONS.length} lessons complete`;

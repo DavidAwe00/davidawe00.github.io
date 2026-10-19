@@ -134,8 +134,20 @@ const FG = (() => {
     });
   }
 
+  // Header "Topics" dropdown (<details>): close it on outside click, Escape, or after choosing a link.
+  function initNavMenu() {
+    const menus = [...document.querySelectorAll(".nav-menu")];
+    if (!menus.length) return;
+    document.addEventListener("click", (e) => menus.forEach((m) => { if (m.open && !m.contains(e.target)) m.open = false; }));
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      menus.forEach((m) => { if (m.open) { m.open = false; m.querySelector("summary").focus(); } });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
+    initNavMenu();
     initFocusRescue();
     renderXp();
     initSignup();

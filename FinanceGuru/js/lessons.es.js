@@ -553,6 +553,400 @@ const LESSONS_ES = {
       },
     ],
   },
+  scams: {
+    title: "Cómo detectar estafas y proteger tu identidad",
+    summary: "Las señales de alerta que comparten todas las estafas, y qué hacer si caes en una.",
+    cards: [
+      {
+        heading: "Las estafas son un gran negocio",
+        html: `<p>En 2025, la gente en EE. UU. presentó <strong>3 millones de reportes de fraude</strong> ante la Comisión Federal de Comercio (FTC) y reportó pérdidas de <strong>$15.9 mil millones</strong>, la cifra más alta registrada. El tipo más común fueron las <strong>estafas de impostores</strong>: alguien que se hace pasar por tu banco, una empresa de entregas, el gobierno, un jefe o un amigo.</p>
+               <p>La forma más común de primer contacto fue un <strong>mensaje de texto</strong>. Las mayores pérdidas vinieron de <strong>pagos bancarios</strong>, seguidos de <strong>criptomonedas</strong>.</p>
+               <p class="small muted">Fuente: testimonio de la FTC ante el Comité Económico Conjunto del Congreso, 25 de marzo de 2026 (datos de Consumer Sentinel 2025). La mayoría de los fraudes nunca se reportan, así que las pérdidas reales son mayores.</p>`,
+      },
+      {
+        heading: "Las cuatro señales de alerta",
+        html: `<p>Casi todas las estafas usan alguna combinación de estas:</p>
+               <ul>
+                 <li><strong>Presión para actuar ya</strong>: "Tu cuenta se cerrará hoy", "Paga en la próxima hora o habrá una orden de arresto".</li>
+                 <li><strong>Una forma rara de pagar</strong>: tarjetas de regalo, criptomonedas, transferencias bancarias o apps de pago. La FTC dice que solo los estafadores exigen tarjetas de regalo.</li>
+                 <li><strong>Te piden códigos o contraseñas</strong>: las empresas reales nunca piden el código de un solo uso que te acaban de enviar.</li>
+                 <li><strong>Demasiado bueno para ser verdad</strong>: un trabajo que paga $500 al día por "darle like a publicaciones", un premio de un concurso en el que nunca participaste, un apartamento barato que no puedes ver en persona.</li>
+               </ul>
+               <div class="callout"><strong>Practica:</strong> clasifica mensajes realistas en el juego <a href="play.html#scam">Spot the Scam</a>.</div>`,
+      },
+      {
+        heading: "Estafas dirigidas a jóvenes",
+        html: `<ul>
+                 <li><strong>Trabajos falsos y "tareas" en línea</strong>: te pagan un poco y luego te piden depositar dinero para "desbloquear" ganancias más grandes.</li>
+                 <li><strong>Cheques falsos</strong>: alguien te "paga de más" y te pide que le devuelvas la diferencia. Días después el cheque rebota y le debes al banco.</li>
+                 <li><strong>Compras y reventas en línea</strong>: boletos de conciertos, tenis o artículos de videojuegos que nunca llegan, pagados con una app que no puede revertir el pago.</li>
+                 <li><strong>Estafas de renta</strong>: un "dueño" quiere un depósito antes de que veas el lugar o firmes un contrato.</li>
+               </ul>
+               <p>Las apps de pago funcionan como entregar efectivo. Si le mandas dinero a un estafador, quizá no lo recuperes.</p>`,
+      },
+      {
+        heading: "Protege tu identidad",
+        html: `<ul>
+                 <li><strong>No uses el enlace ni el número que viene en un mensaje.</strong> Entra a la app de la empresa o llama al número de tu tarjeta.</li>
+                 <li><strong>Activa la verificación en dos pasos</strong> y usa una contraseña diferente para cada cuenta (un administrador de contraseñas ayuda).</li>
+                 <li><strong>Congela tu crédito</strong> en Equifax, Experian y TransUnion. Es gratis por ley federal y evita que alguien abra cuentas a tu nombre. Puedes descongelarlo cuando solicites crédito.</li>
+                 <li><strong>Revisa tus cuentas</strong> cada semana, y tus reportes de crédito gratis en AnnualCreditReport.com.</li>
+               </ul>`,
+      },
+      {
+        heading: "Si caes en una estafa",
+        html: `<p>Actúa rápido y no sientas vergüenza: los estafadores son profesionales.</p>
+               <ol>
+                 <li><strong>Llama de inmediato a tu banco o app de pago</strong> y pide que detengan o reviertan el pago.</li>
+                 <li><strong>Cambia tus contraseñas</strong> de cualquier cuenta que hayas compartido, empezando por tu correo.</li>
+                 <li><strong>Repórtalo</strong> en ReportaFraude.ftc.gov. Si alguien usó tu identidad, obtén un plan de recuperación en RobodeIdentidad.gov.</li>
+               </ol>
+               <p>Cuidado con los servicios de "recuperación" que prometen devolverte el dinero a cambio de un pago. Muchas veces es una segunda estafa.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Un texto dice que tu cuenta bancaria está bloqueada y te pide responder con el código que te acaba de enviar. ¿Qué haces?",
+        choices: ["Respondo rápido con el código", "Hago clic en el enlace para revisar", "Lo ignoro y contacto a mi banco por su app o el número de mi tarjeta", "Se lo reenvío a un amigo"],
+        why: "Los bancos reales nunca piden tu código de un solo uso. Contáctalos por un medio en el que ya confías.",
+      },
+      {
+        q: "¿Qué solicitud de pago es la mayor señal de alerta?",
+        choices: ["Una factura de servicios que puedes pagar en línea", "Alguien que te pide pagar con tarjetas de regalo", "Una tienda que acepta tarjeta de crédito", "Tu escuela pidiendo la cuota de una excursión en su portal"],
+        why: "La FTC dice que solo los estafadores exigen pagos con tarjetas de regalo. En cuanto compartes los números, el dinero se pierde.",
+      },
+      {
+        q: "¿Qué hace un congelamiento de crédito?",
+        choices: ["Baja tu puntaje de crédito", "Evita que se abran cuentas nuevas a tu nombre", "Cancela tus tarjetas actuales", "Cuesta $30 por cada agencia"],
+        why: "El congelamiento impide que los prestamistas consulten tu reporte, así que los ladrones de identidad no pueden abrir cuentas nuevas. Es gratis y no afecta tu puntaje.",
+      },
+    ],
+  },
+  banking: {
+    title: "Conceptos básicos de la banca: cuentas, intereses y cargos",
+    summary: "Elige las cuentas correctas, gana intereses de verdad y deja de pagar cargos innecesarios.",
+    cards: [
+      {
+        heading: "Cuenta de cheques vs. cuenta de ahorros",
+        html: `<ul>
+                 <li><strong>La cuenta de cheques</strong> es para el dinero del día a día: ahí llega tu sueldo, y de ahí salen los pagos con tu tarjeta de débito, tus facturas y tus apps de pago.</li>
+                 <li><strong>La cuenta de ahorros</strong> es para el dinero que no vas a gastar este mes, como tu fondo de emergencia o una meta. Paga intereses, y tenerla separada hace más difícil gastarla por accidente.</li>
+               </ul>
+               <p>Los bancos y las cooperativas de crédito (credit unions) ofrecen ambas. Las cooperativas son organizaciones sin fines de lucro que pertenecen a sus socios y muchas veces cobran menos cargos.</p>`,
+      },
+      {
+        heading: "Dónde ahorras importa",
+        html: `<p>En septiembre de 2026, la cuenta de ahorros promedio en EE. UU. pagaba apenas <strong>0.37%</strong> al año (tasa nacional de la FDIC). Las mejores cuentas de ahorro de alto rendimiento en línea pagaban alrededor de <strong>4%</strong> (Bankrate).</p>
+               <p>Con $5,000 durante un año, eso es unos <strong>$19</strong> de interés contra unos <strong>$200</strong>, por el mismo dinero y la misma seguridad.</p>
+               <p>Los depósitos están asegurados hasta <strong>$250,000</strong> por persona, por banco y por tipo de titularidad: por la FDIC en los bancos o la NCUA en las cooperativas. El dinero que se queda en una app de pago podría no estar asegurado a menos que se pase a un banco.</p>
+               <p class="small muted">Las tasas cambian seguido y algunas de las más altas son promocionales. Revisa el APY actual antes de abrir una cuenta.</p>`,
+      },
+      {
+        heading: "Los cargos que se comen tu dinero",
+        html: `<p>Cargos bancarios promedio en 2025 (Bankrate):</p>
+               <ul>
+                 <li><strong>Sobregiro:</strong> $26.77 cada vez que gastas más de lo que tienes y el banco lo cubre.</li>
+                 <li><strong>Fondos insuficientes (NSF):</strong> $16.82 cuando un pago rebota.</li>
+                 <li><strong>Cajero fuera de la red:</strong> $4.86 por retiro, sumando el cargo de tu banco y el del dueño del cajero.</li>
+               </ul>
+               <p>Un sobregiro por un café de $5 lo convierte en un café de $32, y pueden caer varios en un solo día.</p>
+               <div class="callout"><strong>Practica:</strong> encuentra todos los cargos en un estado de cuenta con el juego <a href="play.html#fees">Fee Hunter</a>.</div>`,
+      },
+      {
+        heading: "Cómo pagar $0 en cargos",
+        html: `<ul>
+                 <li><strong>Elige una cuenta sin cargos</strong> (sin cuota mensual ni saldo mínimo), o cumple las reglas para que te la perdonen, muchas veces un depósito directo.</li>
+                 <li><strong>No aceptes la cobertura de sobregiro</strong> para débito y cajeros. Por ley, los bancos necesitan tu autorización para cobrarte sobregiros en esas compras, así que una tarjeta rechazada te cuesta $0.</li>
+                 <li><strong>Activa alertas de saldo bajo</strong> en la app de tu banco.</li>
+                 <li><strong>Usa los cajeros de la red de tu banco</strong>, o pide efectivo al pagar en una tienda.</li>
+               </ul>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "La cuenta de ahorros promedio pagaba 0.37% y las de alto rendimiento cerca de 4%. Con $5,000 durante un año, ¿cuánto más gana la de alto rendimiento, aproximadamente?",
+        choices: ["Unos $2", "Unos $18", "Unos $180", "Unos $2,000"],
+        why: "$5,000 × 4% ≈ $200, contra $5,000 × 0.37% ≈ $19. La diferencia es de unos $180 sin hacer nada diferente.",
+      },
+      {
+        q: "¿Cuánto protege el seguro de la FDIC o la NCUA por persona, por banco y por tipo de titularidad?",
+        choices: ["$2,500", "$25,000", "$250,000", "Sin límite"],
+        why: "Los depósitos están asegurados hasta $250,000. Si el banco quiebra, recuperas tu dinero asegurado.",
+      },
+      {
+        q: "¿Qué es lo que más probablemente te ahorra cargos por sobregiro en compras con tarjeta de débito?",
+        choices: ["Aceptar la cobertura de sobregiro", "No aceptar la cobertura de sobregiro y activar alertas de saldo bajo", "Usar cajeros fuera de la red", "Guardar el dinero en una app de pago"],
+        why: "Sin tu autorización, los bancos no pueden cobrarte sobregiros en compras con débito ni retiros en cajeros; la compra simplemente se rechaza.",
+      },
+    ],
+  },
+  insurance: {
+    title: "Seguros 101: salud, auto, inquilino y vida",
+    summary: "Paga un poco ahora para que un mal día no te deje en ceros.",
+    cards: [
+      {
+        heading: "Cómo funcionan los seguros",
+        html: `<p>Pagas una <strong>prima</strong> (un precio mensual o anual). A cambio, la aseguradora paga las pérdidas grandes que te costaría cubrir por tu cuenta: una hospitalización, un choque o una laptop robada.</p>
+               <p>Miles de personas pagan, a unas pocas les va mal, y las primas las cubren. La regla general: <strong>asegúrate contra las pérdidas que no podrías pagar</strong>, y cubre las pequeñas con tu fondo de emergencia.</p>`,
+      },
+      {
+        heading: "Palabras del seguro médico",
+        html: `<ul>
+                 <li><strong>Prima:</strong> lo que pagas cada mes, aunque nunca vayas al médico.</li>
+                 <li><strong>Deducible:</strong> lo que pagas por tu atención médica cada año antes de que el plan empiece a compartir los costos. El deducible individual promedio en planes de trabajo fue de <strong>$1,886</strong> en 2025 (KFF).</li>
+                 <li><strong>Copago / coseguro:</strong> tu parte después del deducible, como $25 por consulta o el 20% de la cuenta.</li>
+                 <li><strong>Máximo de gastos de bolsillo:</strong> lo máximo que pagas en un año (sin contar las primas). Para 2026, los planes no pueden fijarlo por encima de <strong>$10,600</strong> por persona.</li>
+               </ul>
+               <p>La mayoría de los planes cubren la atención preventiva, como chequeos y vacunas, sin costo, y normalmente puedes seguir en el plan de tus padres hasta los <strong>26 años</strong>.</p>
+               <div class="callout"><strong>Practica:</strong> elige el plan más barato para distintos años de la vida real en el juego <a href="play.html#plans">Plan Picker</a>.</div>`,
+      },
+      {
+        heading: "Seguro de auto",
+        html: `<ul>
+                 <li><strong>Responsabilidad civil</strong> paga los daños y lesiones que causas a otros. Casi todos los estados lo exigen.</li>
+                 <li><strong>Colisión</strong> repara tu auto después de un choque; <strong>cobertura amplia</strong> cubre robo, granizo o atropellar un venado. Los prestamistas normalmente exigen ambas si tienes un préstamo de auto.</li>
+               </ul>
+               <p>Los conductores jóvenes pagan más porque tienen más accidentes. Formas de pagar menos: quedarte en la póliza familiar, sacar buenas calificaciones (muchas aseguradoras dan descuento), manejar con cuidado y elegir un deducible más alto si tienes ahorros para cubrirlo.</p>`,
+      },
+      {
+        heading: "Seguro de inquilino",
+        html: `<p>El seguro de tu casero cubre el edificio, <strong>no tus cosas</strong>. El seguro de inquilino cubre tus pertenencias en caso de incendio, robo o daños por agua, paga un lugar donde quedarte si tienes que salir, e incluye <strong>responsabilidad civil</strong> si alguien se lastima en tu casa.</p>
+               <p>Cuesta en promedio unos <strong>$170 al año</strong>, alrededor de $14 al mes (Insurance Information Institute, con datos de la NAIC).</p>`,
+      },
+      {
+        heading: "Seguro de vida y de discapacidad",
+        html: `<p>El <strong>seguro de vida</strong> importa cuando alguien depende de tu ingreso, como una pareja o hijos. El <strong>seguro de vida a término</strong> cubre un número fijo de años y es mucho más barato que el <strong>seguro de vida entera</strong>, que mezcla seguro con una cuenta de ahorro.</p>
+               <p>El <strong>seguro de discapacidad</strong> reemplaza parte de tu sueldo si una enfermedad o lesión te impide trabajar. Para la mayoría de los trabajadores jóvenes, su capacidad de ganar dinero es su mayor activo. Revisa si tu trabajo lo ofrece.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Tu plan tiene un deducible de $1,500 y 20% de coseguro. Te llega una cuenta de $4,000. ¿Cuánto pagas (si aún no has cubierto el deducible)?",
+        choices: ["$800", "$1,500", "$2,000", "$4,000"],
+        why: "$1,500 de deducible, más el 20% de los $2,500 restantes ($500) = $2,000.",
+      },
+      {
+        q: "¿Qué hace el máximo de gastos de bolsillo?",
+        choices: ["Limita tu prima mensual", "Limita lo que pagas por atención cubierta en un año", "Fija el precio de una consulta", "Limita cuántos médicos puedes ver"],
+        why: "Una vez que pagas el máximo en deducibles, copagos y coseguro, el plan paga el 100% de la atención cubierta el resto del año.",
+      },
+      {
+        q: "Un incendio daña tu edificio de apartamentos. ¿Quién paga para reemplazar tu laptop y tu ropa?",
+        choices: ["El seguro de tu casero", "Tu seguro de inquilino, si lo tienes", "Los bomberos", "Tu seguro médico"],
+        why: "La póliza del casero cubre el edificio, no las pertenencias de los inquilinos. Para eso es el seguro de inquilino.",
+      },
+    ],
+  },
+  "car-buying": {
+    title: "Cómo comprar tu primer auto",
+    summary: "El costo real de un auto, nuevo vs usado, y cómo no salir quemado con el préstamo.",
+    cards: [
+      {
+        heading: "El precio es solo el comienzo",
+        html: `<p>AAA calcula que tener y manejar un auto nuevo cuesta unos <strong>$12,863 al año</strong> (unos $1,072 al mes) cuando sumas todo para 15,000 millas de manejo.</p>
+               <p>El costo más grande no es la gasolina. Es la <strong>depreciación</strong>, el valor que pierde el auto, de unos <strong>$4,422 al año</strong>. El seguro promedia unos $2,098 al año, y los conductores jóvenes normalmente pagan más.</p>
+               <p class="small muted">Fuente: AAA, <em>Your Driving Costs</em> 2026.</p>`,
+      },
+      {
+        heading: "Nuevo vs. usado",
+        html: `<p>En septiembre de 2026, el auto nuevo promedio se vendió en <strong>$50,562</strong> (Kelley Blue Book). El auto usado promedio se anunciaba en <strong>$27,235</strong> (Cox Automotive).</p>
+               <p>Los autos nuevos pierden valor más rápido en sus primeros años, así que un auto confiable de algunos años suele darte más por tu dinero. Antes de comprar uno usado:</p>
+               <ul>
+                 <li>Pide una <strong>inspección previa a la compra</strong> a un mecánico independiente.</li>
+                 <li>Revisa el <strong>historial del vehículo</strong> y busca retiros (recalls) pendientes con el VIN en NHTSA.gov.</li>
+               </ul>`,
+      },
+      {
+        heading: "El préstamo puede costar más de lo que crees",
+        html: `<p>Los préstamos para autos nuevos promediaron cerca de <strong>7% de APR</strong> en el tercer trimestre de 2026, con un pago promedio de <strong>$787 al mes</strong>, y un récord de <strong>1 de cada 4</strong> préstamos para autos nuevos fue de 84 meses (7 años) o más (Edmunds). Los préstamos para autos usados suelen tener tasas más altas.</p>
+               <ul>
+                 <li><strong>Obtén una preaprobación</strong> en un banco o cooperativa de crédito antes de ir a comprar, para saber tu tasa y compararla con la oferta del concesionario.</li>
+                 <li><strong>Negocia el precio final total</strong> (out-the-door), no el pago mensual. Un pago más bajo con un préstamo más largo puede costar miles más.</li>
+                 <li>Una guía común es <strong>20/4/10</strong>: 20% de enganche, un préstamo de 4 años o menos, y gastos totales del auto por debajo del 10% de tu ingreso bruto.</li>
+               </ul>
+               <div class="callout"><strong>Haz las cuentas:</strong> la calculadora <a href="tools.html#car">Car Cost</a> compara plazos de préstamo y tu costo mensual total.</div>`,
+      },
+      {
+        heading: "¿Te conviene un arrendamiento (lease)?",
+        html: `<p>Un <strong>lease</strong> es una renta a largo plazo: pagos más bajos, pero al final no eres dueño de nada. Los leases limitan cuántas millas manejas al año y cobran por millas extra y desgaste.</p>
+               <p>Puede tener sentido si quieres un auto nuevo cada pocos años y manejas de forma predecible. Si quieres el costo más bajo a largo plazo, comprar un auto confiable y conservarlo muchos años normalmente gana.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Un vendedor te pregunta: \"¿Qué pago mensual estás buscando?\". ¿Cuál es la respuesta más inteligente?",
+        choices: ["Decir el pago más alto que puedes pagar", "Decir que vas a negociar el precio final total", "Pedir el préstamo más largo disponible", "Aceptar lo que sea con tal de que sea menos de $500"],
+        why: "Si te enfocas en el pago mensual, el precio o el plazo pueden subir sin que lo notes. Negocia primero el precio total.",
+      },
+      {
+        q: "Pides prestados $25,000 al 9% de APR. ¿Cuánto interés más pagas, aproximadamente, con un préstamo de 84 meses que con uno de 48?",
+        choices: ["Unos $400", "Unos $1,000", "Unos $3,900", "Unos $12,000"],
+        why: "A 48 meses: unos $4,862 de interés. A 84 meses: unos $8,787. El pago más bajo te cuesta unos $3,900 más.",
+      },
+      {
+        q: "Según AAA, ¿cuál es el mayor costo anual de tener un auto nuevo?",
+        choices: ["La gasolina", "La depreciación (valor perdido)", "Los cambios de aceite", "El registro del vehículo"],
+        why: "La depreciación promedió unos $4,422 al año, más que el seguro o la gasolina.",
+      },
+    ],
+  },
+  betting: {
+    title: "Las matemáticas de las apuestas deportivas y los juegos de azar",
+    summary: "Por qué la casa siempre gana con el tiempo, y cómo las apps de apuestas te mantienen jugando.",
+    cards: [
+      {
+        heading: "Las apuestas están en todas partes",
+        html: `<p>En una encuesta de Pew Research de 2025, el <strong>31% de los adultos de 18 a 29 años</strong> dijo haber apostado dinero en deportes en el último año, más que cualquier otro grupo de edad.</p>
+               <p>En 2025, en EE. UU. se apostaron unos <strong>$167 mil millones</strong> en casas de apuestas legales, que se quedaron con unos <strong>$17 mil millones</strong> (American Gaming Association). Eso es unos <strong>10 centavos de cada dólar</strong> apostado.</p>
+               <p class="small muted">En la mayoría de los estados donde es legal, debes tener 21 años para apostar en deportes.</p>`,
+      },
+      {
+        heading: "Cómo los momios esconden la ventaja de la casa",
+        html: `<p>Una apuesta típica aparece como <strong>−110</strong>: arriesgas $110 para ganar $100. Si el partido es realmente 50/50, ganarías $100 la mitad de las veces y perderías $110 la otra mitad.</p>
+               <p>Eso es una pérdida promedio de <strong>$5 por cada apuesta de $110</strong>, una ventaja de 4.5% para la casa de apuestas. Aunque ganes la mitad de tus apuestas, pierdes dinero.</p>
+               <p>Todos los juegos de azar funcionan así. La ruleta americana se queda en promedio con el 5.26%, y la probabilidad de ganar el premio mayor del Powerball es de <strong>1 en 292,201,338</strong>.</p>
+               <div class="callout"><strong>Pruébalo:</strong> juega <a href="play.html#betting">Beat the Book</a> y luego mira qué pasa cuando 10,000 jugadores hacen las mismas apuestas.</div>`,
+      },
+      {
+        heading: "Parlays: pagos grandes, ventaja más grande",
+        html: `<p>Un <strong>parlay</strong> combina varias apuestas, y todas tienen que ganar. Un parlay de 4 apuestas a −110 paga cerca de <strong>12 a 1</strong>, pero cuatro volados seguidos solo salen 1 vez de cada 16.</p>
+               <p>Un pago justo sería 15 a 1, así que la casa se queda en promedio con cerca del <strong>17%</strong>, casi cuatro veces la ventaja de una apuesta sencilla. Las casas de apuestas promueven los parlays porque ganan más con ellos.</p>`,
+      },
+      {
+        heading: "Diseñadas para que sigas jugando",
+        html: `<ul>
+                 <li><strong>Las "apuestas de bono" y promociones</strong> muchas veces exigen que apuestes mucho más antes de poder retirar.</li>
+                 <li><strong>Los casi-aciertos</strong> (te faltó una apuesta para ganar un gran parlay) se sienten como que casi ganas, así que vuelves a jugar.</li>
+                 <li><strong>La falacia del jugador:</strong> después de cinco derrotas, una victoria no "te toca". Cada apuesta es independiente.</li>
+                 <li><strong>Perseguir pérdidas</strong>, apostar más para recuperar lo perdido, es una señal de alerta de un problema con el juego.</li>
+               </ul>`,
+      },
+      {
+        heading: "Si decides apostar",
+        html: `<ul>
+                 <li>Tómalo como <strong>entretenimiento que pagas</strong>, como un boleto de concierto, no como una forma de ganar dinero.</li>
+                 <li>Fija un límite que puedas perder <strong>antes</strong> de empezar, y nunca uses dinero de facturas, renta o deudas.</li>
+                 <li>Usa los límites de depósito y las pausas de la app.</li>
+               </ul>
+               <p>Si apostar deja de ser divertido, hay ayuda gratuita y confidencial las 24 horas en la Línea Nacional de Ayuda para el Juego Problemático: llama o envía un texto al <strong>1-800-MY-RESET</strong> (1-800-697-3738), o chatea en ncpgambling.org/chat.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Apuestas $110 para ganar $100 en partidos que son volados 50/50. Si ganas exactamente la mitad de tus apuestas, ¿qué pasa?",
+        choices: ["Quedas a mano", "Pierdes dinero", "Ganas dinero", "Depende del deporte"],
+        why: "Cada victoria paga $100 pero cada derrota cuesta $110, así que pierdes unos $5 por apuesta en promedio. Esa diferencia es la ventaja de la casa.",
+      },
+      {
+        q: "¿Por qué las casas de apuestas promueven tanto los parlays?",
+        choices: ["Son las apuestas más seguras", "Su ventaja para la casa es mucho mayor que en las apuestas sencillas", "Pagan momios justos", "La ley lo exige"],
+        why: "Un parlay de 4 apuestas paga cerca de 12 a 1 por algo que sale 1 vez de cada 16, así que la casa se queda en promedio con cerca del 17%, contra un 4.5% en una apuesta sencilla.",
+      },
+      {
+        q: "Perdiste cinco apuestas seguidas. ¿Qué es cierto sobre la siguiente?",
+        choices: ["Ya te toca ganar", "Su probabilidad es la misma que antes", "Deberías duplicar tu apuesta", "Las rachas perdedoras siempre terminan en seis"],
+        why: "Las apuestas son independientes. Creer que \"te toca\" ganar es la falacia del jugador, y duplicar para recuperarlo es perseguir pérdidas.",
+      },
+    ],
+  },
+  "side-hustle": {
+    title: "Trabajos extra e impuestos de trabajo por cuenta propia",
+    summary: "El dinero de los trabajos por encargo es ingreso real. Así se le cobran impuestos y así te quedas con más.",
+    cards: [
+      {
+        heading: "Trabajo W-2 vs. trabajo 1099",
+        html: `<p>En un <strong>trabajo W-2</strong> normal, tu empleador retiene impuestos de cada cheque y paga la mitad de tu impuesto de Seguro Social y Medicare.</p>
+               <p>Como <strong>contratista independiente</strong> (entregas, viajes compartidos, trabajos freelance, reventa, tutorías), nadie te retiene nada. Tú eres el negocio, así que manejas tus propios impuestos, incluidas las dos mitades del Seguro Social y Medicare.</p>`,
+      },
+      {
+        heading: "Todo cuenta, con formulario o sin él",
+        html: `<p>A partir de 2026, un negocio solo tiene que enviarte un <strong>Formulario 1099-NEC</strong> si te pagó <strong>$2,000</strong> o más en el año (antes eran $600). Las apps de pago y los marketplaces envían un <strong>1099-K</strong> solo después de <strong>$20,000 y 200 transacciones</strong>.</p>
+               <p>Pero esas son reglas de reporte para los negocios, no límites libres de impuestos. <strong>Todo el ingreso por cuenta propia paga impuestos</strong>, y debes presentar una declaración cuando tus ganancias netas por cuenta propia llegan a <strong>$400</strong>.</p>`,
+      },
+      {
+        heading: "El impuesto de trabajo por cuenta propia",
+        html: `<p>Sobre tu ganancia pagas <strong>15.3% de impuesto de trabajo por cuenta propia</strong> (12.4% de Seguro Social + 2.9% de Medicare, calculado sobre el 92.35% de la ganancia), más el impuesto sobre la renta normal. Puedes deducir la mitad del impuesto de trabajo por cuenta propia.</p>
+               <p>En total, muchas veces suma entre <strong>25% y 30%</strong> de tu ganancia. El hábito más seguro: pasa esa parte a tus ahorros cada vez que te paguen.</p>
+               <div class="callout"><strong>Encuentra tu número:</strong> la <a href="taxes.html#gig">calculadora de impuestos de trabajos extra</a> te dice cuánto apartar.</div>`,
+      },
+      {
+        heading: "Deducciones: guarda recibos y anota tus millas",
+        html: `<p>Pagas impuestos sobre la <strong>ganancia</strong>: ingresos menos gastos del negocio. Algunos comunes: materiales, la parte de negocio de tu teléfono, comisiones de las plataformas y equipo.</p>
+               <p>Si manejas por trabajo, la <strong>tarifa estándar por milla del IRS</strong> es de 72.5¢ por milla de enero a junio de 2026 y de <strong>76¢</strong> desde el 1 de julio de 2026. Manejar 3,000 millas de negocio a 76¢ te deduce $2,280. Anota cada viaje (fecha, millas, motivo) en el momento; una app lo hace fácil.</p>`,
+      },
+      {
+        heading: "Paga sobre la marcha",
+        html: `<p>Si esperas deber <strong>$1,000 o más</strong>, el IRS espera <strong>pagos estimados trimestrales</strong>, que normalmente vencen en abril, junio, septiembre y enero. Saltarlos puede generar multas. Si también tienes un trabajo W-2, aumentar tu retención en el W-4 puede cubrirlo.</p>
+               <p>Un trabajo extra también cuenta como ingreso del trabajo, así que puedes usarlo para aportar a una <strong>Roth IRA</strong>.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Ganaste $1,500 de un cliente en 2026 y no recibiste un 1099. ¿Debes impuestos por ese dinero?",
+        choices: ["No, menos de $2,000 está libre de impuestos", "Sí, todo el ingreso por cuenta propia paga impuestos", "Solo si usaste una app de pago", "Solo si el cliente lo reporta"],
+        why: "El límite de $2,000 solo decide si el negocio debe enviarte un 1099. Tú igual reportas todo tu ingreso por cuenta propia.",
+      },
+      {
+        q: "¿Cuál es la tasa del impuesto de trabajo por cuenta propia sobre (el 92.35% de) tu ganancia?",
+        choices: ["7.65%", "10%", "15.3%", "22%"],
+        why: "15.3%: pagas la parte del empleado y la del empleador del Seguro Social (12.4%) y Medicare (2.9%).",
+      },
+      {
+        q: "Manejaste 2,000 millas de negocio en agosto de 2026. ¿Cuál es tu deducción por millaje con la tarifa estándar del IRS?",
+        choices: ["$580", "$1,450", "$1,520", "$2,000"],
+        why: "2,000 millas × 76¢ (la tarifa desde el 1 de julio de 2026) = $1,520.",
+      },
+    ],
+  },
+  "bnpl-payday": {
+    title: "Compra ahora, paga después y préstamos de día de pago",
+    summary: "El dinero fácil al pagar puede salir caro muy rápido. Aprende a ver el precio real.",
+    cards: [
+      {
+        heading: "Compra ahora, paga después",
+        html: `<p>Los planes de "paga en 4" dividen una compra en cuatro pagos durante unas seis semanas, normalmente <strong>sin interés si pagas a tiempo</strong>. En la encuesta de la Reserva Federal sobre 2025, el <strong>16% de los adultos</strong> usó uno.</p>
+               <p>El problema: el <strong>21% de los usuarios</strong> pagó un cargo por atraso o tuvo un cargo por sobregiro o pago rebotado. Los problemas fueron más comunes cuando se usó para comida o entregas de comida. Tener varios planes a la vez hace fácil perder la cuenta de lo que debes.</p>
+               <p class="small muted">Fuente: Reserva Federal, Survey of Household Economics and Decisionmaking (datos de 2025).</p>`,
+      },
+      {
+        heading: "Préstamos de día de pago (payday loans)",
+        html: `<p>Un payday loan es un préstamo pequeño y corto que vence en tu próximo día de pago. Un cargo típico es de <strong>$15 por cada $100</strong> por dos semanas. Suena poco, pero la CFPB dice que equivale a un APR de <strong>casi 400%</strong>, contra cerca de 22% en la tarjeta de crédito promedio.</p>
+               <p>La trampa es la <strong>renovación</strong> (rollover): si no puedes pagar, pagas otro cargo para mover la fecha de pago, una y otra vez, y sigues debiendo el monto completo.</p>`,
+      },
+      {
+        heading: "Convierte cualquier cargo en un APR",
+        html: `<p><strong>APR = cargo ÷ monto prestado × 365 ÷ días</strong></p>
+               <p>Ejemplo: un cargo de $60 por un préstamo de $400 a 14 días: 60 ÷ 400 × 365 ÷ 14 ≈ <strong>391%</strong>.</p>
+               <div class="callout"><strong>Pruébalo:</strong> compara préstamos en la <a href="credit.html#loancost">calculadora de cargo a APR</a>.</div>`,
+      },
+      {
+        heading: "Mejores opciones cuando falta dinero",
+        html: `<ul>
+                 <li><strong>Tu fondo de emergencia</strong>: incluso $500 ahorrados te mantienen fuera de la mayoría de estas trampas.</li>
+                 <li><strong>Préstamos alternativos de las cooperativas de crédito</strong> (payday alternative loans): préstamos pequeños con APR limitado al 28% (reglas de la NCUA).</li>
+                 <li><strong>Pide</strong> a tu empleador un adelanto de sueldo, o a quien le debes un plan de pagos o un cambio de fecha.</li>
+                 <li>Si usas compra ahora, paga después, úsalo para una compra planeada a la vez, con pago automático desde una cuenta que tenga el dinero.</li>
+               </ul>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Un prestamista de día de pago cobra $15 por cada $100 por dos semanas. ¿Qué APR es eso, aproximadamente?",
+        choices: ["15%", "30%", "Cerca de 100%", "Casi 400%"],
+        why: "15 ÷ 100 × 365 ÷ 14 ≈ 391%. Los plazos cortos hacen que cargos que parecen pequeños sean enormes al anualizarlos.",
+      },
+      {
+        q: "¿Cuándo suele ser gratis un plan de \"paga en 4\"?",
+        choices: ["Siempre", "Cuando haces todos los pagos a tiempo", "Solo en compras de más de $500", "Nunca"],
+        why: "La mayoría de los planes de paga en 4 no cobran interés, pero los pagos atrasados pueden traer cargos por atraso y cargos por sobregiro de tu banco.",
+      },
+      {
+        q: "¿Cuál es el principal peligro de renovar un payday loan?",
+        choices: ["Baja tu tasa de interés", "Pagas un cargo nuevo cada vez y sigues debiendo el monto completo", "Es ilegal en todas partes", "Cierra tu cuenta bancaria"],
+        why: "Cada renovación agrega otro cargo sin reducir lo que pediste prestado, así que los costos se acumulan rápido.",
+      },
+    ],
+  },
 };
 
 // Returns the lesson in the requested language, falling back to English for anything missing.

@@ -5,13 +5,14 @@
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
   /* ---------- Tabs ---------- */
-  const tabs = ["compound", "budget", "debt", "emergency", "retire", "roth"];
+  const tabs = ["compound", "budget", "debt", "emergency", "retire", "roth", "car"];
   function showTab(name) {
     if (!tabs.includes(name)) name = "compound";
     tabs.forEach((t) => {
       $("panel-" + t).hidden = t !== name;
       document.querySelector(`[data-tab="${t}"]`).setAttribute("aria-selected", t === name);
     });
+    $("tool-picker").value = name;
     if (name === "compound") compound(); // chart needs a visible container to measure
     document.dispatchEvent(new CustomEvent("tabshow", { detail: name }));
   }
@@ -19,6 +20,8 @@
     const t = e.target.closest("[data-tab]");
     if (t) history.replaceState(null, "", "#" + t.dataset.tab), showTab(t.dataset.tab);
   });
+  // Phones get a dropdown instead of the wall of tab buttons.
+  $("tool-picker").addEventListener("change", (e) => { history.replaceState(null, "", "#" + e.target.value); showTab(e.target.value); });
   window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
 
   /* ---------- Compound growth ---------- */

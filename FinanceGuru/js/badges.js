@@ -1,7 +1,7 @@
 // Progress page: level, streak, stats, and badges — all computed from progress saved in this browser.
 (function () {
   const $ = (id) => document.getElementById(id);
-  const GAMES = ["catcher", "sorter", "life", "market", "salary", "prices", "credit", "envelope"];
+  const GAMES = ["catcher", "sorter", "life", "market", "salary", "prices", "credit", "envelope", "scam", "fees", "plans", "betting"];
   const LEVELS = [[0, "Rookie"], [100, "Saver"], [250, "Budgeter"], [500, "Planner"], [1000, "Investor"], [2000, "Wealth Builder"], [4000, "Money Guru"]];
 
   function badges(p, d) {
@@ -23,6 +23,9 @@
       ["🐷", "Piggy Bank Pro", "Save $500+ in Piggy Bank Catcher", best("catcher") >= 500],
       ["📊", "Credit Climber", "Finish Credit Score Quest at 760+", best("credit") >= 760],
       ["✉️", "Budget Boss", "Score 2,000+ in Envelope Budget", best("envelope") >= 2000],
+      ["🛡️", "Scam-Proof", "Spot all 10 in Spot the Scam", best("scam") >= 10],
+      ["🔎", "Fee Hunter", "Score 6+ in Fee Hunter", best("fees") >= 6],
+      ["☂️", "Well Covered", "Pick the cheaper plan 5/5 times in Plan Picker", best("plans") >= 5],
       ["🎢", "Steady Hands", "Finish the Market Rollercoaster", best("market") > 0],
       ["⭐", "Rising Star", "Earn 100 XP", p.xp >= 100],
       ["🌟", "Star Student", "Earn 500 XP", p.xp >= 500],

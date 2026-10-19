@@ -13,7 +13,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/credit.html">
-  
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FinanceGuru">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/credit.html">
@@ -32,11 +32,16 @@
       <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
-        <a href="invest.html">Invest</a>
-        <a href="college.html">College</a>
-        <a href="credit.html" aria-current="page">Credit</a>
-        <a href="taxes.html">Taxes</a>
-        <a href="housing.html">Housing</a>
+        <details class="nav-menu">
+          <summary class="active">Topics</summary>
+          <div class="nav-menu-panel">
+            <a href="invest.html"><span class="nav-menu-icon" aria-hidden="true">📈</span><span><strong>Investing</strong><span class="small muted">Returns, fees, and accounts</span></span></a>
+            <a href="college.html"><span class="nav-menu-icon" aria-hidden="true">🎓</span><span><strong>College &amp; careers</strong><span class="small muted">Majors, pay, and ROI</span></span></a>
+            <a href="credit.html" aria-current="page"><span class="nav-menu-icon" aria-hidden="true">💳</span><span><strong>Credit &amp; debt</strong><span class="small muted">Scores, cards, and loans</span></span></a>
+            <a href="taxes.html"><span class="nav-menu-icon" aria-hidden="true">🧾</span><span><strong>Taxes</strong><span class="small muted">Brackets and paychecks</span></span></a>
+            <a href="housing.html"><span class="nav-menu-icon" aria-hidden="true">🏡</span><span><strong>Housing</strong><span class="small muted">Mortgages and rent vs buy</span></span></a>
+          </div>
+        </details>
         <a href="play.html">Play</a>
         <a href="tools.html">Tools</a>
       </div>
@@ -60,6 +65,7 @@
         <nav class="jump" aria-label="On this page">
           <a href="#score">📊 Credit score simulator</a>
           <a href="#cards">💳 Credit card interest</a>
+          <a href="#loancost">🧮 BNPL &amp; payday loans</a>
           <a href="#student">🎓 Student loan plans</a>
           <a href="#habits">✅ Smart credit habits</a>
         </nav>
@@ -116,6 +122,40 @@
             <p class="callout small" id="cc-insight" style="margin-bottom:0"></p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Fee to APR -->
+    <section id="loancost">
+      <div class="container">
+        <div class="section-head">
+          <h2>🧮 What does this loan really cost?</h2>
+          <p class="muted">Payday loans and "buy now, pay later" show a flat fee, not an interest rate. Turn any fee into an APR so you can compare it with a credit card.</p>
+        </div>
+        <div class="tool">
+          <div class="card">
+            <div class="field"><label for="lc-preset">Start from an example</label><select class="select" id="lc-preset">
+              <option value="payday">Payday loan ($15 per $100)</option>
+              <option value="bnpl">Pay in 4, paid on time</option>
+              <option value="bnpl-late">Pay in 4, one $10 late fee</option>
+              <option value="card">Credit card (22.36% APR)</option>
+            </select></div>
+            <div class="field"><label for="lc-amt">Amount borrowed</label><div class="input-wrap"><span>$</span><input id="lc-amt" type="number" min="0" value="400"></div></div>
+            <div class="field"><label for="lc-fee">Total fees and interest</label><div class="input-wrap"><span>$</span><input id="lc-fee" type="number" min="0" step="0.01" value="60"></div></div>
+            <div class="field"><label for="lc-days">Days until it's repaid</label><div class="input-wrap"><input id="lc-days" type="number" min="1" value="14"><span>days</span></div><span class="hint">Buy now, pay later "pay in 4" plans usually span 6 weeks (42 days).</span></div>
+            <div class="field" id="lc-roll-wrap"><label for="lc-roll">Times rolled over: <span id="lc-roll-l">0</span></label><input type="range" id="lc-roll" min="0" max="8" value="0"><span class="hint">Can't repay on payday? Many lenders let you pay just the fee and take a new loan for the same amount.</span></div>
+          </div>
+          <div class="card">
+            <div class="stats">
+              <div class="stat hero"><div class="label">APR</div><div class="value" id="lc-apr">—</div></div>
+              <div class="stat"><div class="label">You repay</div><div class="value" id="lc-repay">—</div></div>
+              <div class="stat"><div class="label">Fees paid</div><div class="value" id="lc-fees">—</div></div>
+            </div>
+            <div class="lc-bars" id="lc-bars" role="img"></div>
+            <p class="callout small" id="lc-insight" style="margin-bottom:0"></p>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:8px">APR = fee ÷ amount × 365 ÷ days (simple interest, the way lenders must disclose it). The CFPB says a typical two-week payday loan with a $15-per-$100 fee is an APR of almost 400%, and fees range from $10 to $30 per $100 depending on state law. In the Fed's survey of 2025, 16% of adults used buy now, pay later, and 21% of users paid a late fee or overdraft fee (Federal Reserve, SHED). Late fees vary by provider; $10 is an example.</p>
       </div>
     </section>
 
@@ -184,5 +224,6 @@
   <script src="js/charts.js"></script>
   <script src="js/creditmodel.js"></script>
   <script src="js/credit.js"></script>
+  <script src="js/loancost.js"></script>
 </body>
 </html>

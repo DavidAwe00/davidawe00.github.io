@@ -629,4 +629,456 @@ const LESSONS = [
       },
     ],
   },
+  {
+    id: "scams",
+    icon: "🎣",
+    title: "Spotting Scams & Protecting Your Identity",
+    summary: "The red flags every scam shares, and what to do if one gets you.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "Scams are big business",
+        html: `<p>In 2025, Americans filed <strong>3 million fraud reports</strong> with the Federal Trade Commission and reported losing <strong>$15.9 billion</strong>, the most ever. The most common type was <strong>imposter scams</strong>: someone pretending to be your bank, a delivery company, the government, a boss, or a friend.</p>
+               <p>The top way scammers made first contact was a <strong>text message</strong>. The biggest losses came from <strong>bank payments</strong>, followed by <strong>cryptocurrency</strong>.</p>
+               <p class="small muted">Source: FTC testimony to Congress's Joint Economic Committee, March 25, 2026 (Consumer Sentinel 2025 data). Most fraud is never reported, so real losses are higher.</p>`,
+      },
+      {
+        heading: "The four red flags",
+        html: `<p>Almost every scam uses some mix of these:</p>
+               <ul>
+                 <li><strong>Pressure to act now</strong>: "Your account will be closed today," "Pay in the next hour or a warrant is issued."</li>
+                 <li><strong>A strange way to pay</strong>: gift cards, crypto, wire transfers, or payment apps. The FTC says only scammers demand gift cards.</li>
+                 <li><strong>A request for codes or passwords</strong>: real companies never ask for the one-time code they just texted you.</li>
+                 <li><strong>Too good to be true</strong>: a job that pays $500/day for "liking posts," a prize you never entered, a cheap apartment you can't see in person.</li>
+               </ul>
+               <div class="callout"><strong>Practice:</strong> sort real-looking messages in the <a href="play.html#scam">Spot the Scam game</a>.</div>`,
+      },
+      {
+        heading: "Scams aimed at young people",
+        html: `<ul>
+                 <li><strong>Fake jobs and "task" gigs</strong>: they pay you a little, then ask you to deposit money to "unlock" bigger earnings.</li>
+                 <li><strong>Fake checks</strong>: someone "overpays" you and asks you to send back the difference. The check bounces days later, and you owe the bank.</li>
+                 <li><strong>Online shopping and resale</strong>: concert tickets, sneakers, or game items that never arrive, paid with an app that can't reverse it.</li>
+                 <li><strong>Rental scams</strong>: a "landlord" wants a deposit before you've seen the place or signed a lease.</li>
+               </ul>
+               <p>Payment apps work like handing over cash. If you send money to a scammer, you may not get it back.</p>`,
+      },
+      {
+        heading: "Lock down your identity",
+        html: `<ul>
+                 <li><strong>Don't use the link or number in a message.</strong> Go to the company's app or the number on your card instead.</li>
+                 <li><strong>Turn on two-step login</strong> and use a different password for every account (a password manager helps).</li>
+                 <li><strong>Freeze your credit</strong> at Equifax, Experian, and TransUnion. It's free by federal law, and it stops anyone from opening accounts in your name. You can unfreeze it anytime you apply for credit.</li>
+                 <li><strong>Check your accounts</strong> weekly, and your free credit reports at AnnualCreditReport.com.</li>
+               </ul>`,
+      },
+      {
+        heading: "If a scam gets you",
+        html: `<p>Act fast, and don't be embarrassed: scammers are professionals.</p>
+               <ol>
+                 <li><strong>Call your bank or payment app right away</strong> and ask them to stop or reverse the payment.</li>
+                 <li><strong>Change passwords</strong> on any account you shared, starting with email.</li>
+                 <li><strong>Report it</strong> at ReportFraud.ftc.gov. If someone used your identity, get a recovery plan at IdentityTheft.gov.</li>
+               </ol>
+               <p>Watch out for "recovery" services that promise to get your money back for a fee. That's often a second scam.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "A text says your bank account is locked and asks you to reply with the code it just sent you. What should you do?",
+        choices: ["Reply with the code quickly", "Click the link to check", "Ignore it and contact your bank through its app or the number on your card", "Forward it to a friend"],
+        answer: 2,
+        why: "Real banks never ask for your one-time code. Contact them through a channel you already trust.",
+      },
+      {
+        q: "Which payment request is the biggest red flag?",
+        choices: ["A utility bill you can pay online", "Someone asking you to pay with gift cards", "A store taking a credit card", "Your school asking for a field trip fee on its portal"],
+        answer: 1,
+        why: "The FTC says only scammers demand payment with gift cards. Once you share the card numbers, the money is gone.",
+      },
+      {
+        q: "What does a credit freeze do?",
+        choices: ["Lowers your credit score", "Stops new accounts from being opened in your name", "Cancels your current credit cards", "Costs $30 per credit bureau"],
+        answer: 1,
+        why: "A freeze blocks lenders from pulling your report, so identity thieves can't open new accounts. It's free and doesn't affect your score.",
+      },
+    ],
+  },
+  {
+    id: "banking",
+    icon: "🏦",
+    title: "Banking Basics: Accounts, Interest & Fees",
+    summary: "Pick the right accounts, earn real interest, and stop paying fees you don't have to.",
+    minutes: 4,
+    cards: [
+      {
+        heading: "Checking vs. savings",
+        html: `<ul>
+                 <li><strong>Checking</strong> is for everyday money: your paycheck lands here, and your debit card, bills, and payment apps pull from it.</li>
+                 <li><strong>Savings</strong> is for money you're not spending this month, like your emergency fund or a goal. It pays interest, and keeping it separate makes it harder to spend by accident.</li>
+               </ul>
+               <p>Banks and credit unions both offer these. Credit unions are member-owned nonprofits that often charge lower fees.</p>`,
+      },
+      {
+        heading: "Where you save matters",
+        html: `<p>In September 2026, the average savings account in the U.S. paid just <strong>0.37%</strong> a year (FDIC national rate). Top online high-yield savings accounts paid around <strong>4%</strong> (Bankrate).</p>
+               <p>On $5,000 for a year, that's about <strong>$19</strong> of interest versus about <strong>$200</strong>, for the same money and the same safety.</p>
+               <p>Deposits are insured up to <strong>$250,000</strong> per person, per bank, per ownership category, by the FDIC at banks or the NCUA at credit unions. Money sitting in a payment app may not be insured unless it's moved to a bank.</p>
+               <p class="small muted">Rates change often, and some top rates are introductory. Check the current APY before you open an account.</p>`,
+      },
+      {
+        heading: "The fees that eat your money",
+        html: `<p>Average bank fees in 2025 (Bankrate):</p>
+               <ul>
+                 <li><strong>Overdraft:</strong> $26.77 each time you spend more than you have and the bank covers it.</li>
+                 <li><strong>Insufficient funds (NSF):</strong> $16.82 when a payment bounces instead.</li>
+                 <li><strong>Out-of-network ATM:</strong> $4.86 per withdrawal, counting both your bank's fee and the ATM owner's.</li>
+               </ul>
+               <p>Overdraft on a $5 coffee can turn it into a $32 coffee, and several can hit in one day.</p>
+               <div class="callout"><strong>Practice:</strong> find every fee on a bank statement in the <a href="play.html#fees">Fee Hunter game</a>.</div>`,
+      },
+      {
+        heading: "How to pay $0 in fees",
+        html: `<ul>
+                 <li><strong>Choose a no-fee account</strong> (no monthly fee and no minimum balance), or meet the waiver rules, often a direct deposit.</li>
+                 <li><strong>Skip overdraft coverage</strong> for debit and ATM. By law, banks need your opt-in to charge overdraft fees on those, so a declined card costs $0.</li>
+                 <li><strong>Turn on low-balance alerts</strong> in your bank's app.</li>
+                 <li><strong>Use your bank's ATM network</strong>, or get cash back at a store checkout.</li>
+               </ul>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "The average savings account paid 0.37% while top high-yield accounts paid about 4%. On $5,000 for a year, about how much more does the high-yield account earn?",
+        choices: ["About $2", "About $18", "About $180", "About $2,000"],
+        answer: 2,
+        why: "$5,000 × 4% ≈ $200, versus $5,000 × 0.37% ≈ $19. The difference is about $180 for doing nothing different.",
+      },
+      {
+        q: "How much does FDIC or NCUA insurance protect per person, per bank, per ownership category?",
+        choices: ["$2,500", "$25,000", "$250,000", "Unlimited"],
+        answer: 2,
+        why: "Deposits are insured up to $250,000. If the bank fails, you get your insured money back.",
+      },
+      {
+        q: "Which move is most likely to save you from overdraft fees on debit card purchases?",
+        choices: ["Opt in to overdraft coverage", "Don't opt in to overdraft coverage and turn on low-balance alerts", "Use out-of-network ATMs", "Keep money in a payment app"],
+        answer: 1,
+        why: "Without your opt-in, banks can't charge overdraft fees on everyday debit and ATM transactions; the purchase is simply declined.",
+      },
+    ],
+  },
+  {
+    id: "insurance",
+    icon: "☂️",
+    title: "Insurance 101: Health, Car, Renters & Life",
+    summary: "Pay a little now so one bad day can't wipe you out.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "How insurance works",
+        html: `<p>You pay a <strong>premium</strong> (a monthly or yearly price). In return, the insurer pays for big losses that would be hard to cover yourself: a hospital stay, a car crash, a stolen laptop.</p>
+               <p>Thousands of people pay in, a few have bad luck, and the premiums cover them. The rule of thumb: <strong>insure against losses you can't afford</strong>, and handle small ones from your emergency fund.</p>`,
+      },
+      {
+        heading: "Health insurance words",
+        html: `<ul>
+                 <li><strong>Premium:</strong> what you pay every month, even if you never see a doctor.</li>
+                 <li><strong>Deductible:</strong> what you pay for care each year before the plan starts sharing costs. The average single deductible at work was <strong>$1,886</strong> in 2025 (KFF).</li>
+                 <li><strong>Copay / coinsurance:</strong> your share after the deductible, such as $25 a visit or 20% of the bill.</li>
+                 <li><strong>Out-of-pocket maximum:</strong> the most you pay in a year (not counting premiums). For 2026, plans can't set it above <strong>$10,600</strong> for one person.</li>
+               </ul>
+               <p>Most plans cover preventive care like checkups and vaccines at no cost, and you can usually stay on a parent's plan until <strong>age 26</strong>.</p>
+               <div class="callout"><strong>Practice:</strong> choose the cheaper plan for real-life years in the <a href="play.html#plans">Plan Picker game</a>.</div>`,
+      },
+      {
+        heading: "Car insurance",
+        html: `<ul>
+                 <li><strong>Liability</strong> pays for damage and injuries you cause to others. Nearly every state requires it.</li>
+                 <li><strong>Collision</strong> fixes your car after a crash; <strong>comprehensive</strong> covers theft, hail, or hitting a deer. Lenders usually require both if you have a car loan.</li>
+               </ul>
+               <p>Young drivers pay the most because they have the most crashes. Ways to lower it: stay on a family policy, keep good grades (many insurers give a discount), drive safely, and choose a higher deductible if you have the savings to cover it.</p>`,
+      },
+      {
+        heading: "Renters insurance",
+        html: `<p>Your landlord's insurance covers the building, <strong>not your stuff</strong>. Renters insurance covers your belongings after fire, theft, or water damage, pays for a place to stay if you're displaced, and includes <strong>liability</strong> if someone gets hurt at your place.</p>
+               <p>It averages about <strong>$170 a year</strong>, around $14 a month (Insurance Information Institute, from NAIC data).</p>`,
+      },
+      {
+        heading: "Life and disability insurance",
+        html: `<p><strong>Life insurance</strong> matters once someone depends on your income, like a partner or children. <strong>Term life</strong> covers a set number of years and is far cheaper than <strong>whole life</strong>, which mixes insurance with a savings account.</p>
+               <p><strong>Disability insurance</strong> replaces part of your paycheck if illness or injury stops you from working. For most young workers, their ability to earn is their biggest asset. Check whether your job offers it.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Your plan has a $1,500 deductible and 20% coinsurance. You get a $4,000 bill. How much do you pay (assuming you haven't met the deductible)?",
+        choices: ["$800", "$1,500", "$2,000", "$4,000"],
+        answer: 2,
+        why: "$1,500 deductible, plus 20% of the remaining $2,500 ($500) = $2,000.",
+      },
+      {
+        q: "What does the out-of-pocket maximum do?",
+        choices: ["Caps your monthly premium", "Caps what you pay for covered care in a year", "Sets the price of a doctor visit", "Limits how many doctors you can see"],
+        answer: 1,
+        why: "Once you've paid the out-of-pocket maximum in deductibles, copays, and coinsurance, the plan pays 100% of covered care for the rest of the year.",
+      },
+      {
+        q: "A fire damages your apartment building. Who pays to replace your laptop and clothes?",
+        choices: ["Your landlord's insurance", "Your renters insurance, if you have it", "The fire department", "Your health insurance"],
+        answer: 1,
+        why: "The landlord's policy covers the building, not tenants' belongings. That's what renters insurance is for.",
+      },
+    ],
+  },
+  {
+    id: "car-buying",
+    icon: "🚗",
+    title: "Buying Your First Car",
+    summary: "The real cost of a car, new vs used, and how to not get burned on the loan.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "The price tag is just the start",
+        html: `<p>AAA estimates that owning and driving a new car costs about <strong>$12,863 a year</strong> (about $1,072 a month) once you add up everything for 15,000 miles of driving.</p>
+               <p>The biggest cost isn't gas. It's <strong>depreciation</strong>, the value the car loses, at about <strong>$4,422 a year</strong>. Insurance averages about $2,098 a year, and young drivers usually pay more.</p>
+               <p class="small muted">Source: AAA, <em>Your Driving Costs</em> 2026.</p>`,
+      },
+      {
+        heading: "New vs. used",
+        html: `<p>In September 2026, the average new car sold for <strong>$50,562</strong> (Kelley Blue Book). The average used car was listed at <strong>$27,235</strong> (Cox Automotive).</p>
+               <p>New cars lose value fastest in their first few years, so a reliable car a few years old often gives you the most for your money. Before buying used:</p>
+               <ul>
+                 <li>Get a <strong>pre-purchase inspection</strong> from an independent mechanic.</li>
+                 <li>Check the <strong>vehicle history report</strong> and look up open recalls by VIN at NHTSA.gov.</li>
+               </ul>`,
+      },
+      {
+        heading: "The loan can cost more than you think",
+        html: `<p>New-car loans averaged about <strong>7% APR</strong> in Q3 2026, with an average payment of <strong>$787 a month</strong>, and a record <strong>1 in 4</strong> new-car loans ran 84 months (7 years) or longer (Edmunds). Used-car loans usually have higher rates.</p>
+               <ul>
+                 <li><strong>Get pre-approved</strong> at a bank or credit union before you shop, so you know your rate and can compare it with the dealer's offer.</li>
+                 <li><strong>Negotiate the out-the-door price</strong>, not the monthly payment. A lower payment on a longer loan can cost thousands more.</li>
+                 <li>A common guideline is <strong>20/4/10</strong>: 20% down, a loan of 4 years or less, and total car costs under 10% of your gross income.</li>
+               </ul>
+               <div class="callout"><strong>Run the numbers:</strong> the <a href="tools.html#car">Car Cost calculator</a> compares loan lengths and your all-in monthly cost.</div>`,
+      },
+      {
+        heading: "Should you lease?",
+        html: `<p>A <strong>lease</strong> is a long-term rental: lower payments, but you don't own anything at the end. Leases limit how many miles you drive each year and charge for extra miles and wear.</p>
+               <p>Leasing can make sense if you want a new car every few years and drive predictably. If you want the lowest long-term cost, buying a reliable car and keeping it for many years usually wins.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "A salesperson asks, \"What monthly payment are you looking for?\" What's the smartest reply?",
+        choices: ["Name the highest payment you can afford", "Say you'll negotiate the total out-the-door price", "Ask for the longest loan available", "Agree to whatever keeps it under $500"],
+        answer: 1,
+        why: "Focusing on the monthly payment lets the price or loan length rise without you noticing. Negotiate the total price first.",
+      },
+      {
+        q: "You borrow $25,000 at 9% APR. About how much more interest do you pay on an 84-month loan than a 48-month loan?",
+        choices: ["About $400", "About $1,000", "About $3,900", "About $12,000"],
+        answer: 2,
+        why: "48 months: about $4,862 of interest. 84 months: about $8,787. The lower payment costs you about $3,900 more.",
+      },
+      {
+        q: "According to AAA, what's the biggest yearly cost of owning a new car?",
+        choices: ["Gas", "Depreciation (lost value)", "Oil changes", "Registration fees"],
+        answer: 1,
+        why: "Depreciation averaged about $4,422 a year, more than insurance or fuel.",
+      },
+    ],
+  },
+  {
+    id: "betting",
+    icon: "🎲",
+    title: "The Math of Sports Betting & Gambling",
+    summary: "Why the house always wins over time, and how betting apps keep you playing.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "Betting is everywhere now",
+        html: `<p>In a 2025 Pew Research survey, <strong>31% of adults ages 18 to 29</strong> said they had bet money on sports in the past year, more than any other age group.</p>
+               <p>In 2025, Americans bet about <strong>$167 billion</strong> with legal sportsbooks, which kept about <strong>$17 billion</strong> of it (American Gaming Association). That's about <strong>10 cents of every dollar</strong> bet.</p>
+               <p class="small muted">You must be 21 to bet on sports in most states where it's legal.</p>`,
+      },
+      {
+        heading: "How odds hide the house edge",
+        html: `<p>A typical bet is listed at <strong>−110</strong>: you risk $110 to win $100. If the game is a true 50/50, you'd win $100 half the time and lose $110 half the time.</p>
+               <p>That's an average loss of <strong>$5 per $110 bet</strong>, a 4.5% edge for the sportsbook. Win half your bets and you still lose money.</p>
+               <p>Every gambling game is built this way. American roulette keeps 5.26% on average, and the odds of hitting the Powerball jackpot are <strong>1 in 292,201,338</strong>.</p>
+               <div class="callout"><strong>Try it:</strong> play the <a href="play.html#betting">Beat the Book game</a>, then see what happens when 10,000 players make the same bets.</div>`,
+      },
+      {
+        heading: "Parlays: big payouts, bigger edge",
+        html: `<p>A <strong>parlay</strong> combines several bets, and all of them must win. A 4-leg parlay of −110 bets pays about <strong>12-to-1</strong>, but four coin flips in a row only happen 1 time in 16.</p>
+               <p>Fair odds would pay 15-to-1, so the house keeps about <strong>17%</strong> on average, nearly four times the edge on a single bet. Sportsbooks promote parlays because they make more money from them.</p>`,
+      },
+      {
+        heading: "Built to keep you playing",
+        html: `<ul>
+                 <li><strong>"Bonus bets" and promos</strong> often come with rules that require you to bet much more before you can withdraw.</li>
+                 <li><strong>Near misses</strong> (one leg short of a big parlay) feel like you almost won, so you play again.</li>
+                 <li><strong>The gambler's fallacy:</strong> after five losses, a win isn't "due." Each bet is independent.</li>
+                 <li><strong>Chasing losses</strong>, betting more to win back what you lost, is a warning sign of a gambling problem.</li>
+               </ul>`,
+      },
+      {
+        heading: "If you choose to gamble",
+        html: `<ul>
+                 <li>Treat it as <strong>entertainment you pay for</strong>, like a concert ticket, not a way to make money.</li>
+                 <li>Set a limit you can afford to lose <strong>before</strong> you start, and never use money for bills, rent, or debt.</li>
+                 <li>Use the app's deposit limits and time-outs.</li>
+               </ul>
+               <p>If betting stops being fun, free and confidential help is available 24/7 from the National Problem Gambling Helpline: call or text <strong>1-800-MY-RESET</strong> (1-800-697-3738), or chat at ncpgambling.org/chat.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "You bet $110 to win $100 on games that are true 50/50 coin flips. If you win exactly half your bets, what happens?",
+        choices: ["You break even", "You lose money", "You win money", "It depends on the sport"],
+        answer: 1,
+        why: "Each win pays $100 but each loss costs $110, so you lose about $5 per bet on average. That gap is the house edge.",
+      },
+      {
+        q: "Why do sportsbooks heavily promote parlays?",
+        choices: ["They're the safest bets", "Their house edge is much bigger than on single bets", "They pay fair odds", "They're required by law"],
+        answer: 1,
+        why: "A 4-leg parlay pays about 12-to-1 on a 1-in-16 shot, so the house keeps about 17% on average, versus about 4.5% on a single bet.",
+      },
+      {
+        q: "You've lost five bets in a row. What's true about the next one?",
+        choices: ["You're due for a win", "Its odds are the same as before", "You should double your bet", "Losing streaks always end at six"],
+        answer: 1,
+        why: "Bets are independent. Believing a win is \"due\" is the gambler's fallacy, and doubling up to win it back is chasing losses.",
+      },
+    ],
+  },
+  {
+    id: "side-hustle",
+    icon: "🛵",
+    title: "Side Hustles & Self-Employment Taxes",
+    summary: "Gig money is real income. Here's how it's taxed and how to keep more of it.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "W-2 job vs. 1099 gig",
+        html: `<p>At a regular <strong>W-2 job</strong>, your employer withholds income tax from each paycheck and pays half of your Social Security and Medicare tax.</p>
+               <p>As an <strong>independent contractor</strong> (delivery, rideshare, freelancing, reselling, tutoring), nobody withholds anything. You're the business, so you handle your own taxes, including both halves of Social Security and Medicare.</p>`,
+      },
+      {
+        heading: "All of it counts, form or no form",
+        html: `<p>Starting in 2026, a business only has to send you a <strong>Form 1099-NEC</strong> if it paid you <strong>$2,000</strong> or more in the year (up from $600). Payment apps and marketplaces send a <strong>1099-K</strong> only after <strong>$20,000 and 200 transactions</strong>.</p>
+               <p>But those are reporting rules for businesses, not tax-free limits. <strong>All self-employment income is taxable</strong>, and you must file a return once your net self-employment earnings reach <strong>$400</strong>.</p>`,
+      },
+      {
+        heading: "Self-employment tax",
+        html: `<p>On your profit, you pay <strong>15.3% self-employment tax</strong> (12.4% Social Security + 2.9% Medicare, figured on 92.35% of profit), plus regular income tax. You can deduct half of the self-employment tax.</p>
+               <p>Together, that often adds up to <strong>25%–30%</strong> of your profit. The safest habit: move that share into savings every time you get paid.</p>
+               <div class="callout"><strong>Find your number:</strong> the <a href="taxes.html#gig">side hustle tax calculator</a> shows exactly how much to set aside.</div>`,
+      },
+      {
+        heading: "Deductions: keep receipts and log miles",
+        html: `<p>You're taxed on <strong>profit</strong>: income minus business expenses. Common ones: supplies, the business share of your phone, platform fees, and equipment.</p>
+               <p>If you drive for work, the <strong>IRS standard mileage rate</strong> is 72.5¢ per mile for January–June 2026 and <strong>76¢</strong> from July 1, 2026. Driving 3,000 business miles at 76¢ deducts $2,280. Log every trip (date, miles, purpose) as you go; an app makes it easy.</p>`,
+      },
+      {
+        heading: "Pay as you go",
+        html: `<p>If you expect to owe <strong>$1,000 or more</strong>, the IRS expects <strong>quarterly estimated payments</strong>, generally due in April, June, September, and January. Skipping them can mean penalties. If you also have a W-2 job, raising your withholding on your W-4 can cover it instead.</p>
+               <p>A side hustle also counts as earned income, which means you can contribute to a <strong>Roth IRA</strong> with it.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "You earned $1,500 from a client in 2026 and didn't get a 1099. Do you owe tax on it?",
+        choices: ["No, under $2,000 is tax-free", "Yes, all self-employment income is taxable", "Only if you used a payment app", "Only if the client reports it"],
+        answer: 1,
+        why: "The $2,000 threshold only decides whether the business must send a 1099. You still report all your self-employment income.",
+      },
+      {
+        q: "What's the self-employment tax rate on (92.35% of) your profit?",
+        choices: ["7.65%", "10%", "15.3%", "22%"],
+        answer: 2,
+        why: "15.3%: you pay both the employee and employer halves of Social Security (12.4%) and Medicare (2.9%).",
+      },
+      {
+        q: "You drove 2,000 business miles in August 2026. What's your mileage deduction at the IRS standard rate?",
+        choices: ["$580", "$1,450", "$1,520", "$2,000"],
+        answer: 2,
+        why: "2,000 miles × 76¢ (the rate from July 1, 2026) = $1,520.",
+      },
+    ],
+  },
+  {
+    id: "bnpl-payday",
+    icon: "⏳",
+    title: "Buy Now, Pay Later & Payday Loans",
+    summary: "Easy money at checkout can get expensive fast. Learn to see the real price.",
+    minutes: 4,
+    cards: [
+      {
+        heading: "Buy now, pay later",
+        html: `<p>"Pay in 4" plans split a purchase into four payments over about six weeks, usually with <strong>no interest if you pay on time</strong>. In the Fed's survey of 2025, <strong>16% of adults</strong> used one.</p>
+               <p>The catch: <strong>21% of users</strong> paid a late fee or got hit with an overdraft or bounced-payment fee. Problems were most common when people used it for groceries or food delivery. Juggling several plans makes it easy to lose track of what's due.</p>
+               <p class="small muted">Source: Federal Reserve, Survey of Household Economics and Decisionmaking (2025 data).</p>`,
+      },
+      {
+        heading: "Payday loans",
+        html: `<p>A payday loan is a small, short loan due on your next payday. A typical fee is <strong>$15 per $100</strong> for two weeks. That sounds small, but the CFPB says it equals an APR of <strong>almost 400%</strong>, compared with about 22% on the average credit card.</p>
+               <p>The trap is the <strong>rollover</strong>: if you can't repay, you pay another fee to push the due date back, again and again, while still owing the full amount.</p>`,
+      },
+      {
+        heading: "Turn any fee into an APR",
+        html: `<p><strong>APR = fee ÷ amount borrowed × 365 ÷ days</strong></p>
+               <p>Example: a $60 fee on a $400 loan for 14 days: 60 ÷ 400 × 365 ÷ 14 ≈ <strong>391%</strong>.</p>
+               <div class="callout"><strong>Try it:</strong> compare loans in the <a href="credit.html#loancost">fee-to-APR calculator</a>.</div>`,
+      },
+      {
+        heading: "Better options when cash is tight",
+        html: `<ul>
+                 <li><strong>Your emergency fund</strong>: even $500 saved keeps you out of most of these traps.</li>
+                 <li><strong>Credit union payday alternative loans</strong>: small loans with APRs capped at 28% (NCUA rules).</li>
+                 <li><strong>Ask</strong> your employer for a pay advance, or a biller for a payment plan or due-date change.</li>
+                 <li>If you use buy now, pay later, use it for one planned purchase at a time, with autopay from an account that has the money.</li>
+               </ul>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "A payday lender charges $15 per $100 for two weeks. Roughly what APR is that?",
+        choices: ["15%", "30%", "About 100%", "Almost 400%"],
+        answer: 3,
+        why: "15 ÷ 100 × 365 ÷ 14 ≈ 391%. Short loan terms make small-looking fees huge when you annualize them.",
+      },
+      {
+        q: "When is a \"pay in 4\" buy now, pay later plan usually free?",
+        choices: ["Always", "When every payment is made on time", "Only for purchases over $500", "Never"],
+        answer: 1,
+        why: "Most pay-in-4 plans charge no interest, but missed payments can bring late fees and overdraft fees from your bank.",
+      },
+      {
+        q: "What's the main danger of rolling over a payday loan?",
+        choices: ["It lowers your interest rate", "You pay a new fee each time while still owing the full amount", "It's illegal everywhere", "It closes your bank account"],
+        answer: 1,
+        why: "Each rollover adds another fee without paying down what you borrowed, so costs pile up fast.",
+      },
+    ],
+  },
 ];
+
+// The learning path: lessons grouped into units. LESSONS is sorted into this order below, so the
+// Learn page, homepage, lesson pages, and certificate all number lessons the same way.
+// Every lesson id must appear in exactly one unit (scripts/build-seo.test.js checks this).
+const UNITS = [
+  { id: "earn", icon: "💵", title: "Earn & spend", blurb: "Budgets, bank accounts, paychecks, and side hustles.", lessons: ["budgeting", "banking", "taxes-101", "side-hustle"] },
+  { id: "protect", icon: "🛡️", title: "Save & protect", blurb: "Emergency funds, insurance, scams, and betting.", lessons: ["emergency-fund", "insurance", "scams", "betting"] },
+  { id: "borrow", icon: "💳", title: "Borrow wisely", blurb: "Debt, credit scores, and student loans.", lessons: ["debt", "credit", "bnpl-payday", "student-loans-2026"] },
+  { id: "grow", icon: "📈", title: "Grow your money", blurb: "Compounding, investing, inflation, and retirement.", lessons: ["compound-interest", "investing", "inflation", "risk-time", "retirement-accounts"] },
+  { id: "decide", icon: "🧭", title: "Big decisions", blurb: "College, housing, and other big purchases.", lessons: ["college-roi", "rent-vs-buy", "car-buying"] },
+];
+(() => {
+  const order = UNITS.flatMap((u) => u.lessons);
+  const rank = (l) => (order.includes(l.id) ? order.indexOf(l.id) : order.length);
+  LESSONS.sort((a, b) => rank(a) - rank(b));
+})();
