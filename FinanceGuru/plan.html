@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Build a plan for your first paycheck, compare your options, and check in weekly. Free calculations with optional AI coaching.">
+  <title>First Paycheck Plan — FinanceGuru</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/plan.css">
+  <script src="js/plan-theme.js"></script>
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/plan.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/plan.html">
+  <meta property="og:title" content="First Paycheck Plan — FinanceGuru">
+  <meta property="og:description" content="Build a plan for your first paycheck, compare your options, and check in weekly. Free calculations with optional AI coaching.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to your plan</a>
+  <header class="site-header"><nav class="container nav" aria-label="Main navigation">
+    <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+    <div class="nav-links"><a href="learn.html">Learn</a><a href="tools.html">Tools</a><a href="plan.html" aria-current="page">My plan</a></div>
+    <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+  </nav></header>
+  <main class="container planner" id="main">
+    <div class="planner-intro"><div><span class="eyebrow">Your first paycheck, with a plan</span><h1>Make room for what’s next.</h1><p class="lead">Cover your bills. Pick a goal. Know what to do on payday.</p></div><div class="planner-tag">Free planner<br><span>Save on this device</span></div></div>
+    <p id="notice" class="planner-notice" role="status" aria-live="polite"></p>
+    <div class="planner-layout">
+      <div>
+        <section class="card onboarding" id="onboarding" aria-labelledby="onboarding-title">
+          <div class="planner-heading"><h2 id="onboarding-title">Let’s start with your numbers.</h2><button type="button" class="btn btn-ghost small" id="example">Try an example</button></div>
+          <p class="small muted" id="example-note" hidden>Example figures are loaded. Replace them with your own before using the plan.</p>
+          <ol class="planner-steps" aria-label="Plan setup"><li aria-current="step">1. Paycheck</li><li>2. Monthly costs</li><li>3. Your goal</li></ol>
+          <form id="plan-form">
+            <fieldset data-step="0"><legend>What comes into your account?</legend><p class="muted small">Use take-home pay after taxes and payroll deductions. All amounts are in US dollars.</p>
+              <label for="take-home">Take-home pay per paycheck</label><div class="money-field"><span aria-hidden="true">$</span><input id="take-home" name="takeHome" type="number" inputmode="decimal" min="0.01" max="1000000" step="0.01" required placeholder="e.g. 1800"></div>
+              <label for="frequency">How often are you paid?</label><select id="frequency" class="select"><option value="biweekly">Every two weeks</option><option value="weekly">Every week</option><option value="semimonthly">Twice a month</option><option value="monthly">Once a month</option></select>
+              <p class="small muted">We’ll plan recurring bills around a conservative month. Extra-paycheck months can give you room to catch up or save.</p>
+            </fieldset>
+            <fieldset data-step="1" hidden><legend>What goes out each month?</legend><p class="muted small">Enter monthly totals. Include money set aside for irregular bills. Debt payments go in the separate debt list.</p>
+              <div class="planner-fields">
+                <div><label for="housing">Rent or mortgage</label><input id="housing" type="number" min="0" max="1000000" step="0.01" value="0" required></div>
+                <div><label for="utilities">Utilities, phone & internet</label><input id="utilities" type="number" min="0" max="1000000" step="0.01" value="0" required></div>
+                <div><label for="food">Groceries</label><input id="food" type="number" min="0" max="1000000" step="0.01" value="0" required></div>
+                <div><label for="transport">Transport & insurance</label><input id="transport" type="number" min="0" max="1000000" step="0.01" value="0" required></div>
+                <div><label for="other">Other essentials & reserves</label><input id="other" type="number" min="0" max="1000000" step="0.01" value="0" required></div>
+                <div><label for="wants">Dining out, hobbies & extras</label><input id="wants" type="number" min="0" max="1000000" step="0.01" value="0" required></div>
+              </div>
+              <div class="planner-heading"><h3>Your debts</h3><button type="button" class="btn btn-ghost" id="add-debt">+ Add a debt</button></div><p class="small muted">Include car loans and credit cards here. Use a nickname, not an account number.</p><div id="debts"></div>
+            </fieldset>
+            <fieldset data-step="2" hidden><legend>What would you like to work toward?</legend>
+              <label for="goal">Your focus</label><select id="goal" class="select"><option value="buffer">Build a savings buffer</option><option value="move">Save for moving out</option><option value="debt">Pay down debt</option></select>
+              <div id="savings-fields" class="planner-fields"><div><label for="target">Savings target</label><input id="target" type="number" min="0" max="1000000" step="0.01" value="1000" required></div><div><label for="saved">Already saved for this goal</label><input id="saved" type="number" min="0" max="1000000" step="0.01" value="0" required></div></div>
+              <label for="months">Your target timeline (months)</label><input id="months" type="number" min="1" max="120" step="1" value="6" required>
+              <p class="small muted">Choose an amount and timeline that matter to you. We’ll show whether they fit, plus a comparison you can adjust.</p>
+            </fieldset>
+            <p id="form-error" role="alert" class="planner-error"></p>
+            <div class="planner-heading"><button type="button" class="btn btn-ghost" id="back" hidden>← Back</button><button type="button" class="btn btn-primary" id="next">Monthly costs →</button><button type="submit" class="btn btn-primary" id="build" hidden>Build my plan →</button></div>
+          </form>
+        </section>
+        <div id="dashboard" hidden>
+          <section class="card" aria-labelledby="plan-title"><div class="planner-heading"><div><span class="eyebrow">Your starting point</span><h2 id="plan-title" tabindex="-1">A job for every paycheck.</h2></div><button class="btn btn-ghost" id="edit">Edit numbers</button></div>
+            <div id="summary"></div><div id="allocation"></div><div id="actions"></div>
+            <div class="planner-heading"><button class="btn btn-primary" id="save-local">Save on this device</button><button class="btn btn-ghost" id="export">Download my plan</button></div><p id="save-status" class="small muted" role="status"></p>
+            <details class="plan-assumptions"><summary>How these figures work</summary><ul id="assumptions"></ul></details>
+          </section>
+          <section class="card" aria-labelledby="scenario-title"><h2 id="scenario-title">See what could change.</h2><p class="muted">Try a different monthly housing cost or level of flexible spending. Your saved plan stays as it is until you apply the scenario.</p>
+            <form id="scenario-form"><div class="planner-fields"><div><label for="scenario-housing">Monthly housing</label><input id="scenario-housing" type="number" min="0" max="1000000" step="0.01" required></div><div><label for="scenario-wants">Monthly extras</label><input id="scenario-wants" type="number" min="0" max="1000000" step="0.01" required></div></div><button class="btn btn-ghost">Compare this scenario</button></form><div id="scenario-result" aria-live="polite"></div><button class="btn btn-primary" id="apply-scenario" hidden>Use these amounts</button>
+          </section>
+          <section class="card" aria-labelledby="coach-title"><span class="eyebrow">Make sense of your plan</span><h2 id="coach-title">A little guidance for your next step.</h2><p id="coach-availability" class="muted">Your calculated plan is ready. Checking whether coaching is available…</p>
+            <form id="coach-form" hidden><label for="coach-question">What would you like help understanding?</label><textarea id="coach-question" maxlength="600" rows="3" placeholder="e.g. How should I think about this savings timeline?"></textarea><label class="check-label"><input type="checkbox" id="ai-consent" required><span>Send my plan figures, recent check-ins, and question to the AI provider for an explanation. I’ll leave identifying details out of my question. <a href="privacy.html">Data details</a></span></label><button class="btn btn-primary" id="ask-coach">Explain my plan</button></form>
+            <div id="coach-result" aria-live="polite"></div>
+          </section>
+          <section class="card" aria-labelledby="checkin-title"><span class="eyebrow">Small steps, week by week</span><h2 id="checkin-title">Your weekly check-in.</h2><p class="muted">Record the last seven days. Include bills and debt minimums in spending. Goal contributions are savings transfers or extra debt payments.</p>
+            <form id="checkin-form"><label for="week-ending">Week ending</label><input id="week-ending" type="date" required><div class="planner-fields"><div><label for="actual-spending">Spent over the last week</label><input id="actual-spending" type="number" min="0" max="1000000" step="0.01" required></div><div><label for="actual-saved">Put toward your goal</label><input id="actual-saved" type="number" min="0" max="1000000" step="0.01" required></div></div><fieldset><legend>Actions you completed</legend><div id="completed-actions"></div></fieldset><button class="btn btn-primary">Save my check-in</button></form><div id="checkin-history" aria-live="polite"></div>
+          </section>
+          <section class="card" aria-labelledby="program-title"><h2 id="program-title">Your first 30 days.</h2><p class="muted">A simple path through the first month. Your calculator, action list, and check-ins are always free.</p><ol class="program-weeks"><li><strong>Week 1 · Get clear.</strong> Build your plan, check bill dates, and review Budgeting Basics.</li><li><strong>Week 2 · Make room.</strong> Compare a spending scenario and choose one adjustment.</li><li><strong>Week 3 · Build momentum.</strong> Review your savings or debt goal and log a check-in.</li><li><strong>Week 4 · Keep what works.</strong> Review your recorded actions and update next month’s plan.</li></ol><div id="progress-summary"></div></section>
+        </div>
+      </div>
+      <aside class="planner-sidebar">
+        <section class="card"><span class="eyebrow">Pick up where you left off</span><h2>Your plan, your pace.</h2><p class="small muted">Saving on this device works without an account. Anyone using this browser can see a saved plan.</p><p id="account-status" role="status">Checking account availability…</p>
+          <form id="auth-form" hidden><label for="auth-email">Email</label><input id="auth-email" type="email" autocomplete="email" required maxlength="254"><label for="auth-password">Password</label><input id="auth-password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required><p class="small muted">Use at least 12 characters.</p><label class="check-label"><input type="checkbox" id="adult-consent"><span>I’m 18 or older and agree to the <a href="privacy.html">privacy terms</a> for creating an account.</span></label><div class="auth-buttons"><button class="btn btn-primary" type="submit">Sign in</button><button class="btn btn-ghost" type="button" id="signup">Create account</button></div></form>
+          <div id="cloud-controls" hidden><p class="small muted">Choose when to sync. Loading a cloud plan replaces the plan currently shown on this device.</p><div class="cloud-buttons"><button class="btn btn-primary" id="save-cloud">Save to my account</button><button class="btn btn-ghost" id="load-cloud">Load my account plan</button><button class="btn btn-ghost" id="logout">Sign out</button></div></div>
+        </section>
+        <section class="card program-offer"><span class="eyebrow">First Paycheck Program</span><h2>30 days of AI guidance.</h2><p class="program-price">$29 <span>one time</span></p><p>Explanations tied to your plan, follow-up questions, and support for your weekly reviews.</p><ul><li>10 coaching requests per 24 hours</li><li>100 requests per 30 days</li><li>Saved plans and weekly check-ins</li><li>No automatic renewal</li></ul><p class="small muted">Free signed-in accounts can try 1 coaching request per 24 hours, up to 3 per 30 days. Requests count when submitted, including unsuccessful responses.</p><button class="btn btn-primary" id="checkout" disabled>Enrollment isn’t open yet</button><p id="program-status" class="small muted" role="status"></p><p class="small muted">AI guidance is educational and may be wrong. It does not move money or choose investments for you.</p></section>
+        <section class="card"><h3>Control your saved information</h3><button class="btn btn-ghost" id="clear-local">Clear this device’s plan</button><button class="btn btn-ghost" id="delete-cloud" hidden>Delete my cloud plan</button><p class="small muted">Clearing a device does not delete your cloud copy. Deleting a cloud plan does not cancel an active program.</p><a href="privacy.html" class="small">How your data is used</a></section>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container"><span>FinanceGuru · Educational planning, not financial advice.</span><a href="privacy.html">Privacy &amp; data</a></div></footer>
+  <script src="js/site.js"></script><script src="js/finance.js"></script><script src="js/plan.js"></script>
+</body>
+</html>

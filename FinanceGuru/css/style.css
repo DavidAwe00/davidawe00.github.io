@@ -9,6 +9,11 @@
 .lesson-article aside ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 24px; padding-left: 20px; }
 
 /* ============ Design tokens ============ */
+form[data-signup] { flex-wrap:wrap; }
+form[data-signup] .signup-consent { flex-basis:100%; font-size:.8rem; }
+form[data-signup] input[type=checkbox] { width:auto; min-width:0; }
+form[data-signup] [data-signup-status] { flex-basis:100%; margin:0; font-size:.85rem; }
+form[data-signup] [data-signup-status]:empty { display:none; }
 :root {
   color-scheme: light;
   --bg: #fbfaf7;
@@ -506,6 +511,11 @@ section[id] { scroll-margin-top: 72px; }
 
 /* Tools: dropdown replaces the tab buttons on phones */
 .tool-picker { display: none; margin: 16px 0; }
+/* Tools page: one grouped dropdown at every width */
+.tool-picker-bar { margin: 16px 0 20px; max-width: 520px; }
+.tool-picker-bar .field { margin-bottom: 4px; }
+.tool-picker-bar .select { font-size: 1.05rem; font-weight: 600; }
+.tool-picker-bar p { margin: 0; min-height: 1.4em; }
 @media (max-width: 640px) { .tool-picker { display: block; } .tool-tabs, .game-hub { display: none; } }
 
 /* Beat the Book */
@@ -526,6 +536,40 @@ section[id] { scroll-margin-top: 72px; }
 .lc-bars { display: grid; gap: 10px; margin: 4px 0 16px; }
 .lc-bars .hb-row { grid-template-columns: minmax(120px, 180px) 1fr 64px; }
 @media (max-width: 640px) { .lc-bars .hb-row { grid-template-columns: 1fr 56px; } }
+
+/* Tools: shared pieces for the js/tools/ calculators */
+.nw-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.nw-cols > * { min-width: 0; }
+.offer-grid { display: grid; grid-template-columns: minmax(150px, 1.2fr) 1fr 1fr; gap: 10px 12px; align-items: center; }
+.offer-grid h3 { margin: 0; font-size: 1rem; }
+.offer-grid label { font-size: .9rem; font-weight: 600; }
+.offer-verdict { font-size: 1.1rem; margin: 0 0 12px; }
+table tr.sub td { font-weight: 600; }
+table tr.total td { font-weight: 700; border-top: 2px solid var(--border); }
+.list-head, .list-row { display: grid; grid-template-columns: var(--cols); gap: 8px; align-items: center; }
+.list-head { font-size: .8rem; font-weight: 600; color: var(--text-2); margin-bottom: 4px; }
+.list-row { margin-bottom: 8px; }
+/* Grid cells and inputs default to their content's width; let them shrink on narrow screens. */
+.list-row > div, .tool > *, .offer-grid > * { min-width: 0; }
+.list-row .input-wrap input { min-width: 0; width: 100%; }
+.list-row .input-wrap { margin: 0; }
+.list-row .select { width: 100%; }
+.list-row .icon-btn { width: 36px; height: 36px; }
+.row-check { display: inline-flex; gap: 6px; align-items: center; font-size: .9rem; cursor: pointer; }
+.goal-bar { height: 6px; background: var(--surface-2); border-radius: 3px; margin-top: 4px; overflow: hidden; }
+.goal-bar i { display: block; height: 100%; background: var(--brand); }
+@media (max-width: 640px) {
+  .offer-grid { grid-template-columns: 1fr 1fr; }
+  .offer-grid > div:first-child { display: none; }
+  .offer-grid label { grid-column: 1 / -1; margin-top: 4px; }
+  .list-head { display: none; }
+  .list-row { grid-template-columns: 1fr 1fr; padding: 10px; border: 1px solid var(--border); border-radius: 10px; }
+  .list-row > div:first-child { grid-column: 1 / -1; }
+  .list-row > .icon-btn { justify-self: end; align-self: end; }
+  .list-row > div[data-label=""]::before { display: none; }
+  .nw-cols { grid-template-columns: 1fr; }
+  .list-row > div::before { content: attr(data-label); display: block; font-size: .75rem; font-weight: 600; color: var(--text-2); margin-bottom: 2px; }
+}
 
 /* Car Cost calculator */
 .car-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .9rem; }

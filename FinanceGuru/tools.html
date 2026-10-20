@@ -54,17 +54,40 @@
     <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Money tools</h1>
     <p class="muted">Plug in your own numbers. Nothing you type leaves your browser.</p>
 
-    <div class="field tool-picker"><label for="tool-picker">Choose a tool</label><select class="select" id="tool-picker">
-      <option value="compound">📈 Compound Growth</option><option value="budget">🧾 Budget Planner</option><option value="debt">⛓️ Debt Payoff</option><option value="emergency">🛟 Emergency Fund</option><option value="retire">🏖️ Retirement Check</option><option value="roth">⚖️ Roth vs Traditional</option><option value="car">🚗 Car Cost</option>
-    </select></div>
-    <div class="tool-tabs" role="tablist">
-      <button role="tab" data-tab="compound">📈 Compound Growth</button>
-      <button role="tab" data-tab="budget">🧾 Budget Planner</button>
-      <button role="tab" data-tab="debt">⛓️ Debt Payoff</button>
-      <button role="tab" data-tab="emergency">🛟 Emergency Fund</button>
-      <button role="tab" data-tab="retire">🏖️ Retirement Check</button>
-      <button role="tab" data-tab="roth">⚖️ Roth vs Traditional</button>
-      <button role="tab" data-tab="car">🚗 Car Cost</button>
+    <!-- Every tool is listed here once; js/tools.js reads the options, and each option needs a #panel-<value>. -->
+    <div class="tool-picker-bar">
+      <div class="field"><label for="tool-picker">Choose a tool</label><select class="select" id="tool-picker">
+        <optgroup label="Save &amp; plan">
+          <option value="budget" data-desc="Split your paycheck with the 50/30/20 rule.">🧾 Budget Planner</option>
+          <option value="emergency" data-desc="How big your safety net should be, and how long to build it.">🛟 Emergency Fund</option>
+          <option value="goals" data-desc="Plan several savings goals and the monthly amount for each.">🎯 Savings Goals</option>
+          <option value="subs" data-desc="Add up your subscriptions and see what cutting them is worth.">📺 Subscription Audit</option>
+          <option value="networth" data-desc="Track what you own minus what you owe, month by month.">📊 Net Worth Tracker</option>
+          <option value="compound" data-desc="See how saving and investing snowball over time.">📈 Compound Growth</option>
+        </optgroup>
+        <optgroup label="Earn &amp; work">
+          <option value="offer" data-desc="Compare two job offers on take-home pay and benefits.">💼 Job Offer Comparison</option>
+          <option value="raise" data-desc="Did your raise beat inflation after taxes?">📈 Raise vs Inflation</option>
+          <option value="col" data-desc="Compare pay and prices between two states.">🗺️ Cost of Living by State</option>
+        </optgroup>
+        <optgroup label="Borrow">
+          <option value="debt" data-desc="Avalanche vs. snowball: find your debt-free date.">⛓️ Debt Payoff</option>
+          <option value="transfer" data-desc="Does a 0% balance transfer actually save you money?">💳 Balance Transfer Check</option>
+          <option value="car" data-desc="Loan payment, interest, and the all-in monthly cost of a car.">🚗 Car Cost</option>
+        </optgroup>
+        <optgroup label="Home">
+          <option value="apartment" data-desc="Rent you can afford, move-in costs, and roommate splits.">🏠 First Apartment Budget</option>
+        </optgroup>
+        <optgroup label="Health &amp; protection">
+          <option value="hsa" data-desc="Tax savings from an HSA or FSA, with 2026 limits.">🩺 HSA / FSA Savings</option>
+          <option value="life" data-desc="A simple estimate of how much life insurance a family needs.">☂️ Life Insurance Needs</option>
+        </optgroup>
+        <optgroup label="Retire &amp; invest">
+          <option value="retire" data-desc="Are you on track for retirement?">🏖️ Retirement Check</option>
+          <option value="roth" data-desc="Pay tax now or later? Compare Roth and traditional.">⚖️ Roth vs Traditional</option>
+        </optgroup>
+      </select></div>
+      <p class="small muted" id="tool-desc" aria-live="polite"></p>
     </div>
 
     <!-- Compound growth -->
@@ -242,6 +265,233 @@
         </div>
       </div>
     </section>
+
+    <!-- Job offer comparison -->
+    <section id="panel-offer" role="tabpanel" style="padding:0" hidden>
+      <div class="card">
+        <div class="offer-grid">
+          <div></div><h3>Offer A</h3><h3>Offer B</h3>
+          <label for="of-pay-a">Yearly pay</label><div class="input-wrap"><span>$</span><input id="of-pay-a" type="number" min="0" step="1000" value="48000"></div><div class="input-wrap"><span>$</span><input id="of-pay-b" type="number" min="0" step="1000" value="52000" aria-label="Offer B yearly pay"></div>
+          <label for="of-match-a">401(k) match (up to % of pay)</label><div class="input-wrap"><input id="of-match-a" type="number" min="0" max="25" step="0.5" value="5"><span>%</span></div><div class="input-wrap"><input id="of-match-b" type="number" min="0" max="25" step="0.5" value="0" aria-label="Offer B 401(k) match"><span>%</span></div>
+          <label for="of-health-a">Your health premium per month</label><div class="input-wrap"><span>$</span><input id="of-health-a" type="number" min="0" value="90"></div><div class="input-wrap"><span>$</span><input id="of-health-b" type="number" min="0" value="180" aria-label="Offer B health premium"></div>
+          <label for="of-miles-a">Commute miles (round trip)</label><div class="input-wrap"><input id="of-miles-a" type="number" min="0" value="10"><span>mi</span></div><div class="input-wrap"><input id="of-miles-b" type="number" min="0" value="40" aria-label="Offer B commute miles"><span>mi</span></div>
+          <label for="of-days-a">Days in the office per week</label><div class="input-wrap"><input id="of-days-a" type="number" min="0" max="7" value="5"><span>days</span></div><div class="input-wrap"><input id="of-days-b" type="number" min="0" max="7" value="5" aria-label="Offer B office days"><span>days</span></div>
+          <label for="of-state-a">State income tax (approx.)</label><div class="input-wrap"><input id="of-state-a" type="number" min="0" step="0.1" value="4"><span>%</span></div><div class="input-wrap"><input id="of-state-b" type="number" min="0" step="0.1" value="4" aria-label="Offer B state income tax"><span>%</span></div>
+        </div>
+        <div class="tool" style="margin-top:12px">
+          <div class="field"><label for="of-save">You'd put in your 401(k)</label><div class="input-wrap"><input id="of-save" type="number" min="0" max="50" step="0.5" value="6"><span>% of pay</span></div><span class="hint">Contribute at least enough to get the full match.</span></div>
+          <div class="field"><label for="of-status">Filing status</label><select class="select" id="of-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div id="of-result"></div>
+        <div class="table-scroll" style="max-height:none"><table id="of-table"></table></div>
+        <p class="callout small" id="of-insight" style="margin-bottom:0"></p>
+        <p class="small muted" style="margin:10px 0 0">Taxes use 2026 federal brackets and the standard deduction, Social Security (6.2%) and Medicare (1.45%), and your state rate. 401(k) contributions and health premiums are treated as pre-tax. Commute cost uses AAA's 2026 per-mile cost of fuel plus maintenance, repairs, and tires (29¢) for about 50 work weeks a year. Estimate only.</p>
+      </div>
+    </section>
+
+    <!-- Raise vs inflation -->
+    <section id="panel-raise" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="rs-old">Old pay (per year)</label><div class="input-wrap"><span>$</span><input id="rs-old" type="number" min="0" step="500" value="45000"></div></div>
+          <div class="field"><label for="rs-old-year">Year of old pay</label><select class="select" id="rs-old-year"></select></div>
+          <div class="field"><label for="rs-new">New pay (per year)</label><div class="input-wrap"><span>$</span><input id="rs-new" type="number" min="0" step="500" value="47000"></div></div>
+          <div class="field"><label for="rs-new-year">Year of new pay</label><select class="select" id="rs-new-year"></select></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat"><div class="label">Your raise</div><div class="value" id="rs-raise">—</div></div>
+            <div class="stat"><div class="label">Prices rose</div><div class="value" id="rs-infl">—</div></div>
+            <div class="stat hero"><div class="label">Real raise (buying power)</div><div class="value" id="rs-real">—</div></div>
+          </div>
+          <p class="callout small" id="rs-insight" style="margin-bottom:0"></p>
+          <p class="small muted" style="margin:10px 0 0">Inflation uses the annual average Consumer Price Index (CPI-U) from the U.S. Bureau of Labor Statistics, through 2025. For a raise this year, compare with last year's pay and 2025 prices as the closest full year.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cost of living by state -->
+    <section id="panel-col" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="cl-from">Where you are (or the offer is)</label><select class="select" id="cl-from"></select></div>
+          <div class="field"><label for="cl-pay">Pay there</label><div class="input-wrap"><span>$</span><input id="cl-pay" type="number" min="0" step="1000" value="60000"></div></div>
+          <div class="field"><label for="cl-to">Compare with</label><select class="select" id="cl-to"></select></div>
+          <div class="field"><label for="cl-job">Typical pay for</label><select class="select" id="cl-job"></select></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat hero"><div class="label" id="cl-equiv-label">Same buying power in …</div><div class="value" id="cl-equiv">—</div></div>
+            <div class="stat"><div class="label">Price level (U.S. = 100)</div><div class="value" id="cl-rpp">—</div></div>
+          </div>
+          <div class="table-scroll" style="max-height:none"><table id="cl-table"></table></div>
+          <p class="callout small" id="cl-insight" style="margin-bottom:0"></p>
+          <p class="small muted" style="margin:10px 0 0">Price levels: U.S. Bureau of Economic Analysis Regional Price Parities by state (all items, <span id="cl-rpp-year"></span>), which include rent. Pay: BLS Occupational Employment and Wage Statistics state medians (May 2025). Prices within a state vary a lot between cities and rural areas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Balance transfer -->
+    <section id="panel-transfer" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="bt-bal">Card balance</label><div class="input-wrap"><span>$</span><input id="bt-bal" type="number" min="0" value="4000"></div></div>
+          <div class="field"><label for="bt-apr">Current APR</label><div class="input-wrap"><input id="bt-apr" type="number" min="0" step="0.01" value="22.36"><span>%</span></div><span class="hint">Average for accounts paying interest, Aug 2026 (Federal Reserve G.19).</span></div>
+          <div class="field"><label for="bt-fee">Transfer fee</label><div class="input-wrap"><input id="bt-fee" type="number" min="0" max="10" step="0.5" value="3"><span>%</span></div><span class="hint">Usually 3%–5% of the amount moved.</span></div>
+          <div class="field"><label for="bt-months">0% intro period</label><div class="input-wrap"><input id="bt-months" type="number" min="0" max="24" value="15"><span>months</span></div></div>
+          <div class="field"><label for="bt-after">APR after the intro period</label><div class="input-wrap"><input id="bt-after" type="number" min="0" step="0.01" value="22.36"><span>%</span></div></div>
+          <div class="field"><label for="bt-pay">You'll pay each month</label><div class="input-wrap"><span>$</span><input id="bt-pay" type="number" min="0" value="250"></div></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat"><div class="label">Stay: total interest</div><div class="value" id="bt-stay">—</div></div>
+            <div class="stat"><div class="label">Transfer: fee + interest</div><div class="value" id="bt-move">—</div></div>
+            <div class="stat hero"><div class="label">You save</div><div class="value" id="bt-save">—</div></div>
+          </div>
+          <p class="callout small" id="bt-insight" style="margin-bottom:0"></p>
+          <p class="small muted" style="margin:10px 0 0">Assumes no new purchases on either card and that every payment is on time (a late payment can end a 0% offer early). Monthly interest is the APR ÷ 12.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- First apartment -->
+    <section id="panel-apartment" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="ap-income">Your yearly income (before taxes)</label><div class="input-wrap"><span>$</span><input id="ap-income" type="number" min="0" step="1000" value="42000"></div></div>
+          <div class="field"><label for="ap-rent">Monthly rent for the whole place</label><div class="input-wrap"><span>$</span><input id="ap-rent" type="number" min="0" step="25" value="1500"></div></div>
+          <div class="field"><label for="ap-people">People splitting rent</label><div class="input-wrap"><input id="ap-people" type="number" min="1" max="8" value="2"><span>people</span></div></div>
+          <div class="field"><label for="ap-util">Utilities + internet per month (whole place)</label><div class="input-wrap"><span>$</span><input id="ap-util" type="number" min="0" value="220"></div></div>
+          <div class="field"><label for="ap-ins">Renters insurance per month (yours)</label><div class="input-wrap"><span>$</span><input id="ap-ins" type="number" min="0" value="14"></div><span class="hint">About $170 a year on average (Insurance Information Institute).</span></div>
+          <div class="field"><label for="ap-deposit">Security deposit (months of rent)</label><div class="input-wrap"><input id="ap-deposit" type="number" min="0" max="3" step="0.5" value="1"><span>months</span></div></div>
+          <div class="field"><label for="ap-setup">Furniture, moving &amp; setup (yours)</label><div class="input-wrap"><span>$</span><input id="ap-setup" type="number" min="0" step="50" value="1000"></div></div>
+          <div class="field"><label for="ap-fees">Application &amp; utility setup fees (yours)</label><div class="input-wrap"><span>$</span><input id="ap-fees" type="number" min="0" value="100"></div></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat"><div class="label">Max rent share at 30% of pay</div><div class="value" id="ap-max">—</div></div>
+            <div class="stat hero"><div class="label">Your monthly housing cost</div><div class="value" id="ap-month">—</div><div class="small muted" id="ap-pct"></div></div>
+            <div class="stat"><div class="label">Cash needed to move in</div><div class="value" id="ap-cash">—</div></div>
+          </div>
+          <div class="pc-list" id="ap-list"></div>
+          <p class="callout small" id="ap-insight" style="margin-bottom:0"></p>
+          <p class="small muted" style="margin:10px 0 0">HUD considers households "cost-burdened" when housing takes more than 30% of income. Landlords often ask for income of about 3 times the rent; check each listing. Move-in cash assumes first month's rent plus deposit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HSA / FSA -->
+    <section id="panel-hsa" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="hs-type">Account</label><select class="select" id="hs-type">
+            <option value="hsa-self">HSA, self-only coverage</option><option value="hsa-family">HSA, family coverage</option><option value="fsa">Health FSA</option></select></div>
+          <div class="field"><label for="hs-amt">You put in per year</label><div class="input-wrap"><span>$</span><input id="hs-amt" type="number" min="0" step="50" value="1500"></div><span class="hint" id="hs-limit"></span></div>
+          <div class="field"><label for="hs-income">Your yearly income</label><div class="input-wrap"><span>$</span><input id="hs-income" type="number" min="0" step="1000" value="55000"></div></div>
+          <div class="field"><label for="hs-status">Filing status</label><select class="select" id="hs-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+          <div class="field"><label for="hs-state">State income tax (approx.)</label><div class="input-wrap"><input id="hs-state" type="number" min="0" step="0.1" value="4"><span>%</span></div></div>
+          <div class="field" id="hs-spend-wrap"><label for="hs-spend">Medical costs you expect this year</label><div class="input-wrap"><span>$</span><input id="hs-spend" type="number" min="0" step="50" value="1200"></div></div>
+          <label class="row-check"><input type="checkbox" id="hs-payroll" checked> Through payroll at work (also skips Social Security and Medicare tax)</label>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat hero"><div class="label">Tax you save</div><div class="value" id="hs-save">—</div></div>
+            <div class="stat"><div class="label">Real cost of $100 of care</div><div class="value" id="hs-per">—</div></div>
+            <div class="stat"><div class="label" id="hs-risk-label">At risk of forfeiting</div><div class="value" id="hs-risk">—</div></div>
+          </div>
+          <p class="callout small" id="hs-insight" style="margin-bottom:0"></p>
+          <p class="small muted" style="margin:10px 0 0">2026 IRS limits: HSA $4,400 self-only and $8,750 family (Rev. Proc. 2025-19), plus $1,000 more at age 55+; health FSA $3,400, with up to $680 carryover if your plan allows it (Rev. Proc. 2025-32). An HSA requires a high-deductible health plan. Uses 2026 federal brackets; estimate only.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Life insurance needs -->
+    <section id="panel-life" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <div class="field"><label for="li-income">Yearly income to replace</label><div class="input-wrap"><span>$</span><input id="li-income" type="number" min="0" step="1000" value="60000"></div></div>
+          <div class="field"><label for="li-years">Years your family would need it</label><div class="input-wrap"><input id="li-years" type="number" min="0" max="40" value="15"><span>years</span></div><span class="hint">Often until the youngest child turns 18 or finishes school.</span></div>
+          <div class="field"><label for="li-debt">Debts to pay off (mortgage, loans)</label><div class="input-wrap"><span>$</span><input id="li-debt" type="number" min="0" step="1000" value="180000"></div></div>
+          <div class="field"><label for="li-future">Future costs (college, final expenses)</label><div class="input-wrap"><span>$</span><input id="li-future" type="number" min="0" step="1000" value="60000"></div></div>
+          <div class="field"><label for="li-savings">Savings and investments</label><div class="input-wrap"><span>$</span><input id="li-savings" type="number" min="0" step="1000" value="25000"></div></div>
+          <div class="field"><label for="li-have">Life insurance you already have</label><div class="input-wrap"><span>$</span><input id="li-have" type="number" min="0" step="1000" value="60000"></div><span class="hint">Many jobs include 1–2× salary of group coverage, which usually ends if you leave.</span></div>
+        </div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat"><div class="label">Total need</div><div class="value" id="li-need">—</div></div>
+            <div class="stat hero"><div class="label">Coverage gap</div><div class="value" id="li-gap">—</div></div>
+          </div>
+          <div class="pc-list" id="li-list"></div>
+          <p class="callout small" id="li-insight" style="margin-bottom:0"></p>
+          <p class="small muted" style="margin:10px 0 0">A simple needs estimate (income × years + debts + future costs − savings − existing coverage). It ignores investment growth and inflation. No dependents usually means little or no need. Get quotes from licensed agents or insurers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Savings goals -->
+    <section id="panel-goals" role="tabpanel" style="padding:0" hidden>
+      <div class="card">
+        <div id="sg-list"></div>
+        <button class="btn btn-ghost" id="sg-add" type="button">+ Add a goal</button>
+        <div class="field" style="margin-top:16px;max-width:320px"><label for="sg-apy">Savings account APY</label><div class="input-wrap"><input id="sg-apy" type="number" min="0" max="10" step="0.05" value="4"><span>%</span></div><span class="hint">Average savings account: 0.37% (FDIC, Sept 2026). Top high-yield: about 4% (Bankrate).</span></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="stats">
+          <div class="stat hero"><div class="label">Save per month for all goals</div><div class="value" id="sg-total">—</div></div>
+          <div class="stat"><div class="label">Still to save</div><div class="value" id="sg-left">—</div></div>
+          <div class="stat"><div class="label">Interest helps by</div><div class="value" id="sg-interest">—</div></div>
+        </div>
+        <div class="table-scroll" style="max-height:none"><table id="sg-table"></table></div>
+        <p class="small muted" style="margin:10px 0 0">Saved in this browser only. Monthly amounts assume equal deposits and monthly compounding at the APY you enter.</p>
+      </div>
+    </section>
+
+    <!-- Subscription audit -->
+    <section id="panel-subs" role="tabpanel" style="padding:0" hidden>
+      <div class="card">
+        <p class="small muted" style="margin-top:0">List everything that charges you automatically. Check the ones you'd cut.</p>
+        <div id="sb-list"></div>
+        <button class="btn btn-ghost" id="sb-add" type="button">+ Add a subscription</button>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="stats">
+          <div class="stat"><div class="label">All subscriptions per year</div><div class="value" id="sb-year">—</div><div class="small muted" id="sb-month"></div></div>
+          <div class="stat hero"><div class="label">Cutting the checked ones saves</div><div class="value" id="sb-cut">—</div><div class="small muted">per year</div></div>
+          <div class="stat"><div class="label">Invested for 10 years at 7%</div><div class="value" id="sb-grow">—</div></div>
+        </div>
+        <p class="callout small" id="sb-insight" style="margin-bottom:0"></p>
+        <p class="small muted" style="margin:10px 0 0">Saved in this browser only. 7% a year is roughly the stock market's long-run average after inflation; it isn't guaranteed. Check your bank and card statements for charges you forgot about.</p>
+      </div>
+    </section>
+
+    <!-- Net worth -->
+    <section id="panel-networth" role="tabpanel" style="padding:0" hidden>
+      <div class="nw-cols">
+        <div class="card">
+          <h3 style="margin-top:0">What you own</h3>
+          <div id="nw-assets"></div>
+          <button class="btn btn-ghost" id="nw-add-asset" type="button">+ Add an asset</button>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">What you owe</h3>
+          <div id="nw-debts"></div>
+          <button class="btn btn-ghost" id="nw-add-debt" type="button">+ Add a debt</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="stats">
+          <div class="stat"><div class="label">Assets</div><div class="value" id="nw-a">—</div></div>
+          <div class="stat"><div class="label">Debts</div><div class="value" id="nw-d">—</div></div>
+          <div class="stat hero"><div class="label">Net worth</div><div class="value" id="nw-total">—</div><div class="small muted" id="nw-change"></div></div>
+        </div>
+        <button class="btn btn-primary" id="nw-snap" type="button">Save this month's snapshot</button>
+        <div class="chart" id="nw-chart" style="margin-top:12px"></div>
+        <details class="table-view"><summary>Snapshot history</summary><div class="table-scroll" id="nw-history"></div></details>
+        <p class="small muted" style="margin:10px 0 0">Saved in this browser only. Take a snapshot about once a month; one per month is kept (a new one replaces that month's). A negative net worth is common early on with student loans; the trend matters more than the number.</p>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -255,9 +505,23 @@
   <script src="js/charts.js"></script>
   <script src="js/data/market-history.js"></script>
   <script src="js/data/inflation.js"></script>
+  <script src="js/finance.js"></script>
   <script src="js/tools.js"></script>
   <script src="js/data/tax2026.js"></script>
   <script src="js/retire.js"></script>
   <script src="js/car.js"></script>
+  <script src="js/data/rpp.js"></script>
+  <script src="js/data/statepay.js"></script>
+  <script src="js/tools/kit.js"></script>
+  <script src="js/tools/offer.js"></script>
+  <script src="js/tools/raise.js"></script>
+  <script src="js/tools/col.js"></script>
+  <script src="js/tools/transfer.js"></script>
+  <script src="js/tools/apartment.js"></script>
+  <script src="js/tools/hsa.js"></script>
+  <script src="js/tools/life.js"></script>
+  <script src="js/tools/goals.js"></script>
+  <script src="js/tools/subs.js"></script>
+  <script src="js/tools/networth.js"></script>
 </body>
 </html>

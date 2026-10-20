@@ -2,26 +2,21 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
+  const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-  /* ---------- Tabs ---------- */
-  const tabs = ["compound", "budget", "debt", "emergency", "retire", "roth", "car"];
+  /* ---------- Tool picker (grouped dropdown; the options are the list of tools) ---------- */
+  const picker = $("tool-picker");
+  const tabs = [...picker.options].map((o) => o.value);
   function showTab(name) {
     if (!tabs.includes(name)) name = "compound";
-    tabs.forEach((t) => {
-      $("panel-" + t).hidden = t !== name;
-      document.querySelector(`[data-tab="${t}"]`).setAttribute("aria-selected", t === name);
-    });
-    $("tool-picker").value = name;
+    tabs.forEach((t) => ($("panel-" + t).hidden = t !== name));
+    picker.value = name;
+    $("tool-desc").textContent = picker.selectedOptions[0].dataset.desc || "";
     if (name === "compound") compound(); // chart needs a visible container to measure
     document.dispatchEvent(new CustomEvent("tabshow", { detail: name }));
   }
-  document.querySelector(".tool-tabs").addEventListener("click", (e) => {
-    const t = e.target.closest("[data-tab]");
-    if (t) history.replaceState(null, "", "#" + t.dataset.tab), showTab(t.dataset.tab);
-  });
-  // Phones get a dropdown instead of the wall of tab buttons.
-  $("tool-picker").addEventListener("change", (e) => { history.replaceState(null, "", "#" + e.target.value); showTab(e.target.value); });
+  picker.addEventListener("change", () => { history.replaceState(null, "", "#" + picker.value); showTab(picker.value); });
   window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
 
   /* ---------- Compound growth ---------- */
@@ -155,7 +150,7 @@
   function renderDebts() {
     $("d-list").innerHTML = debts.map((d, i) => `
       <div class="debt-row" data-i="${i}">
-        <input class="name" data-k="name" value="${d.name.replace(/"/g, "&quot;")}" aria-label="Debt name">
+        <input class="name" data-k="name" value="${esc(d.name)}" aria-label="Debt name">
         <input data-k="balance" type="number" min="0" value="${d.balance}" aria-label="Balance">
         <input data-k="apr" type="number" min="0" step="0.1" value="${d.apr}" aria-label="APR">
         <input data-k="min" type="number" min="0" value="${d.min}" aria-label="Minimum payment">
@@ -172,29 +167,12 @@
     debts.splice(+e.target.closest(".debt-row").dataset.i, 1);
     renderDebts(); debt();
   });
-  $("d-add").addEventListener("click", () => { debts.push({ name: "New debt", balance: 1000, apr: 15, min: 40 }); renderDebts(); debt(); });
+  $("d-add").addEventListener("click", () => { if (debts.length >= 10) { FG.toast('Add up to ten debts.'); return; } debts.push({ name: "New debt", balance: 1000, apr: 15, min: 40 }); renderDebts(); debt(); });
   $("d-extra").addEventListener("input", debt);
 
   // Month-by-month simulation. Freed-up minimums roll into the next target debt.
-  function simulate(order) {
-    const ds = debts.filter((d) => d.balance > 0).map((d) => ({ ...d }));
-    if (!ds.length) return { months: 0, interest: 0, order: [] };
-    const budget = ds.reduce((s, d) => s + d.min, 0) + num("d-extra");
-    const sorted = [...ds].sort(order);
-    let months = 0, interest = 0;
-    const paidOff = [];
-    while (ds.some((d) => d.balance > 0.005) && months < 600) {
-      months++;
-      ds.forEach((d) => { if (d.balance > 0) { const i = d.balance * d.apr / 100 / 12; d.balance += i; interest += i; } });
-      let left = budget;
-      ds.forEach((d) => { if (d.balance > 0) { const p = Math.min(d.min, d.balance, left); d.balance -= p; left -= p; } });
-      for (const t of sorted) {
-        if (left <= 0) break;
-        if (t.balance > 0) { const p = Math.min(left, t.balance); t.balance -= p; left -= p; }
-      }
-      ds.forEach((d) => { if (d.balance <= 0.005 && !paidOff.includes(d.name)) paidOff.push(d.name); d.balance = Math.max(0, d.balance); });
-    }
-    return { months, interest, order: paidOff, stuck: months >= 600 };
+  function simulate(strategy, extra = num("d-extra")) {
+    return FinancePlan.debtPayoff(debts, extra, strategy);
   }
 
   const fmtMonths = (m) => {
@@ -204,21 +182,21 @@
   const freeDate = (m) => { const d = new Date(); d.setMonth(d.getMonth() + m); return d.toLocaleDateString(undefined, { month: "long", year: "numeric" }); };
 
   function debt() {
-    const av = simulate((a, b) => b.apr - a.apr);
-    const sn = simulate((a, b) => a.balance - b.balance);
-    const minOnly = (() => { const e = $("d-extra").value; $("d-extra").value = 0; const r = simulate((a, b) => b.apr - a.apr); $("d-extra").value = e; return r; })();
+    let av, sn, minOnly;
+    try { av = simulate('avalanche'); sn = simulate('snowball'); minOnly = simulate('avalanche', 0); }
+    catch (error) { $("d-results").textContent = error.message; return; }
     const card = (title, r, note) => `
       <div class="card">
         <h3>${title}</h3>
-        ${r.stuck ? `<p style="color:var(--bad)"><strong>Payments don't cover the interest.</strong> Increase minimums or the extra amount.</p>` : `
+        ${r.stuck ? `<p style="color:var(--bad)"><strong>Not paid off within 50 years.</strong> Review the rates, minimums, and extra payment.</p>` : `
         <div class="stats" style="grid-template-columns:1fr 1fr">
           <div class="stat hero"><div class="label">Debt-free in</div><div class="value">${fmtMonths(r.months)}</div></div>
           <div class="stat"><div class="label">Total interest</div><div class="value">${FG.money(r.interest)}</div></div>
         </div>
-        <p class="small muted">Debt-free by <strong>${freeDate(r.months)}</strong>. Payoff order: ${r.order.join(" → ")}</p>`}
+        <p class="small muted">Estimated debt-free by <strong>${freeDate(r.months)}</strong>. Payoff order: ${r.order.map(esc).join(" → ")}</p>`}
         <p class="small muted" style="margin:0">${note}</p>
       </div>`;
-    const saved = minOnly.stuck ? null : minOnly.interest - av.interest;
+    const saved = minOnly.stuck || av.stuck ? null : minOnly.interest - av.interest;
     $("d-results").innerHTML =
       card("🏔️ Avalanche (highest APR first)", av, "Mathematically cheapest.") +
       card("⛄ Snowball (smallest balance first)", sn, "Fastest early wins for motivation.") +

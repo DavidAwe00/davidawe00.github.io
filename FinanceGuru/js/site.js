@@ -104,11 +104,20 @@ const FG = (() => {
 
   function initSignup() {
     document.querySelectorAll("form[data-signup]").forEach((form) => {
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        // TODO: connect to an email provider (ConvertKit, Beehiiv, Mailchimp) — see README.
-        form.reset();
-        toast("You're on the list! 🎉");
+        const button = form.querySelector('button[type="submit"]');
+        let status = form.querySelector('[data-signup-status]');
+        if (!status) { status = document.createElement('p'); status.dataset.signupStatus = ''; status.setAttribute('role', 'status'); form.append(status); }
+        button.disabled = true; status.textContent = 'Saving…';
+        try {
+          const response = await fetch('/api/newsletter', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: form.querySelector('input[type="email"]').value, consent: form.querySelector('[data-email-consent]')?.checked === true }), signal: AbortSignal.timeout(15000) });
+          const data = await response.json().catch(() => ({ error: 'Email signup is not available on this site yet. Please check back soon.' }));
+          if (!response.ok) throw new Error(data.error);
+          status.textContent = data.message; form.reset();
+        } catch (error) { status.textContent = error.message || 'Could not save your email. Please try again later.'; }
+        finally { button.disabled = false; }
       });
     });
   }
