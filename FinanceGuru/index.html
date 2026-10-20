@@ -92,10 +92,9 @@
 
     <section>
       <div class="container">
-        <div class="section-head">
-          <h2>Deep dives, powered by real data</h2>
-          <p class="muted">Interactive hubs built on 98 years of market returns and official salary statistics.</p>
-        </div>
+        <details class="section-drop" data-section="hubs">
+          <summary><span class="section-icon" aria-hidden="true">🧭</span><span class="section-text"><h2>Deep dives, powered by real data</h2><span class="muted">Interactive hubs built on 98 years of market returns and official salary statistics.</span></span><span class="section-count">5 hubs</span></summary>
+          <div class="section-body">
         <div class="grid hub-grid">
           <a class="card hub-card" href="invest.html">
             <div class="card-icon">📈</div><h3>Investing Hub</h3>
@@ -123,14 +122,18 @@
             <span class="hub-link">Rent or buy? →</span>
           </a>
         </div>
+          </div>
+        </details>
       </div>
     </section>
 
     <section>
       <div class="container">
+        <details class="section-drop" data-section="path" open>
+          <summary><span class="section-icon" aria-hidden="true">📚</span><span class="section-text"><h2>Your learning path</h2><span class="muted">Short lessons from budgeting to investing to college. Earn XP for every quiz.</span></span><span class="section-count"><span id="path-count">5 units</span></span></summary>
+          <div class="section-body">
         <div class="section-head">
-          <h2>Your learning path</h2>
-          <p class="muted">Short lessons that cover the foundations of personal finance, from budgeting to investing to college. Earn XP for every quiz. <a href="learn.html?lang=es" lang="es">También en español →</a></p>
+          <p class="muted" style="margin-top:0"><a href="learn.html?lang=es" lang="es">También en español →</a></p>
           <div class="progress" aria-label="Course progress"><span id="home-progress" style="width:0%"></span></div>
           <p class="small muted units-bar" style="margin-top:6px"><span id="home-progress-label"></span><button type="button" class="link-btn" id="units-toggle">Show all lessons</button></p>
         </div>
@@ -159,37 +162,53 @@
 <div class="grid"><a class="card" href="lessons/college-roi.html"><div class="card-icon">🎓</div><h3>18. Is College Worth It?</h3><p class="muted small">Think about a degree like an investment: cost, payoff, and alternatives.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a>
 <a class="card" href="lessons/rent-vs-buy.html"><div class="card-icon">🏡</div><h3>19. Renting vs Buying a Home</h3><p class="muted small">Mortgages, equity, and the hidden costs of owning.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
 <a class="card" href="lessons/car-buying.html"><div class="card-icon">🚗</div><h3>20. Buying Your First Car</h3><p class="muted small">The real cost of a car, new vs used, and how to not get burned on the loan.</p><div class="card-meta"><span>5 min</span><span class="badge">Start learning</span></div></a></div></details></div><!-- lesson-grid-end -->
+          </div>
+        </details>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <div class="section-head">
-          <h2>Play your way to smarter money</h2>
-          <p class="muted">Games that teach real lessons. Beat your high score, earn XP.</p>
-        </div>
+        <details class="section-drop" data-section="games">
+          <summary><span class="section-icon" aria-hidden="true">🎮</span><span class="section-text"><h2>Play your way to smarter money</h2><span class="muted">Games that teach real lessons. Beat your high score, earn XP.</span></span><span class="section-count">12 games</span></summary>
+          <div class="section-body">
         <div class="grid">
           <a class="card game-card" href="play.html#catcher"><div class="card-icon">🐷</div><h3>Piggy Bank Catcher <span class="badge">3D</span></h3><p class="muted small">Catch coins, dodge impulse buys.</p></a>
           <a class="card game-card" href="play.html#sorter"><div class="card-icon">⚡</div><h3>Needs vs Wants</h3><p class="muted small">Sort as fast as you can in 30 seconds.</p></a>
           <a class="card game-card" href="play.html#life"><div class="card-icon">📅</div><h3>Payday: Life Sim</h3><p class="muted small">Survive 12 months of bills, surprises, and temptations.</p></a>
           <a class="card game-card" href="play.html#market"><div class="card-icon">🎢</div><h3>Market Rollercoaster</h3><p class="muted small">20 years of crashes. Will you panic-sell?</p></a>
+          <a class="card game-card" href="play.html#salary"><div class="card-icon">💼</div><h3>Salary Showdown</h3><p class="muted small">Higher or lower: which job pays more?</p></a>
+          <a class="card game-card" href="play.html#prices"><div class="card-icon">🛒</div><h3>Price Time Machine</h3><p class="muted small">Guess today’s price from the past one.</p></a>
+          <a class="card game-card" href="play.html#credit"><div class="card-icon">📊</div><h3>Credit Score Quest</h3><p class="muted small">A year of credit choices. Can you reach “Very good”?</p></a>
+          <a class="card game-card" href="play.html#envelope"><div class="card-icon">✉️</div><h3>Envelope Budget</h3><p class="muted small">Sort every expense into needs, wants, or savings.</p></a>
+          <a class="card game-card" href="play.html#scam"><div class="card-icon">🎣</div><h3>Spot the Scam</h3><p class="muted small">Real-looking texts and emails. Scam or legit?</p></a>
+          <a class="card game-card" href="play.html#fees"><div class="card-icon">🔎</div><h3>Fee Hunter</h3><p class="muted small">Find every bank fee hiding on a statement.</p></a>
+          <a class="card game-card" href="play.html#plans"><div class="card-icon">☂️</div><h3>Plan Picker</h3><p class="muted small">Low or high deductible? Pick the cheaper health plan.</p></a>
+          <a class="card game-card" href="play.html#betting"><div class="card-icon">🎲</div><h3>Beat the Book</h3><p class="muted small">Bet or skip, then watch 10,000 players try it.</p></a>
         </div>
+          </div>
+        </details>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <div class="section-head">
-          <h2>Free money tools</h2>
-          <p class="muted">Run the numbers on your own life.</p>
-        </div>
+        <details class="section-drop" data-section="tools">
+          <summary><span class="section-icon" aria-hidden="true">🧮</span><span class="section-text"><h2>Free money tools</h2><span class="muted">Run the numbers on your own life. Nothing you type leaves your browser.</span></span><span class="section-count">17 tools</span></summary>
+          <div class="section-body">
         <div class="grid">
-          <a class="card" href="tools.html#compound"><div class="card-icon">📈</div><h3>Compound Growth</h3><p class="muted small">See how your savings snowball over time.</p></a>
           <a class="card" href="tools.html#budget"><div class="card-icon">🧾</div><h3>Budget Planner</h3><p class="muted small">Split your paycheck with the 50/30/20 rule.</p></a>
-          <a class="card" href="tools.html#debt"><div class="card-icon">⛓️</div><h3>Debt Payoff</h3><p class="muted small">Avalanche vs. snowball — find your debt-free date.</p></a>
           <a class="card" href="tools.html#emergency"><div class="card-icon">🛟</div><h3>Emergency Fund</h3><p class="muted small">How big should your safety net be?</p></a>
+          <a class="card" href="tools.html#goals"><div class="card-icon">🎯</div><h3>Savings Goals</h3><p class="muted small">The monthly amount for every goal.</p></a>
+          <a class="card" href="tools.html#offer"><div class="card-icon">💼</div><h3>Job Offer Comparison</h3><p class="muted small">Take-home pay, 401(k) match, and commute.</p></a>
+          <a class="card" href="tools.html#apartment"><div class="card-icon">🏠</div><h3>First Apartment Budget</h3><p class="muted small">Rent you can afford and move-in costs.</p></a>
+          <a class="card" href="tools.html#debt"><div class="card-icon">⛓️</div><h3>Debt Payoff</h3><p class="muted small">Avalanche vs. snowball: find your debt-free date.</p></a>
+          <a class="card" href="tools.html#car"><div class="card-icon">🚗</div><h3>Car Cost</h3><p class="muted small">Loan payment and the all-in monthly cost.</p></a>
+          <a class="card" href="tools.html#compound"><div class="card-icon">📈</div><h3>Compound Growth</h3><p class="muted small">See how your savings snowball over time.</p></a>
         </div>
-        <p style="margin-top:12px"><a href="tools.html#offer">Compare job offers</a> · <a href="tools.html#goals">Plan savings goals</a> · <a href="tools.html#apartment">Budget a first apartment</a> · <a href="tools.html">See all 17 tools →</a></p>
+        <p style="margin-top:12px"><a href="tools.html">See all 17 tools →</a></p>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -271,8 +290,23 @@
       grid.addEventListener("toggle", sync, true);
       sync();
       const count = LESSONS.filter((l) => p.done[l.id]).length;
+      document.getElementById("path-count").textContent = count ? `${count}/${LESSONS.length} done` : `${LESSONS.length} lessons`;
       document.getElementById("home-progress").style.width = (count / LESSONS.length) * 100 + "%";
       document.getElementById("home-progress-label").textContent = `${count} of ${LESSONS.length} lessons complete`;
+    })();
+
+    // Section dropdowns: remember which ones this visitor opened or closed (per-browser convenience).
+    (function () {
+      const KEY = "fg-home-sections";
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch {}
+      document.querySelectorAll("details.section-drop").forEach((d) => {
+        if (d.dataset.section in saved) d.open = saved[d.dataset.section];
+        d.addEventListener("toggle", () => {
+          saved[d.dataset.section] = d.open;
+          try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch {}
+        });
+      });
     })();
 
     // Hero mini-calculator

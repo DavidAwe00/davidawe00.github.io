@@ -575,6 +575,30 @@ table tr.total td { font-weight: 700; border-top: 2px solid var(--border); }
 .car-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .9rem; }
 .car-terms tr.current td { background: var(--brand-soft); font-weight: 600; }
 
+/* Homepage sections: each list section is a dropdown (open state remembered per visitor) */
+.section-drop { border: 1px solid var(--border); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+.section-drop > summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 18px;
+}
+.section-drop > summary::-webkit-details-marker { display: none; }
+.section-drop > summary::after { content: "▾"; font-size: 1.2rem; color: var(--text-2); transition: transform .15s; }
+.section-drop[open] > summary::after { transform: rotate(180deg); }
+.section-drop > summary:hover { background: var(--surface-2); }
+.section-drop[open] > summary { border-bottom: 1px solid var(--border); border-radius: 18px 18px 0 0; }
+.section-icon { font-size: 2rem; line-height: 1; }
+.section-text { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.section-text h2 { margin: 0; font-size: clamp(1.3rem, 3vw, 1.7rem); }
+.section-count { font-size: .85rem; font-weight: 600; color: var(--brand); background: var(--brand-soft); padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+.section-body { padding: 20px 24px 24px; }
+.section-body > .section-head { margin-bottom: 16px; }
+main > section:has(> .container > .section-drop) { padding-top: 12px; padding-bottom: 12px; }
+@media (max-width: 560px) {
+  .section-drop > summary { padding: 16px; gap: 12px; align-items: flex-start; }
+  .section-text > .muted { font-size: .9rem; }
+  .section-count { display: none; }
+  .section-body { padding: 16px; }
+}
+
 /* Homepage learning path: collapsible units */
 .units { display: grid; gap: 12px; }
 .unit { border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
