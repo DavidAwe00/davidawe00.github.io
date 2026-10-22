@@ -217,6 +217,9 @@
       ? "You're fully funded. Next step: invest additional savings for long-term growth."
       : saved < 1000 ? "Tip: hit a <strong>$1,000 starter fund</strong> first, then build toward the full target."
       : "Keep it in a high-yield savings account so it earns interest while it waits.";
+    const months = Math.min(120, Math.max(1, monthly > 0 ? Math.ceil(gap / monthly) : 12));
+    $("e-plan").hidden = gap === 0;
+    $("e-plan").href = `plan.html?goal=buffer&target=${target}&saved=${saved}&months=${months}`;
   }
   ["e-expenses", "e-months", "e-saved", "e-monthly"].forEach((id) => $(id).addEventListener("input", emergency));
 

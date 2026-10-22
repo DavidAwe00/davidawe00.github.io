@@ -5,6 +5,7 @@
   const LEVELS = [[0, "Rookie"], [100, "Saver"], [250, "Budgeter"], [500, "Planner"], [1000, "Investor"], [2000, "Wealth Builder"], [4000, "Money Guru"]];
 
   function badges(p, d) {
+    const c = Checkup.state(), cap = Capstone.state();
     const done = Object.values(p.done);
     const played = GAMES.filter((g) => FG.getBest(g) > 0).length;
     const best = (g) => FG.getBest(g);
@@ -12,6 +13,11 @@
       ["👣", "First Steps", "Finish your first lesson", done.length >= 1],
       ["📚", "Halfway There", `Finish ${Math.ceil(LESSONS.length / 2)} lessons`, done.length >= Math.ceil(LESSONS.length / 2)],
       ["🎓", "Scholar", `Finish all ${LESSONS.length} lessons`, done.length >= LESSONS.length],
+      ...UNITS.map((u, n) => [u.icon, `Unit ${n + 1}: ${u.title}`, `Finish all ${u.lessons.length} lessons in Unit ${n + 1}`, u.lessons.every((id) => p.done[id])]),
+      ["🩺", "Check-up", "Take the Money Check-up", !!c.pre],
+      ["🌱", "Growth Spurt", "Beat your \"before\" score on the Money Check-up", !!(c.pre && c.post && Checkup.scoreOf(c.post.answers) > Checkup.scoreOf(c.pre.answers))],
+      ["🎓", "First Year", "Finish the capstone", cap.runs.length >= 1],
+      ["🏅", "Five for Five", "Get all 5 units in the green in the capstone", cap.best >= 5],
       ["💯", "Perfect Score", "Ace any lesson quiz", done.some((x) => x.score === x.total)],
       ["📅", "Daily Habit", "Answer a daily challenge", d.total >= 1],
       ["🔥", "On Fire", "Reach a 3-day streak", d.best >= 3],
@@ -51,6 +57,15 @@
     const left = LESSONS.length - done;
     $("cert-status").textContent = left ? `Finish ${left} more lesson${left > 1 ? "s" : ""} to unlock it.` : "Unlocked — print it or share it!";
     $("cert-link").textContent = left ? "Preview →" : "Get your certificate →";
+    const c = Checkup.state(), n = Checkup.QUESTIONS.length;
+    $("checkup-status").textContent = c.post ? `Before ${Checkup.scoreOf(c.pre.answers)}/${n} → after ${Checkup.scoreOf(c.post.answers)}/${n}`
+      : c.pre ? `Before: ${Checkup.scoreOf(c.pre.answers)}/${n}. Take the "after" check-up when you finish the lessons.`
+      : "10 questions to take before the lessons and again after.";
+    $("checkup-link").textContent = c.post ? "See your results →" : c.pre ? "Take the \"after\" check-up →" : "Take the check-up →";
+    const cap = Capstone.state(), last = cap.runs.at(-1);
+    $("capstone-status").textContent = last ? `Best: ${cap.best}/5 units in the green · last net worth ${FG.money(Math.round(last.netWorth))}`
+      : "Seven decisions, one year on a $50,000 salary, and a report card for every unit.";
+    $("capstone-link").textContent = last ? "Play again →" : "Start the capstone →";
     const list = badges(p, d);
     const earned = list.filter((b) => b[3]).length;
     $("badge-count").textContent = `${earned} of ${list.length} earned`;

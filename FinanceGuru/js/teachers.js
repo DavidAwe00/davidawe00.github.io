@@ -1,4 +1,4 @@
-// Teachers & parents page: lesson plans, printable quizzes with answer keys, and family conversation guides.
+// Teachers & parents page: lesson plans, printable quizzes and worksheets with answer keys, and family conversation guides.
 (function () {
   const $ = (id) => document.getElementById(id);
   const LETTERS = "ABCD";
@@ -57,6 +57,7 @@
           <div class="hero-actions">
             <button class="btn btn-primary" data-print="plan">🖨 Print plan</button>
             <button class="btn btn-ghost" data-print="quiz">📝 Print quiz + answer key</button>
+            <button class="btn btn-ghost" data-print="worksheet">📄 Print student worksheet</button>
             <button class="btn btn-ghost" data-copy>🔗 Copy student link</button>
           </div>
         </div>
@@ -104,6 +105,7 @@
     const kind = e.target.closest("[data-print]")?.dataset.print;
     if (kind === "plan") printOnly(`<div class="print-sheet">${planHtml(l, PLANS[l.id], i)}</div>`);
     if (kind === "quiz") printOnly(quizHtml(l, i));
+    if (kind === "worksheet") printOnly(Worksheet.build(l, PLANS[l.id], i));
     if (e.target.closest("[data-copy]")) {
       try { await navigator.clipboard.writeText(studentLink(l.id)); FG.toast("Student link copied 🔗"); }
       catch { FG.toast(studentLink(l.id)); }
@@ -131,7 +133,7 @@
     history.replaceState(null, "", "#" + next);
   });
 
-  $("plan-count").textContent = Object.keys(PLANS).length;
+  $("plan-count").textContent = $("plan-count-lead").textContent = Object.keys(PLANS).length;
   renderChips(); renderPlans(); renderParents();
   const fromHash = () => setMode(location.hash === "#parents" ? "parents" : "teachers");
   addEventListener("hashchange", fromHash);

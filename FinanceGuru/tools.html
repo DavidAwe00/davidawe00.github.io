@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0e7a4e">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/tools.html">
 
@@ -44,6 +47,7 @@
         </details>
         <a href="play.html">Play</a>
         <a href="tools.html" aria-current="page">Tools</a>
+        <a href="plan.html" class="nav-plan">My plan <span aria-hidden="true">&#8599;</span></a>
       </div>
       <span class="xp-pill" data-xp>0 XP</span>
       <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
@@ -57,6 +61,10 @@
     <!-- Every tool is listed here once; js/tools.js reads the options, and each option needs a #panel-<value>. -->
     <div class="tool-picker-bar">
       <div class="field"><label for="tool-picker">Choose a tool</label><select class="select" id="tool-picker">
+        <optgroup label="Choose an account">
+          <option value="match" data-desc="Answer six questions to find the checking, savings, and first credit card that fit you.">🧭 Account Matchmaker</option>
+          <option value="compare" data-desc="Line up the real offers you found and see the yearly cost for how you'd use them.">⚖️ Offer Comparer</option>
+        </optgroup>
         <optgroup label="Save &amp; plan">
           <option value="budget" data-desc="Split your paycheck with the 50/30/20 rule.">🧾 Budget Planner</option>
           <option value="emergency" data-desc="How big your safety net should be, and how long to build it.">🛟 Emergency Fund</option>
@@ -66,6 +74,8 @@
           <option value="compound" data-desc="See how saving and investing snowball over time.">📈 Compound Growth</option>
         </optgroup>
         <optgroup label="Earn &amp; work">
+          <option value="firstjob" data-desc="Every step of starting a job: paperwork, benefits, and your first paycheck.">✅ First Job Checklist</option>
+          <option value="stub" data-desc="Decode your pay stub line by line, check the taxes, and send your take-home to your plan.">🔎 Pay Stub Reader</option>
           <option value="offer" data-desc="Compare two job offers on take-home pay and benefits.">💼 Job Offer Comparison</option>
           <option value="raise" data-desc="Did your raise beat inflation after taxes?">📈 Raise vs Inflation</option>
           <option value="col" data-desc="Compare pay and prices between two states.">🗺️ Cost of Living by State</option>
@@ -89,6 +99,45 @@
       </select></div>
       <p class="small muted" id="tool-desc" aria-live="polite"></p>
     </div>
+
+    <!-- Account matchmaker (rendered by js/tools/match.js) -->
+    <section id="panel-match" role="tabpanel" style="padding:0" hidden>
+      <div id="mm-root"></div>
+      <p class="small muted" style="margin-top:8px">FinanceGuru doesn't name, rank, or get paid by any bank or card. These are general account types, not advice for your situation. Savings rates: FDIC national rate and Bankrate (Sept 2026). Overdraft fee: Bankrate 2025. Card APR: Federal Reserve G.19 (Aug 2026). Under-21 card rule: Credit CARD Act of 2009.</p>
+    </section>
+
+    <!-- Offer comparer (js/tools/compare.js) -->
+    <section id="panel-compare" role="tabpanel" style="padding:0" hidden>
+      <div class="card">
+        <div class="chips" role="group" aria-label="What are you comparing?">
+          <button type="button" class="chip" data-mode="card" aria-pressed="true">💳 Credit cards</button>
+          <button type="button" class="chip" data-mode="savings" aria-pressed="false">🐷 Savings</button>
+          <button type="button" class="chip" data-mode="checking" aria-pressed="false">🏦 Checking</button>
+        </div>
+        <h3 style="margin:16px 0 4px">How you'd use it</h3>
+        <div class="tool cp-usage" style="padding:0">
+          <div class="field" data-mode-panel="card"><label for="cp-spend">You'd spend on the card each month</label><div class="input-wrap"><span>$</span><input id="cp-spend" type="number" min="0" value="200"></div></div>
+          <div class="field" data-mode-panel="card"><label for="cp-payfull">Pay the full balance every month?</label><select class="select" id="cp-payfull"><option value="yes">Yes</option><option value="no">No, I'd carry a balance</option></select></div>
+          <div class="field" data-mode-panel="card" id="cp-carry-field"><label for="cp-carry">Balance you'd usually carry</label><div class="input-wrap"><span>$</span><input id="cp-carry" type="number" min="0" value="800"></div></div>
+          <div class="field" data-mode-panel="savings" hidden><label for="cp-balance">Starting balance</label><div class="input-wrap"><span>$</span><input id="cp-balance" type="number" min="0" value="1000"></div></div>
+          <div class="field" data-mode-panel="savings" hidden><label for="cp-deposit">You'd add each month</label><div class="input-wrap"><span>$</span><input id="cp-deposit" type="number" min="0" value="100"></div></div>
+          <div class="field" data-mode-panel="checking" hidden><label for="cp-dd">Do you get paid by direct deposit?</label><select class="select" id="cp-dd"><option value="yes">Yes</option><option value="no">No</option></select></div>
+          <div class="field" data-mode-panel="checking" hidden><label for="cp-od">Overdrafts per year</label><div class="input-wrap"><input id="cp-od" type="number" min="0" value="2"><span>times</span></div><span class="hint">Overdrafts averaged $26.77 each in 2025 (Bankrate).</span></div>
+          <div class="field" data-mode-panel="checking" hidden><label for="cp-atm">Out-of-network ATM uses per month</label><div class="input-wrap"><input id="cp-atm" type="number" min="0" value="1"><span>times</span></div><span class="hint">Average total cost $4.86 per withdrawal, both fees combined (Bankrate 2025).</span></div>
+        </div>
+        <h3 style="margin:16px 0 4px">Offers you found</h3>
+        <p class="small muted" style="margin:0 0 8px">Replace the examples with real offers. Find the numbers in each account's fee schedule or the card's rates table.</p>
+        <div data-mode-panel="card"><div id="cp-list-card"></div><button class="btn btn-ghost" id="cp-add-card" type="button">+ Add an offer</button></div>
+        <div data-mode-panel="savings" hidden><div id="cp-list-savings"></div><button class="btn btn-ghost" id="cp-add-savings" type="button">+ Add an offer</button></div>
+        <div data-mode-panel="checking" hidden><div id="cp-list-checking"></div><button class="btn btn-ghost" id="cp-add-checking" type="button">+ Add an offer</button></div>
+        <button class="link-btn small" id="cp-reset" type="button" style="margin-top:10px">Reset to examples</button>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div id="cp-result" aria-live="polite"></div>
+        <p class="callout small" id="cp-insight" style="margin-bottom:0"></p>
+        <p class="small muted" style="margin:10px 0 0">What the numbers don't show: customer service, app quality, branch and ATM locations, and whether the account is FDIC or NCUA insured. Savings assumes monthly compounding and the APY staying the same all year. Card interest is the APR on your usual balance; rewards are a flat rate on all spending. Example offers are illustrative, not real products.</p>
+      </div>
+    </section>
 
     <!-- Compound growth -->
     <section class="tool" id="panel-compound" role="tabpanel" style="padding:0">
@@ -162,6 +211,7 @@
         <div class="progress" style="height:14px"><span id="e-bar"></span></div>
         <p class="small muted" id="e-pct" style="margin-top:6px"></p>
         <p class="muted" id="e-insight"></p>
+        <a class="btn btn-ghost" id="e-plan" href="plan.html">Make this my plan's savings goal →</a>
       </div>
     </section>
     <!-- Retirement check -->
@@ -264,6 +314,34 @@
           </details>
         </div>
       </div>
+    </section>
+
+    <!-- First job checklist (rendered by js/tools/firstjob.js) -->
+    <section id="panel-firstjob" role="tabpanel" style="padding:0" hidden>
+      <div class="card" id="fj-root"></div>
+      <p class="small muted" style="margin-top:8px">Sources: USCIS (Form I-9 timing), IRS (Form W-4), Bankrate 2025 average overdraft fee, Insurance Information Institute (renters insurance). Enrollment windows and benefits vary by employer; check your offer letter and HR portal.</p>
+    </section>
+
+    <!-- Pay stub reader (js/tools/stub.js) -->
+    <section id="panel-stub" role="tabpanel" style="padding:0" hidden>
+      <div class="tool">
+        <div class="card">
+          <p class="small muted" style="margin-top:0">Copy the "current" column from your pay stub. The example is a $50,000-a-year job paid every two weeks.</p>
+          <div class="field"><label for="ps-freq">How often you're paid</label><select class="select" id="ps-freq"><option value="biweekly">Every two weeks</option><option value="weekly">Every week</option><option value="semimonthly">Twice a month</option><option value="monthly">Once a month</option></select></div>
+          <div class="field"><label for="ps-status">Filing status (on your W-4)</label><select class="select" id="ps-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
+          <div class="field"><label for="ps-gross">Gross pay</label><div class="input-wrap"><span>$</span><input id="ps-gross" type="number" min="0" step="0.01" value="1923.08"></div></div>
+          <div class="field"><label for="ps-401k">401(k) or 403(b), pre-tax</label><div class="input-wrap"><span>$</span><input id="ps-401k" type="number" min="0" step="0.01" value="76.92"></div></div>
+          <div class="field"><label for="ps-health">Health, dental, vision</label><div class="input-wrap"><span>$</span><input id="ps-health" type="number" min="0" step="0.01" value="40.00"></div></div>
+          <div class="field"><label for="ps-fed">Federal income tax</label><div class="input-wrap"><span>$</span><input id="ps-fed" type="number" min="0" step="0.01" value="132.89"></div><span class="hint">May say "FITW" or "Fed W/H".</span></div>
+          <div class="field"><label for="ps-ss">Social Security</label><div class="input-wrap"><span>$</span><input id="ps-ss" type="number" min="0" step="0.01" value="116.75"></div><span class="hint">May say "OASDI" or "FICA-SS".</span></div>
+          <div class="field"><label for="ps-med">Medicare</label><div class="input-wrap"><span>$</span><input id="ps-med" type="number" min="0" step="0.01" value="27.30"></div><span class="hint">May say "FICA-Med" or "MED".</span></div>
+          <div class="field"><label for="ps-state">State and local tax</label><div class="input-wrap"><span>$</span><input id="ps-state" type="number" min="0" step="0.01" value="72.25"></div></div>
+          <div class="field"><label for="ps-other">Other deductions</label><div class="input-wrap"><span>$</span><input id="ps-other" type="number" min="0" step="0.01" value="0"></div></div>
+          <div class="field"><label for="ps-net">Net pay (optional, to check the math)</label><div class="input-wrap"><span>$</span><input id="ps-net" type="number" min="0" step="0.01" value="1456.97"></div></div>
+        </div>
+        <div class="card" id="ps-result" aria-live="polite"></div>
+      </div>
+      <p class="small muted" style="margin-top:8px">Checks use 2026 rates: Social Security 6.2% up to a $184,500 wage base and Medicare 1.45% (SSA, IRS). Pre-tax health premiums under a cafeteria plan are exempt from both; 401(k) contributions are not. The federal check annualizes this paycheck with 2026 brackets and the standard deduction. Real withholding follows IRS Publication 15-T and your W-4, so treat a flag as a reason to ask payroll, not proof of an error. Nothing you type leaves your browser.</p>
     </section>
 
     <!-- Job offer comparison -->
@@ -497,7 +575,7 @@
   <footer class="site-footer">
     <div class="container">
       <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
-      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
@@ -513,6 +591,8 @@
   <script src="js/data/rpp.js"></script>
   <script src="js/data/statepay.js"></script>
   <script src="js/tools/kit.js"></script>
+  <script src="js/tools/firstjob.js"></script>
+  <script src="js/tools/stub.js"></script>
   <script src="js/tools/offer.js"></script>
   <script src="js/tools/raise.js"></script>
   <script src="js/tools/col.js"></script>
@@ -523,5 +603,7 @@
   <script src="js/tools/goals.js"></script>
   <script src="js/tools/subs.js"></script>
   <script src="js/tools/networth.js"></script>
+  <script src="js/tools/match.js"></script>
+  <script src="js/tools/compare.js"></script>
 </body>
 </html>

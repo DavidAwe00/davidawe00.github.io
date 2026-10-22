@@ -102,8 +102,20 @@ const FG = (() => {
     });
   }
 
-  function initSignup() {
-    document.querySelectorAll("form[data-signup]").forEach((form) => {
+  // The interest form stays hidden unless the app server says email signup is enabled. On the static
+  // site (GitHub Pages) there is no server, so visitors only see the free-planner link.
+  async function initSignup() {
+    const forms = document.querySelectorAll("form[data-signup]");
+    if (!forms.length) return;
+    let enabled = false;
+    try {
+      const r = await fetch("/api/config", { signal: AbortSignal.timeout(5000) });
+      enabled = r.ok && (await r.json()).newsletter === true;
+    } catch { /* no app server: keep the form hidden */ }
+    if (!enabled) return;
+    document.querySelectorAll("[data-signup-off]").forEach((el) => (el.hidden = true));
+    forms.forEach((form) => {
+      form.hidden = false;
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const button = form.querySelector('button[type="submit"]');
@@ -169,4 +181,12 @@ const FG = (() => {
   const scrollTo = (el, block = "start") => el && el.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block });
 
   return { getProgress, completeLesson, addXp, recordBest, getBest, money, compact, toast, reducedMotion, scrollTo };
+})();
+
+// Offline support: register sw.js from the site root (found relative to this script, so lesson pages and
+// subfolder hosting work). Network-first, so it never serves stale pages to online visitors.
+(() => {
+  const src = document.currentScript && document.currentScript.src;
+  if (!src || !("serviceWorker" in navigator) || !/^https?:$/.test(location.protocol)) return;
+  addEventListener("load", () => { navigator.serviceWorker.register(new URL("../sw.js", src)).catch(() => {}); });
 })();

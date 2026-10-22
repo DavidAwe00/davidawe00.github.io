@@ -7,7 +7,11 @@
   <title>First Paycheck Plan — FinanceGuru</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/plan.css">
+  <link rel="stylesheet" href="css/workspace.css">
   <script src="js/plan-theme.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0e7a4e">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/plan.html">
 
@@ -23,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- publishing-meta:end -->
 </head>
-<body>
+<body class="planner-page">
   <a class="skip-link" href="#main">Skip to your plan</a>
   <header class="site-header"><nav class="container nav" aria-label="Main navigation">
     <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
@@ -31,16 +35,17 @@
     <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
   </nav></header>
   <main class="container planner" id="main">
-    <div class="planner-intro"><div><span class="eyebrow">Your first paycheck, with a plan</span><h1>Make room for what’s next.</h1><p class="lead">Cover your bills. Pick a goal. Know what to do on payday.</p></div><div class="planner-tag">Free planner<br><span>Save on this device</span></div></div>
+    <div class="planner-intro"><div><span class="eyebrow">FIRST PAYCHECK / YOUR WORKSPACE</span><h1>A little clarity.<br><em>A plan to move forward.</em></h1><p class="lead">Your bills, your goals, and a clearer picture of payday.</p></div><div class="planner-tag"><span class="status-dot" aria-hidden="true"></span> Your free workspace<span class="planner-tag-note">Start here. Build at your pace.</span></div></div>
     <p id="notice" class="planner-notice" role="status" aria-live="polite"></p>
+    <nav id="workspace-nav" class="workspace-nav" aria-label="Your plan sections" hidden><a href="#overview" aria-current="location">Overview</a><a href="#scenarios">What if?</a><a href="#guidance">AI guidance</a><a href="#review">Weekly check-in</a><a href="#roadmap">Your first month</a></nav>
     <div class="planner-layout">
       <div>
         <section class="card onboarding" id="onboarding" aria-labelledby="onboarding-title">
-          <div class="planner-heading"><h2 id="onboarding-title">Let’s start with your numbers.</h2><button type="button" class="btn btn-ghost small" id="example">Try an example</button></div>
+          <div class="planner-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2 id="onboarding-title">Start with the essentials.</h2></div><button type="button" class="btn btn-ghost small" id="example">Try an example <span aria-hidden="true">↗</span></button></div>
           <p class="small muted" id="example-note" hidden>Example figures are loaded. Replace them with your own before using the plan.</p>
-          <ol class="planner-steps" aria-label="Plan setup"><li aria-current="step">1. Paycheck</li><li>2. Monthly costs</li><li>3. Your goal</li></ol>
+          <ol class="planner-steps" aria-label="Plan setup"><li aria-current="step"><span class="step-number" aria-hidden="true">01</span><span>Paycheck</span></li><li><span class="step-number" aria-hidden="true">02</span><span>Monthly costs</span></li><li><span class="step-number" aria-hidden="true">03</span><span>Your goal</span></li></ol>
           <form id="plan-form">
-            <fieldset data-step="0"><legend>What comes into your account?</legend><p class="muted small">Use take-home pay after taxes and payroll deductions. All amounts are in US dollars.</p>
+            <fieldset data-step="0"><legend>What comes into your account?</legend><p class="muted small">Use take-home pay after taxes and payroll deductions. All amounts are in US dollars. Have a pay stub? <a href="tools.html#stub">Read it line by line</a> and send the take-home here.</p>
               <label for="take-home">Take-home pay per paycheck</label><div class="money-field"><span aria-hidden="true">$</span><input id="take-home" name="takeHome" type="number" inputmode="decimal" min="0.01" max="1000000" step="0.01" required placeholder="e.g. 1800"></div>
               <label for="frequency">How often are you paid?</label><select id="frequency" class="select"><option value="biweekly">Every two weeks</option><option value="weekly">Every week</option><option value="semimonthly">Twice a month</option><option value="monthly">Once a month</option></select>
               <p class="small muted">We’ll plan recurring bills around a conservative month. Extra-paycheck months can give you room to catch up or save.</p>
@@ -67,25 +72,26 @@
           </form>
         </section>
         <div id="dashboard" hidden>
-          <section class="card" aria-labelledby="plan-title"><div class="planner-heading"><div><span class="eyebrow">Your starting point</span><h2 id="plan-title" tabindex="-1">A job for every paycheck.</h2></div><button class="btn btn-ghost" id="edit">Edit numbers</button></div>
-            <div id="summary"></div><div id="allocation"></div><div id="actions"></div>
+          <section class="card workspace-panel overview-panel" id="overview" aria-labelledby="plan-title"><div class="planner-heading"><div><span class="eyebrow">YOUR MONEY AT A GLANCE</span><h2 id="plan-title" tabindex="-1">A job for every paycheck.</h2></div><button class="btn btn-ghost" id="edit">Edit numbers</button></div>
+            <div id="summary"></div><div id="allocation"></div><div id="goal-progress"></div><div id="actions"></div>
             <div class="planner-heading"><button class="btn btn-primary" id="save-local">Save on this device</button><button class="btn btn-ghost" id="export">Download my plan</button></div><p id="save-status" class="small muted" role="status"></p>
             <details class="plan-assumptions"><summary>How these figures work</summary><ul id="assumptions"></ul></details>
           </section>
-          <section class="card" aria-labelledby="scenario-title"><h2 id="scenario-title">See what could change.</h2><p class="muted">Try a different monthly housing cost or level of flexible spending. Your saved plan stays as it is until you apply the scenario.</p>
+          <section class="card workspace-panel" id="scenarios" aria-labelledby="scenario-title"><span class="eyebrow">EXPLORE THE POSSIBILITIES</span><h2 id="scenario-title">What if you made a little room?</h2><p class="muted">Compare a different housing cost or amount for extras. Apply it when it feels right.</p>
             <form id="scenario-form"><div class="planner-fields"><div><label for="scenario-housing">Monthly housing</label><input id="scenario-housing" type="number" min="0" max="1000000" step="0.01" required></div><div><label for="scenario-wants">Monthly extras</label><input id="scenario-wants" type="number" min="0" max="1000000" step="0.01" required></div></div><button class="btn btn-ghost">Compare this scenario</button></form><div id="scenario-result" aria-live="polite"></div><button class="btn btn-primary" id="apply-scenario" hidden>Use these amounts</button>
           </section>
-          <section class="card" aria-labelledby="coach-title"><span class="eyebrow">Make sense of your plan</span><h2 id="coach-title">A little guidance for your next step.</h2><p id="coach-availability" class="muted">Your calculated plan is ready. Checking whether coaching is available…</p>
+          <section class="card workspace-panel guidance-panel" id="guidance" aria-labelledby="coach-title"><span class="eyebrow">A LITTLE PERSPECTIVE</span><h2 id="coach-title">Make sense of your next step.</h2><p id="coach-availability" class="muted">Your calculated plan is ready. Checking whether coaching is available…</p>
             <form id="coach-form" hidden><label for="coach-question">What would you like help understanding?</label><textarea id="coach-question" maxlength="600" rows="3" placeholder="e.g. How should I think about this savings timeline?"></textarea><label class="check-label"><input type="checkbox" id="ai-consent" required><span>Send my plan figures, recent check-ins, and question to the AI provider for an explanation. I’ll leave identifying details out of my question. <a href="privacy.html">Data details</a></span></label><button class="btn btn-primary" id="ask-coach">Explain my plan</button></form>
             <div id="coach-result" aria-live="polite"></div>
           </section>
-          <section class="card" aria-labelledby="checkin-title"><span class="eyebrow">Small steps, week by week</span><h2 id="checkin-title">Your weekly check-in.</h2><p class="muted">Record the last seven days. Include bills and debt minimums in spending. Goal contributions are savings transfers or extra debt payments.</p>
-            <form id="checkin-form"><label for="week-ending">Week ending</label><input id="week-ending" type="date" required><div class="planner-fields"><div><label for="actual-spending">Spent over the last week</label><input id="actual-spending" type="number" min="0" max="1000000" step="0.01" required></div><div><label for="actual-saved">Put toward your goal</label><input id="actual-saved" type="number" min="0" max="1000000" step="0.01" required></div></div><fieldset><legend>Actions you completed</legend><div id="completed-actions"></div></fieldset><button class="btn btn-primary">Save my check-in</button></form><div id="checkin-history" aria-live="polite"></div>
+          <section class="card workspace-panel" id="review" aria-labelledby="checkin-title"><span class="eyebrow">PROGRESS, AT YOUR PACE</span><h2 id="checkin-title">A moment to check in.</h2><p class="muted">Record the last seven days. Include bills and debt minimums in spending. Goal contributions are savings transfers or extra debt payments.</p>
+            <form id="checkin-form"><label for="week-ending">Week ending</label><input id="week-ending" type="date" required><div class="planner-fields"><div><label for="actual-spending">Spent over the last week</label><input id="actual-spending" type="number" min="0" max="1000000" step="0.01" required></div><div><label for="actual-saved">Put toward your goal</label><input id="actual-saved" type="number" min="0" max="1000000" step="0.01" required></div></div><fieldset><legend>Actions you completed</legend><div id="completed-actions"></div></fieldset><button class="btn btn-primary">Save my check-in</button></form><div id="checkin-history" aria-live="polite"></div><p class="small muted reminder-row"><button type="button" class="btn btn-ghost small" id="reminder">📅 Add a weekly reminder to my calendar</button> A calendar file for this day each week at 6 pm. It holds no plan figures.</p>
           </section>
-          <section class="card" aria-labelledby="program-title"><h2 id="program-title">Your first 30 days.</h2><p class="muted">A simple path through the first month. Your calculator, action list, and check-ins are always free.</p><ol class="program-weeks"><li><strong>Week 1 · Get clear.</strong> Build your plan, check bill dates, and review Budgeting Basics.</li><li><strong>Week 2 · Make room.</strong> Compare a spending scenario and choose one adjustment.</li><li><strong>Week 3 · Build momentum.</strong> Review your savings or debt goal and log a check-in.</li><li><strong>Week 4 · Keep what works.</strong> Review your recorded actions and update next month’s plan.</li></ol><div id="progress-summary"></div></section>
+          <section class="card workspace-panel" id="roadmap" aria-labelledby="program-title"><span class="eyebrow">ONE MONTH, SMALL STEPS</span><h2 id="program-title">Your first 30 days.</h2><p class="muted">A simple path through the first month. Your calculator, action list, and check-ins are always free.</p><ol class="program-weeks"><li><strong>Week 1 · Get clear.</strong> Build your plan, check bill dates, and review Budgeting Basics.</li><li><strong>Week 2 · Make room.</strong> Compare a spending scenario and choose one adjustment.</li><li><strong>Week 3 · Build momentum.</strong> Review your savings or debt goal and log a check-in.</li><li><strong>Week 4 · Keep what works.</strong> Review your recorded actions and update next month’s plan.</li></ol><div id="progress-summary"></div></section>
         </div>
       </div>
       <aside class="planner-sidebar">
+        <section class="card setup-guide" id="setup-guide"><span class="eyebrow">THE PLAN IS SIMPLE</span><h2>A starting point.<br>Built around you.</h2><ol><li><span>01</span><div><strong>Bring your numbers.</strong><p>Your take-home pay, usual bills, and a goal that matters.</p></div></li><li><span>02</span><div><strong>See the whole picture.</strong><p>Understand what’s committed and where you have room.</p></div></li><li><span>03</span><div><strong>Take one next step.</strong><p>Save your plan and come back for a weekly check-in.</p></div></li></ol><p class="setup-footnote">No bank connection needed. You decide what to save.</p></section>
         <section class="card"><span class="eyebrow">Pick up where you left off</span><h2>Your plan, your pace.</h2><p class="small muted">Saving on this device works without an account. Anyone using this browser can see a saved plan.</p><p id="account-status" role="status">Checking account availability…</p>
           <form id="auth-form" hidden><label for="auth-email">Email</label><input id="auth-email" type="email" autocomplete="email" required maxlength="254"><label for="auth-password">Password</label><input id="auth-password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required><p class="small muted">Use at least 12 characters.</p><label class="check-label"><input type="checkbox" id="adult-consent"><span>I’m 18 or older and agree to the <a href="privacy.html">privacy terms</a> for creating an account.</span></label><div class="auth-buttons"><button class="btn btn-primary" type="submit">Sign in</button><button class="btn btn-ghost" type="button" id="signup">Create account</button></div></form>
           <div id="cloud-controls" hidden><p class="small muted">Choose when to sync. Loading a cloud plan replaces the plan currently shown on this device.</p><div class="cloud-buttons"><button class="btn btn-primary" id="save-cloud">Save to my account</button><button class="btn btn-ghost" id="load-cloud">Load my account plan</button><button class="btn btn-ghost" id="logout">Sign out</button></div></div>
@@ -95,7 +101,7 @@
       </aside>
     </div>
   </main>
-  <footer class="site-footer"><div class="container"><span>FinanceGuru · Educational planning, not financial advice.</span><a href="privacy.html">Privacy &amp; data</a></div></footer>
+  <footer class="site-footer"><div class="container"><span>FinanceGuru · Educational planning, not financial advice.</span><span><a href="privacy.html">Privacy &amp; data</a> · <a href="terms.html">Terms</a></span></div></footer>
   <script src="js/site.js"></script><script src="js/finance.js"></script><script src="js/plan.js"></script>
 </body>
 </html>

@@ -10,7 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0e7a4e">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/">
 
@@ -26,7 +30,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- publishing-meta:end -->
 </head>
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <nav class="container nav">
       <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
@@ -44,46 +49,54 @@
         </details>
         <a href="play.html">Play</a>
         <a href="tools.html">Tools</a>
+        <a href="plan.html" class="nav-plan">My plan <span aria-hidden="true">&#8599;</span></a>
       </div>
       <span class="xp-pill" data-xp>0 XP</span>
       <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">Free money lessons</span>
-          <h1>Master your money in 5 minutes a day.</h1>
-          <p class="lead">Bite-sized lessons, practical calculators, and a plan for your first paycheck. Build the money skills school never taught you.</p>
+          <span class="eyebrow">A little clarity. A lot more possibility.</span>
+          <h1>Your money.<br>A clearer <em>next step.</em></h1>
+          <p class="lead">Turn your paycheck into a plan. Build the skills to save, spend, and move forward with more confidence.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="learn.html">Start learning →</a>
-            <a class="btn btn-ghost" href="plan.html">Build my paycheck plan</a>
+            <a class="btn btn-primary" href="plan.html">Build my free plan <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" href="learn.html">Explore the lessons</a>
           </div>
+          <ul class="hero-proof" aria-label="Why FinanceGuru">
+            <li>Free planner. No account needed.</li>
+            <li><span><span id="proof-lessons">20</span> lessons in English &amp; Spanish</span></li>
+            <li>Real, cited data</li>
+          </ul>
         </div>
         <div class="hero-card" id="hero-demo">
-          <div class="small muted">If you invest <strong id="demo-amt">$300</strong>/month at 8% for <strong id="demo-yrs">30</strong> years…</div>
+          <div class="growth-heading"><span class="growth-icon" aria-hidden="true">↗</span><div><span class="growth-kicker">THE BIGGER PICTURE</span><h2>Small habits. Room to grow.</h2></div><span class="growth-live">Interactive</span></div>
+          <div class="growth-label">Illustrative future balance</div>
           <div class="hero-number" id="demo-result">$447,108</div>
-          <div class="small muted" style="margin-bottom:12px">…you'd put in <span id="demo-in">$108,000</span>. Compounding does the rest.</div>
-          <div class="scene3d" id="hero-3d" hidden>
-            <div class="scene-labels" aria-hidden="true"></div>
-            <div class="tooltip scene-tip"></div>
-            <span class="scene-hint">Drag to rotate · hover a stack (or focus it and press ← →)</span>
-          </div>
-          <div class="chart-legend" style="margin-top:8px">
-            <span><i style="background:#3987e5"></i>What you put in</span>
-            <span><i style="background:#e2b23c"></i>Compound growth</span>
-          </div>
-          <label class="small" for="demo-slider-amt">Monthly amount</label>
-          <input type="range" id="demo-slider-amt" min="50" max="2000" step="50" value="300">
-          <label class="small" for="demo-slider-yrs">Years</label>
-          <input type="range" id="demo-slider-yrs" min="5" max="45" step="1" value="30">
+          <p class="growth-caption">From <strong id="demo-in">$108,000</strong> in contributions</p>
+          <svg class="growth-chart" viewBox="0 0 440 168" role="img" aria-labelledby="growth-chart-title growth-chart-description"><title id="growth-chart-title">Contributions and illustrative compound growth</title><desc id="growth-chart-description">Adjust the amount and years to compare your contributions with growth at an assumed eight percent annual return.</desc><defs><linearGradient id="growth-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#85d4b0" stop-opacity=".26"/><stop offset="100%" stop-color="#85d4b0" stop-opacity="0"/></linearGradient></defs><path class="growth-grid" d="M4 20H436 M4 64H436 M4 108H436 M4 152H436"/><path id="growth-area" fill="url(#growth-fill)"/><path id="growth-contributions" class="growth-contributions"/><path id="growth-line" class="growth-line"/></svg>
+          <div class="growth-axis"><span>Today</span><span id="growth-end">Year 30</span></div>
+          <div class="growth-legend"><span>Contributions</span><span>With compound growth</span></div>
+          <div class="growth-controls"><div><label for="demo-slider-amt">Monthly amount <strong id="demo-amt">$300</strong></label><input type="range" id="demo-slider-amt" min="50" max="2000" step="50" value="300"></div><div><label for="demo-slider-yrs">Time to grow <strong><span id="demo-yrs">30</span> years</strong></label><input type="range" id="demo-slider-yrs" min="5" max="45" step="1" value="30"></div></div>
+          <p class="growth-note">Assumes 8% annual return, compounded monthly. Illustration only; returns vary. Excludes taxes, fees, and inflation.</p>
         </div>
       </div>
     </section>
 
-    <section style="padding-top:0">
+    <section class="start-section" aria-labelledby="start-heading">
+      <div class="container"><div class="start-heading"><div><span class="eyebrow">Start where you are</span><h2 id="start-heading">One small step, in the right direction.</h2></div><p>Practical tools for the decisions<br>you’re making right now.</p></div>
+        <div class="start-grid">
+          <a href="plan.html" class="start-card"><span class="start-number">01 / MAKE A PLAN</span><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="6" width="24" height="28" rx="4"/><path d="M14 14h12M14 21h12M14 28h5"/></svg><h3>Give your paycheck a purpose.</h3><p>Cover your bills, make room for a goal, and see what’s left.</p><span class="start-link">Build your plan <span aria-hidden="true">↗</span></span></a>
+          <a href="learn.html" class="start-card"><span class="start-number">02 / BUILD YOUR SKILLS</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 11C14 6 6 8 6 8v24s8-2 14 3c6-5 14-3 14-3V8s-8-2-14 3v24"/></svg><h3>Understand the money stuff.</h3><p>Short lessons on saving, credit, investing, and everything between.</p><span class="start-link">Find your next lesson <span aria-hidden="true">↗</span></span></a>
+          <a href="tools.html" class="start-card"><span class="start-number">03 / EXPLORE YOUR OPTIONS</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 33h28M10 27V18M20 27V12M30 27V6"/><circle cx="10" cy="15" r="2"/><circle cx="20" cy="9" r="2"/><circle cx="30" cy="3" r="2"/></svg><h3>See the difference a decision makes.</h3><p>Try the numbers before committing to a loan, budget, or goal.</p><span class="start-link">Explore the calculators <span aria-hidden="true">↗</span></span></a>
+        </div>
+      </div>
+    </section>
+    <section class="daily-section">
       <div class="container">
         <div class="card daily-card" id="daily" data-focus-root></div>
         <p class="small muted" style="margin-top:8px">New question every day. <a href="badges.html">See your streak &amp; badges →</a></p>
@@ -135,7 +148,7 @@
         <div class="path-bar">
           <div class="path-progress"><div class="progress" aria-label="Course progress"><span id="home-progress" style="width:0%"></span></div>
             <span class="small muted" id="home-progress-label"></span></div>
-          <div class="path-actions small"><button type="button" class="link-btn" id="units-toggle">Show all lessons</button><a href="learn.html?lang=es" lang="es">En español</a></div>
+          <div class="path-actions small"><button type="button" class="link-btn" id="units-toggle">Show all lessons</button><a href="checkup.html">🩺 Money Check-up</a><a href="capstone.html">🎓 Capstone</a><a href="learn.html?lang=es" lang="es">En español</a></div>
         </div>
         <div class="units" id="lesson-grid"><details class="unit" data-unit="earn" open><summary><span class="unit-icon" aria-hidden="true">💵</span><span class="unit-text"><strong>Unit 1: Earn &amp; spend</strong><span class="small muted">Budgets, bank accounts, paychecks, and side hustles. · 4 lessons</span></span><span class="unit-status">4 lessons</span></summary>
 <div class="grid"><a class="card" href="lessons/budgeting.html"><div class="card-icon">🧾</div><h3>1. Budgeting Basics</h3><p class="muted small">Tell your money where to go instead of wondering where it went.</p><div class="card-meta"><span>4 min</span><span class="badge">Start learning</span></div></a>
@@ -194,9 +207,11 @@
     <section>
       <div class="container">
         <details class="section-drop" data-section="tools">
-          <summary><span class="section-icon" aria-hidden="true">🧮</span><span class="section-text"><span class="section-eyebrow">Plan</span><h2>Free money tools</h2><span class="muted">Run the numbers on your own life. Nothing you type leaves your browser.</span></span><span class="section-count">17 tools</span></summary>
+          <summary><span class="section-icon" aria-hidden="true">🧮</span><span class="section-text"><span class="section-eyebrow">Plan</span><h2>Free money tools</h2><span class="muted">Run the numbers on your own life. Nothing you type leaves your browser.</span></span><span class="section-count">20 tools</span></summary>
           <div class="section-body">
         <div class="grid">
+          <a class="card" href="tools.html#match"><div class="card-icon">🧭</div><h3>Account Matchmaker</h3><p class="muted small">The checking, savings, and first card that fit you, then compare real offers.</p></a>
+          <a class="card" href="tools.html#firstjob"><div class="card-icon">✅</div><h3>First Job Checklist</h3><p class="muted small">Paperwork, benefits, and your first paycheck, step by step.</p></a>
           <a class="card" href="tools.html#budget"><div class="card-icon">🧾</div><h3>Budget Planner</h3><p class="muted small">Split your paycheck with the 50/30/20 rule.</p></a>
           <a class="card" href="tools.html#emergency"><div class="card-icon">🛟</div><h3>Emergency Fund</h3><p class="muted small">How big should your safety net be?</p></a>
           <a class="card" href="tools.html#goals"><div class="card-icon">🎯</div><h3>Savings Goals</h3><p class="muted small">The monthly amount for every goal.</p></a>
@@ -204,9 +219,8 @@
           <a class="card" href="tools.html#apartment"><div class="card-icon">🏠</div><h3>First Apartment Budget</h3><p class="muted small">Rent you can afford and move-in costs.</p></a>
           <a class="card" href="tools.html#debt"><div class="card-icon">⛓️</div><h3>Debt Payoff</h3><p class="muted small">Avalanche vs. snowball: find your debt-free date.</p></a>
           <a class="card" href="tools.html#car"><div class="card-icon">🚗</div><h3>Car Cost</h3><p class="muted small">Loan payment and the all-in monthly cost.</p></a>
-          <a class="card" href="tools.html#compound"><div class="card-icon">📈</div><h3>Compound Growth</h3><p class="muted small">See how your savings snowball over time.</p></a>
         </div>
-        <p style="margin-top:12px"><a href="tools.html">See all 17 tools →</a></p>
+        <p style="margin-top:12px"><a href="tools.html">See all 20 tools →</a></p>
           </div>
         </details>
       </div>
@@ -215,7 +229,7 @@
     <section style="padding-top:0">
       <div class="container">
         <a class="card cert-cta" href="teachers.html">
-          <div><strong>👩‍🏫 Teacher or parent?</strong><div class="small muted">Free 45-minute lesson plans, printable quizzes with answer keys, and conversation starters for home.</div></div>
+          <div><strong>👩‍🏫 Teacher or parent?</strong><div class="small muted">Free 45-minute lesson plans, printable worksheets and quizzes with answer keys, and conversation starters for home.</div></div>
           <span class="btn btn-primary">See the guides →</span>
         </a>
       </div>
@@ -226,12 +240,15 @@
         <div class="cta-band">
           <div>
             <h2>Give your first paycheck a plan.</h2>
-            <p style="margin:0;opacity:.9"><a href="plan.html">Try the free planner</a>, or hear when the guided pilot opens.</p>
+            <p style="margin:0;opacity:.9">Budget your pay, cover your bills, and pick a goal in about five minutes. Free, no account needed.</p>
           </div>
-          <form data-signup>
+          <!-- Shown when email signup is off (the static site): just the planner. -->
+          <a class="btn btn-light" href="plan.html" data-signup-off>Try the free planner →</a>
+          <!-- Shown only when the server reports the interest list is enabled (see initSignup in js/site.js). -->
+          <form data-signup hidden>
             <label class="sr-only" for="email">Email address</label>
             <input id="email" type="email" required maxlength="254" placeholder="you@example.com">
-            <label class="signup-consent"><input type="checkbox" data-email-consent required> I agree to receive pilot launch updates. <a href="privacy.html">Privacy</a></label>
+            <label class="signup-consent"><input type="checkbox" data-email-consent required> I'm 18 or older and agree to receive pilot launch updates. <a href="privacy.html">Privacy</a></label>
             <button class="btn" type="submit">Notify me</button>
             <p data-signup-status role="status"></p>
           </form>
@@ -243,7 +260,7 @@
   <footer class="site-footer">
     <div class="container">
       <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
-      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
@@ -251,8 +268,6 @@
   <script src="js/lessons.js"></script>
   <script src="js/daily.js"></script>
   <script>Daily.render(document.getElementById("daily"));</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="js/hero3d.js"></script>
   <script>
     // Lesson units (collapsible) + progress. The unit holding your next lesson starts open.
     (function () {
@@ -291,6 +306,7 @@
       sync();
       const count = LESSONS.filter((l) => p.done[l.id]).length;
       document.getElementById("path-count").textContent = count ? `${count}/${LESSONS.length} done` : `${LESSONS.length} lessons`;
+      document.getElementById("proof-lessons").textContent = LESSONS.length;
       document.getElementById("home-progress").style.width = (count / LESSONS.length) * 100 + "%";
       document.getElementById("home-progress-label").textContent = `${count} of ${LESSONS.length} lessons complete`;
     })();
@@ -320,7 +336,15 @@
         document.getElementById("demo-yrs").textContent = y.value;
         document.getElementById("demo-result").textContent = FG.money(fv);
         document.getElementById("demo-in").textContent = FG.money(pmt * n);
-        if (Hero3D) Hero3D.update(pmt, +y.value);
+        const points = Array.from({length: 61}, (_, i) => {
+          const months = n * i / 60, value = pmt * ((Math.pow(1 + r, months) - 1) / r);
+          return `${4 + i / 60 * 432},${152 - value / fv * 140}`;
+        });
+        document.getElementById('growth-line').setAttribute('d', 'M' + points.join(' L'));
+        document.getElementById('growth-area').setAttribute('d', 'M4,152 L' + points.join(' L') + ' L436,152 Z');
+        document.getElementById('growth-contributions').setAttribute('d', `M4,152 L436,${152 - pmt * n / fv * 140}`);
+        document.getElementById('growth-end').textContent = `Year ${y.value}`;
+        document.getElementById('growth-chart-description').textContent = `${FG.money(pmt)} contributed monthly over ${y.value} years: ${FG.money(pmt * n)} contributed and an illustrative balance of ${FG.money(fv)} at an assumed 8% annual return.`;
       }
       a.addEventListener("input", update);
       y.addEventListener("input", update);

@@ -52,7 +52,7 @@
   function showStep(next) {
     step = next;
     document.querySelectorAll('[data-step]').forEach((f, i) => { f.hidden = i !== step; f.disabled = i !== step; });
-    document.querySelectorAll('.planner-steps li').forEach((n, i) => { if (i === step) n.setAttribute('aria-current', 'step'); else n.removeAttribute('aria-current'); });
+    document.querySelectorAll('.planner-steps li').forEach((n, i) => { n.classList.toggle('step-complete', i < step); if (i === step) n.setAttribute('aria-current', 'step'); else n.removeAttribute('aria-current'); });
     $('back').hidden = step === 0; $('next').hidden = step === 2; $('build').hidden = step !== 2;
     $('next').textContent = step === 0 ? 'Monthly costs →' : 'Choose a goal →';
     $('form-error').textContent = '';
@@ -92,9 +92,10 @@
   }
   function render() {
     const p = current; $('onboarding').hidden = true; $('dashboard').hidden = false;
+    $('workspace-nav').hidden = false; $('setup-guide').hidden = true;
     const metrics = el('div', undefined, 'plan-metrics');
     for (const [title, value] of [['Base-month income', p.monthlyIncome], ['Monthly costs + minimums', p.outgo], [p.surplus < 0 ? 'Monthly shortfall' : 'Room after costs', Math.abs(p.surplus)]]) {
-      const n = el('div'); n.append(el('span', title), el('strong', dollars(value))); metrics.append(n);
+      const n = el('div', undefined, 'metric-card'); if (metrics.children.length === 2) n.classList.add(p.surplus < 0 ? 'metric-negative' : 'metric-available'); n.append(el('span', title), el('strong', dollars(value))); metrics.append(n);
     }
     const explanation = el('p', timeline(p), p.timelineFeasible && p.surplus >= 0 ? 'planner-success' : 'planner-warning');
     $('summary').replaceChildren(metrics, explanation);
@@ -107,8 +108,21 @@
       table.append(tbody); $('summary').append(table);
     }
     const allocation = el('dl', undefined, 'allocation');
-    for (const [name, value] of [['Bills & debt minimums', p.perPaycheck.bills], ['Flexible spending', p.perPaycheck.wants], ['Your goal', p.perPaycheck.goal], [p.perPaycheck.remaining < 0 ? 'Unfunded amount' : 'Unassigned buffer', p.perPaycheck.remaining]]) { const n = el('div'); n.append(el('dt', name), el('dd', dollars(value))); allocation.append(n); }
+    for (const [name, value] of [['Bills & debt minimums', p.perPaycheck.bills], ['Flexible spending', p.perPaycheck.wants], ['Your goal', p.perPaycheck.goal], [p.perPaycheck.remaining < 0 ? 'Unfunded amount' : 'Unassigned buffer', p.perPaycheck.remaining]]) { const n = el('div', undefined, `allocation-item allocation-${allocation.children.length}`); n.append(el('dt', name), el('dd', dollars(value))); allocation.append(n); }
     $('allocation').replaceChildren(el('h3', `For each ${dollars(p.profile.takeHome)} paycheck`), allocation, el('p', 'Check bill due dates before spending or transferring. An unassigned buffer is not a guarantee that money is safe to spend.', 'small muted'));
+    if (p.perPaycheck.remaining >= 0) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('viewBox', '0 0 600 18'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('class', 'allocation-bar'); svg.setAttribute('aria-hidden', 'true');
+      let start = 0;
+      Object.values(p.perPaycheck).forEach((value, i) => { const width = value / p.profile.takeHome * 600, rect = document.createElementNS(svg.namespaceURI, 'rect'); rect.setAttribute('x', start); rect.setAttribute('width', width); rect.setAttribute('height', 18); rect.setAttribute('class', `allocation-segment-${i}`); svg.append(rect); start += width; });
+      allocation.before(svg);
+    }
+    $('goal-progress').replaceChildren();
+    if (p.profile.goal !== 'debt' && p.profile.target > 0) {
+      const label = el('label', p.profile.goal === 'move' ? 'Your moving-out fund' : 'Your savings buffer'); label.htmlFor = 'savings-meter';
+      const progress = el('progress'); progress.id = 'savings-meter'; progress.max = p.profile.target; progress.value = Math.min(p.profile.saved, p.profile.target);
+      const heading = el('div', undefined, 'goal-progress-heading'); heading.append(label, el('strong', `${dollars(p.profile.saved)} of ${dollars(p.profile.target)}`));
+      $('goal-progress').append(heading, progress, el('p', 'Based on the savings you entered. Update your numbers as your balance changes.', 'small muted'));
+    }
     const actions = el('ol', undefined, 'plan-actions'); $('completed-actions').replaceChildren();
     for (const a of p.actions) {
       const li = el('li'); li.append(el('strong', a.title), el('p', a.detail)); const link = el('a', lessons[a.lesson]); link.href = `learn.html#${a.lesson}`; li.append(link); actions.append(li);
@@ -123,6 +137,7 @@
   }
   function renderHistory() {
     $('checkin-history').replaceChildren();
+    if (!checkins.length) { const empty = el('div', undefined, 'checkin-empty'); empty.append(el('span', '↗', 'empty-symbol'), el('h3', 'Your progress starts with one check-in.'), el('p', 'Each week is a chance to notice what worked and make a small adjustment.', 'small muted')); $('checkin-history').append(empty); }
     for (const c of [...checkins].reverse()) {
       const entry = el('article', undefined, 'checkin-entry'); entry.append(el('h3', `Week ending ${c.weekEnding}`), el('p', `Spent ${dollars(c.spending)} · Goal contributions ${dollars(c.saved)} · ${c.completed.length} actions completed`), el('p', `Compared with that week's plan: ${dollars(c.spendingDifference)} spending difference and ${dollars(c.goalDifference)} goal contribution difference.`, 'small'), el('p', c.note, 'small muted')); $('checkin-history').append(entry);
     }
@@ -155,8 +170,27 @@
     try { current = F.plan(profile()); render(); $('plan-title').focus(); say('Your calculated plan is ready. Choose where to save it.'); }
     catch (error) { $('form-error').textContent = error.message; }
   });
-  $('edit').addEventListener('click', () => { populate(current.profile); $('onboarding').hidden = false; $('dashboard').hidden = true; showStep(0); });
+  $('edit').addEventListener('click', () => { populate(current.profile); $('onboarding').hidden = false; $('dashboard').hidden = true; $('workspace-nav').hidden = true; $('setup-guide').hidden = false; showStep(0); $('onboarding').scrollIntoView({ block: 'start', behavior: 'instant' }); });
   $('save-local').addEventListener('click', () => { if (persist()) say('Your plan and check-ins are saved on this device.'); });
+  // Weekly check-in reminder as a calendar file: this weekday, 6 pm local, starting next week and repeating.
+  // No plan figures inside. Lines over 75 octets are folded (RFC 5545).
+  function reminderIcs(now = new Date()) {
+    const pad = (n) => String(n).padStart(2, '0');
+    const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7);
+    const stamp = now.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+    const link = new URL('plan.html#review', location.href).href;
+    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//FinanceGuru//First Paycheck Plan//EN', 'BEGIN:VEVENT',
+      `UID:${stamp}-${Math.random().toString(36).slice(2)}@financeguru`, `DTSTAMP:${stamp}`,
+      `DTSTART:${day.getFullYear()}${pad(day.getMonth() + 1)}${pad(day.getDate())}T180000`, 'DURATION:PT10M', 'RRULE:FREQ=WEEKLY',
+      'SUMMARY:Weekly money check-in', `DESCRIPTION:Log last week's spending and savings in your FinanceGuru plan: ${link}`, `URL:${link}`,
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:Weekly money check-in', 'TRIGGER:PT0M', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR']
+      .map((line) => line.match(/.{1,74}/g).join('\r\n ')).join('\r\n') + '\r\n';
+  }
+  $('reminder').addEventListener('click', () => {
+    const url = URL.createObjectURL(new Blob([reminderIcs()], { type: 'text/calendar' }));
+    const a = el('a'); a.href = url; a.download = 'financeguru-weekly-check-in.ics'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    say('Open the downloaded file to add the weekly reminder to your calendar app.');
+  });
   $('export').addEventListener('click', () => {
     const url = URL.createObjectURL(new Blob([JSON.stringify({ ...savedData(), calculated: current }, null, 2)], { type: 'application/json' }));
     const a = el('a'); a.href = url; a.download = 'financeguru-plan.json'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -205,7 +239,7 @@
   $('clear-local').addEventListener('click', () => {
     if (!confirm('Clear this device’s saved plan and the plan shown here? Cloud copies remain.')) return;
     try { localStorage.removeItem(KEY); } catch { say('This browser did not allow us to clear storage. Use your browser’s site-data settings.'); return; }
-    current = null; checkins = []; $('plan-form').reset(); $('debts').replaceChildren(); $('example-note').hidden = true; goalFields(); $('dashboard').hidden = true; $('onboarding').hidden = false; showStep(0); updateAccount(); say('This device’s plan has been cleared.');
+    current = null; checkins = []; $('plan-form').reset(); $('debts').replaceChildren(); $('example-note').hidden = true; goalFields(); $('dashboard').hidden = true; $('onboarding').hidden = false; $('workspace-nav').hidden = true; $('setup-guide').hidden = false; showStep(0); updateAccount(); say('This device’s plan has been cleared.');
   });
   $('coach-form').addEventListener('submit', (e) => {
     e.preventDefault(); busy($('ask-coach'), async () => {
@@ -227,10 +261,50 @@
     });
   });
   $('week-ending').value = today(); $('week-ending').max = today(); showStep(0);
+  const sectionLinks = [...$('workspace-nav').querySelectorAll('a')];
+  function markSection(id) { sectionLinks.forEach((a) => { if (a.hash === `#${id}`) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); }); }
+  sectionLinks.forEach((a) => a.addEventListener('click', (event) => {
+    event.preventDefault(); const section = document.getElementById(a.hash.slice(1));
+    markSection(section.id); section.scrollIntoView({ block: 'start', behavior: FG.reducedMotion() ? 'instant' : 'smooth' });
+    const heading = section.querySelector('h2'); heading.tabIndex = -1; heading.focus({ preventScroll: true });
+  }));
+  let sectionFrame = 0;
+  function syncSection() {
+    if (sectionFrame) return;
+    sectionFrame = requestAnimationFrame(() => {
+      sectionFrame = 0;
+      if ($('dashboard').hidden) return;
+      const threshold = Math.min($('workspace-nav').getBoundingClientRect().bottom + 40, innerHeight * .4);
+      const panels = [...document.querySelectorAll('.workspace-panel')];
+      const passed = panels.filter((panel) => panel.getBoundingClientRect().top <= threshold);
+      markSection((passed.at(-1) || panels[0]).id);
+    });
+  }
+  addEventListener('scroll', syncSection, { passive: true });
+  addEventListener('resize', syncSection, { passive: true });
   try {
     const raw = localStorage.getItem(KEY);
     if (raw) { const data = normalize(JSON.parse(raw)); current = data.plan; checkins = data.history; populate(current.profile); render(); $('save-status').textContent = 'Loaded from this device.'; }
   } catch { say('The saved plan could not be loaded. You can build a new one or clear this device’s saved plan.'); }
+  // Hand-offs from Tools: the Pay Stub Reader sends take-home + frequency; Emergency Fund and Savings Goals
+  // send a goal (type, target, saved, months). Values are validated, prefilled for review, never auto-saved.
+  const handoff = new URLSearchParams(location.search);
+  if (handoff.has('takehome') || handoff.has('goal')) {
+    history.replaceState(null, '', location.pathname + location.hash);
+    const amount = (k) => { const v = Number(handoff.get(k)); return Number.isFinite(v) && v >= 0 && v <= 1000000 ? v : null; };
+    const pay = amount('takehome'), freq = handoff.get('frequency');
+    const payOk = pay > 0 && ['weekly', 'biweekly', 'semimonthly', 'monthly'].includes(freq);
+    const target = amount('target'), saved = amount('saved') ?? 0, months = Number(handoff.get('months'));
+    const goalOk = ['buffer', 'move'].includes(handoff.get('goal')) && target > 0 && Number.isInteger(months) && months >= 1 && months <= 120;
+    if (payOk || goalOk) {
+      if (current) $('edit').click();
+      if (payOk) { $('take-home').value = pay.toFixed(2); $('frequency').value = freq; }
+      if (goalOk) { $('goal').value = handoff.get('goal'); $('target').value = target.toFixed(2); $('saved').value = Math.min(saved, target).toFixed(2); $('months').value = months; goalFields(); }
+      showStep(goalOk && current ? 2 : 0);
+      say(payOk ? `Take-home of ${dollars(pay)} filled in from your pay stub. Review it, then continue.`
+        : `Goal of ${dollars(target)} in ${months} month${months > 1 ? 's' : ''} filled in. ${current ? 'Review it, then rebuild your plan.' : 'Start with your take-home pay; the goal is ready on step 3.'}`);
+    }
+  }
   (async () => {
     try { config = await api('/config', 'GET', undefined, false); if (config.accounts) { try { await refreshAccount(); } catch (e) { if (e.status !== 401) say(e.message); } } }
     catch { config = {}; }

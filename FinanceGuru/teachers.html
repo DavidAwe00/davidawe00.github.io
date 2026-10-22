@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0e7a4e">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/teachers.html">
 
@@ -44,6 +47,7 @@
         </details>
         <a href="play.html">Play</a>
         <a href="tools.html">Tools</a>
+        <a href="plan.html" class="nav-plan">My plan <span aria-hidden="true">&#8599;</span></a>
       </div>
       <span class="xp-pill" data-xp>0 XP</span>
       <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
@@ -55,7 +59,7 @@
       <div class="container">
         <span class="eyebrow">For teachers &amp; parents</span>
         <h1>Teach money skills with free, ready-to-run lessons.</h1>
-        <p class="lead muted">Thirteen 45-minute lesson plans for grades 9–12, each built around an interactive tool or game on this site, plus conversation starters for families. No sign-ups, no student accounts, and no student data collected.</p>
+        <p class="lead muted"><span id="plan-count-lead">20</span> ready-to-run 45-minute lesson plans for grades 9–12, each built around an interactive tool or game on this site, plus conversation starters for families. No sign-ups, no student accounts, and no student data collected.</p>
         <div class="stats" style="margin-top:20px">
           <div class="stat hero"><div class="label">States requiring a personal finance course to graduate</div><div class="value">30</div><div class="small muted">Standalone course, per <a href="https://www.ngpf.org/blog/advocacy/how-many-states-require-students-to-take-a-personal-finance-course-for-high-school-graduation" rel="noopener" target="_blank">NGPF, Apr 2026</a></div></div>
           <div class="stat"><div class="label">Lesson plans</div><div class="value" id="plan-count">20</div><div class="small muted">~45 minutes each</div></div>
@@ -78,8 +82,11 @@
             <li><strong>Lesson (10 min).</strong> Students open the lesson link on any device (Chromebooks and phones work) and finish the reading and the 3-question quiz.</li>
             <li><strong>Activity (20 min).</strong> Pairs work through the tool or game and record their results.</li>
             <li><strong>Discuss + exit ticket (10 min).</strong> Debrief, then use the printable quiz as an exit ticket.</li>
+            <li><strong>No devices?</strong> Print the student worksheet: guided notes from the lesson text with a word bank, discussion questions with room to write, the quiz, and an answer key.</li>
           </ol>
           <p class="small muted">Progress and XP are saved in each student's browser only. Every lesson is also available in Spanish (<a href="learn.html?lang=es">learn.html?lang=es</a>) for English learners, with progress shared across both languages. Students who finish every lesson can print a <a href="certificate.html">FinanceGuru Fundamentals certificate</a> to turn in.</p>
+          <p class="small muted"><strong>Measure growth:</strong> the <a href="checkup.html">Money Check-up</a> is a 10-question pre/post test (two questions per unit). Students take it on day one, then again at the end; the results screen shows before → after scores by unit for them to screenshot or show you. Answers stay hidden after the "before" check-up so the comparison is fair.</p>
+          <p class="small muted"><strong>Capstone:</strong> <a href="capstone.html">Your First Year After Graduation</a> (about 15 minutes) asks students to make seven decisions on a $50,000 salary: housing, transport, 401(k), savings account, spending, a first credit card, and a bonus. It then simulates twelve months and grades each unit. A good final-day activity: students play once, change one decision, and explain in writing which choice moved their net worth the most and why.</p>
         </div>
       </section>
 
@@ -112,13 +119,14 @@
   <footer class="site-footer">
     <div class="container">
       <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
-      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
   <script src="js/site.js"></script>
   <script src="js/lessons.js"></script>
   <script src="js/data/lessonplans.js"></script>
+  <script src="js/worksheet.js"></script>
   <script src="js/teachers.js"></script>
 </body>
 </html>

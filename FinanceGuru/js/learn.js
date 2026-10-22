@@ -4,7 +4,7 @@
   const list = document.getElementById("lesson-list");
   const body = document.getElementById("lesson-body");
   const LANG_KEY = "fg-lang";
-  let lesson, step, score, answered;
+  let lesson, step, score, answered, firstRender = true;
 
   const T = {
     en: {
@@ -13,7 +13,8 @@
       correct: "✅ Correct!", wrong: "❌ Not quite.",
       perfect: "Perfect score! 🏆", great: "Great job! 🎉", effort: "Nice effort — review and try again anytime.",
       earned: (xp) => `You earned <strong>+${xp} XP</strong>.`, retry: "Retry lesson",
-      cert: "🎓 Get your certificate →", nextL: (t) => `Next: ${t} →`, finish: "Finish the remaining lessons →",
+      cert: "🎓 Get your certificate →", unitDone: (n, title) => `🏅 Unit ${n} complete: ${title}! You earned a badge.`,
+      checkup: "🩺 Take the \"after\" check-up →", capstone: "🎓 Capstone: your first year →", nextL: (t) => `Next: ${t} →`, finish: "Finish the remaining lessons →",
       title: "Learn — FinanceGuru",
     },
     es: {
@@ -22,7 +23,8 @@
       correct: "✅ ¡Correcto!", wrong: "❌ No exactamente.",
       perfect: "¡Puntaje perfecto! 🏆", great: "¡Muy bien! 🎉", effort: "Buen intento: repasa y vuelve a intentarlo cuando quieras.",
       earned: (xp) => `Ganaste <strong>+${xp} XP</strong>.`, retry: "Repetir la lección",
-      cert: "🎓 Obtén tu certificado →", nextL: (t) => `Siguiente: ${t} →`, finish: "Termina las lecciones que faltan →",
+      cert: "🎓 Obtén tu certificado →", unitDone: (n) => `🏅 ¡Unidad ${n} completa! Ganaste una insignia.`,
+      checkup: "🩺 Haz el chequeo final (en inglés) →", capstone: "🎓 Proyecto final: tu primer año (en inglés) →", nextL: (t) => `Siguiente: ${t} →`, finish: "Termina las lecciones que faltan →",
       title: "Aprende — FinanceGuru",
     },
   };
@@ -127,20 +129,25 @@
       const next = LESSONS[idx + 1] && L(LESSONS[idx + 1]);
       const msg = score === total ? t().perfect : score >= total - 1 ? t().great : t().effort;
       const allDone = LESSONS.every((l) => FG.getProgress().done[l.id]);
+      const ui = UNITS.findIndex((u) => u.lessons.includes(lesson.id));
+      const unitDone = ui >= 0 && UNITS[ui].lessons.every((id) => FG.getProgress().done[id]);
       body.innerHTML = `
         <div class="card result">
           <div class="big">${score}/${total}</div>
           <h2 tabindex="-1" data-autofocus>${msg}</h2>
           <p class="muted">${t().earned(earned)}</p>
+          ${unitDone ? `<p class="unit-done-note">${t().unitDone(ui + 1, UNITS[ui].title)}</p>` : ""}
           <div class="hero-actions" style="justify-content:center">
             <button class="btn btn-ghost" data-act="retry">${t().retry}</button>
-            ${allDone ? `<a class="btn btn-primary" href="certificate.html">${t().cert}</a>` : ""}
+            ${allDone ? `<a class="btn btn-primary" href="certificate.html">${t().cert}</a><a class="btn btn-ghost" href="capstone.html">${t().capstone}</a><a class="btn btn-ghost" href="checkup.html">${t().checkup}</a>` : ""}
             ${next ? `<a class="btn ${allDone ? "btn-ghost" : "btn-primary"}" href="#${next.id}">${t().nextL(next.title)}</a>`
                    : allDone ? "" : `<a class="btn btn-primary" href="learn.html#${LESSONS.find((l) => !FG.getProgress().done[l.id]).id}">${t().finish}</a>`}
           </div>
         </div>`;
     }
-    FG.scrollTo(body);
+    // Don't jump past the page header on first load; after that, keep each step in view.
+    if (firstRender) firstRender = false;
+    else FG.scrollTo(body);
   }
 
   body.addEventListener("click", (e) => {

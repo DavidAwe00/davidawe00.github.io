@@ -45,12 +45,13 @@
       const n = monthsUntil(g.date), p = perMonth(g.target, g.saved, n, r), p0 = perMonth(g.target, g.saved, n, 0);
       total += p; flat += p0; left += Math.max(0, g.target - g.saved);
       const pct = g.target ? Math.min(100, (g.saved / g.target) * 100) : 0;
-      return `<tr><td>${esc(g.name || "Untitled goal")}<div class="goal-bar"><i style="width:${pct}%"></i></div></td><td>${n ? `${n} mo` : "Due now"}</td><td>${money(p)}</td></tr>`;
+      const plan = g.target > g.saved ? `plan.html?goal=${/move/i.test(g.name) ? "move" : "buffer"}&target=${g.target}&saved=${g.saved}&months=${Math.min(120, Math.max(1, n))}` : "";
+      return `<tr><td>${esc(g.name || "Untitled goal")}<div class="goal-bar"><i style="width:${pct}%"></i></div></td><td>${n ? `${n} mo` : "Due now"}</td><td>${money(p)}</td><td>${plan ? `<a href="${esc(plan)}" class="small">Use in my plan →</a>` : "✅"}</td></tr>`;
     });
     $("sg-total").textContent = money(total);
     $("sg-left").textContent = money(left);
     $("sg-interest").textContent = `${money((flat - total))}/mo`;
-    $("sg-table").innerHTML = rows.length ? `<thead><tr><th scope="col">Goal</th><th scope="col">Time left</th><th scope="col">Per month</th></tr></thead><tbody>${lines.join("")}</tbody>` : "";
+    $("sg-table").innerHTML = rows.length ? `<thead><tr><th scope="col">Goal</th><th scope="col">Time left</th><th scope="col">Per month</th><th scope="col"><span class="sr-only">Plan</span></th></tr></thead><tbody>${lines.join("")}</tbody>` : "";
   }
 
   $("sg-apy").addEventListener("input", () => calc());

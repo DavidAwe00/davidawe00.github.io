@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0e7a4e">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/badges.html">
   <meta name="robots" content="noindex,follow">
@@ -44,6 +47,7 @@
         </details>
         <a href="play.html">Play</a>
         <a href="tools.html">Tools</a>
+        <a href="plan.html" class="nav-plan">My plan <span aria-hidden="true">&#8599;</span></a>
       </div>
       <span class="xp-pill" data-xp>0 XP</span>
       <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
@@ -66,6 +70,17 @@
       </div>
     </section>
 
+    <section style="padding:16px 0 0">
+      <div class="card cert-cta">
+        <div><strong>🩺 Money Check-up</strong><div class="small muted" id="checkup-status"></div></div>
+        <a class="btn btn-ghost" href="checkup.html" id="checkup-link">Take the check-up →</a>
+      </div>
+      <div class="card cert-cta" style="margin-top:12px">
+        <div><strong>🎓 Capstone: Your First Year</strong><div class="small muted" id="capstone-status"></div></div>
+        <a class="btn btn-ghost" href="capstone.html" id="capstone-link">Start the capstone →</a>
+      </div>
+    </section>
+
     <section style="padding:24px 0 0">
       <div class="card daily-card" id="daily" data-focus-root></div>
     </section>
@@ -74,18 +89,36 @@
       <div class="section-head" style="margin-bottom:12px"><h2>🏅 Badges</h2><p class="muted" id="badge-count"></p></div>
       <div class="badge-grid" id="badge-grid"></div>
     </section>
+
+    <section style="padding:32px 0 0" id="backup">
+      <div class="card">
+        <h2 style="margin-top:0;font-size:1.3rem">💾 Move your progress to another device</h2>
+        <p class="muted">Progress is saved in this browser only. Download a backup here, then restore it on your other device (for example, a school Chromebook and your phone). The file includes lessons, XP, streaks, badges, high scores, and your saved tool entries.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-primary" type="button" id="backup-export">Download a backup</button>
+          <button class="btn btn-ghost" type="button" id="backup-pick">Restore from a file</button>
+          <input type="file" id="backup-import" accept="application/json,.json" hidden aria-label="Backup file to restore">
+        </div>
+        <p class="small muted" id="backup-status" role="status" style="margin:10px 0 0"></p>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
-      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a></span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
   <script src="js/site.js"></script>
   <script src="js/lessons.js"></script>
   <script src="js/daily.js"></script>
+  <script src="js/checkup.js"></script>
+  <script src="js/data/tax2026.js"></script>
+  <script src="js/creditmodel.js"></script>
+  <script src="js/capstone.js"></script>
   <script src="js/badges.js"></script>
+  <script src="js/backup.js"></script>
 </body>
 </html>
