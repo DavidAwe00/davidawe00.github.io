@@ -1,4 +1,4 @@
-// Teachers & parents page: lesson plans, printable quizzes and worksheets with answer keys, and family conversation guides.
+// Teachers & parents page: lesson plans, slide decks, printable quizzes and worksheets with answer keys, and family conversation guides.
 (function () {
   const $ = (id) => document.getElementById(id);
   const LETTERS = "ABCD";
@@ -55,7 +55,8 @@
         <div class="plan-body">
           ${planHtml(l, p, i)}
           <div class="hero-actions">
-            <button class="btn btn-primary" data-print="plan">🖨 Print plan</button>
+            <a class="btn btn-primary" href="slides.html#${l.id}" target="_blank" rel="noopener">📽 Present slides</a>
+            <button class="btn btn-ghost" data-print="plan">🖨 Print plan</button>
             <button class="btn btn-ghost" data-print="quiz">📝 Print quiz + answer key</button>
             <button class="btn btn-ghost" data-print="worksheet">📄 Print student worksheet</button>
             <button class="btn btn-ghost" data-copy>🔗 Copy student link</button>

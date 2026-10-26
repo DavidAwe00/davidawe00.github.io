@@ -1,5 +1,7 @@
 // Daily challenge, streaks, and badges. One question per day, drawn from the lesson quizzes
 // (each lesson's facts are sourced on its page). Progress lives in this browser only.
+// English or Spanish: the language is the Learn page's saved choice (fg-lang), and the Spanish
+// lesson file is loaded only when it's needed. Answers and streaks are shared across languages.
 const Daily = (() => {
   const KEY = "fg-daily-v1";
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
@@ -37,28 +39,75 @@ const Daily = (() => {
     return s.today;
   }
 
+  const LANG_KEY = "fg-lang";
+  const T = {
+    en: {
+      title: "Daily challenge", from: "from", locale: undefined, streakTip: "Answer every day to grow your streak",
+      days: (n) => `${n} day${n === 1 ? "" : "s"}`, right: "✅ Correct! +15 XP", wrong: "❌ Not quite. +5 XP for showing up",
+      tomorrow: "Come back tomorrow to keep your streak.", review: "Review the lesson →", other: "Español", otherLang: "es", otherLabel: "Ver el reto en español",
+    },
+    es: {
+      title: "Reto diario", from: "de", locale: "es", streakTip: "Responde cada día para hacer crecer tu racha",
+      days: (n) => `${n} día${n === 1 ? "" : "s"}`, right: "✅ ¡Correcto! +15 XP", wrong: "❌ No exactamente. +5 XP por participar",
+      tomorrow: "Vuelve mañana para mantener tu racha.", review: "Repasa la lección →", other: "English", otherLang: "en", otherLabel: "Show the challenge in English",
+    },
+  };
+  function getLang() { try { return localStorage.getItem(LANG_KEY) === "es" ? "es" : "en"; } catch { return "en"; } }
+  function setLang(lang) { try { localStorage.setItem(LANG_KEY, lang); } catch { /* storage blocked */ } }
+
+  // Spanish text lives in js/lessons.es.js; pages that show the challenge load it on demand.
+  let esLoading = null;
+  function loadSpanish() {
+    if (typeof localizeLesson === "function") return Promise.resolve();
+    const self = document.querySelector('script[src$="js/daily.js"]');
+    return (esLoading ||= new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = new URL("lessons.es.js", self ? self.src : location.href).href;
+      s.onload = resolve; s.onerror = () => { esLoading = null; reject(); };
+      document.head.append(s);
+    }));
+  }
+
+  // Returns a promise that settles once the card is drawn (Spanish may need a download first).
   function render(host) {
-    const q = todaysQuestion(), st = state();
+    const lang = getLang();
+    if (lang === "es" && typeof localizeLesson !== "function") {
+      return loadSpanish().then(() => render(host), () => { setLang("en"); return render(host); });
+    }
+    const base = todaysQuestion(), st = state(), t = T[lang];
+    const lesson = lang === "es" ? localizeLesson(base.lesson, "es") : base.lesson;
+    const q = { ...base, ...lesson.quiz[base.lesson.quiz.findIndex((x) => x.q === base.q)], lesson };
     const done = st.today;
+    host.lang = lang;
     host.innerHTML = `
       <div class="daily-head">
-        <div><span class="eyebrow" style="margin:0">Daily challenge</span><div class="small muted">${new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })} · from “${q.lesson.title}”</div></div>
-        <div class="streak-pill" title="Answer every day to grow your streak">🔥 ${st.streak} day${st.streak === 1 ? "" : "s"}</div>
+        <div><span class="eyebrow" style="margin:0">${t.title}</span><div class="small muted">${new Date().toLocaleDateString(t.locale, { weekday: "long", month: "long", day: "numeric" })} · ${t.from} “${q.lesson.title}”</div></div>
+        <div class="daily-tools">
+          <button type="button" class="chip" data-daily-lang="${t.otherLang}" lang="${t.otherLang}" aria-label="${t.otherLabel}">${t.other}</button>
+          <div class="streak-pill" title="${t.streakTip}">🔥 ${t.days(st.streak)}</div>
+        </div>
       </div>
       <p class="quiz-q" style="margin-top:12px">${q.q}</p>
       <div class="choices">${q.choices.map((c, i) => {
         const cls = done ? (i === q.answer ? "correct" : i === done.choice ? "wrong" : "") : "";
         return `<button class="choice ${cls}" data-daily="${i}" ${done ? "disabled" : ""}>${c}</button>`;
       }).join("")}</div>
-      ${done ? `<div class="feedback" tabindex="-1" data-autofocus><strong>${done.ok ? "✅ Correct! +15 XP" : "❌ Not quite. +5 XP for showing up"}</strong> ${q.why}
-        <div class="small muted" style="margin-top:6px">Come back tomorrow to keep your streak. <a href="learn.html#${q.lesson.id}">Review the lesson →</a></div></div>` : ""}`;
+      ${done ? `<div class="feedback" tabindex="-1" data-autofocus><strong>${done.ok ? t.right : t.wrong}</strong> ${q.why}
+        <div class="small muted" style="margin-top:6px">${t.tomorrow} <a href="learn.html${lang === "es" ? "?lang=es" : ""}#${q.lesson.id}">${t.review}</a></div></div>` : ""}`;
     host.onclick = (e) => {
+      const switcher = e.target.closest("[data-daily-lang]");
+      if (switcher) {
+        setLang(switcher.dataset.dailyLang);
+        render(host).then(() => host.querySelector("[data-daily-lang]")?.focus());
+        return;
+      }
       const b = e.target.closest("[data-daily]");
       if (!b || st.today) return;
       answer(+b.dataset.daily);
       render(host);
       document.dispatchEvent(new Event("progresschange"));
     };
+    return Promise.resolve();
   }
 
   return { state, render, todaysQuestion, dayKey };

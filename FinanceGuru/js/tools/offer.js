@@ -39,8 +39,8 @@
 
     const diff = a.value - b.value, win = diff >= 0 ? "A" : "B", payWin = a.pay >= b.pay ? "A" : "B";
     $("of-result").innerHTML = Math.abs(diff) < 1
-      ? `<p class="offer-verdict">These offers come out about even.</p>`
-      : `<p class="offer-verdict">Offer <strong>${win}</strong> is worth about <strong>${money(Math.abs(diff))} more per year</strong> (${money(Math.abs(diff) / 12)} a month).</p>`;
+      ? `<p class="offer-verdict" data-announce>These offers come out about even.</p>`
+      : `<p class="offer-verdict" data-announce>Offer <strong>${win}</strong> is worth about <strong>${money(Math.abs(diff))} more per year</strong> (${money(Math.abs(diff) / 12)} a month).</p>`;
     const notes = [];
     if (payWin !== win && Math.abs(diff) >= 1) notes.push(`Offer ${payWin} has the bigger paycheck, but benefits and commuting flip the result.`);
     [["A", a], ["B", b]].forEach(([s, o]) => { if (o.missed > 0) notes.push(`With Offer ${s}, saving ${Math.round(save * 100)}% leaves ${money(o.missed)} of free match money on the table each year.`); });

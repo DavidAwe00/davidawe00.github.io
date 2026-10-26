@@ -29,6 +29,7 @@ form[data-signup] [data-signup-status]:empty { display:none; }
   --gold: #8a6416;
   --good: #0e7a4e;
   --bad: #c0392b;
+  --bad-ink: #ffffff;
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
@@ -70,6 +71,7 @@ form[data-signup] [data-signup-status]:empty { display:none; }
     --gold: #d9a74a;
     --good: #35b57c;
     --bad: #e66767;
+    --bad-ink: #1f0b0b;
     --series-1: #3987e5;
     --series-2: #d95926;
     --series-3: #199e70;
@@ -101,6 +103,7 @@ form[data-signup] [data-signup-status]:empty { display:none; }
   --gold: #d9a74a;
   --good: #35b57c;
   --bad: #e66767;
+  --bad-ink: #1f0b0b;
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
@@ -143,6 +146,8 @@ a:hover { color: var(--brand-strong); }
 h1, h2, h3 { line-height: 1.15; margin: 0 0 .5em; text-wrap: balance; }
 h1, h2 { font-family: var(--font-display); font-weight: 600; letter-spacing: -.022em; font-optical-sizing: auto; }
 h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.06; }
+/* Lesson player: the lesson title line doubles as the page heading without changing its look. */
+h1.lesson-meta { font-family: var(--font); font-size: .875rem; font-weight: 400; letter-spacing: 0; line-height: 1.5; margin: 0; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
 h3 { font-size: 1.15rem; letter-spacing: -.01em; }
 p { margin: 0 0 1em; text-wrap: pretty; }
@@ -465,8 +470,8 @@ th:first-child, td:first-child { text-align: left; }
 @keyframes shake { 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 .sort-buttons { display: flex; gap: 12px; width: min(420px, 100%); }
 .sort-buttons .btn { flex: 1; font-size: 1.05rem; padding: 16px; }
-.btn-need { background: #2a78d6; color: #fff; }
-.btn-want { background: #eb6834; color: #fff; }
+.btn-need { background: #2470cc; color: #fff; }
+.btn-want { background: #c2491a; color: #fff; }
 .timer-bar { width: 100%; height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
 .timer-bar span { display: block; height: 100%; background: var(--brand); transition: width .1s linear; }
 .sort-feedback { min-height: 3em; max-width: 420px; }
@@ -491,7 +496,7 @@ th:first-child, td:first-child { text-align: left; }
 
 /* Market */
 .market-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 12px 0; }
-.btn-sell { background: var(--bad); color: #fff; min-width: 200px; font-size: 1.05rem; padding: 14px 20px; }
+.btn-sell { background: var(--bad); color: var(--bad-ink); min-width: 200px; font-size: 1.05rem; padding: 14px 20px; }
 .btn-buy { background: var(--good); color: var(--brand-ink); min-width: 200px; font-size: 1.05rem; padding: 14px 20px; }
 .headline { min-height: 2.6em; font-weight: 700; font-size: 1.05rem; }
 .headline.panic { color: var(--bad); } .headline.boom { color: var(--good); }
@@ -854,7 +859,8 @@ main > section:has(> .container > .section-drop) { padding-top: 14px; padding-bo
 /* Taxes */
 .buckets { display: grid; gap: 10px; margin-top: 4px; }
 .bucket-row { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; align-items: center; }
-.bucket-row.empty { opacity: .5; }
+.bucket-row.empty { color: var(--muted); }
+.bucket-row.empty .bucket-track { opacity: .5; }
 .bucket-rate { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; text-align: center; background: var(--surface-2); border-radius: 8px; padding: 6px 0; }
 .bucket-track { height: 16px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
 .bucket-track span { display: block; height: 100%; background: var(--series-1); border-radius: 0 4px 4px 0; transition: width .25s ease; }
@@ -908,6 +914,7 @@ a.xp-pill:hover { filter: brightness(1.1); }
 .daily-card { position: relative; overflow: hidden; border-color: color-mix(in srgb, var(--brand) 20%, var(--border)); }
 .daily-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--brand), var(--gold)); }
 .daily-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.daily-tools { display: flex; align-items: center; gap: 8px; }
 .streak-pill { font-weight: 800; padding: 6px 12px; border-radius: 999px; background: var(--brand-soft); color: var(--brand); white-space: nowrap; }
 .badge-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
 .badge-tile { display: grid; gap: 4px; justify-items: center; text-align: center; padding: 16px 12px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); opacity: .55; }

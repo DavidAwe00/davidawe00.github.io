@@ -166,10 +166,34 @@ const FG = (() => {
     });
   }
 
+  // Calculators update their result tiles as you type, which a screen reader doesn't notice. After an
+  // input or select settles, read out the edited section's [data-announce] element, else its headline
+  // tile (.stat.hero, else the first .stat). Sections that already have their own live region announce themselves.
+  function initResultAnnouncer() {
+    let region = null, timer = 0, last = "";
+    const visible = (el) => el.getClientRects().length;
+    document.addEventListener("input", (e) => {
+      if (!e.target.matches("input, select, textarea")) return;
+      const scope = e.target.closest("[role=tabpanel]") || e.target.closest("section") || e.target.closest(".tool");
+      if (!scope || scope.querySelector("[aria-live]")) return;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const own = [...scope.querySelectorAll("[data-announce]")].find(visible);
+        const stat = [...scope.querySelectorAll(".stat.hero"), ...scope.querySelectorAll(".stat")].find(visible);
+        const label = stat?.querySelector(".label")?.textContent.trim(), value = stat?.querySelector(".value")?.textContent.trim();
+        const text = own ? own.textContent.trim() : label && value && value !== "—" ? `${label}: ${value}` : "";
+        if (!text || text === last) return;
+        if (!region) { region = document.createElement("div"); region.className = "sr-only"; region.setAttribute("aria-live", "polite"); document.body.append(region); }
+        region.textContent = last = text;
+      }, 900);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     initNavMenu();
     initFocusRescue();
+    initResultAnnouncer();
     renderXp();
     initSignup();
     const y = document.querySelector("[data-year]");

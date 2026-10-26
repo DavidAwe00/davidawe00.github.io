@@ -16,6 +16,14 @@
     if (name === "compound") compound(); // chart needs a visible container to measure
     document.dispatchEvent(new CustomEvent("tabshow", { detail: name }));
   }
+  // The visible tool name is in the picker, so give each panel a screen-reader heading with that name.
+  [...picker.options].forEach((o) => {
+    const panel = $("panel-" + o.value);
+    if (panel.querySelector("h2")) return;
+    const h = document.createElement("h2");
+    h.className = "sr-only"; h.id = "panel-title-" + o.value; h.textContent = o.textContent.trim();
+    panel.prepend(h); panel.setAttribute("aria-labelledby", h.id);
+  });
   picker.addEventListener("change", () => { history.replaceState(null, "", "#" + picker.value); showTab(picker.value); });
   window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
 

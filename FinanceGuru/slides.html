@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson slides — FinanceGuru</title>
+  <meta name="description" content="Free classroom slides for every FinanceGuru lesson: objectives, warm-up, lesson content, activity, quiz questions with answer reveals, and discussion. Present full screen, no sign-up.">
+  <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/slides.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0e7a4e">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/slides.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/slides.html">
+  <meta property="og:title" content="Lesson slides — FinanceGuru">
+  <meta property="og:description" content="Free classroom slides for every FinanceGuru lesson: objectives, warm-up, lesson content, activity, quiz questions with answer reveals, and discussion. Present full screen, no sign-up.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <div id="picker">
+    <header class="site-header">
+      <nav class="container nav">
+        <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+        <div class="nav-links">
+          <a href="learn.html">Learn</a>
+          <a href="teachers.html">Teachers &amp; parents</a>
+        </div>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle theme">☾</button>
+      </nav>
+    </header>
+    <main class="container slide-picker">
+      <p class="eyebrow">For teachers</p>
+      <h1>Lesson slides</h1>
+      <p class="lead muted">Project any lesson. Each deck follows its 45-minute lesson plan: objectives, warm-up, the lesson, the activity, quiz questions with answer reveals, discussion, and an exit ticket.</p>
+      <p class="small muted">Keys: → or Space next (reveals a quiz answer first) · ← back · R reveal · F full screen. Works offline once opened.</p>
+      <ol id="picker-list" class="slide-pick-list"></ol>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+        <span><a href="learn.html">Learn</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <div id="deck" class="deck" hidden>
+    <header class="deck-bar">
+      <a class="logo" href="index.html" aria-label="FinanceGuru home"><span class="logo-mark">$</span></a>
+      <strong id="deck-title" class="deck-title"></strong>
+      <a class="btn btn-ghost btn-sm" href="#">All decks</a>
+    </header>
+    <main class="deck-stage">
+      <section id="slide" class="slide" aria-roledescription="slide"></section>
+    </main>
+    <nav class="deck-controls" aria-label="Slide controls">
+      <button id="prev" class="btn btn-ghost" aria-label="Previous slide">←</button>
+      <span id="count" class="deck-count" aria-hidden="true"></span>
+      <button id="next" class="btn btn-primary" aria-label="Next slide">→</button>
+      <button id="reveal" class="btn btn-ghost" hidden>Reveal answer</button>
+      <span class="deck-spacer"></span>
+      <button id="fullscreen" class="btn btn-ghost">Full screen</button>
+    </nav>
+    <div class="deck-progress" aria-hidden="true"><span id="progress"></span></div>
+    <p id="status" class="sr-only" aria-live="polite"></p>
+  </div>
+
+  <script src="js/site.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/data/lessonplans.js"></script>
+  <script src="js/slides.js"></script>
+  <script src="js/present.js"></script>
+</body>
+</html>

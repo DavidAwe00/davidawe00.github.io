@@ -99,7 +99,7 @@
     if (step < nCards) {
       const c = lesson.cards[step];
       body.innerHTML = `
-        <div class="small muted">${lesson.icon} ${lesson.title} · ${step + 1} ${t().of} ${nCards}</div>
+        <h1 class="lesson-meta small muted">${lesson.icon} ${lesson.title} <span>· ${step + 1} ${t().of} ${nCards}</span></h1>
         ${dots()}
         <article><h2 tabindex="-1" data-autofocus>${c.heading}</h2>${c.html}</article>
         <div class="step-actions">
@@ -110,7 +110,7 @@
       const qi = step - nCards;
       const q = lesson.quiz[qi];
       body.innerHTML = `
-        <div class="small muted">${t().quizQ(qi + 1, lesson.quiz.length)}</div>
+        <h1 class="lesson-meta small muted">${lesson.icon} ${lesson.title} <span>· ${t().quizQ(qi + 1, lesson.quiz.length)}</span></h1>
         ${dots()}
         <article>
           <p class="quiz-q" tabindex="-1" data-autofocus>${q.q}</p>
