@@ -55,8 +55,12 @@
   </header>
 
   <main class="container" style="padding-top:32px;padding-bottom:48px;max-width:760px">
-    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">🩺 Money Check-up</h1>
-    <p class="muted">Ten questions, two from each unit. Take it <strong>before</strong> you start the lessons and again <strong>after</strong> to see how much you've learned. Answers stay hidden until the end, and results are saved in this browser only.</p>
+    <div class="lang-switch chips" id="checkup-lang" role="group" aria-label="Check-up language">
+      <button class="chip" data-lang="en" lang="en" aria-pressed="true">English</button>
+      <button class="chip" data-lang="es" lang="es" aria-pressed="false">Español</button>
+    </div>
+    <h1 id="checkup-title" style="font-size:clamp(1.8rem,4vw,2.6rem)">🩺 Money Check-up</h1>
+    <p class="muted" id="checkup-intro">Ten questions, two from each unit. Take it <strong>before</strong> you start the lessons and again <strong>after</strong> to see how much you've learned. Answers stay hidden until the end, and results are saved in this browser only.</p>
     <div class="lesson-body" id="checkup" data-focus-root style="margin-top:16px"></div>
   </main>
 

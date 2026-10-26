@@ -91,8 +91,13 @@ const FG = (() => {
     const isDark = () =>
       document.documentElement.dataset.theme === "dark" ||
       (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
-    const label = () => { btn.textContent = isDark() ? "☀" : "☾"; btn.setAttribute("aria-label", isDark() ? "Switch to light mode" : "Switch to dark mode"); };
+    const label = () => {
+      const es = document.documentElement.lang === "es";
+      btn.textContent = isDark() ? "☀" : "☾";
+      btn.setAttribute("aria-label", isDark() ? (es ? "Cambiar a modo claro" : "Switch to light mode") : (es ? "Cambiar a modo oscuro" : "Switch to dark mode"));
+    };
     label();
+    document.addEventListener("langchange", label);
     btn.addEventListener("click", () => {
       const next = isDark() ? "light" : "dark";
       document.documentElement.dataset.theme = next;
@@ -204,7 +209,51 @@ const FG = (() => {
   // Smooth scrolling, except for people who asked their system for less motion.
   const scrollTo = (el, block = "start") => el && el.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block });
 
-  return { getProgress, completeLesson, addXp, recordBest, getBest, money, compact, toast, reducedMotion, scrollTo };
+  // Header and footer in Spanish for pages whose content is in Spanish (the Learn page). The linked pages
+  // themselves are still in English. Sets <html lang> so screen readers switch pronunciation.
+  const CHROME_ES = {
+    "Learn": "Aprende", "Topics": "Temas", "Play": "Juega", "Tools": "Herramientas", "My plan": "Mi plan",
+    "Investing": "Inversiones", "Returns, fees, and accounts": "Rendimientos, comisiones y cuentas",
+    "College & careers": "Universidad y carreras", "Majors, pay, and ROI": "Carreras, salarios y rentabilidad",
+    "Credit & debt": "Crédito y deudas", "Scores, cards, and loans": "Puntajes, tarjetas y préstamos",
+    "Taxes": "Impuestos", "Brackets and paychecks": "Tramos y cheques de pago",
+    "Housing": "Vivienda", "Mortgages and rent vs buy": "Hipotecas y alquilar vs. comprar",
+    "FinanceGuru. For educational purposes only — not financial advice.": "FinanceGuru. Solo con fines educativos; no es asesoría financiera.",
+    "Invest": "Invertir", "College": "Universidad", "Credit": "Crédito", "Teachers & parents": "Docentes y familias",
+    "Privacy": "Privacidad", "Terms": "Términos",
+  };
+  const chromeOriginal = new WeakMap();
+  function setChromeLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll(".site-header, .site-footer").forEach((root) => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+        if (!chromeOriginal.has(n)) chromeOriginal.set(n, n.nodeValue);
+        const en = chromeOriginal.get(n), key = en.trim();
+        n.nodeValue = lang === "es" && CHROME_ES[key] ? en.replace(key, CHROME_ES[key]) : en;
+      }
+    });
+    document.dispatchEvent(new Event("langchange"));
+  }
+
+  // The visitor's lesson language ("en" or "es"), shared by the Learn page, daily challenge, and Check-up.
+  const LANG_KEY = "fg-lang";
+  function getLang() { return safeGet(LANG_KEY) === "es" ? "es" : "en"; }
+  function setLang(lang) { safeSet(LANG_KEY, lang); }
+  // Spanish lesson text (js/lessons.es.js) for pages that load it only when someone picks Spanish.
+  const siteScript = document.currentScript && document.currentScript.src;
+  let esLoading = null;
+  function loadSpanish() {
+    if (typeof localizeLesson === "function") return Promise.resolve();
+    return (esLoading ||= new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = new URL("lessons.es.js", siteScript || location.href).href;
+      s.onload = resolve; s.onerror = () => { esLoading = null; reject(new Error("Spanish lessons failed to load")); };
+      document.head.append(s);
+    }));
+  }
+
+  return { getProgress, completeLesson, addXp, recordBest, getBest, money, compact, toast, reducedMotion, scrollTo, setChromeLang, getLang, setLang, loadSpanish };
 })();
 
 // Offline support: register sw.js from the site root (found relative to this script, so lesson pages and

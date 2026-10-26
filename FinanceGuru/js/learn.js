@@ -15,7 +15,7 @@
       earned: (xp) => `You earned <strong>+${xp} XP</strong>.`, retry: "Retry lesson",
       cert: "🎓 Get your certificate →", unitDone: (n, title) => `🏅 Unit ${n} complete: ${title}! You earned a badge.`,
       checkup: "🩺 Take the \"after\" check-up →", capstone: "🎓 Capstone: your first year →", nextL: (t) => `Next: ${t} →`, finish: "Finish the remaining lessons →",
-      title: "Learn — FinanceGuru",
+      title: "Learn — FinanceGuru", langGroup: "Lesson language",
     },
     es: {
       lessons: "Lecciones", of: "de", back: "← Atrás", next: "Siguiente →", takeQuiz: "Hacer el quiz →",
@@ -23,9 +23,9 @@
       correct: "✅ ¡Correcto!", wrong: "❌ No exactamente.",
       perfect: "¡Puntaje perfecto! 🏆", great: "¡Muy bien! 🎉", effort: "Buen intento: repasa y vuelve a intentarlo cuando quieras.",
       earned: (xp) => `Ganaste <strong>+${xp} XP</strong>.`, retry: "Repetir la lección",
-      cert: "🎓 Obtén tu certificado →", unitDone: (n) => `🏅 ¡Unidad ${n} completa! Ganaste una insignia.`,
-      checkup: "🩺 Haz el chequeo final (en inglés) →", capstone: "🎓 Proyecto final: tu primer año (en inglés) →", nextL: (t) => `Siguiente: ${t} →`, finish: "Termina las lecciones que faltan →",
-      title: "Aprende — FinanceGuru",
+      cert: "🎓 Obtén tu certificado →", unitDone: (n, title) => `🏅 ¡Unidad ${n} completa: ${title}! Ganaste una insignia.`,
+      checkup: "🩺 Haz el chequeo final →", capstone: "🎓 Proyecto final: tu primer año (en inglés) →", nextL: (t) => `Siguiente: ${t} →`, finish: "Termina las lecciones que faltan →",
+      title: "Aprende — FinanceGuru", langGroup: "Idioma de la lección",
     },
   };
 
@@ -44,6 +44,8 @@
     document.getElementById("lesson-nav-title").textContent = t().lessons;
     list.lang = body.lang = lang;
     document.title = t().title;
+    FG.setChromeLang(lang);
+    document.querySelector(".lang-switch").setAttribute("aria-label", t().langGroup);
   }
 
   function renderNav() {
@@ -136,7 +138,7 @@
           <div class="big">${score}/${total}</div>
           <h2 tabindex="-1" data-autofocus>${msg}</h2>
           <p class="muted">${t().earned(earned)}</p>
-          ${unitDone ? `<p class="unit-done-note">${t().unitDone(ui + 1, UNITS[ui].title)}</p>` : ""}
+          ${unitDone ? `<p class="unit-done-note">${t().unitDone(ui + 1, lang === "es" ? UNITS_ES[UNITS[ui].id] : UNITS[ui].title)}</p>` : ""}
           <div class="hero-actions" style="justify-content:center">
             <button class="btn btn-ghost" data-act="retry">${t().retry}</button>
             ${allDone ? `<a class="btn btn-primary" href="certificate.html">${t().cert}</a><a class="btn btn-ghost" href="capstone.html">${t().capstone}</a><a class="btn btn-ghost" href="checkup.html">${t().checkup}</a>` : ""}

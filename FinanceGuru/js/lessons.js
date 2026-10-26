@@ -784,9 +784,9 @@ const LESSONS = [
         heading: "Health insurance words",
         html: `<ul>
                  <li><strong>Premium:</strong> what you pay every month, even if you never see a doctor.</li>
-                 <li><strong>Deductible:</strong> what you pay for care each year before the plan starts sharing costs. The average single deductible at work was <strong>$1,886</strong> in 2025 (KFF).</li>
+                 <li><strong>Deductible:</strong> what you pay for care each year before the plan starts sharing costs. The average single deductible at work was <strong>$1,955</strong> in 2026 (KFF).</li>
                  <li><strong>Copay / coinsurance:</strong> your share after the deductible, such as $25 a visit or 20% of the bill.</li>
-                 <li><strong>Out-of-pocket maximum:</strong> the most you pay in a year (not counting premiums). For 2026, plans can't set it above <strong>$10,600</strong> for one person.</li>
+                 <li><strong>Out-of-pocket maximum:</strong> the most you pay in a year (not counting premiums). For 2026, plans can't set it above <strong>$10,600</strong> for one person, rising to $12,000 in 2027 (HHS).</li>
                </ul>
                <p>Most plans cover preventive care like checkups and vaccines at no cost, and you can usually stay on a parent's plan until <strong>age 26</strong>.</p>
                <div class="callout"><strong>Practice:</strong> choose the cheaper plan for real-life years in the <a href="play.html#plans">Plan Picker game</a>.</div>`,

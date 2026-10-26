@@ -85,9 +85,33 @@
             <li><strong>Discuss + exit ticket (10 min).</strong> Debrief, then use the printable quiz as an exit ticket.</li>
             <li><strong>No devices?</strong> Print the student worksheet: guided notes from the lesson text with a word bank, discussion questions with room to write, the quiz, and an answer key.</li>
           </ol>
-          <p class="small muted">Progress and XP are saved in each student's browser only. Every lesson is also available in Spanish (<a href="learn.html?lang=es">learn.html?lang=es</a>) for English learners, with progress shared across both languages. Students who finish every lesson can print a <a href="certificate.html">FinanceGuru Fundamentals certificate</a> to turn in.</p>
+          <p class="small muted">Progress and XP are saved in each student's browser only. Every lesson and the Money Check-up are also available in Spanish (<a href="learn.html?lang=es">learn.html?lang=es</a>, <a href="checkup.html?lang=es">checkup.html?lang=es</a>) for English learners, with progress shared across both languages. Students who finish every lesson can print a <a href="certificate.html">FinanceGuru Fundamentals certificate</a> to turn in.</p>
           <p class="small muted"><strong>Measure growth:</strong> the <a href="checkup.html">Money Check-up</a> is a 10-question pre/post test (two questions per unit). Students take it on day one, then again at the end; the results screen shows before → after scores by unit for them to screenshot or show you. Answers stay hidden after the "before" check-up so the comparison is fair.</p>
           <p class="small muted"><strong>Capstone:</strong> <a href="capstone.html">Your First Year After Graduation</a> (about 15 minutes) asks students to make seven decisions on a $50,000 salary: housing, transport, 401(k), savings account, spending, a first credit card, and a bonus. It then simulates twelve months and grades each unit. A good final-day activity: students play once, change one decision, and explain in writing which choice moved their net worth the most and why.</p>
+        </div>
+      </section>
+
+      <section style="padding-top:0" aria-labelledby="state-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 id="state-title">Your state's requirement</h2>
+            <p class="muted">Which states require a standalone personal finance course to graduate, and when it starts. Pick a state on the map or from the list.</p>
+          </div>
+          <div class="state-layout">
+            <div>
+              <div class="state-map" id="state-map" aria-hidden="true"></div>
+              <ul class="state-legend small" aria-hidden="true">
+                <li><span class="swatch now"></span>Required now</li>
+                <li><span class="swatch soon"></span>Starts with a future class</li>
+                <li><span class="swatch none"></span>No standalone course required</li>
+              </ul>
+            </div>
+            <div class="card state-detail">
+              <div class="field"><label for="state-pick">Choose your state</label><select class="select" id="state-pick"></select></div>
+              <div id="state-info" aria-live="polite"></div>
+            </div>
+          </div>
+          <p class="small muted" id="state-source"></p>
         </div>
       </section>
 
@@ -127,6 +151,7 @@
   <script src="js/site.js"></script>
   <script src="js/lessons.js"></script>
   <script src="js/data/lessonplans.js"></script>
+  <script src="js/data/states.js"></script>
   <script src="js/worksheet.js"></script>
   <script src="js/teachers.js"></script>
 </body>

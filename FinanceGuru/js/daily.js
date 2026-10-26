@@ -39,7 +39,6 @@ const Daily = (() => {
     return s.today;
   }
 
-  const LANG_KEY = "fg-lang";
   const T = {
     en: {
       title: "Daily challenge", from: "from", locale: undefined, streakTip: "Answer every day to grow your streak",
@@ -52,27 +51,11 @@ const Daily = (() => {
       tomorrow: "Vuelve mañana para mantener tu racha.", review: "Repasa la lección →", other: "English", otherLang: "en", otherLabel: "Show the challenge in English",
     },
   };
-  function getLang() { try { return localStorage.getItem(LANG_KEY) === "es" ? "es" : "en"; } catch { return "en"; } }
-  function setLang(lang) { try { localStorage.setItem(LANG_KEY, lang); } catch { /* storage blocked */ } }
-
-  // Spanish text lives in js/lessons.es.js; pages that show the challenge load it on demand.
-  let esLoading = null;
-  function loadSpanish() {
-    if (typeof localizeLesson === "function") return Promise.resolve();
-    const self = document.querySelector('script[src$="js/daily.js"]');
-    return (esLoading ||= new Promise((resolve, reject) => {
-      const s = document.createElement("script");
-      s.src = new URL("lessons.es.js", self ? self.src : location.href).href;
-      s.onload = resolve; s.onerror = () => { esLoading = null; reject(); };
-      document.head.append(s);
-    }));
-  }
-
   // Returns a promise that settles once the card is drawn (Spanish may need a download first).
   function render(host) {
-    const lang = getLang();
+    const lang = FG.getLang();
     if (lang === "es" && typeof localizeLesson !== "function") {
-      return loadSpanish().then(() => render(host), () => { setLang("en"); return render(host); });
+      return FG.loadSpanish().then(() => render(host), () => { FG.setLang("en"); return render(host); });
     }
     const base = todaysQuestion(), st = state(), t = T[lang];
     const lesson = lang === "es" ? localizeLesson(base.lesson, "es") : base.lesson;
@@ -97,7 +80,7 @@ const Daily = (() => {
     host.onclick = (e) => {
       const switcher = e.target.closest("[data-daily-lang]");
       if (switcher) {
-        setLang(switcher.dataset.dailyLang);
+        FG.setLang(switcher.dataset.dailyLang);
         render(host).then(() => host.querySelector("[data-daily-lang]")?.focus());
         return;
       }

@@ -693,9 +693,9 @@ const LESSONS_ES = {
         heading: "Palabras del seguro médico",
         html: `<ul>
                  <li><strong>Prima:</strong> lo que pagas cada mes, aunque nunca vayas al médico.</li>
-                 <li><strong>Deducible:</strong> lo que pagas por tu atención médica cada año antes de que el plan empiece a compartir los costos. El deducible individual promedio en planes de trabajo fue de <strong>$1,886</strong> en 2025 (KFF).</li>
+                 <li><strong>Deducible:</strong> lo que pagas por tu atención médica cada año antes de que el plan empiece a compartir los costos. El deducible individual promedio en planes de trabajo fue de <strong>$1,955</strong> en 2026 (KFF).</li>
                  <li><strong>Copago / coseguro:</strong> tu parte después del deducible, como $25 por consulta o el 20% de la cuenta.</li>
-                 <li><strong>Máximo de gastos de bolsillo:</strong> lo máximo que pagas en un año (sin contar las primas). Para 2026, los planes no pueden fijarlo por encima de <strong>$10,600</strong> por persona.</li>
+                 <li><strong>Máximo de gastos de bolsillo:</strong> lo máximo que pagas en un año (sin contar las primas). Para 2026, los planes no pueden fijarlo por encima de <strong>$10,600</strong> por persona; en 2027 sube a $12,000 (HHS).</li>
                </ul>
                <p>La mayoría de los planes cubren la atención preventiva, como chequeos y vacunas, sin costo, y normalmente puedes seguir en el plan de tus padres hasta los <strong>26 años</strong>.</p>
                <div class="callout"><strong>Practica:</strong> elige el plan más barato para distintos años de la vida real en el juego <a href="play.html#plans">Plan Picker</a>.</div>`,
@@ -948,6 +948,9 @@ const LESSONS_ES = {
     ],
   },
 };
+
+// Unit titles (UNITS in js/lessons.js), keyed by unit id.
+const UNITS_ES = { earn: "Ganar y gastar", protect: "Ahorrar y protegerte", borrow: "Pedir prestado con cabeza", grow: "Haz crecer tu dinero", decide: "Grandes decisiones" };
 
 // Returns the lesson in the requested language, falling back to English for anything missing.
 function localizeLesson(lesson, lang) {

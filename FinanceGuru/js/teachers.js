@@ -134,8 +134,66 @@
     history.replaceState(null, "", "#" + next);
   });
 
+  /* ---------- Your state's requirement (js/data/states.js) ---------- */
+  const STATE_KEY = "fg-state";
+  const codes = Object.keys(STATE_PF.states).sort((a, b) => STATE_PF.states[a].name.localeCompare(STATE_PF.states[b].name));
+  // Graduating class of this school year's seniors (a school year starts in August).
+  const seniors = (() => { const d = new Date(); return d.getFullYear() + (d.getMonth() >= 7 ? 1 : 0); })();
+  const ordinal = (n) => n + ([11, 12, 13].includes(n) ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+  const grade = (cls) => { const g = 12 - (cls - seniors); return g >= 1 ? `${ordinal(g)} grade` : g === 0 ? "kindergarten" : null; };
+  const statusText = (s) => s.since ? `Required since the Class of ${s.since}` : s.adopted ? `Required (adopted ${s.adopted})` : s.starts ? `Starts with the Class of ${s.starts}` : "No standalone course required";
+
+  function stateInfo(code) {
+    const s = STATE_PF.states[code], status = statePfStatus(s);
+    const g = s.starts && grade(s.starts);
+    const lead = status === "now"
+      ? `Students in ${s.name} take a standalone personal finance course (at least one semester) to graduate.`
+      : status === "soon"
+        ? `${s.name} has adopted a standalone personal finance course requirement. It starts with the Class of ${s.starts}${g ? `: students in ${g} this school year` : ""}.`
+        : `${s.name} doesn't require a standalone personal finance course yet. Personal finance may be taught inside another course, such as economics; your state department of education has the details.`;
+    const counts = STANDARD_AREAS.map((a) => [a, Object.values(PLANS).filter((p) => p.areas.includes(a)).length]);
+    return `
+      <p class="state-status ${status}"><strong>${statusText(s)}</strong></p>
+      <p>${lead}</p>
+      <h3 class="small">FinanceGuru lessons by national standards area</h3>
+      <div class="chips">${counts.map(([a, n]) => `<button type="button" class="chip" data-state-area="${a}">${a} · ${n}</button>`).join("")}</div>`;
+  }
+
+  function pickState(code, remember = true) {
+    if (!STATE_PF.states[code]) return;
+    $("state-pick").value = code;
+    $("state-info").innerHTML = stateInfo(code);
+    $("state-map").querySelectorAll("[data-state]").forEach((b) => b.classList.toggle("on", b.dataset.state === code));
+    if (remember) try { localStorage.setItem(STATE_KEY, code); } catch { /* storage blocked */ }
+  }
+
+  function renderStates() {
+    $("state-map").innerHTML = Object.entries(STATE_PF.grid).map(([code, [r, c]]) => {
+      const s = STATE_PF.states[code];
+      return `<button type="button" tabindex="-1" class="state-tile ${statePfStatus(s)}" data-state="${code}" title="${s.name}: ${statusText(s)}" style="grid-row:${r + 1};grid-column:${c + 1}">${code}</button>`;
+    }).join("");
+    $("state-pick").innerHTML = `<option value="">Select a state…</option>` + codes.map((c) => `<option value="${c}">${STATE_PF.states[c].name}</option>`).join("");
+    const all = Object.values(STATE_PF.states).map(statePfStatus);
+    $("state-source").innerHTML = `${all.filter((s) => s === "now").length} states require the course now and ${all.filter((s) => s === "soon").length} more start with the Classes of 2027–${Math.max(...Object.values(STATE_PF.states).map((s) => s.starts || 0))}. Source: <a href="${STATE_PF.source}" rel="noopener" target="_blank">NGPF Live U.S. Dashboard</a>, checked ${STATE_PF.checked}. NGPF counts only standalone courses of at least one semester.`;
+    let saved = null;
+    try { saved = localStorage.getItem(STATE_KEY); } catch { /* storage blocked */ }
+    if (saved) pickState(saved, false);
+    else $("state-info").innerHTML = `<p class="muted">Pick a state to see its requirement and how the lessons line up with the national standards.</p>`;
+  }
+
+  $("state-map").addEventListener("click", (e) => { const b = e.target.closest("[data-state]"); if (b) pickState(b.dataset.state); });
+  $("state-pick").addEventListener("change", (e) => pickState(e.target.value));
+  $("state-info").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-state-area]");
+    if (!b) return;
+    area = b.dataset.stateArea;
+    renderChips(); renderPlans();
+    $("area-chips").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    $("area-chips").querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+  });
+
   $("plan-count").textContent = $("plan-count-lead").textContent = Object.keys(PLANS).length;
-  renderChips(); renderPlans(); renderParents();
+  renderChips(); renderPlans(); renderParents(); renderStates();
   const fromHash = () => setMode(location.hash === "#parents" ? "parents" : "teachers");
   addEventListener("hashchange", fromHash);
   fromHash();
