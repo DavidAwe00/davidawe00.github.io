@@ -63,6 +63,28 @@
       <div class="card"><div class="stats" id="pstats" style="margin:0"></div></div>
     </div>
 
+    <section class="class-join-section" id="class-join" hidden aria-labelledby="class-title">
+      <div class="card class-card">
+        <h2 id="class-title">🏫 Your class</h2>
+        <div id="class-member" hidden>
+          <p>You're in <strong id="class-name"></strong> as <strong id="class-nick"></strong>. Your lesson quiz scores and Money Check-up scores share with your teacher automatically.</p>
+          <p class="small muted" id="class-synced"></p>
+          <div id="class-assigned" hidden><h3>Assigned by your teacher</h3><ul class="class-assigned" id="class-assigned-list"></ul></div>
+          <button type="button" class="btn btn-ghost" id="class-leave">Leave class</button>
+        </div>
+        <form id="class-form" hidden novalidate>
+          <p class="muted">Got a class code from your teacher? Join so they can see your progress. No account needed.</p>
+          <div class="class-fields">
+            <div class="field"><label for="class-code">Class code</label><div class="input-wrap"><input id="class-code" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="7" placeholder="ABC234" required></div></div>
+            <div class="field"><label for="class-nickname">Nickname</label><div class="input-wrap"><input id="class-nickname" autocomplete="off" maxlength="30" placeholder="Ana R." required aria-describedby="class-nick-hint"></div><span class="hint" id="class-nick-hint">First name and last initial is plenty. Don't use your full name.</span></div>
+          </div>
+          <p class="small muted">Your teacher will see your nickname, which lessons you've finished with your quiz scores, and your Money Check-up scores. Nothing else leaves this browser. You can leave the class at any time.</p>
+          <button type="submit" class="btn btn-primary">Join class</button>
+          <p class="small" id="class-error" role="alert"></p>
+        </form>
+      </div>
+    </section>
+
     <section style="padding:24px 0 0">
       <div class="card cert-cta">
         <div><strong>🎓 FinanceGuru Fundamentals certificate</strong><div class="small muted" id="cert-status"></div></div>
@@ -107,10 +129,11 @@
   <footer class="site-footer">
     <div class="container">
       <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
-      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
+  <script src="js/site-config.js"></script>
   <script src="js/site.js"></script>
   <script src="js/lessons.js"></script>
   <script src="js/daily.js"></script>
@@ -120,5 +143,7 @@
   <script src="js/capstone.js"></script>
   <script src="js/badges.js"></script>
   <script src="js/backup.js"></script>
+  <script src="js/class-sync.js"></script>
+  <script src="js/class-join.js"></script>
 </body>
 </html>

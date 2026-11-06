@@ -464,6 +464,7 @@
     <section id="panel-hsa" role="tabpanel" style="padding:0" hidden>
       <div class="tool">
         <div class="card">
+          <div class="field"><label for="hs-year">Plan year</label><select class="select" id="hs-year"><option value="2026">2026</option><option value="2027">2027 (open enrollment)</option></select></div>
           <div class="field"><label for="hs-type">Account</label><select class="select" id="hs-type">
             <option value="hsa-self">HSA, self-only coverage</option><option value="hsa-family">HSA, family coverage</option><option value="fsa">Health FSA</option></select></div>
           <div class="field"><label for="hs-amt">You put in per year</label><div class="input-wrap"><span>$</span><input id="hs-amt" type="number" min="0" step="50" value="1500"></div><span class="hint" id="hs-limit"></span></div>
@@ -480,7 +481,7 @@
             <div class="stat"><div class="label" id="hs-risk-label">At risk of forfeiting</div><div class="value" id="hs-risk">—</div></div>
           </div>
           <p class="callout small" id="hs-insight" style="margin-bottom:0"></p>
-          <p class="small muted" style="margin:10px 0 0">2026 IRS limits: HSA $4,400 self-only and $8,750 family (Rev. Proc. 2025-19), plus $1,000 more at age 55+; health FSA $3,400, with up to $680 carryover if your plan allows it (Rev. Proc. 2025-32). An HSA requires a high-deductible health plan. Uses 2026 federal brackets; estimate only.</p>
+          <p class="small muted" style="margin:10px 0 0">IRS limits: HSA $4,400 self-only and $8,750 family in 2026 (Rev. Proc. 2025-19), $4,500 and $9,000 in 2027 (Rev. Proc. 2026-24), plus $1,000 more at age 55+; health FSA $3,400 in 2026, with up to $680 carryover if your plan allows it (Rev. Proc. 2025-32); $3,500 in 2027 with up to $700 carryover, and 2027 federal brackets (Rev. Proc. 2026-35). Social Security wage base: $184,500 (2026), $192,300 (2027, SSA). An HSA requires a high-deductible health plan. Estimate only.</p>
         </div>
       </div>
     </section>
@@ -570,15 +571,17 @@
         <p class="small muted" style="margin:10px 0 0">Saved in this browser only. Take a snapshot about once a month; one per month is kept (a new one replaces that month's). A negative net worth is common early on with student loans; the trend matters more than the number.</p>
       </div>
     </section>
+    <div id="tool-feedback" data-feedback hidden></div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
-      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+      <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
+  <script src="js/site-config.js"></script>
   <script src="js/site.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/data/market-history.js"></script>

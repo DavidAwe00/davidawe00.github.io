@@ -15,6 +15,7 @@
     $("tool-desc").textContent = picker.selectedOptions[0].dataset.desc || "";
     if (name === "compound") compound(); // chart needs a visible container to measure
     document.dispatchEvent(new CustomEvent("tabshow", { detail: name }));
+    FG.feedback($("tool-feedback"), `tool/${name}`, picker.selectedOptions[0].textContent.trim());
   }
   // The visible tool name is in the picker, so give each panel a screen-reader heading with that name.
   [...picker.options].forEach((o) => {

@@ -10,7 +10,9 @@ const LESSONS_ES = {
       {
         heading: "Qué es realmente un presupuesto",
         html: `<p>Un presupuesto no es un castigo. Es un <strong>plan para tu dinero</strong> hecho <em>antes</em> de gastarlo.</p>
-               <p>Sin un plan, el dinero se escapa en cosas pequeñas. Con uno, tú decides qué es lo más importante para ti, y lo pagas primero.</p>`,
+               <p>Sin un plan, el dinero se escapa en cosas pequeñas. Con uno, tú decides qué es lo más importante para ti, y lo pagas primero.</p>
+               <p>Un plan también te da un colchón. En 2025, el <strong>63% de los adultos en EE. UU.</strong> dijo que podría cubrir un gasto inesperado de $400 con efectivo o su equivalente. Los demás tendrían que pedir prestado, vender algo o no podrían pagarlo.</p>
+               <p class="small muted">Fuente: Reserva Federal, <em>Economic Well-Being of U.S. Households in 2025</em> (mayo de 2026).</p>`,
       },
       {
         heading: "La regla 50/30/20",
@@ -20,13 +22,44 @@ const LESSONS_ES = {
                  <li><strong>30% deseos</strong>: comer fuera, streaming, pasatiempos, viajes.</li>
                  <li><strong>20% ahorro y pagos extra de deudas</strong>: tu yo del futuro.</li>
                </ul>
+               <p><strong>Ejemplo:</strong> el primer trabajo de tiempo completo de Jordan le deja <strong>$2,400 al mes</strong> después de impuestos. Eso es $1,200 para necesidades, $720 para deseos y $480 para ahorro. Si solo la renta cuesta $1,100, las necesidades pasarán del 50%, así que Jordan recorta primero los deseos, no el ahorro.</p>
                <p class="small muted">La guía 50/30/20 la popularizaron Elizabeth Warren y Amelia Warren Tyagi en <em>All Your Worth</em> (2005).</p>
-               <div class="callout"><strong>Pruébalo:</strong> el <a href="tools.html#budget">Budget Planner</a> divide tu ingreso por ti, o practica con el juego <a href="play.html#envelope">Envelope Budget</a>.</div>`,
+               <div class="callout"><strong>Pruébalo:</strong> el <a href="tools.html#budget">Budget Planner</a> divide tu ingreso por ti, y el <a href="plan.html">First Paycheck Plan</a> arma uno con tu sueldo neto real.</div>`,
+      },
+      {
+        heading: "Elige un método que te funcione",
+        html: `<p>El 50/30/20 es una forma de hacer un presupuesto. Otros dos métodos populares:</p>
+               <ul>
+                 <li><strong>Presupuesto base cero</strong>: dale un trabajo a cada dólar (cuentas, comida, diversión, ahorro) hasta que tu ingreso menos tu plan sea $0. Requiere más trabajo, pero nada queda sin plan.</li>
+                 <li><strong>Presupuesto de sobres</strong>: pon una cantidad fija para cada categoría en su propio sobre (efectivo, o cuentas o "apartados" separados en una app del banco). Cuando un sobre se vacía, esa categoría se acabó por el mes.</li>
+               </ul>
+               <p>El mejor método es el que de verdad sigas usando. Puedes cambiar cuando quieras.</p>
+               <div class="callout"><strong>Practica:</strong> llena los sobres en el juego <a href="play.html#envelope">Envelope Budget</a>.</div>`,
       },
       {
         heading: "Págate a ti primero",
         html: `<p>El hábito más poderoso: <strong>pasa dinero a tus ahorros el mismo día que te pagan</strong>, de forma automática. Luego gasta lo que queda.</p>
                <p>Si esperas a ahorrar "lo que sobre", casi nunca sobra nada.</p>`,
+      },
+      {
+        heading: "Revisa adónde se va de verdad",
+        html: `<p>Un presupuesto es solo una suposición hasta que lo revisas. Una vez al mes, abre tu app del banco o de pagos y separa los gastos del mes pasado en necesidades, deseos y ahorro.</p>
+               <ul>
+                 <li>Busca <strong>compras pequeñas que se repiten</strong>: $6 al día en snacks o café son unos $180 al mes.</li>
+                 <li>Haz una lista de cada <strong>suscripción</strong>. Las pruebas gratis que se convirtieron en cobros son fáciles de pasar por alto.</li>
+                 <li>Ajusta el plan del mes siguiente a la vida real. Cambiar un presupuesto no es fracasar; así es como funcionan los presupuestos.</li>
+               </ul>
+               <div class="callout"><strong>Pruébalo:</strong> suma tus suscripciones en el <a href="tools.html#subs">Subscription Audit</a>.</div>`,
+      },
+      {
+        heading: "Cuando tu pago cambia cada mes",
+        html: `<p>Las propinas, los trabajos por app y los empleos de temporada no pagan lo mismo cada vez. Para hacer un presupuesto de todos modos:</p>
+               <ol>
+                 <li><strong>Planea con un mes bajo</strong>, no con tu mejor mes. Cubre tus necesidades con lo que sabes que vas a recibir.</li>
+                 <li>En los meses buenos, pon lo extra en una cuenta de ahorro de <strong>reserva</strong>.</li>
+                 <li>En los meses flojos, págate de la reserva para que tus gastos se mantengan estables.</li>
+               </ol>
+               <p>El pago por trabajos por app o independientes casi nunca tiene impuestos retenidos, así que aparta algo para impuestos también (mira la lección <a href="learn.html#side-hustle">Trabajos extra</a>).</p>`,
       },
     ],
     quiz: [
@@ -49,6 +82,16 @@ const LESSONS_ES = {
           "Pedir un aumento",
         ],
         why: "Ahorrar primero lo vuelve automático, así que de verdad sucede.",
+      },
+      {
+        q: "Jordan recibe $2,400 al mes después de impuestos. Con la regla 50/30/20, ¿cuánto va a ahorro y pagos extra de deudas?",
+        choices: ["$240", "$480", "$720", "$1,200"],
+        why: "El 20% de $2,400 es $480. Las necesidades reciben $1,200 (50%) y los deseos $720 (30%).",
+      },
+      {
+        q: "Tus propinas van de $1,400 a $2,200 al mes. ¿Cuál es la forma más segura de hacer tu presupuesto?",
+        choices: ["Planear con tu mejor mes", "Planear con un mes bajo y ahorrar lo extra de los meses buenos", "No hacer presupuesto hasta que tu pago sea estable", "Usar una tarjeta de crédito cuando un mes no alcance"],
+        why: "Planear con un mes bajo significa que tus necesidades siempre están cubiertas. Lo extra de los meses buenos crea una reserva para los meses flojos.",
       },
     ],
   },
@@ -860,7 +903,7 @@ const LESSONS_ES = {
       },
       {
         heading: "Todo cuenta, con formulario o sin él",
-        html: `<p>A partir de 2026, un negocio solo tiene que enviarte un <strong>Formulario 1099-NEC</strong> si te pagó <strong>$2,000</strong> o más en el año (antes eran $600). Las apps de pago y los marketplaces envían un <strong>1099-K</strong> solo después de <strong>$20,000 y 200 transacciones</strong>.</p>
+        html: `<p>A partir de 2026, un negocio solo tiene que enviarte un <strong>Formulario 1099-NEC</strong> si te pagó <strong>$2,000</strong> o más en el año (antes eran $600); con la inflación sube a $2,100 para los pagos de 2027 (IRS). Las apps de pago y los marketplaces envían un <strong>1099-K</strong> solo después de <strong>$20,000 y 200 transacciones</strong>.</p>
                <p>Pero esas son reglas de reporte para los negocios, no límites libres de impuestos. <strong>Todo el ingreso por cuenta propia paga impuestos</strong>, y debes presentar una declaración cuando tus ganancias netas por cuenta propia llegan a <strong>$400</strong>.</p>`,
       },
       {
@@ -944,6 +987,141 @@ const LESSONS_ES = {
         q: "¿Cuál es el principal peligro de renovar un payday loan?",
         choices: ["Baja tu tasa de interés", "Pagas un cargo nuevo cada vez y sigues debiendo el monto completo", "Es ilegal en todas partes", "Cierra tu cuenta bancaria"],
         why: "Cada renovación agrega otro cargo sin reducir lo que pediste prestado, así que los costos se acumulan rápido.",
+      },
+    ],
+  },
+  "financial-aid": {
+    title: "Cómo pagar la universidad: FAFSA, becas y préstamos",
+    summary: "Consigue primero el dinero gratis, lee tu oferta de ayuda y pide prestado solo lo que necesitas.",
+    cards: [
+      {
+        heading: "Primero el dinero gratis",
+        html: `<p>Paga tus estudios en este orden:</p>
+               <ol>
+                 <li><strong>Subvenciones y becas</strong>: dinero que no devuelves.</li>
+                 <li><strong>Estudio y trabajo</strong> (work-study): un empleo de medio tiempo, muchas veces en el campus, que cobras mientras trabajas.</li>
+                 <li><strong>Préstamos estudiantiles federales</strong>: dinero prestado con tasas fijas y protecciones.</li>
+                 <li><strong>Préstamos privados</strong>: al final, y solo si todavía te falta dinero.</li>
+               </ol>
+               <p>Cada paso hacia abajo en la lista te cuesta más, así que agota cada uno antes de pasar al siguiente.</p>`,
+      },
+      {
+        heading: "La FAFSA abre la puerta",
+        html: `<p>La <strong>FAFSA</strong> (Solicitud Gratuita de Ayuda Federal para Estudiantes) es el formulario para las subvenciones federales, el programa de estudio y trabajo y los préstamos federales, y muchos estados y universidades la usan para su propia ayuda. Es gratis en <strong>StudentAid.gov</strong>. Nunca le pagues a un sitio web para llenarla.</p>
+               <p>La FAFSA 2027–28 abrió el <strong>23 de septiembre de 2026</strong> y cubre los estudios del 1 de julio de 2027 al 30 de junio de 2028. Usa la <strong>información de impuestos de 2025</strong> de tu familia. La fecha límite federal es el 30 de junio de 2028, pero parte de la ayuda estatal y universitaria se acaba mucho antes, así que llénala lo antes posible.</p>
+               <p>Tendrás que llenar una FAFSA nueva <strong>cada año</strong> de estudios.</p>
+               <p class="small muted">Fuente: Departamento de Educación de EE. UU. (comunicado de prensa, 23 de septiembre de 2026) y StudentAid.gov.</p>`,
+      },
+      {
+        heading: "Subvenciones y becas",
+        html: `<p>La <strong>Beca Pell</strong> (Pell Grant) es ayuda federal para estudiantes con necesidad económica. Para 2026–27 lo máximo que puedes recibir es <strong>$7,395</strong> al año, y no la devuelves.</p>
+               <p>Tu estado y tu universidad pueden agregar sus propias subvenciones. Las becas vienen de universidades, empleadores, grupos comunitarios y organizaciones sin fines de lucro. Solicita varias: las pequeñas se suman y muchas veces tienen menos solicitantes.</p>
+               <p>Las <strong>estafas de becas</strong> te piden pagar una cuota para solicitar o para "garantizar" un premio. Las becas reales no te cobran (mira la lección <a href="learn.html#scams">Cómo detectar estafas</a>).</p>
+               <p class="small muted">Fuente: Departamento de Educación de EE. UU., carta GEN-26-01 (30 de enero de 2026).</p>`,
+      },
+      {
+        heading: "Lee tu oferta de ayuda",
+        html: `<p>Cada universidad que te acepta te envía una <strong>oferta de ayuda</strong>. Las ofertas mezclan subvenciones, estudio y trabajo y préstamos, así que haz las cuentas tú:</p>
+               <p><strong>Precio neto = costo de asistencia − subvenciones y becas</strong></p>
+               <p>El costo de asistencia incluye matrícula, cuotas, vivienda, comida, libros y transporte. Los préstamos no son un descuento: cubren parte del precio neto ahora, y los devuelves con intereses después.</p>
+               <p>Compara universidades por su <strong>precio neto</strong>, no por el precio de lista ni por el total de "ayuda". Si la situación de tu familia cambió, puedes pedirle a la oficina de ayuda financiera que revise tu caso.</p>
+               <div class="callout"><strong>Haz las cuentas:</strong> mira cuánto te devuelve un título con la calculadora <a href="college.html#roi">College ROI</a>.</div>`,
+      },
+      {
+        heading: "Préstamos federales antes que privados",
+        html: `<ul>
+                 <li><strong>Préstamos subsidiados</strong>: son para estudiantes con necesidad económica. El gobierno paga los intereses mientras estudias al menos a medio tiempo.</li>
+                 <li><strong>Préstamos no subsidiados</strong>: no dependen de la necesidad, pero los intereses se acumulan desde el día en que se entrega el dinero.</li>
+               </ul>
+               <p>Para 2026–27, ambos tienen una tasa fija de <strong>6.52%</strong> para estudiantes de licenciatura. Un estudiante dependiente de primer año puede pedir hasta <strong>$5,500</strong> en préstamos federales, y hasta $3,500 de eso puede ser subsidiado.</p>
+               <p>Los préstamos privados muchas veces piden un codeudor, pueden tener tasas variables y no tienen las opciones de pago federales. Pide prestado solo lo que necesitas, aunque te ofrezcan más.</p>
+               <p class="small muted">Fuente: Departamento de Educación de EE. UU., tasas de interés de los préstamos Direct entregados del 1 de julio de 2026 al 30 de junio de 2027; límites de préstamo de StudentAid.gov.</p>
+               <div class="callout"><strong>Sigue:</strong> mira cómo se pagan en la lección <a href="learn.html#student-loans-2026">Préstamos estudiantiles: las reglas de 2026</a> y en la <a href="credit.html#student">calculadora de préstamos estudiantiles</a>.</div>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "¿Qué tipo de ayuda no hay que devolver?",
+        choices: ["Un préstamo no subsidiado", "Una Beca Pell", "Un préstamo estudiantil privado", "Un préstamo PLUS para padres"],
+        why: "Las subvenciones y las becas son dinero gratis. Todo tipo de préstamo hay que devolverlo, con intereses.",
+      },
+      {
+        q: "La Universidad A cuesta $30,000 al año y ofrece $12,000 en subvenciones. La Universidad B cuesta $24,000 y ofrece $4,000 en subvenciones. ¿Cuál tiene el precio neto más bajo?",
+        choices: ["La Universidad A ($18,000)", "La Universidad B ($20,000)", "Cuestan lo mismo", "La Universidad B, porque su precio de lista es más bajo"],
+        why: "El precio neto es el costo menos subvenciones y becas: $30,000 − $12,000 = $18,000 para A, y $24,000 − $4,000 = $20,000 para B.",
+      },
+      {
+        q: "¿Qué tiene de especial un préstamo federal subsidiado?",
+        choices: ["Nunca cobra intereses", "El gobierno paga los intereses mientras estudias al menos a medio tiempo", "No hay que devolverlo", "Solo los padres pueden pedirlo"],
+        why: "Los préstamos subsidiados no acumulan intereses mientras estudias al menos a medio tiempo. Los no subsidiados empiezan a acumularlos de inmediato.",
+      },
+    ],
+  },
+  "first-apartment": {
+    title: "Cómo rentar tu primer apartamento",
+    summary: "Cuánto puedes pagar, qué dice un contrato de renta y cómo recuperar tu depósito.",
+    cards: [
+      {
+        heading: "¿Cuánto puedes pagar?",
+        html: `<p>HUD considera que un hogar tiene <strong>carga de costos</strong> cuando la vivienda se lleva más del <strong>30% del ingreso</strong>. La cantidad de inquilinos con carga de costos está en un récord, así que vale la pena planear con cuidado.</p>
+               <p>Muchos dueños también piden que tu ingreso mensual sea cerca de <strong>3 veces la renta</strong>. Para una renta de $1,000, eso es $3,000 al mes antes de impuestos.</p>
+               <p>Cuenta también los extras: luz, gas, agua, internet, seguro de inquilino y estacionamiento pueden sumar cientos de dólares al mes.</p>
+               <p class="small muted">Fuentes: HUD; Harvard Joint Center for Housing Studies, <em>America's Rental Housing 2026</em>.</p>
+               <div class="callout"><strong>Pruébalo:</strong> la herramienta <a href="tools.html#apartment">First Apartment budget</a> suma la renta, los costos de mudanza y la división con compañeros de cuarto.</div>`,
+      },
+      {
+        heading: "El dinero que necesitas para mudarte",
+        html: `<p>Antes de recibir las llaves, puede que necesites:</p>
+               <ul>
+                 <li><strong>Cuotas de solicitud</strong> por cada lugar donde apliques.</li>
+                 <li>La <strong>renta del primer mes</strong>, y a veces también la del último.</li>
+                 <li>Un <strong>depósito de seguridad</strong>, muchas veces de cerca de un mes de renta.</li>
+                 <li>Depósitos o cuotas de conexión de servicios, la mudanza y muebles básicos.</li>
+               </ul>
+               <p>Mudarte puede costar fácilmente <strong>dos o tres veces la renta mensual</strong>, así que ahorra con tiempo.</p>`,
+      },
+      {
+        heading: "Lee el contrato antes de firmar",
+        html: `<p>Un <strong>contrato de renta</strong> (lease) es un contrato legal. Revisa:</p>
+               <ul>
+                 <li>La <strong>duración</strong>, y cuánto cuesta terminarlo antes de tiempo.</li>
+                 <li><strong>Qué cuentas pagas tú</strong> y cuáles paga el dueño.</li>
+                 <li>Los cargos por pago tardío, las reglas sobre visitas y mascotas, y quién se encarga de las reparaciones.</li>
+                 <li>Con compañeros de cuarto, normalmente todos los que firman son responsables de la <strong>renta completa</strong>. Si uno deja de pagar, los demás podrían tener que cubrirlo.</li>
+               </ul>
+               <p>Pide todas las promesas por escrito. Nunca envíes un depósito por un lugar que no has visto o antes de firmar un contrato (mira la lección <a href="learn.html#scams">Cómo detectar estafas</a>).</p>`,
+      },
+      {
+        heading: "Recupera tu depósito",
+        html: `<ul>
+                 <li><strong>Documenta la mudanza</strong>: toma fotos y video con fecha de cada cuarto, y anota los daños que ya existen en una lista de entrada que firme el dueño.</li>
+                 <li>Reporta las reparaciones por escrito (un correo o un mensaje que guardes).</li>
+                 <li>Al mudarte, limpia, repara lo que dañaste y vuelve a fotografiar todo.</li>
+               </ul>
+               <p>La mayoría de los estados fija un plazo para devolver el depósito y exige que el dueño detalle cualquier descuento. Normalmente no te pueden cobrar el desgaste normal. Revisa las reglas de tu estado.</p>`,
+      },
+      {
+        heading: "Tus derechos como inquilino",
+        html: `<p>La <strong>Ley de Vivienda Justa</strong> (Fair Housing Act) federal prohíbe negarse a rentarte, o ponerte condiciones diferentes, por tu raza, color, religión, origen nacional, sexo, discapacidad o por tener hijos. Puedes reportar la discriminación a <strong>HUD</strong>.</p>
+               <p>Los estados y las ciudades agregan sus propias protecciones, como cuánto aviso debe dar el dueño antes de entrar o de subir la renta. Busca "derechos del inquilino" más el nombre de tu estado.</p>
+               <p>El seguro de inquilino cubre tus pertenencias (cerca de <strong>$170 al año</strong>; mira la lección <a href="learn.html#insurance">Seguros 101</a>).</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Ganas $3,000 al mes antes de impuestos. Con la guía del 30%, ¿cuánto es lo máximo que querrías gastar en vivienda?",
+        choices: ["$600", "$900", "$1,200", "$1,500"],
+        why: "El 30% de $3,000 es $900. Gastar más que eso te pone en carga de costos según la definición de HUD.",
+      },
+      {
+        q: "¿Cuál es la mejor forma de proteger tu depósito de seguridad al mudarte?",
+        choices: ["Pagarlo en efectivo", "Tomar fotos con fecha de cada cuarto y anotar los daños en una lista de entrada", "Pedir un depósito más pequeño", "No desempacar hasta estar seguro de quedarte"],
+        why: "Las fotos y una lista firmada prueban que el daño ya estaba antes de que llegaras.",
+      },
+      {
+        q: "Tu compañero de cuarto se va sin pagar su parte. Si los dos firmaron el contrato, ¿qué suele pasar?",
+        choices: ["El dueño solo le puede cobrar a tu compañero", "Se cancela el contrato", "Podrías deber la renta completa", "La renta baja a la mitad"],
+        why: "Los contratos normalmente hacen a todos los que firmaron responsables de toda la renta, no solo de su parte.",
       },
     ],
   },

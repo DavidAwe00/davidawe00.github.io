@@ -21,6 +21,7 @@ const FG = (() => {
     p.xp += earned;
     safeSet(STORE_KEY, JSON.stringify(p));
     renderXp();
+    document.dispatchEvent(new Event("progresschange"));
     return earned;
   }
 
@@ -194,8 +195,83 @@ const FG = (() => {
     });
   }
 
+  // Contact details come from site.config.json (js/site-config.js). With an email set, every footer gets a
+  // "Report an error" link for the current page and [data-contact] blocks (About page) appear.
+  const config = typeof SITE_CONFIG === "object" ? SITE_CONFIG : {};
+  function initContact() {
+    const email = config.contactEmail;
+    if (!email) return;
+    const mailto = (subject, body = "") => `mailto:${email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ""}`;
+    document.querySelectorAll("[data-contact-email]").forEach((a) => { a.href = mailto("FinanceGuru"); a.textContent = email; });
+    document.querySelectorAll("[data-contact]").forEach((el) => (el.hidden = false));
+    document.querySelectorAll(".site-footer .container > span:last-child").forEach((links) => {
+      const a = document.createElement("a");
+      a.href = mailto(`Error report: ${document.title}`, `Page: ${location.href.split("#")[0]}\n\nWhat looks wrong (and your source, if you have one):\n`);
+      a.textContent = "Report an error";
+      a.dataset.report = "";
+      links.append(" · ", a);
+    });
+    if (document.documentElement.lang === "es") setChromeLang("es");  // the Learn page switched before this ran
+  }
+
+  // Cookie-free page counts with GoatCounter when site.config.json names a site code. Never on the planner
+  // (its links can carry paycheck figures), never locally, and not when the browser asks not to be tracked.
+  function initAnalytics() {
+    const code = config.goatcounter;
+    if (code) {
+      document.querySelectorAll("[data-analytics]").forEach((el) => (el.hidden = false));
+      document.querySelectorAll("[data-no-analytics]").forEach((el) => (el.hidden = true));
+    }
+    if (!code || location.protocol !== "https:" || /(^|\/)plan\.html$/.test(location.pathname)) return;
+    if (navigator.doNotTrack === "1" || navigator.globalPrivacyControl) return;
+    window.goatcounter = { path: () => location.pathname };  // the path only: no query strings or hashes
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://gc.zgo.at/count.js";
+    s.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
+    document.head.append(s);
+  }
+
+  // "Was this helpful?" under a lesson's results or a tool. Shown once page counts or a contact address
+  // are set up, so an answer always reaches someone: the vote is a GoatCounter event (key + yes/no, nothing
+  // else) when counting is allowed, and "No" offers an email link. Answers are kept here so we don't re-ask.
+  const FEEDBACK_KEY = "fg-feedback-v1";
+  const FEEDBACK_T = {
+    en: { ask: "Was this helpful?", yes: "👍 Yes", no: "👎 No", thanks: "Thanks for the feedback!", missing: "Tell us what was missing →" },
+    es: { ask: "¿Te sirvió?", yes: "👍 Sí", no: "👎 No", thanks: "¡Gracias por tu opinión!", missing: "Cuéntanos qué faltó →" },
+  };
+  function feedback(host, key, title, lang = "en") {
+    if (!host || !(config.goatcounter || config.contactEmail)) { if (host) host.hidden = true; return; }
+    const t = FEEDBACK_T[lang] || FEEDBACK_T.en;
+    let saved = {};
+    try { saved = JSON.parse(safeGet(FEEDBACK_KEY)) || {}; } catch { /* corrupt: start over */ }
+    if (typeof saved !== "object" || Array.isArray(saved)) saved = {};
+    const missingLink = () => config.contactEmail
+      ? ` <a href="mailto:${config.contactEmail}?subject=${encodeURIComponent(`Feedback: ${title}`)}&body=${encodeURIComponent(`Page: ${location.href.split("#")[0]}${location.hash}
+
+What was missing or confusing:
+`)}">${t.missing}</a>` : "";
+    const done = (vote) => { host.innerHTML = `<p class="small muted" role="status">${t.thanks}${vote === "no" ? missingLink() : ""}</p>`; };
+    host.hidden = false;
+    host.lang = lang;
+    if (saved[key]) return done(saved[key]);
+    host.innerHTML = `<div class="feedback" role="group" aria-label="${t.ask}"><span class="small">${t.ask}</span>
+      <button class="btn btn-ghost" type="button" data-vote="yes">${t.yes}</button>
+      <button class="btn btn-ghost" type="button" data-vote="no">${t.no}</button></div>`;
+    host.querySelectorAll("[data-vote]").forEach((b) => b.addEventListener("click", () => {
+      const vote = b.dataset.vote;
+      saved[key] = vote;
+      safeSet(FEEDBACK_KEY, JSON.stringify(saved));
+      if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count({ path: `feedback/${key}/${vote}`, title: `Feedback: ${title}`, event: true });
+      }
+      done(vote);
+    }));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
+    initContact();
+    initAnalytics();
     initNavMenu();
     initFocusRescue();
     initResultAnnouncer();
@@ -220,7 +296,7 @@ const FG = (() => {
     "Housing": "Vivienda", "Mortgages and rent vs buy": "Hipotecas y alquilar vs. comprar",
     "FinanceGuru. For educational purposes only — not financial advice.": "FinanceGuru. Solo con fines educativos; no es asesoría financiera.",
     "Invest": "Invertir", "College": "Universidad", "Credit": "Crédito", "Teachers & parents": "Docentes y familias",
-    "Privacy": "Privacidad", "Terms": "Términos",
+    "Privacy": "Privacidad", "Terms": "Términos", "About": "Acerca de", "Report an error": "Reportar un error",
   };
   const chromeOriginal = new WeakMap();
   function setChromeLang(lang) {
@@ -253,7 +329,7 @@ const FG = (() => {
     }));
   }
 
-  return { getProgress, completeLesson, addXp, recordBest, getBest, money, compact, toast, reducedMotion, scrollTo, setChromeLang, getLang, setLang, loadSpanish };
+  return { feedback, getProgress, completeLesson, addXp, recordBest, getBest, money, compact, toast, reducedMotion, scrollTo, setChromeLang, getLang, setLang, loadSpanish };
 })();
 
 // Offline support: register sw.js from the site root (found relative to this script, so lesson pages and

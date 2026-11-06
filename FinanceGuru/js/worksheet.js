@@ -11,7 +11,10 @@ const Worksheet = (() => {
     "emergency-fund": ["$1,000 or one month", "3–6 months", "high-yield savings account", "stocks"],
     "compound-interest": ["Compound interest", "a third as much"],
   };
-  const SKIP = { "compound-interest": ["Alex", "Sam"] };
+  const SKIP = {
+    budgeting: ["63% of U.S. adults", "$2,400 a month"], "compound-interest": ["Alex", "Sam"],
+    "financial-aid": ["StudentAid.gov", "September 23, 2026"], "first-apartment": ["Length", "Application fees"],
+  };
   const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
   // Labels ("Deductible:"), tool prompts ("Try it:"), long phrases, and formulas make poor blanks.
   const usable = (t) => t && !/:$/.test(t) && !/^(try it|see it|feel it|explore|run the numbers|practice)\b/i.test(t)

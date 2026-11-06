@@ -6,12 +6,14 @@ const LESSONS = [
     icon: "🧾",
     title: "Budgeting Basics",
     summary: "Tell your money where to go instead of wondering where it went.",
-    minutes: 4,
+    minutes: 6,
     cards: [
       {
         heading: "What a budget really is",
         html: `<p>A budget isn't a punishment. It's a <strong>plan for your money</strong> made <em>before</em> you spend it.</p>
-               <p>Without a plan, money tends to leak away on small things. With one, you decide what matters most to you — and fund that first.</p>`,
+               <p>Without a plan, money tends to leak away on small things. With one, you decide what matters most to you — and fund that first.</p>
+               <p>A plan also gives you a cushion. In 2025, <strong>63% of U.S. adults</strong> said they could cover a surprise $400 expense with cash or its equivalent. The rest would have to borrow, sell something, or couldn't pay at all.</p>
+               <p class="small muted">Source: Federal Reserve, <em>Economic Well-Being of U.S. Households in 2025</em> (May 2026).</p>`,
       },
       {
         heading: "The 50/30/20 rule",
@@ -21,13 +23,44 @@ const LESSONS = [
                  <li><strong>30% Wants</strong> — eating out, streaming, hobbies, travel.</li>
                  <li><strong>20% Savings & extra debt payments</strong> — your future self.</li>
                </ul>
+               <p><strong>Example:</strong> Jordan's first full-time job pays <strong>$2,400 a month</strong> after taxes. That's $1,200 for needs, $720 for wants, and $480 for savings. If rent alone is $1,100, needs will run over 50%, so Jordan trims wants first, not savings.</p>
                <p class="small muted">The 50/30/20 guideline was popularized by Elizabeth Warren and Amelia Warren Tyagi in <em>All Your Worth</em> (2005).</p>
-               <div class="callout"><strong>Try it:</strong> the <a href="tools.html#budget">Budget Planner</a> splits your income for you — or practice in the <a href="play.html#envelope">Envelope Budget game</a>.</div>`,
+               <div class="callout"><strong>Try it:</strong> the <a href="tools.html#budget">Budget Planner</a> splits your income for you, and the <a href="plan.html">First Paycheck Plan</a> builds one from your real take-home pay.</div>`,
+      },
+      {
+        heading: "Pick a method that fits you",
+        html: `<p>50/30/20 is one way to budget. Two other popular methods:</p>
+               <ul>
+                 <li><strong>Zero-based budget</strong>: give every dollar a job (bills, food, fun, savings) until income minus your plan equals $0. More work, but nothing goes unplanned.</li>
+                 <li><strong>Envelope budget</strong>: put a set amount for each category in its own envelope (cash, or separate accounts or "buckets" in a banking app). When an envelope is empty, that category is done for the month.</li>
+               </ul>
+               <p>The best method is the one you'll actually keep using. You can switch any time.</p>
+               <div class="callout"><strong>Practice:</strong> fill the envelopes in the <a href="play.html#envelope">Envelope Budget game</a>.</div>`,
       },
       {
         heading: "Pay yourself first",
         html: `<p>The most powerful budgeting habit: <strong>move money to savings the day you get paid</strong>, automatically. Then spend what's left.</p>
                <p>If you wait to save "whatever is left over," there usually isn't anything left over.</p>`,
+      },
+      {
+        heading: "Track where it really goes",
+        html: `<p>A budget is a guess until you check it. Once a month, open your bank or payment app and sort last month's spending into needs, wants, and savings.</p>
+               <ul>
+                 <li>Look for <strong>small repeat purchases</strong>: $6 a day on snacks or coffee is about $180 a month.</li>
+                 <li>List every <strong>subscription</strong>. Free trials that turned into charges are easy to miss.</li>
+                 <li>Adjust next month's plan to match real life. Changing a budget isn't failing; it's how budgets work.</li>
+               </ul>
+               <div class="callout"><strong>Try it:</strong> add up your subscriptions in the <a href="tools.html#subs">Subscription Audit</a>.</div>`,
+      },
+      {
+        heading: "When your pay changes every month",
+        html: `<p>Tips, gig work, and seasonal jobs don't pay the same amount every time. To budget anyway:</p>
+               <ol>
+                 <li><strong>Plan around a low month</strong>, not your best one. Cover needs with what you can count on.</li>
+                 <li>In good months, put the extra into a <strong>buffer</strong> savings account.</li>
+                 <li>In slow months, pay yourself from the buffer so your spending stays steady.</li>
+               </ol>
+               <p>Gig and freelance pay usually has no taxes taken out, so set some aside for taxes too (see <a href="learn.html#side-hustle">Side Hustles</a>).</p>`,
       },
     ],
     quiz: [
@@ -53,6 +86,18 @@ const LESSONS = [
         ],
         answer: 1,
         why: "Saving first makes it automatic, so it actually happens.",
+      },
+      {
+        q: "Jordan takes home $2,400 a month. Using 50/30/20, how much goes to savings and extra debt payments?",
+        choices: ["$240", "$480", "$720", "$1,200"],
+        answer: 1,
+        why: "20% of $2,400 is $480. Needs get $1,200 (50%) and wants get $720 (30%).",
+      },
+      {
+        q: "Your tips range from $1,400 to $2,200 a month. What's the safest way to budget?",
+        choices: ["Plan around your best month", "Plan around a low month and save the extra from good months", "Skip budgeting until your pay is steady", "Use a credit card when a month comes up short"],
+        answer: 1,
+        why: "Planning on a low month means your needs are always covered. Extra from good months builds a buffer for slow ones.",
       },
     ],
   },
@@ -969,7 +1014,7 @@ const LESSONS = [
       },
       {
         heading: "All of it counts, form or no form",
-        html: `<p>Starting in 2026, a business only has to send you a <strong>Form 1099-NEC</strong> if it paid you <strong>$2,000</strong> or more in the year (up from $600). Payment apps and marketplaces send a <strong>1099-K</strong> only after <strong>$20,000 and 200 transactions</strong>.</p>
+        html: `<p>Starting in 2026, a business only has to send you a <strong>Form 1099-NEC</strong> if it paid you <strong>$2,000</strong> or more in the year (up from $600), rising with inflation to $2,100 for 2027 payments (IRS). Payment apps and marketplaces send a <strong>1099-K</strong> only after <strong>$20,000 and 200 transactions</strong>.</p>
                <p>But those are reporting rules for businesses, not tax-free limits. <strong>All self-employment income is taxable</strong>, and you must file a return once your net self-employment earnings reach <strong>$400</strong>.</p>`,
       },
       {
@@ -1065,6 +1110,153 @@ const LESSONS = [
       },
     ],
   },
+  {
+    id: "financial-aid",
+    icon: "🎒",
+    title: "Paying for College: FAFSA, Grants & Loans",
+    summary: "Get the free money first, read your aid offer, and borrow only what you need.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "Free money first",
+        html: `<p>Pay for school in this order:</p>
+               <ol>
+                 <li><strong>Grants and scholarships</strong>: money you don't pay back.</li>
+                 <li><strong>Work-study</strong>: a part-time job, often on campus, that you earn as you work.</li>
+                 <li><strong>Federal student loans</strong>: borrowed money with fixed rates and protections.</li>
+                 <li><strong>Private loans</strong>: last, and only if you still have a gap.</li>
+               </ol>
+               <p>Every step down this list costs you more, so use up each one before moving to the next.</p>`,
+      },
+      {
+        heading: "The FAFSA unlocks it",
+        html: `<p>The <strong>FAFSA</strong> (Free Application for Federal Student Aid) is the form for federal grants, work-study, and federal loans, and many states and colleges use it for their own aid. It's free at <strong>StudentAid.gov</strong>. Never pay a website to file it.</p>
+               <p>The 2027–28 FAFSA opened on <strong>September 23, 2026</strong> and covers school from July 1, 2027, to June 30, 2028. It uses your family's <strong>2025 tax information</strong>. The federal deadline is June 30, 2028, but some state and college aid runs out much sooner, so file as early as you can.</p>
+               <p>You'll file a new FAFSA for <strong>every year</strong> of school.</p>
+               <p class="small muted">Source: U.S. Department of Education (press release, Sept. 23, 2026) and StudentAid.gov.</p>`,
+      },
+      {
+        heading: "Grants and scholarships",
+        html: `<p>A <strong>Pell Grant</strong> is federal aid for students with financial need. For 2026–27 the most you can get is <strong>$7,395</strong> a year, and you don't pay it back.</p>
+               <p>Your state and your college may add their own grants. Scholarships come from colleges, employers, community groups, and nonprofits. Apply to several: small ones add up and often have fewer applicants.</p>
+               <p><strong>Scholarship scams</strong> ask you to pay a fee to apply or "guarantee" an award. Real scholarships don't charge you (see <a href="learn.html#scams">Spotting Scams</a>).</p>
+               <p class="small muted">Source: U.S. Department of Education, Dear Colleague Letter GEN-26-01 (Jan. 30, 2026).</p>`,
+      },
+      {
+        heading: "Read your aid offer",
+        html: `<p>Each college you're admitted to sends an <strong>aid offer</strong>. Offers mix grants, work-study, and loans together, so do the math yourself:</p>
+               <p><strong>Net price = cost of attendance − grants and scholarships</strong></p>
+               <p>Cost of attendance includes tuition, fees, housing, food, books, and transportation. Loans are not a discount: they cover part of the net price now, and you repay them with interest later.</p>
+               <p>Compare colleges by <strong>net price</strong>, not by the sticker price or the total "aid" amount. If your family's situation has changed, you can ask the financial aid office to take another look.</p>
+               <div class="callout"><strong>Run the numbers:</strong> see what a degree pays back in the <a href="college.html#roi">College ROI calculator</a>.</div>`,
+      },
+      {
+        heading: "Federal loans before private loans",
+        html: `<ul>
+                 <li><strong>Subsidized loans</strong> are for students with financial need. The government pays the interest while you're in school at least half-time.</li>
+                 <li><strong>Unsubsidized loans</strong> don't depend on need, but interest builds from the day the money is paid out.</li>
+               </ul>
+               <p>For 2026–27, both carry a fixed <strong>6.52%</strong> rate for undergraduates. A dependent first-year student can borrow up to <strong>$5,500</strong> in federal loans, of which up to $3,500 can be subsidized.</p>
+               <p>Private loans often need a cosigner, may have variable rates, and lack federal repayment options. Borrow only what you need, even if you're offered more.</p>
+               <p class="small muted">Source: U.S. Department of Education, interest rates for Direct Loans first disbursed July 1, 2026 – June 30, 2027; StudentAid.gov loan limits.</p>
+               <div class="callout"><strong>Next:</strong> see how repayment works in <a href="learn.html#student-loans-2026">Student Loans: The 2026 Rules</a> and the <a href="credit.html#student">student loan calculator</a>.</div>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Which kind of aid doesn't have to be paid back?",
+        choices: ["An unsubsidized loan", "A Pell Grant", "A private student loan", "A parent PLUS loan"],
+        answer: 1,
+        why: "Grants and scholarships are free money. Every kind of loan has to be repaid, with interest.",
+      },
+      {
+        q: "College A costs $30,000 a year and offers $12,000 in grants. College B costs $24,000 and offers $4,000 in grants. Which has the lower net price?",
+        choices: ["College A ($18,000)", "College B ($20,000)", "They're the same", "College B, because its sticker price is lower"],
+        answer: 0,
+        why: "Net price is cost minus grants and scholarships: $30,000 − $12,000 = $18,000 for A, and $24,000 − $4,000 = $20,000 for B.",
+      },
+      {
+        q: "What's special about a subsidized federal loan?",
+        choices: ["It never charges interest", "The government pays the interest while you're in school at least half-time", "It doesn't have to be repaid", "Only parents can get it"],
+        answer: 1,
+        why: "Subsidized loans don't build interest while you're in school at least half-time. Unsubsidized loans start building interest right away.",
+      },
+    ],
+  },
+  {
+    id: "first-apartment",
+    icon: "🔑",
+    title: "Renting Your First Apartment",
+    summary: "What you can afford, what's in a lease, and how to get your deposit back.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "What can you afford?",
+        html: `<p>HUD considers a household <strong>cost-burdened</strong> when housing takes more than <strong>30% of income</strong>. The number of cost-burdened renters is at a record high, so it's worth planning carefully.</p>
+               <p>Many landlords also want your monthly income to be about <strong>3 times the rent</strong>. For $1,000 rent, that's $3,000 a month before taxes.</p>
+               <p>Count the extras too: electricity, gas, water, internet, renters insurance, and parking can add hundreds a month.</p>
+               <p class="small muted">Sources: HUD; Harvard Joint Center for Housing Studies, <em>America's Rental Housing 2026</em>.</p>
+               <div class="callout"><strong>Try it:</strong> the <a href="tools.html#apartment">First Apartment budget</a> adds up rent, move-in costs, and a roommate split.</div>`,
+      },
+      {
+        heading: "The cash you need to move in",
+        html: `<p>Before you get the keys, you may need:</p>
+               <ul>
+                 <li><strong>Application fees</strong> for each place you apply to.</li>
+                 <li><strong>First month's rent</strong>, and sometimes the last month's too.</li>
+                 <li>A <strong>security deposit</strong>, often about one month's rent.</li>
+                 <li>Utility deposits or setup fees, moving costs, and basic furniture.</li>
+               </ul>
+               <p>Moving in can easily cost <strong>two to three times the monthly rent</strong>, so save for it ahead of time.</p>`,
+      },
+      {
+        heading: "Read the lease before you sign",
+        html: `<p>A <strong>lease</strong> is a contract. Check:</p>
+               <ul>
+                 <li><strong>Length</strong>, and what it costs to break the lease early.</li>
+                 <li><strong>Which bills you pay</strong> and which the landlord pays.</li>
+                 <li>Late fees, guest and pet rules, and who handles repairs.</li>
+                 <li>With roommates, everyone on the lease is usually responsible for the <strong>full rent</strong>. If one roommate stops paying, the others may have to cover it.</li>
+               </ul>
+               <p>Get every promise in writing. Never send a deposit for a place you haven't seen or before you've signed a lease (see <a href="learn.html#scams">Spotting Scams</a>).</p>`,
+      },
+      {
+        heading: "Get your deposit back",
+        html: `<ul>
+                 <li><strong>Document move-in</strong>: take dated photos and video of every room, and note existing damage on a move-in checklist the landlord signs.</li>
+                 <li>Report repairs in writing (email or a text you keep).</li>
+                 <li>At move-out, clean, repair what you damaged, and photograph everything again.</li>
+               </ul>
+               <p>Most states set a deadline for returning your deposit and require landlords to list any deductions. Normal wear and tear usually can't be charged. Check your state's rules.</p>`,
+      },
+      {
+        heading: "Your rights as a renter",
+        html: `<p>The federal <strong>Fair Housing Act</strong> makes it illegal to refuse to rent to you, or to set different terms, because of race, color, religion, national origin, sex, disability, or having children. You can report discrimination to <strong>HUD</strong>.</p>
+               <p>States and cities add their own protections, such as how much notice a landlord must give before entering or raising rent. Search for "tenant rights" plus your state.</p>
+               <p>Renters insurance covers your belongings (about <strong>$170 a year</strong>; see <a href="learn.html#insurance">Insurance 101</a>).</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "You earn $3,000 a month before taxes. Using the 30% guideline, what's the most you'd want to spend on housing?",
+        choices: ["$600", "$900", "$1,200", "$1,500"],
+        answer: 1,
+        why: "30% of $3,000 is $900. Spending more than that makes you cost-burdened by HUD's definition.",
+      },
+      {
+        q: "What's the best way to protect your security deposit when you move in?",
+        choices: ["Pay it in cash", "Take dated photos of every room and note damage on a move-in checklist", "Ask for a smaller deposit", "Don't unpack until you're sure you'll stay"],
+        answer: 1,
+        why: "Photos and a signed checklist prove the damage was there before you moved in.",
+      },
+      {
+        q: "Your roommate moves out without paying their share. If you're both on the lease, what usually happens?",
+        choices: ["The landlord can only collect from your roommate", "The lease is canceled", "You may owe the full rent", "Rent drops by half"],
+        answer: 2,
+        why: "Leases usually make everyone who signed responsible for the whole rent, not just their share.",
+      },
+    ],
+  },
 ];
 
 // The learning path: lessons grouped into units. LESSONS is sorted into this order below, so the
@@ -1075,7 +1267,7 @@ const UNITS = [
   { id: "protect", icon: "🛡️", title: "Save & protect", blurb: "Emergency funds, insurance, scams, and betting.", lessons: ["emergency-fund", "insurance", "scams", "betting"] },
   { id: "borrow", icon: "💳", title: "Borrow wisely", blurb: "Debt, credit scores, and student loans.", lessons: ["debt", "credit", "bnpl-payday", "student-loans-2026"] },
   { id: "grow", icon: "📈", title: "Grow your money", blurb: "Compounding, investing, inflation, and retirement.", lessons: ["compound-interest", "investing", "inflation", "risk-time", "retirement-accounts"] },
-  { id: "decide", icon: "🧭", title: "Big decisions", blurb: "College, housing, and other big purchases.", lessons: ["college-roi", "rent-vs-buy", "car-buying"] },
+  { id: "decide", icon: "🧭", title: "Big decisions", blurb: "College and how to pay for it, your first apartment, housing, and cars.", lessons: ["college-roi", "financial-aid", "first-apartment", "rent-vs-buy", "car-buying"] },
 ];
 (() => {
   const order = UNITS.flatMap((u) => u.lessons);

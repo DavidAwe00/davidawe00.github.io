@@ -15,7 +15,7 @@
       earned: (xp) => `You earned <strong>+${xp} XP</strong>.`, retry: "Retry lesson",
       cert: "🎓 Get your certificate →", unitDone: (n, title) => `🏅 Unit ${n} complete: ${title}! You earned a badge.`,
       checkup: "🩺 Take the \"after\" check-up →", capstone: "🎓 Capstone: your first year →", nextL: (t) => `Next: ${t} →`, finish: "Finish the remaining lessons →",
-      title: "Learn — FinanceGuru", langGroup: "Lesson language",
+      title: "Learn — FinanceGuru", langGroup: "Lesson language", assigned: "Assigned",
     },
     es: {
       lessons: "Lecciones", of: "de", back: "← Atrás", next: "Siguiente →", takeQuiz: "Hacer el quiz →",
@@ -25,7 +25,7 @@
       earned: (xp) => `Ganaste <strong>+${xp} XP</strong>.`, retry: "Repetir la lección",
       cert: "🎓 Obtén tu certificado →", unitDone: (n, title) => `🏅 ¡Unidad ${n} completa: ${title}! Ganaste una insignia.`,
       checkup: "🩺 Haz el chequeo final →", capstone: "🎓 Proyecto final: tu primer año (en inglés) →", nextL: (t) => `Siguiente: ${t} →`, finish: "Termina las lecciones que faltan →",
-      title: "Aprende — FinanceGuru", langGroup: "Idioma de la lección",
+      title: "Aprende — FinanceGuru", langGroup: "Idioma de la lección", assigned: "Asignada",
     },
   };
 
@@ -50,12 +50,15 @@
 
   function renderNav() {
     const p = FG.getProgress();
+    const assigned = typeof ClassSync === "object" ? ClassSync.assigned() : [];  // from the student's class, if any
     list.innerHTML = LESSONS.map((l) => `
       <li><button data-id="${l.id}" ${lesson && lesson.id === l.id ? 'aria-current="true"' : ""}>
         <span class="check ${p.done[l.id] ? "done" : ""}">${p.done[l.id] ? "✓" : ""}</span>${L(l).title}
+        ${assigned.includes(l.id) && !p.done[l.id] ? `<span class="lesson-tag">${t().assigned}</span>` : ""}
       </button></li>`).join("");
   }
 
+  document.addEventListener("classchange", () => renderNav());
   list.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-id]");
     if (!btn) return;
@@ -145,7 +148,9 @@
             ${next ? `<a class="btn ${allDone ? "btn-ghost" : "btn-primary"}" href="#${next.id}">${t().nextL(next.title)}</a>`
                    : allDone ? "" : `<a class="btn btn-primary" href="learn.html#${LESSONS.find((l) => !FG.getProgress().done[l.id]).id}">${t().finish}</a>`}
           </div>
+          <div data-feedback hidden></div>
         </div>`;
+      FG.feedback(body.querySelector("[data-feedback]"), `lesson/${lesson.id}`, lesson.title, lang);
     }
     // Don't jump past the page header on first load; after that, keep each step in view.
     if (firstRender) firstRender = false;

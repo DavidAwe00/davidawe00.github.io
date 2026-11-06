@@ -1,0 +1,36 @@
+/* Teacher class dashboard (class.html). No inline styles: the page runs under a strict CSP. */
+.class-page { padding-top: 32px; padding-bottom: 48px; }
+.class-page .lead { max-width: 64ch; }
+.class-notice:empty { display: none; }
+.class-notice { padding: 10px 14px; border-radius: var(--radius-sm); background: var(--brand-soft); color: var(--text); }
+.class-signin { max-width: 520px; }
+.class-signin .row-check { margin: 8px 0 4px; }
+.class-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0 12px; }
+.class-toolbar h2 { margin: 0 auto 0 0; }
+.new-class { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 16px; }
+.new-class .field { flex: 1 1 260px; margin: 0; }
+.class-item { margin-bottom: 16px; }
+.class-item-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.class-item-head h3 { margin: 0; }
+.class-share { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-end; margin: 12px 0; }
+.class-code { font: 700 clamp(1.8rem, 5vw, 2.6rem)/1.1 var(--font); letter-spacing: .18em; color: var(--brand); }
+.class-share-link { min-width: 0; flex: 1 1 260px; }
+.class-share-link code { display: block; overflow-wrap: anywhere; font-size: .85rem; color: var(--text-2); }
+.table-wrap { overflow-x: auto; margin: 8px 0; position: relative; }  /* keeps the .sr-only header labels inside the scroller */
+.roster { width: 100%; border-collapse: collapse; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.roster th, .roster td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+.roster thead th { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--text-2); }
+.roster tbody th { font-weight: 600; }
+.roster .unit-col { text-align: center; }
+.roster td.unit-done { color: var(--good); font-weight: 600; }
+.roster .icon-btn { width: 32px; height: 32px; }
+.by-lesson summary { cursor: pointer; font-weight: 600; margin-top: 8px; }
+.assign { margin: 12px 0; }
+.assign summary { cursor: pointer; font-weight: 600; }
+.assign-units { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; margin: 8px 0 12px; }
+.assign-unit { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px 12px; margin: 0; min-width: 0; }
+.assign-unit legend { font-weight: 600; padding: 0 4px; }
+.assign-unit label { display: flex; gap: 8px; align-items: flex-start; padding: 3px 0; font-size: .92rem; }
+.assign-unit input { margin-top: 3px; flex: none; }
+.by-lesson .roster th { white-space: normal; }
+.class-privacy { margin-top: 16px; max-width: 70ch; }

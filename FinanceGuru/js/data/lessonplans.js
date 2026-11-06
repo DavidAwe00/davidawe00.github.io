@@ -7,14 +7,14 @@ const STANDARD_AREAS = ["Earning Income", "Spending", "Saving", "Investing", "Ma
 const PLANS = {
   budgeting: {
     areas: ["Spending", "Saving"],
-    objectives: ["Sort expenses into needs, wants, and savings", "Apply the 50/30/20 guideline to a take-home paycheck", "Explain why “pay yourself first” works"],
+    objectives: ["Sort expenses into needs, wants, and savings", "Apply the 50/30/20 guideline to a take-home paycheck", "Compare 50/30/20, zero-based, and envelope budgets", "Explain why “pay yourself first” works", "Plan a budget for pay that changes month to month"],
     warmup: "List three things you spent money on (or wanted to) this week. Is each one a need or a want? Be ready to defend one.",
     activity: {
       title: "Envelope Budget + Budget Planner",
       links: [["Envelope Budget game", "play.html#envelope"], ["Budget Planner", "tools.html#budget"]],
       steps: ["Students play Envelope Budget once and record their star rating.", "In pairs, open the Budget Planner with a $3,000/month take-home pay and adjust the sliders until savings hits 20%.", "Each pair names one “want” they would cut first and one “need” that surprised them."],
     },
-    discuss: ["Is a phone a need or a want? Does the answer change by job or age?", "Why does saving first beat saving “whatever is left”?"],
+    discuss: ["Is a phone a need or a want? Does the answer change by job or age?", "Why does saving first beat saving “whatever is left”?", "A server earns $1,400 in a slow month and $2,200 in a busy one. Which number should their budget start from, and why?"],
     home: { talk: ["What's one bill our family pays every month that you didn't know about?", "If you got $100 tomorrow, how would you split it between needs, wants, and savings?"], try: "Track every purchase for one week together, then sort the list into needs and wants." },
   },
   "emergency-fund": {
@@ -244,5 +244,29 @@ const PLANS = {
     },
     discuss: ["Why do payday lenders show a fee instead of an APR?", "When could buy now, pay later be reasonable, and when is it risky?"],
     home: { talk: ["Have we ever been tempted by \"pay in 4\" at checkout? What did we decide?", "What would we do if we needed $400 by Friday?"], try: "Look up whether a local credit union offers a payday alternative loan, and what it would cost." },
+  },
+  "financial-aid": {
+    areas: ["Earning Income", "Managing Credit"],
+    objectives: ["Rank ways to pay for college from cheapest to most expensive", "Explain what the FAFSA is, when it opens, and why to file early", "Calculate net price from an aid offer", "Tell subsidized, unsubsidized, and private loans apart"],
+    warmup: "Write down what you think one year of college costs, and how much of that you think a typical student pays back later. Keep it to compare at the end.",
+    activity: {
+      title: "Compare two aid offers + College ROI",
+      links: [["College ROI calculator", "college.html#roi"], ["Student loan calculator", "credit.html#student"]],
+      steps: ["Give pairs two sample aid offers: College A costs $30,000 with $12,000 in grants, $2,500 work-study, and $5,500 in loans; College B costs $24,000 with $4,000 in grants and $5,500 in loans.", "Students circle every line that must be repaid, then calculate each net price (cost − grants and scholarships).", "Enter the borrowed amount over four years in the student loan calculator and record the monthly payment.", "Use the College ROI calculator to check whether a major they're interested in pays that back."],
+    },
+    discuss: ["Why might an offer with more total \"aid\" still cost more?", "Why do some students who would qualify for a Pell Grant never get one?"],
+    home: { talk: ["Have we talked about how we'd pay for college or training after high school?", "Which papers would we need for the FAFSA, and who in the family would fill it out?"], try: "Use a college's net price calculator (every college has one on its website) together and compare the result with its sticker price." },
+  },
+  "first-apartment": {
+    areas: ["Spending", "Managing Risk"],
+    objectives: ["Apply the 30% guideline and the 3× income rule to a rent", "Estimate the cash needed to move in", "Identify key lease terms, including shared responsibility with roommates", "Describe how to protect a security deposit and where to find tenant rights"],
+    warmup: "Make a list of every cost you'd pay in your first month in your own apartment. Compare lists with a partner: who found more?",
+    activity: {
+      title: "First Apartment budget",
+      links: [["First Apartment budget", "tools.html#apartment"], ["Budget Planner", "tools.html#budget"]],
+      steps: ["Find a real rental listing in your area and note the rent.", "Enter it in the First Apartment budget with an entry-level salary for a job you're interested in. Does it pass the 30% check?", "Add a roommate. How much do the rent check and move-in cash change?", "List three questions you'd ask the landlord before signing."],
+    },
+    discuss: ["When is a roommate worth it, and what should you agree on before signing?", "Why should you never send a deposit before seeing a place?"],
+    home: { talk: ["What did your first apartment or rental cost, and what surprised you?", "Have we ever had trouble getting a deposit back? What would we do differently?"], try: "Read a sample lease together (many are online) and highlight the fees and the rules about breaking it early." },
   },
 };
