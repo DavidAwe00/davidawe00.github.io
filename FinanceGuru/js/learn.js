@@ -4,7 +4,7 @@
   const list = document.getElementById("lesson-list");
   const body = document.getElementById("lesson-body");
   const LANG_KEY = "fg-lang";
-  let lesson, step, score, answered, firstRender = true;
+  let lesson, step, score, answered, firstRender = true, checked = null;  // checked: the server's reply to the latest class answer
 
   const T = {
     en: {
@@ -13,6 +13,7 @@
       correct: "✅ Correct!", wrong: "❌ Not quite.",
       perfect: "Perfect score! 🏆", great: "Great job! 🎉", effort: "Nice effort — review and try again anytime.",
       earned: (xp) => `You earned <strong>+${xp} XP</strong>.`, retry: "Retry lesson",
+      checked: (s, n) => `🏫 Your teacher sees your first try: <strong>${s}/${n}</strong>. Retakes are for practice.`, checkedLater: "🏫 Your answers will reach your teacher when you're back online.",
       cert: "🎓 Get your certificate →", unitDone: (n, title) => `🏅 Unit ${n} complete: ${title}! You earned a badge.`,
       backup: "Your progress is saved only in this browser. <a href=\"badges.html#backup\">Download a backup</a> so you don’t lose it.",
       checkup: "🩺 Take the \"after\" check-up →", capstone: "🎓 Capstone: your first year →", nextL: (t) => `Next: ${t} →`, finish: "Finish the remaining lessons →",
@@ -24,6 +25,7 @@
       correct: "✅ ¡Correcto!", wrong: "❌ No exactamente.",
       perfect: "¡Puntaje perfecto! 🏆", great: "¡Muy bien! 🎉", effort: "Buen intento: repasa y vuelve a intentarlo cuando quieras.",
       earned: (xp) => `Ganaste <strong>+${xp} XP</strong>.`, retry: "Repetir la lección",
+      checked: (s, n) => `🏫 Tu docente ve tu primer intento: <strong>${s}/${n}</strong>. Repetir sirve para practicar.`, checkedLater: "🏫 Tus respuestas le llegarán a tu docente cuando vuelvas a estar en línea.",
       cert: "🎓 Obtén tu certificado →", unitDone: (n, title) => `🏅 ¡Unidad ${n} completa: ${title}! Ganaste una insignia.`,
       backup: "Tu progreso solo se guarda en este navegador. <a href=\"badges.html#backup\">Descarga una copia de seguridad</a> para no perderlo.",
       checkup: "🩺 Haz el chequeo final →", capstone: "🎓 Proyecto final: tu primer año (en inglés) →", nextL: (t) => `Siguiente: ${t} →`, finish: "Termina las lecciones que faltan →",
@@ -88,6 +90,7 @@
     lesson = L(LESSONS.find((l) => l.id === id) || LESSONS[0]);
     step = 0;
     score = 0;
+    checked = null;
     renderNav();
     render();
   }
@@ -158,6 +161,17 @@
           </div>
           <div data-feedback hidden></div>
         </div>`;
+      // In a class: once the last answer is checked, say which score the teacher sees.
+      if (checked) {
+        const shownFor = lesson.id, note = document.createElement("p");
+        note.className = "small class-checked"; note.setAttribute("role", "status");
+        body.querySelector(".result .muted").after(note);
+        checked.then((r) => {
+          if (lesson.id !== shownFor || !note.isConnected) return;
+          note.innerHTML = r && r.lesson === shownFor && r.complete ? t().checked(r.score, r.total) : r && r.member === false ? "" : t().checkedLater;
+        });
+        checked = null;
+      }
       FG.feedback(body.querySelector("[data-feedback]"), `lesson/${lesson.id}`, lesson.title, lang);
     }
     // Don't jump past the page header on first load; after that, keep each step in view.
@@ -179,6 +193,8 @@
       });
       const right = picked === q.answer;
       if (right) score++;
+      // In a class, the server checks the answer too; the first answer to each question is what the teacher sees.
+      if (typeof ClassSync === "object" && ClassSync.load()) checked = ClassSync.answer(lesson.id, step - lesson.cards.length, picked);
       document.getElementById("feedback").innerHTML =
         `<div class="feedback"><strong>${right ? t().correct : t().wrong}</strong> ${q.why}</div>`;
       const nextBtn = body.querySelector('[data-act="next"]');

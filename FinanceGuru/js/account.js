@@ -73,11 +73,14 @@
       await A.push();
       await A.api("/auth/logout", "POST", {}, false).catch(() => {});
       if ($("forget-device").checked) {
-        try { Object.keys(localStorage).filter((k) => A.SYNC_KEY.test(k)).forEach((k) => localStorage.removeItem(k)); } catch { /* storage blocked */ }
+        // Everything this learner saved here (progress, class membership, calculator figures, certificate name);
+        // only the theme and language choices stay for the next person.
+        const KEEP = ["fg-theme", "fg-lang", "fg-lang-offer"];
+        try { Object.keys(localStorage).filter((k) => k.startsWith("fg-") && !KEEP.includes(k)).forEach((k) => localStorage.removeItem(k)); } catch { /* storage blocked */ }
       }
       A.remember(null);
       show("signed-out");
-      notice($("forget-device").checked ? "Signed out, and your progress was removed from this browser." : "Signed out. Your progress is still saved in this browser and in your account.");
+      notice($("forget-device").checked ? "Signed out, and everything you saved was removed from this browser. Your progress is still in your account." : "Signed out. Your progress is still saved in this browser and in your account.");
       $("forget-device").checked = false;
     } finally { button.disabled = false; }
   });

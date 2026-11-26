@@ -74,7 +74,12 @@
             <div class="field"><label for="class-code">Class code</label><div class="input-wrap"><input id="class-code" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="7" placeholder="ABC234" required></div></div>
             <div class="field"><label for="class-nickname">Nickname</label><div class="input-wrap"><input id="class-nickname" autocomplete="off" maxlength="30" placeholder="Ana R." required aria-describedby="class-nick-hint"></div><span class="hint" id="class-nick-hint">First name and last initial is plenty. Don't use your full name.</span></div>
           </div>
-          <p class="small muted">Your teacher will see your nickname, which lessons you've finished with your quiz scores, and your Money Check-up scores. Nothing else leaves this browser. You can leave the class at any time.</p>
+          <details class="class-rejoin" id="class-rejoin-box">
+            <summary>Already in this class on another device?</summary>
+            <p class="small muted">Ask your teacher for a rejoin code, then enter it with the class code and the same nickname.</p>
+            <div class="field"><label for="class-rejoin">Rejoin code</label><div class="input-wrap"><input id="class-rejoin" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="7" placeholder="R7K2QX"></div></div>
+          </details>
+          <p class="small muted">Your teacher will see your nickname, which lessons you've finished with your quiz scores, and your Money Check-up scores. While you're in a class, your quiz answers are sent as you choose them so your first-try score can be checked. Nothing else leaves this browser. You can leave the class at any time.</p>
           <button type="submit" class="btn btn-primary">Join class</button>
           <p class="small" id="class-error" role="alert"></p>
         </form>

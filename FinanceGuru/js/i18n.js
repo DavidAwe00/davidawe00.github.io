@@ -41,6 +41,7 @@ const I18N = (() => {
   const INLINE = new Set(["STRONG", "EM", "B", "I", "A", "BR", "ABBR", "SPAN", "CODE", "SMALL", "SUP", "SUB", "MARK", "KBD", "TIME", "U", "S"]);
   const ATTRS = ["placeholder", "aria-label", "title", "alt", "data-desc", "label"];
   const SKIP = "script,style,svg,canvas,[data-i18n-skip]";
+  const BLOCKS = "div,p,h1,h2,h3,h4,h5,h6,ul,ol,li,table,section,article,header,footer,details,summary,figure,form,label";
   const wordy = (s) => /[A-Za-z]{2}/.test(s);
   const original = new WeakMap(); // text node -> its text; element -> its attributes
   function snapshot(root) {
@@ -79,7 +80,9 @@ const I18N = (() => {
       if (v && wordy(v) && v === was[a]) { const es = lookup(v); if (es !== null) el.setAttribute(a, es); }
     }
     const kids = [...el.children];
-    const inlineOnly = kids.length && kids.every((k) => INLINE.has(k.tagName) && !k.querySelector("input,select,textarea,button") && !k.matches(SKIP));
+    // Inline wrappers around icons or blocks (a card link holding an <svg> and an <h3>) are walked into, so keys
+    // stay plain text instead of whole cards of markup.
+    const inlineOnly = kids.length && kids.every((k) => INLINE.has(k.tagName) && !k.querySelector(`input,select,textarea,button,svg,${BLOCKS}`) && !k.matches(SKIP));
     if (inlineOnly && wordy(el.textContent)) {
       if (!pristine(el)) return; // a script owns this block
       const es = lookup(blockKey(el));

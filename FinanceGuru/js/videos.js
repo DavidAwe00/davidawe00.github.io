@@ -115,7 +115,8 @@ const VideoPlayer = (() => {
   // Homepage: the three newest videos (last in the list), shown only when there are any.
   const home = document.getElementById("home-video-grid");
   if (home && list.length) {
-    home.innerHTML = list.slice(-3).reverse().map((v) => `<div>${poster(v)}</div>`).join("");
+    const lang = typeof FG === "object" && FG.getLang ? FG.getLang() : "en";
+    home.innerHTML = list.slice(-3).reverse().map((v) => `<div>${poster(v, lang)}</div>`).join("");
     document.getElementById("home-videos").hidden = false;
   }
 

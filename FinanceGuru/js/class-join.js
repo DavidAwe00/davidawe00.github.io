@@ -45,17 +45,22 @@
     e.preventDefault();
     const button = e.submitter || $("class-form").querySelector("[type=submit]");
     $("class-error").textContent = "";
-    const code = $("class-code").value.trim(), nickname = $("class-nickname").value.trim();
+    const code = $("class-code").value.trim(), nickname = $("class-nickname").value.trim(), rejoin = $("class-rejoin").value.trim();
     if (!code || !nickname) { $("class-error").textContent = "Enter the class code and a nickname."; return; }
     button.disabled = true;
     try {
-      await ClassSync.join(code, nickname);
-      FG.toast("You joined the class 🏫");
+      await ClassSync.join(code, nickname, rejoin || undefined);
+      $("class-rejoin").value = "";
+      FG.toast(rejoin ? "You're back in your class on this device 🏫" : "You joined the class 🏫");
       if (fromLink) history.replaceState(null, "", location.pathname);
       render();
       $("class-leave").focus();
     } catch (err) {
       $("class-error").textContent = err.message;
+      if (/already uses that nickname/.test(err.message)) {  // probably this student, on a new device
+        $("class-rejoin-box").open = true;
+        $("class-error").textContent += " If that's you on a new device, ask your teacher for a rejoin code.";
+      }
     } finally { button.disabled = false; }
   });
 

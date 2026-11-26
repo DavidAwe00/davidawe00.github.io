@@ -40,7 +40,10 @@
     const pct = lessons.length ? Math.round((lessons.reduce((a, [, [sc, of]]) => a + sc / of, 0) / lessons.length) * 100) : null;
     const units = UNITS.map((u) => ({ u, done: u.lessons.filter((id) => s.progress?.lessons?.[id]).length, of: u.lessons.length }));
     const assignedDone = assigned.filter((id) => s.progress?.lessons?.[id]).length;
-    return { done: lessons.length, pct, units, assignedDone, pre: s.progress?.checkup?.pre, post: s.progress?.checkup?.post };
+    // First-try scores the server checked (graded): what to use for grades.
+    const graded = Object.entries(s.graded || {}).filter(([id]) => data.lessons.includes(id));
+    const firstPct = graded.length ? Math.round((graded.reduce((a, [, [sc, of]]) => a + sc / of, 0) / graded.length) * 100) : null;
+    return { done: lessons.length, pct, firstPct, units, assignedDone, pre: s.progress?.checkup?.pre, post: s.progress?.checkup?.post };
   }
   const assignedOf = (c) => (c.assigned || []).filter((id) => data.lessons.includes(id));
   // Due dates are calendar dates (YYYY-MM-DD): format in UTC so they don't shift a day, compare with today's local date.
@@ -68,26 +71,28 @@
     const rows = data.lessons.map((id) => {
       const scores = students.map((s) => s.progress?.lessons?.[id]).filter(Boolean);
       const pct = scores.length ? Math.round((scores.reduce((a, [sc, of]) => a + sc / of, 0) / scores.length) * 100) : null;
-      return `<tr><th scope="row">${esc(lessonTitle[id] || id)}</th><td>${scores.length}/${students.length}</td><td>${pct === null ? "—" : `${pct}%`}</td></tr>`;
+      const firsts = students.map((s) => s.graded?.[id]).filter(Boolean);
+      const first = firsts.length ? Math.round((firsts.reduce((a, [sc, of]) => a + sc / of, 0) / firsts.length) * 100) : null;
+      return `<tr><th scope="row">${esc(lessonTitle[id] || id)}</th><td>${scores.length}/${students.length}</td><td>${first === null ? "—" : `${first}%`}</td><td>${pct === null ? "—" : `${pct}%`}</td></tr>`;
     }).join("");
-    return `<details class="by-lesson"><summary>Scores by lesson</summary><div class="table-wrap"><table class="roster"><thead><tr><th scope="col">Lesson</th><th scope="col">Finished</th><th scope="col">Average quiz</th></tr></thead><tbody>${rows}</tbody></table></div></details>`;
+    return `<details class="by-lesson"><summary>Scores by lesson</summary><div class="table-wrap"><table class="roster"><thead><tr><th scope="col">Lesson</th><th scope="col">Finished</th><th scope="col">First-try average ✓</th><th scope="col">Best practice average</th></tr></thead><tbody>${rows}</tbody></table></div></details>`;
   }
 
   function roster(c) {
     const students = [...c.class_students].sort((a, b) => a.nickname.localeCompare(b.nickname));
     if (!students.length) return `<p class="muted">No students yet. They open <strong>My progress</strong> on MoneyExplained, choose <strong>Your class</strong>, and enter the code (or use the student link).</p>`;
     const assigned = assignedOf(c);
-    const head = `<tr><th scope="col">Nickname</th><th scope="col">Lessons</th>${assigned.length ? `<th scope="col">Assigned</th>` : ""}<th scope="col">Avg quiz</th>${UNITS.map((u) => `<th scope="col" class="unit-col" title="${esc(u.title)}"><span aria-hidden="true">${u.icon}</span><span class="sr-only">${esc(u.title)}</span></th>`).join("")}<th scope="col">Check-up</th><th scope="col">Last active</th><th scope="col"><span class="sr-only">Remove</span></th></tr>`;
+    const head = `<tr><th scope="col">Nickname</th><th scope="col">Lessons</th>${assigned.length ? `<th scope="col">Assigned</th>` : ""}<th scope="col">First try ✓</th><th scope="col">Best (practice)</th>${UNITS.map((u) => `<th scope="col" class="unit-col" title="${esc(u.title)}"><span aria-hidden="true">${u.icon}</span><span class="sr-only">${esc(u.title)}</span></th>`).join("")}<th scope="col">Check-up</th><th scope="col">Last active</th><th scope="col"><span class="sr-only">Actions</span></th></tr>`;
     const rows = students.map((s) => {
       const x = studentSummary(s, assigned);
-      return `<tr><th scope="row">${esc(s.nickname)}</th><td>${x.done}/${total()}</td>${assigned.length ? (x.assignedDone === assigned.length ? `<td class="unit-done">${x.assignedDone}/${assigned.length}</td>` : `<td${isPastDue(c) ? ' class="assign-late"' : ""}>${x.assignedDone}/${assigned.length}${isPastDue(c) ? " · late" : ""}</td>`) : ""}<td>${x.pct === null ? "—" : `${x.pct}%`}</td>
+      return `<tr><th scope="row">${esc(s.nickname)}</th><td>${x.done}/${total()}</td>${assigned.length ? (x.assignedDone === assigned.length ? `<td class="unit-done">${x.assignedDone}/${assigned.length}</td>` : `<td${isPastDue(c) ? ' class="assign-late"' : ""}>${x.assignedDone}/${assigned.length}${isPastDue(c) ? " · late" : ""}</td>`) : ""}<td>${x.firstPct === null ? "—" : `${x.firstPct}%`}</td><td>${x.pct === null ? "—" : `${x.pct}%`}</td>
         ${x.units.map((u) => `<td class="unit-col${u.done === u.of ? " unit-done" : ""}">${u.done}/${u.of}</td>`).join("")}
         <td>${checkup(x)}</td><td>${when(s.updated_at)}</td>
-        <td><button type="button" class="icon-btn" data-remove="${esc(s.id)}" aria-label="Remove ${esc(s.nickname)}">✕</button></td></tr>`;
+        <td class="row-actions"><button type="button" class="btn btn-ghost btn-small" data-rejoin="${esc(s.id)}" aria-label="Rejoin code for ${esc(s.nickname)} on a new device">New device</button><button type="button" class="icon-btn" data-remove="${esc(s.id)}" aria-label="Remove ${esc(s.nickname)}">✕</button></td></tr>`;
     }).join("");
     return `<p class="small">${esc(classSummary(students))}</p>
       <div class="table-wrap"><table class="roster"><caption class="sr-only">Students in ${esc(c.name)}</caption><thead>${head}</thead><tbody>${rows}</tbody></table></div>
-      <p class="small muted">${assigned.length ? `Assigned: assigned lessons finished${c.assigned_due ? ` (due ${esc(dueText(c.assigned_due))}; ${students.filter((s) => studentSummary(s, assigned).assignedDone === assigned.length).length} of ${students.length} done)` : ""}. ` : ""}Unit columns: ${UNITS.map((u) => `${u.icon} ${esc(u.title)}`).join(" · ")}. Check-up: before → after, out of ${data.checkupQuestions}.</p>
+      <p class="small muted">${assigned.length ? `Assigned: assigned lessons finished${c.assigned_due ? ` (due ${esc(dueText(c.assigned_due))}; ${students.filter((s) => studentSummary(s, assigned).assignedDone === assigned.length).length} of ${students.length} done)` : ""}. ` : ""}Unit columns: ${UNITS.map((u) => `${u.icon} ${esc(u.title)}`).join(" · ")}. Check-up: before → after, out of ${data.checkupQuestions}. <strong>First try ✓</strong>: the average of each finished quiz's first answers, checked by MoneyExplained; use it for grades. <strong>Best (practice)</strong> includes retakes. <strong>New device</strong> gives a student a one-time code to move to another computer or phone.</p>
       ${byLesson(students)}`;
   }
 
@@ -137,7 +142,7 @@
           <button type="button" class="btn btn-ghost" data-gunlink>Unlink</button>
         </div>
         <div data-groster-box></div>
-        <p class="small muted">Grades are each lesson's quiz score out of 100, for students you've matched. Quiz scores come from the student's browser, so use them for practice and completion grades, not tests.</p>`;
+        <p class="small muted">Grades are each lesson's first-try quiz score out of 100 (checked by MoneyExplained; retakes don't change it), for students you've matched.</p>`;
     }
     return `<details class="assign google-box" data-key="google"><summary>Google Classroom${link ? ` · ${esc(link.courseName)}` : ""}</summary>${body}<p class="small">${share}</p></details>`;
   }
@@ -197,10 +202,10 @@
   function csv(c) {
     const cell = (v) => { let s = String(v ?? ""); if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`; return `"${s.replace(/"/g, '""')}"`; };
     const assigned = assignedOf(c);
-    const head = ["Nickname", "Lessons completed", ...(assigned.length ? [`Assigned completed (of ${assigned.length}${c.assigned_due ? `, due ${c.assigned_due}` : ""})`] : []), "Average quiz %", "Check-up before", "Check-up after", "Last active", ...data.lessons.map((id) => LESSONS.find((l) => l.id === id)?.title || id)];
+    const head = ["Nickname", "Lessons completed", ...(assigned.length ? [`Assigned completed (of ${assigned.length}${c.assigned_due ? `, due ${c.assigned_due}` : ""})`] : []), "First-try average %", "Best practice average %", "Check-up before", "Check-up after", "Last active", ...data.lessons.map((id) => LESSONS.find((l) => l.id === id)?.title || id), ...data.lessons.map((id) => `${LESSONS.find((l) => l.id === id)?.title || id} (first try)`)];
     const rows = c.class_students.map((s) => {
       const x = studentSummary(s, assigned);
-      return [s.nickname, x.done, ...(assigned.length ? [x.assignedDone] : []), x.pct ?? "", x.pre ?? "", x.post ?? "", (s.updated_at || "").slice(0, 10), ...data.lessons.map((id) => { const r = s.progress?.lessons?.[id]; return r ? `${r[0]}/${r[1]}` : ""; })];
+      return [s.nickname, x.done, ...(assigned.length ? [x.assignedDone] : []), x.firstPct ?? "", x.pct ?? "", x.pre ?? "", x.post ?? "", (s.updated_at || "").slice(0, 10), ...data.lessons.map((id) => { const r = s.progress?.lessons?.[id]; return r ? `${r[0]}/${r[1]}` : ""; }), ...data.lessons.map((id) => { const r = s.graded?.[id]; return r ? `${r[0]}/${r[1]}` : ""; })];
     });
     const blob = new Blob(["﻿" + [head, ...rows].map((r) => r.map(cell).join(",")).join("\r\n")], { type: "text/csv" });
     const a = document.createElement("a");
@@ -290,6 +295,12 @@
     } else if ("delete" in button.dataset) {
       if (!confirm(`Delete "${c.name}"? This permanently removes the class and all of its students' progress from MoneyExplained.`)) return;
       busy(button, async () => { await api(`/classes/${c.id}`, "DELETE"); await load(); say(`Deleted ${c.name}.`); $("class-name-input").focus(); });
+    } else if (button.dataset.rejoin) {
+      const s = c.class_students.find((x) => x.id === button.dataset.rejoin);
+      busy(button, async () => {
+        const r = await api(`/classes/${c.id}/students/${s.id}/rejoin`, "POST", {});
+        say(`Rejoin code for ${r.nickname}: ${r.code.split("").join(" ")}. It works once, for 24 hours. On the new device: My progress → Your class → "Already in this class on another device?", with the class code and the nickname ${r.nickname}. The old device leaves the class.`);
+      });
     } else if (button.dataset.remove) {
       const s = c.class_students.find((x) => x.id === button.dataset.remove);
       if (!confirm(`Remove ${s.nickname} from ${c.name}? Their progress in this class is deleted; their own device keeps it.`)) return;

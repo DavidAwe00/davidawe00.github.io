@@ -11,7 +11,7 @@ const ClassSync = (() => {
   async function post(path, body) {
     const r = await fetch(`${api}/api/class/${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), credentials: "omit", keepalive: true });
     const data = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(data.error || "The class service didn't respond. Try again in a minute.");
+    if (!r.ok) { const e = new Error(data.error || "The class service didn't respond. Try again in a minute."); e.status = r.status; throw e; }
     return data;
   }
 
@@ -67,8 +67,38 @@ const ClassSync = (() => {
   const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
   const pastDue = () => Boolean(assignedDue()) && today() > assignedDue();
 
-  async function join(code, nickname) {
-    const r = await post("join", { code, nickname });
+  // Quiz answers, sent as they're chosen so the server can check them. Only the first answer to each question
+  // counts for the teacher. Answers that couldn't be sent (offline, server asleep) wait here and go with the next one.
+  const PENDING = "fg-class-answers";
+  const pending = () => { try { const p = JSON.parse(localStorage.getItem(PENDING)); return Array.isArray(p) ? p : []; } catch { return []; } };
+  const setPending = (p) => { try { if (p.length) localStorage.setItem(PENDING, JSON.stringify(p.slice(-200))); else localStorage.removeItem(PENDING); } catch { /* storage blocked */ } };
+  let flushing = Promise.resolve();
+  function answer(lesson, question, choice) {
+    if (!load()) return Promise.resolve(null);
+    setPending([...pending(), { lesson, question, choice }]);
+    return flush();
+  }
+  function flush() {
+    flushing = flushing.then(async () => {
+      let last = null;
+      for (const a of pending()) {
+        const m = load();
+        if (!m) { setPending([]); return null; }
+        try { last = { ...a, ...(await post("answer", { token: m.token, ...a })) }; }
+        catch (e) {
+          if (!(e.status >= 400 && e.status < 500 && e.status !== 429)) return last;  // offline or busy: keep the rest for later
+          last = null;  // a rejected answer (e.g. a retired lesson) is dropped
+        }
+        setPending(pending().slice(1));
+        if (last && last.member === false) { clear(); setPending([]); document.dispatchEvent(new Event("classchange")); return null; }
+      }
+      return last;
+    }).catch(() => null);
+    return flushing;
+  }
+
+  async function join(code, nickname, rejoin) {
+    const r = await post(rejoin ? "rejoin" : "join", { code, nickname, ...(rejoin ? { rejoin } : {}) });
     save({ token: r.token, className: r.className, nickname: r.nickname });
     sync();
     refresh(true);
@@ -80,11 +110,13 @@ const ClassSync = (() => {
     const m = load();
     if (m) await post("leave", { token: m.token });
     clear();
+    setPending([]);
     document.dispatchEvent(new Event("classchange"));
   }
 
   document.addEventListener("progresschange", sync);
   sync();
   refresh();
-  return { load, join, leave, sync, refresh, assigned, assignedDue, dueLabel, pastDue, isAvailable };
+  if (pending().length) flush();
+  return { load, join, leave, sync, refresh, answer, assigned, assignedDue, dueLabel, pastDue, isAvailable };
 })();

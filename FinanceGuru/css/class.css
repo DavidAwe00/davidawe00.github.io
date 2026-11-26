@@ -4,6 +4,8 @@
 .class-notice:empty { display: none; }
 .class-notice { padding: 10px 14px; border-radius: var(--radius-sm); background: var(--brand-soft); color: var(--text); }
 .class-signin { max-width: 520px; }
+.roster .row-actions { white-space: nowrap; }
+.roster .row-actions .btn-small { min-height: 36px; padding: 6px 10px; font-size: .8rem; margin-right: 6px; vertical-align: middle; }
 .class-signin .row-check { margin: 8px 0 4px; }
 .class-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0 12px; }
 .class-toolbar h2 { margin: 0 auto 0 0; }
