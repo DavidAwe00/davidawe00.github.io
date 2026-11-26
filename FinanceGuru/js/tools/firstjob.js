@@ -1,7 +1,7 @@
 // First Job Checklist: the steps around starting a job, grouped by when they happen, each linking to
 // the lesson or tool that helps. Check-offs persist in this browser.
 (function () {
-  const { $, esc, store } = ToolKit;
+  const { $, esc, store, t } = ToolKit;
   const root = $("fj-root");
   if (!root) return;
   const KEY = "fg-tool-firstjob";
@@ -39,20 +39,20 @@
     const count = all.filter((s) => done[s.id]).length;
     root.innerHTML = `
       <div class="fj-top">
-        <div><div class="label small muted">Your progress</div><div class="fj-count">${count} of ${all.length} steps</div></div>
-        <button type="button" class="link-btn" data-reset>Start over</button>
+        <div><div class="label small muted">${t("Your progress")}</div><div class="fj-count">${t("{done} of {total} steps", { done: count, total: all.length })}</div></div>
+        <button type="button" class="link-btn" data-reset>${t("Start over")}</button>
       </div>
       <div class="progress" style="height:10px;margin:8px 0 20px"><span style="width:${(count / all.length) * 100}%"></span></div>
       ${STEPS.map((p) => `
-        <h3 class="fj-phase">${esc(p.phase)} <span class="small muted">${p.items.filter((s) => done[s.id]).length}/${p.items.length}</span></h3>
+        <h3 class="fj-phase">${esc(t(p.phase))} <span class="small muted">${p.items.filter((s) => done[s.id]).length}/${p.items.length}</span></h3>
         <ul class="fj-list">${p.items.map((s) => `
           <li class="fj-item${done[s.id] ? " done" : ""}">
             <input type="checkbox" id="fj-${s.id}" data-id="${s.id}"${done[s.id] ? " checked" : ""}>
-            <div><label for="fj-${s.id}"><strong>${esc(s.title)}</strong></label>
-              <p class="small muted">${esc(s.text)}</p>
-              <a class="small" href="${s.link[1]}"${s.link[1].startsWith("http") ? ' rel="noopener" target="_blank"' : ""}>${esc(s.link[0])} →</a></div>
+            <div><label for="fj-${s.id}"><strong>${esc(t(s.title))}</strong></label>
+              <p class="small muted">${esc(t(s.text))}</p>
+              <a class="small" href="${s.link[1]}"${s.link[1].startsWith("http") ? ' rel="noopener" target="_blank"' : ""}>${esc(t(s.link[0]))} →</a></div>
           </li>`).join("")}</ul>`).join("")}
-      ${count === all.length ? `<p class="callout small">🎉 Every step done. Your first job is set up for success. Revisit the benefits steps each year at open enrollment.</p>` : ""}`;
+      ${count === all.length ? `<p class="callout small">${t("🎉 Every step done. Your first job is set up for success. Revisit the benefits steps each year at open enrollment.")}</p>` : ""}`;
   }
 
   root.addEventListener("change", (e) => {
@@ -65,8 +65,9 @@
   });
   root.addEventListener("click", (e) => {
     if (!e.target.closest("[data-reset]")) return;
-    if (!confirm("Clear all checkmarks?")) return;
+    if (!confirm(t("Clear all checkmarks?"))) return;
     done = {}; store.set(KEY, done); render();
   });
+  document.addEventListener("langchange", render);
   render();
 })();

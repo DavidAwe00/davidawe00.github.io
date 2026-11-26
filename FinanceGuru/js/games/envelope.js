@@ -4,6 +4,7 @@
 window.Games = window.Games || {};
 Games.envelope = (() => {
   const root = document.getElementById("env-root");
+  const t = (s, v) => (typeof I18N === "object" ? I18N.t(s, v) : s);
   const INCOME = 3200; // sample monthly take-home pay (made-up budget, not a statistic)
   const ENVS = [
     { key: "need", name: "Needs", emoji: "🏠", pct: 0.5, color: "--series-1" },
@@ -40,21 +41,21 @@ Games.envelope = (() => {
     totals = { need: 0, want: 0, save: 0 };
     root.innerHTML = `
       <div class="env-top">
-        <div class="small muted">Payday! Take-home pay: <strong>${FG.money(INCOME)}</strong> · Left to assign: <strong id="env-left"></strong></div>
+        <div class="small muted">${t("Payday! Take-home pay: <strong>{amount}</strong> · Left to assign:", { amount: FG.money(INCOME) })} <strong id="env-left"></strong></div>
         <div class="step-dots" id="env-dots"></div>
       </div>
       <div class="env-stage">
         <div class="env-card-slot" id="env-slot"></div>
-        <div class="env-feedback small" id="env-fb" aria-live="polite">Drag the expense into an envelope — or tap one.</div>
+        <div class="env-feedback small" id="env-fb" aria-live="polite">${t("Drag the expense into an envelope — or tap one.")}</div>
       </div>
       <div class="env-row">
         ${ENVS.map((e) => `<button class="envelope" data-env="${e.key}" style="--env:var(${e.color})">
-          <span class="env-name">${e.emoji} ${e.name}</span>
-          <span class="env-goal">Goal ${Math.round(e.pct * 100)}%: ${FG.money(INCOME * e.pct)}</span>
+          <span class="env-name">${e.emoji} ${t(e.name)}</span>
+          <span class="env-goal">${t("Goal {pct}%: {amount}", { pct: Math.round(e.pct * 100), amount: FG.money(INCOME * e.pct) })}</span>
           <span class="env-meter"><span data-fill="${e.key}"></span><i></i></span>
           <span class="env-amt" data-amt="${e.key}">$0</span>
         </button>`).join("")}
-        <button class="envelope skip" data-env="skip"><span class="env-name">🗑️ Skip it</span><span class="env-goal">Not this month</span><span class="env-amt" id="env-skipped">$0 skipped</span></button>
+        <button class="envelope skip" data-env="skip"><span class="env-name">${t("🗑️ Skip it")}</span><span class="env-goal">${t("Not this month")}</span><span class="env-amt" id="env-skipped"></span></button>
       </div>`;
     showCard();
   }
@@ -73,7 +74,7 @@ Games.envelope = (() => {
     const el = document.getElementById("env-left");
     el.textContent = FG.money(left);
     el.style.color = left < 0 ? "var(--bad)" : "";
-    document.getElementById("env-skipped").textContent = `${FG.money(skipped.reduce((t, c) => t + c[2], 0))} skipped`;
+    document.getElementById("env-skipped").textContent = t("{amount} skipped", { amount: FG.money(skipped.reduce((sum, c) => sum + c[2], 0)) });
     document.getElementById("env-dots").innerHTML = deck.map((_, k) => `<span class="${k < i ? "on" : ""}"></span>`).join("");
   }
 
@@ -81,8 +82,8 @@ Games.envelope = (() => {
     updateEnvelopes();
     if (i >= deck.length) return end();
     const c = deck[i];
-    document.getElementById("env-slot").innerHTML = `<div class="sort-card env-card" id="env-card" tabindex="0" aria-label="${c[1]}, ${FG.money(c[2])}">
-      <div class="emoji">${c[0]}</div><div class="name">${c[1]}</div><div class="env-price">${FG.money(c[2])}</div></div>`;
+    document.getElementById("env-slot").innerHTML = `<div class="sort-card env-card" id="env-card" tabindex="0" aria-label="${t(c[1])}, ${FG.money(c[2])}">
+      <div class="emoji">${c[0]}</div><div class="name">${t(c[1])}</div><div class="env-price">${FG.money(c[2])}</div></div>`;
     locked = false;
     bindDrag(document.getElementById("env-card"));
   }
@@ -90,18 +91,18 @@ Games.envelope = (() => {
   function choose(env) {
     if (locked || i >= deck.length) return;
     const c = deck[i], fb = document.getElementById("env-fb");
-    const [, name, amt, cat, why] = c;
+    const [, en, amt, cat, whyEn] = c, name = t(en), why = t(whyEn), envName = t(ENVS.find((e) => e.key === cat).name);
     if (env === "skip") {
-      if (cat === "need") { score -= 25; fb.innerHTML = `<span class="delta down">🚫 You can't skip ${name.toLowerCase()}!</span> ${why}`; shake(); return; }
+      if (cat === "need") { score -= 25; fb.innerHTML = `<span class="delta down">${t("🚫 You can't skip {item}!", { item: name.toLowerCase() })}</span> ${why}`; shake(); return; }
       skipped.push(c);
-      if (cat === "want") { score += 50; fb.innerHTML = `<span class="delta up">✓ Skipped ${name} — ${FG.money(amt)} stays free.</span> Cutting wants is the easiest way to balance a budget.`; }
-      else { score -= 50; fb.innerHTML = `<span class="delta down">Skipped savings.</span> Future you loses ${FG.money(amt)} this month. Pay yourself first!`; }
+      if (cat === "want") { score += 50; fb.innerHTML = `<span class="delta up">${t("✓ Skipped {item} — {amount} stays free.", { item: name, amount: FG.money(amt) })}</span> ${t("Cutting wants is the easiest way to balance a budget.")}`; }
+      else { score -= 50; fb.innerHTML = `<span class="delta down">${t("Skipped savings.")}</span> ${t("Future you loses {amount} this month. Pay yourself first!", { amount: FG.money(amt) })}`; }
     } else if (env === cat) {
       score += 100; totals[cat] += amt;
-      fb.innerHTML = `<span class="delta up">✓ ${name} → ${ENVS.find((e) => e.key === cat).name}.</span> ${why}`;
+      fb.innerHTML = `<span class="delta up">✓ ${name} → ${envName}.</span> ${why}`;
     } else {
       score -= 50; wrong++; totals[cat] += amt;
-      fb.innerHTML = `<span class="delta down">✗ ${name} belongs in ${ENVS.find((e) => e.key === cat).name}.</span> ${why} (Moved it for you.)`;
+      fb.innerHTML = `<span class="delta down">${t("✗ {item} belongs in {envelope}.", { item: name, envelope: envName })}</span> ${why} ${t("(Moved it for you.)")}`;
     }
     locked = true;
     const card = document.getElementById("env-card");
@@ -121,15 +122,15 @@ Games.envelope = (() => {
       if (!dragging) return;
       card.style.transform = `translate(${e.clientX - sx}px, ${e.clientY - sy}px) rotate(${(e.clientX - sx) / 30}deg)`;
       root.querySelectorAll(".envelope").forEach((b) => b.classList.remove("hover"));
-      const t = targetAt(card, e.clientX, e.clientY);
-      if (t) t.classList.add("hover");
+      const over = targetAt(card, e.clientX, e.clientY);
+      if (over) over.classList.add("hover");
     });
     card.addEventListener("pointerup", (e) => {
       if (!dragging) return;
       dragging = false; card.classList.remove("dragging");
       root.querySelectorAll(".envelope").forEach((b) => b.classList.remove("hover"));
-      const t = targetAt(card, e.clientX, e.clientY);
-      if (t) choose(t.dataset.env);
+      const target = targetAt(card, e.clientX, e.clientY);
+      if (target) choose(target.dataset.env);
       else { card.style.transition = "transform .2s ease"; card.style.transform = ""; }
     });
   }
@@ -144,9 +145,9 @@ Games.envelope = (() => {
     const wantGoal = INCOME * 0.3, saveGoal = INCOME * 0.2;
     let left = INCOME - placed();
     const checks = [
-      [totals.want <= wantGoal, `Wants: ${FG.money(totals.want)} of the ${FG.money(wantGoal)} goal`, 200],
-      [totals.save >= saveGoal, `Savings & debt: ${FG.money(totals.save)} (goal ${FG.money(saveGoal)})`, 200],
-      [left >= 0, left >= 0 ? `Spent no more than you earned (${FG.money(left)} left over)` : `Overspent by ${FG.money(-left)} — that would land on a credit card`, left >= 0 ? 100 : -200],
+      [totals.want <= wantGoal, t("Wants: {amount} of the {goal} goal", { amount: FG.money(totals.want), goal: FG.money(wantGoal) }), 200],
+      [totals.save >= saveGoal, t("Savings & debt: {amount} (goal {goal})", { amount: FG.money(totals.save), goal: FG.money(saveGoal) }), 200],
+      [left >= 0, left >= 0 ? t("Spent no more than you earned ({amount} left over)", { amount: FG.money(left) }) : t("Overspent by {amount} — that would land on a credit card", { amount: FG.money(-left) }), left >= 0 ? 100 : -200],
     ];
     checks.forEach(([ok, , pts]) => { if (ok || pts < 0) score += pts; });
     const stars = checks.filter(([ok]) => ok).length - (wrong > 1 ? 1 : 0);
@@ -156,12 +157,12 @@ Games.envelope = (() => {
     Games.refreshBest && Games.refreshBest();
     root.querySelector(".env-stage").innerHTML = `<div class="result" style="padding:8px">
       <div class="env-stars">${"⭐".repeat(Math.max(0, stars))}${"☆".repeat(3 - Math.max(0, stars))}</div>
-      <div class="big">${score} pts</div>
-      <p class="small muted">${isNew ? "🏆 New best!" : "Best: " + best} · +${xp} XP · ${wrong} misfiled</p>
+      <div class="big">${t("{n} pts", { n: score })}</div>
+      <p class="small muted">${isNew ? t("🏆 New best!") : t("Best: {best}", { best })} · +${xp} XP · ${t("{n} misfiled", { n: wrong })}</p>
       <ul class="env-checks">${checks.map(([ok, label]) => `<li>${ok ? "✅" : "❌"} ${label}</li>`).join("")}</ul>
-      ${left > 0 ? `<p class="small">💡 Got ${FG.money(left)} left? Give every dollar a job — move it to savings.</p>` : ""}
-      <div class="callout" style="text-align:left"><strong>Money lesson:</strong> the 50/30/20 guideline — 50% needs, 30% wants, 20% savings and extra debt payments — is a starting point, not a law. The real skill is the one you just practiced: you can't fund every want, so decide what matters most <em>before</em> payday.</div>
-      <button class="btn btn-primary" data-restart>Play again</button></div>`;
+      ${left > 0 ? `<p class="small">${t("💡 Got {amount} left? Give every dollar a job — move it to savings.", { amount: FG.money(left) })}</p>` : ""}
+      <div class="callout" style="text-align:left">${t("<strong>Money lesson:</strong> the 50/30/20 guideline — 50% needs, 30% wants, 20% savings and extra debt payments — is a starting point, not a law. The real skill is the one you just practiced: you can't fund every want, so decide what matters most <em>before</em> payday.")}</div>
+      <button class="btn btn-primary" data-restart>${t("Play again")}</button></div>`;
   }
 
   root.addEventListener("click", (e) => {
@@ -175,5 +176,7 @@ Games.envelope = (() => {
     if (map[e.key]) { e.preventDefault(); choose(map[e.key]); }
   });
 
+  // A fresh game (nothing filed yet) is redrawn in the new language.
+  document.addEventListener("langchange", () => { if (deck && i === 0) start(); });
   return { show() { if (!deck) start(); }, hide() {} };
 })();

@@ -2,6 +2,7 @@
 // Lesson: small amounts add up; impulse buys drain savings.
 window.Games = window.Games || {};
 Games.catcher = (() => {
+  const t = (s, v) => (typeof I18N === "object" ? I18N.t(s, v) : s);
   const stage = document.getElementById("catcher-stage");
   const overlay = document.getElementById("catcher-overlay");
   const $score = document.getElementById("catcher-score");
@@ -9,7 +10,7 @@ Games.catcher = (() => {
   const $lives = document.getElementById("catcher-lives");
 
   if (!window.THREE) {
-    overlay.querySelector(".card").innerHTML = "<h3>3D needs an internet connection</h3><p class='muted small'>This game loads a 3D engine from the web. Connect and reload to play.</p>";
+    overlay.querySelector(".card").innerHTML = `<h3>${t("3D needs an internet connection")}</h3><p class='muted small'>${t("This game loads a 3D engine from the web. Connect and reload to play.")}</p>`;
     return { show() {}, hide() {} };
   }
 
@@ -24,13 +25,15 @@ Games.catcher = (() => {
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     } catch {
-      overlay.querySelector(".card").innerHTML = "<h3>3D isn't supported here</h3><p class='muted small'>Your browser or device has WebGL turned off. Try another game!</p>";
+      overlay.querySelector(".card").innerHTML = `<h3>${t("3D isn't supported here")}</h3><p class='muted small'>${t("Your browser or device has WebGL turned off. Try another game!")}</p>`;
       return false;
     }
     renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
     stage.prepend(renderer.domElement);
     renderer.domElement.setAttribute("role", "img");
-    renderer.domElement.setAttribute("aria-label", "3D game field: a piggy bank catches falling coins, cash, and interest stars while dodging impulse buys. Move with the left and right arrow keys.");
+    const label = () => renderer.domElement.setAttribute("aria-label", t("3D game field: a piggy bank catches falling coins, cash, and interest stars while dodging impulse buys. Move with the left and right arrow keys."));
+    label();
+    document.addEventListener("langchange", label);
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.set(0, 4.2, 13);
@@ -135,7 +138,7 @@ Games.catcher = (() => {
     running = true;
     last = performance.now();
     hud();
-    document.getElementById("catcher-sr").textContent = "Game started. Move with the left and right arrow keys. 45 seconds, 3 lives.";
+    document.getElementById("catcher-sr").textContent = t("Game started. Move with the left and right arrow keys. 45 seconds, 3 lives.");
     requestAnimationFrame(loop);
   }
 
@@ -195,8 +198,8 @@ Games.catcher = (() => {
       if (hit) {
         if (it.kind === "coin") { score += 10; caughtCoins++; popup("+$10", true, m.position.x, m.position.y); }
         else if (it.kind === "cash") { score += 50; caughtCash++; popup("+$50", true, m.position.x, m.position.y); }
-        else if (it.kind === "star") { const b = Math.max(10, Math.round(score * 0.1)); score += b; stars++; popup(`+${FG.money(b)} interest!`, true, m.position.x, m.position.y); }
-        else { score = Math.max(0, score - 25); lives--; impulses++; popup("−$25 impulse buy!", false, m.position.x, m.position.y); }
+        else if (it.kind === "star") { const b = Math.max(10, Math.round(score * 0.1)); score += b; stars++; popup(t("+{amount} interest!", { amount: FG.money(b) }), true, m.position.x, m.position.y); }
+        else { score = Math.max(0, score - 25); lives--; impulses++; popup(t("−$25 impulse buy!"), false, m.position.x, m.position.y); }
         scene.remove(m); items.splice(i, 1);
       } else if (m.position.y < -2) {
         scene.remove(m); items.splice(i, 1);
@@ -217,16 +220,16 @@ Games.catcher = (() => {
     const future = score * Math.pow(1.07, 30);
     overlay.querySelector(".card").innerHTML = `
       <div class="card-icon">${lives <= 0 ? "💸" : "🐷"}</div>
-      <h3>${lives <= 0 ? "Too many impulse buys!" : "Time's up!"}</h3>
+      <h3>${lives <= 0 ? t("Too many impulse buys!") : t("Time's up!")}</h3>
       <div class="big">${FG.money(score)}</div>
-      <p class="small muted">${isNew ? "🏆 New best!" : "Best: " + FG.money(best)} · +${xp} XP</p>
-      <p class="small">🪙 ${caughtCoins} coins · 💵 ${caughtCash} bills · ⭐ ${stars} stars · 🛍️ ${impulses} impulse buys</p>
-      <div class="callout" style="text-align:left"><strong>Money lesson:</strong> invested at 7% for 30 years, your ${FG.money(score)} would grow to about <strong>${FG.money(future)}</strong>. Small amounts add up — and every impulse buy is future money gone.</div>
-      <button class="btn btn-primary" data-start>Play again</button>`;
+      <p class="small muted">${isNew ? t("🏆 New best!") : t("Best: {best}", { best: FG.money(best) })} · +${xp} XP</p>
+      <p class="small">${t("🪙 {coins} coins · 💵 {cash} bills · ⭐ {stars} stars · 🛍️ {impulses} impulse buys", { coins: caughtCoins, cash: caughtCash, stars, impulses })}</p>
+      <div class="callout" style="text-align:left">${t("<strong>Money lesson:</strong> invested at 7% for 30 years, your {score} would grow to about <strong>{future}</strong>. Small amounts add up — and every impulse buy is future money gone.", { score: FG.money(score), future: FG.money(future) })}</div>
+      <button class="btn btn-primary" data-start>${t("Play again")}</button>`;
     overlay.hidden = false;
     // The results card covers the game, so move keyboard focus onto it.
     if (stage.contains(document.activeElement) || document.activeElement === document.body) overlay.querySelector("[data-start]").focus({ preventScroll: true });
-    document.getElementById("catcher-sr").textContent = `${lives <= 0 ? "Out of lives" : "Time's up"}. You saved ${FG.money(score)}. ${isNew ? "New best!" : ""}`;
+    document.getElementById("catcher-sr").textContent = `${t(lives <= 0 ? "Out of lives. You saved {amount}." : "Time's up. You saved {amount}.", { amount: FG.money(score) })} ${isNew ? t("New best!") : ""}`;
     Games.refreshBest && Games.refreshBest();
   }
 

@@ -4,6 +4,7 @@
   const $ = (id) => document.getElementById(id);
   if (!$("loancost")) return;
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
+  const t = I18N.t;
   const CARD_APR = 22.36; // Federal Reserve G.19, Aug 2026 (matches the page hero)
   const PRESETS = {
     payday: { amt: 400, fee: 60, days: 14, roll: true },
@@ -34,18 +35,20 @@
 
     const rows = [["This loan", apr, "--series-2"], ["Average credit card", CARD_APR, "--series-1"], ["Typical payday loan", 391, "--series-5"]];
     const max = Math.max(...rows.map((r) => r[1]), 1);
-    $("lc-bars").innerHTML = rows.map(([n, v, c]) => `<div class="hb-row"><span class="hb-name">${n}</span><div class="hb-track"><span class="hb-bar" style="width:${Math.max(0.5, (v / max) * 100)}%;background:var(${c})"></span></div><span class="hb-val">${pctFmt(v)}</span></div>`).join("");
-    $("lc-bars").setAttribute("aria-label", rows.map(([n, v]) => `${n}: ${pctFmt(v)} APR`).join(", "));
+    $("lc-bars").innerHTML = rows.map(([n, v, c]) => `<div class="hb-row"><span class="hb-name">${t(n)}</span><div class="hb-track"><span class="hb-bar" style="width:${Math.max(0.5, (v / max) * 100)}%;background:var(${c})"></span></div><span class="hb-val">${pctFmt(v)}</span></div>`).join("");
+    $("lc-bars").setAttribute("aria-label", rows.map(([n, v]) => t("{name}: {apr} APR", { name: t(n), apr: pctFmt(v) })).join(", "));
 
     const weeks = Math.round((days * (roll + 1)) / 7);
     $("lc-insight").innerHTML = !fee
-      ? "Paid on time with no fees, this costs nothing extra. The risk is missing a payment or juggling several plans at once: late fees and overdrafts add up fast."
+      ? t("Paid on time with no fees, this costs nothing extra. The risk is missing a payment or juggling several plans at once: late fees and overdrafts add up fast.")
       : roll
-        ? `Rolling over ${roll} time${roll > 1 ? "s" : ""} means about ${weeks} weeks of borrowing and <strong>${cash(fees)}</strong> in fees, and you still owe the original ${cash(amt)}.`
-        : `${cash(fee)} on ${cash(amt)} for ${days} days works out to <strong>${pctFmt(apr)} APR</strong>, about ${apr > CARD_APR ? Math.round(apr / CARD_APR) + " times" : "the same as or less than"} the average credit card rate.`;
+        ? t(roll > 1 ? "Rolling over {n} times means about {weeks} weeks of borrowing and <strong>{fees}</strong> in fees, and you still owe the original {amt}." : "Rolling over {n} time means about {weeks} weeks of borrowing and <strong>{fees}</strong> in fees, and you still owe the original {amt}.", { n: roll, weeks, fees: cash(fees), amt: cash(amt) })
+        : t(apr > CARD_APR ? "{fee} on {amt} for {days} days works out to <strong>{apr} APR</strong>, about {x} times the average credit card rate." : "{fee} on {amt} for {days} days works out to <strong>{apr} APR</strong>, about the same as or less than the average credit card rate.",
+            { fee: cash(fee), amt: cash(amt), days, apr: pctFmt(apr), x: Math.round(apr / CARD_APR) });
   }
 
   $("lc-preset").addEventListener("change", applyPreset);
   ["lc-amt", "lc-fee", "lc-days", "lc-roll"].forEach((id) => $(id).addEventListener("input", calc));
+  document.addEventListener("langchange", calc);
   applyPreset();
 })();

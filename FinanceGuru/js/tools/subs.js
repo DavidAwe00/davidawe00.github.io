@@ -1,7 +1,7 @@
 // Subscription Audit: yearly total of recurring charges, savings from the ones marked to cut, and what
 // that yearly saving would grow to if invested monthly for 10 years at 7%. Persists in this browser.
 (function () {
-  const { $, money, listEditor } = ToolKit;
+  const { $, money, listEditor, t } = ToolKit;
   if (!$("panel-subs")) return;
   const YEARS = 10, RATE = 0.07;
   const yearly = (s) => (s.every === "year" ? s.price : s.every === "week" ? s.price * 52 : s.price * 12);
@@ -32,11 +32,11 @@
     const r = RATE / 12, n = YEARS * 12;
     const grow = (cut / 12) * ((Math.pow(1 + r, n) - 1) / r);
     $("sb-year").textContent = money(total);
-    $("sb-month").textContent = `${money(total / 12)} a month`;
+    $("sb-month").textContent = t("{amount} a month", { amount: money(total / 12) });
     $("sb-cut").textContent = money(cut);
     $("sb-grow").textContent = money(grow);
     const biggest = [...rows].sort((a, b) => yearly(b) - yearly(a))[0];
-    $("sb-insight").innerHTML = !rows.length ? "Add your subscriptions to see the total." :
-      `${rows.length} subscription${rows.length > 1 ? "s" : ""} cost <strong>${money(total)}</strong> a year. ${cut ? `Cutting the checked ones frees up ${money(cut / 12)} a month; invested, that could grow to about <strong>${money(grow)}</strong> in ${YEARS} years.` : "Check any you could live without to see what cutting them is worth."} ${biggest && yearly(biggest) ? `Your biggest is ${biggest.name || "an unnamed one"} at ${money(yearly(biggest))} a year.` : ""} Tip: many services let you pause instead of cancel, or rotate one at a time.`;
+    $("sb-insight").innerHTML = !rows.length ? t("Add your subscriptions to see the total.") :
+      `${t(rows.length > 1 ? "{n} subscriptions cost <strong>{total}</strong> a year." : "{n} subscription costs <strong>{total}</strong> a year.", { n: rows.length, total: money(total) })} ${cut ? t("Cutting the checked ones frees up {month} a month; invested, that could grow to about <strong>{grow}</strong> in {years} years.", { month: money(cut / 12), grow: money(grow), years: YEARS }) : t("Check any you could live without to see what cutting them is worth.")} ${biggest && yearly(biggest) ? t("Your biggest is {name} at {amount} a year.", { name: biggest.name || t("an unnamed one"), amount: money(yearly(biggest)) }) : ""} ${t("Tip: many services let you pause instead of cancel, or rotate one at a time.")}`;
   }
 })();

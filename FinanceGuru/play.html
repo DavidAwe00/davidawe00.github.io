@@ -3,36 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Play — FinanceGuru</title>
+  <title>Play — MoneyExplained</title>
   <meta name="description" content="Money games that teach: a 3D piggy bank catcher, needs vs wants, a 12-month life simulator, and a stock market rollercoaster.">
   <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231d5bbf'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0e7a4e">
+  <meta name="theme-color" content="#1d5bbf">
   <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/play.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:site_name" content="MoneyExplained">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/play.html">
-  <meta property="og:title" content="Play — FinanceGuru">
+  <meta property="og:title" content="Play — MoneyExplained">
   <meta property="og:description" content="Money games that teach: a 3D piggy bank catcher, needs vs wants, a 12-month life simulator, and a stock market rollercoaster.">
-  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/moneyexplained.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta property="og:image:alt" content="MoneyExplained — free money lessons, quizzes, games, and tools">
   <meta name="twitter:card" content="summary_large_image">
   <!-- publishing-meta:end -->
 </head>
 <body>
   <header class="site-header">
     <nav class="container nav">
-      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">MoneyExplained</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
         <details class="nav-menu">
@@ -54,9 +51,9 @@
     </nav>
   </header>
 
-  <main class="container" style="padding-top:32px;padding-bottom:48px">
-    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Play &amp; learn</h1>
-    <p class="muted">Every game teaches a real money lesson. Beat your best score to earn more XP.</p>
+  <main class="container page-main">
+    <header class="page-head"><span class="eyebrow">Games</span><h1>Play &amp; learn</h1><p class="lead">Every game teaches a real money lesson. Beat your best score to earn more XP.</p>
+      <div class="page-lang chips" role="group" aria-label="Language"><button type="button" class="chip" data-page-lang="en" lang="en" data-i18n-skip aria-pressed="true">English</button><button type="button" class="chip" data-page-lang="es" lang="es" data-i18n-skip aria-pressed="false">Español</button></div></header>
     <div class="field tool-picker"><label for="game-picker">Choose a game</label><select class="select" id="game-picker"></select></div>
 
     <h2 class="sr-only">Games</h2>
@@ -67,7 +64,7 @@
       </button>
       <button class="card game-card" data-game="sorter" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">⚡</div><h3>Needs vs Wants</h3>
-        <p class="muted small" style="margin:0">Sort as many as you can in 30 seconds.</p><div class="best" data-best="sorter"></div>
+        <p class="muted small" style="margin:0">Need, want, or overpriced need? 30 seconds, and it gets harder.</p><div class="best" data-best="sorter"></div>
       </button>
       <button class="card game-card" data-game="life" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">📅</div><h3>Payday: Life Sim</h3>
@@ -79,11 +76,11 @@
       </button>
       <button class="card game-card" data-game="salary" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">💼</div><h3>Salary Showdown <span class="badge">New</span></h3>
-        <p class="muted small" style="margin:0">Higher or lower? Guess which career or major pays more.</p><div class="best" data-best="salary"></div>
+        <p class="muted small" style="margin:0">Higher or lower, guess the salary, or race two careers to age 65.</p><div class="best" data-best="salary"></div>
       </button>
       <button class="card game-card" data-game="prices" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">🛒</div><h3>Price Time Machine <span class="badge">New</span></h3>
-        <p class="muted small" style="margin:0">Eggs cost 84¢ in 1980. What do they cost now? Real BLS prices.</p><div class="best" data-best="prices"></div>
+        <p class="muted small" style="margin:0">Eggs cost 84¢ in 1980. Slide to your guess for today, then see the real price history.</p><div class="best" data-best="prices"></div>
       </button>
       <button class="card game-card" data-game="credit" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">📊</div><h3>Credit Score Quest <span class="badge">New</span></h3>
@@ -95,26 +92,26 @@
       </button>
       <button class="card game-card" data-game="scam" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">🎣</div><h3>Spot the Scam <span class="badge">New</span></h3>
-        <p class="muted small" style="margin:0">Texts, emails, DMs, and calls. Can you tell the scams from the real ones?</p><div class="best" data-best="scam"></div>
+        <p class="muted small" style="margin:0">Call scam or legit, then hunt down every red flag in the message.</p><div class="best" data-best="scam"></div>
       </button>
       <button class="card game-card" data-game="fees" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">🔎</div><h3>Fee Hunter <span class="badge">New</span></h3>
-        <p class="muted small" style="margin:0">Find every bank fee hiding on a month's statement, and learn how to dodge it.</p><div class="best" data-best="fees"></div>
+        <p class="muted small" style="margin:0">Find every bank fee hiding on three statements, from easy to sneaky, then pick how you'd avoid each one.</p><div class="best" data-best="fees"></div>
       </button>
       <button class="card game-card" data-game="plans" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">☂️</div><h3>Plan Picker <span class="badge">New</span></h3>
-        <p class="muted small" style="margin:0">Low or high deductible? Pick each person's health plan, then see their real year of bills.</p><div class="best" data-best="plans"></div>
+        <p class="muted small" style="margin:0">Three health plans, real-life odds. Pick the cheapest on average, then roll the year.</p><div class="best" data-best="plans"></div>
       </button>
       <button class="card game-card" data-game="betting" style="text-align:left;font:inherit;color:inherit">
         <div class="card-icon">🎲</div><h3>Beat the Book <span class="badge">New</span></h3>
-        <p class="muted small" style="margin:0">20 rounds of bets with $100. Then watch 10,000 players make your exact choices.</p><div class="best" data-best="betting"></div>
+        <p class="muted small" style="margin:0">20 rounds, $100, your choice of bet size. See how much was the house edge and how much was luck, then watch 10,000 players make your exact choices.</p><div class="best" data-best="betting"></div>
       </button>
     </div>
 
     <!-- 3D Piggy Bank Catcher -->
     <section class="game-panel" id="game-catcher" hidden style="padding:0">
       <header>
-        <div><h2>🐷 Piggy Bank Catcher</h2><p class="muted small" style="margin:0">Move with your mouse, finger, or <span class="key">←</span> <span class="key">→</span></p></div>
+        <div><h2>Piggy Bank Catcher</h2><p class="muted small" style="margin:0">Move with your mouse, finger, or <span class="key">←</span> <span class="key">→</span></p></div>
       </header>
       <div class="stage" id="catcher-stage" data-focus-root>
         <div class="sr-only" aria-live="polite" id="catcher-sr"></div>
@@ -141,7 +138,7 @@
     <!-- Needs vs Wants -->
     <section class="game-panel" id="game-sorter" hidden style="padding:0">
       <header>
-        <div><h2>⚡ Needs vs Wants</h2><p class="muted small" style="margin:0">Swipe, click, or press <span class="key">←</span> Need / <span class="key">→</span> Want</p></div>
+        <div><h2>Needs vs Wants</h2><p class="muted small" style="margin:0">Swipe, click, or press <span class="key">←</span> Need · <span class="key">↑</span> Upgrade · <span class="key">→</span> Want</p></div>
         <div class="hud" style="position:static"><label class="small relaxed-toggle"><input type="checkbox" id="sorter-relaxed"> No time limit</label><span class="pill" id="sorter-score">0 pts</span><span class="pill" id="sorter-streak">🔥 x1</span></div>
       </header>
       <div class="card sorter" id="sorter-root" data-focus-root>
@@ -150,14 +147,16 @@
         <div class="sort-card" id="sorter-card"><div class="emoji">🧾</div><div class="name">Ready?</div></div>
         <div class="sort-buttons">
           <button class="btn btn-need" data-sort="need">← Need</button>
+          <button class="btn btn-upgrade" data-sort="upgrade">↑ Upgrade</button>
           <button class="btn btn-want" data-sort="want">Want →</button>
         </div>
         <div class="sort-feedback muted small" id="sorter-feedback" aria-live="polite"></div>
         <div class="overlay" id="sorter-overlay">
           <div class="card">
             <div class="card-icon">⚡</div>
-            <h3>Need or want?</h3>
-            <p class="muted small">Needs keep you safe, healthy, housed, and employed. Everything else is a want. Build a streak for bonus points!</p>
+            <h3>Need, want, or upgrade?</h3>
+            <p class="muted small">Needs keep you safe, healthy, housed, and employed. Everything else is a want. An <strong>upgrade</strong> is a real need bought at a want price, like a $90 phone plan when a $30 one works.</p>
+            <p class="muted small">Cards get trickier as you go and harder ones score more. A wrong answer costs 2 seconds. Build a streak for bonus points!</p>
             <button class="btn btn-primary" data-start>Start (30 seconds)</button>
           </div>
         </div>
@@ -167,7 +166,7 @@
     <!-- Life sim -->
     <section class="game-panel" id="game-life" hidden style="padding:0">
       <header>
-        <div><h2>📅 Payday: Life Sim</h2><p class="muted small" style="margin:0">$3,200 take-home a month. $2,000 goes to rent, food & bills. The rest is up to you.</p></div>
+        <div><h2>Payday: Life Sim</h2><p class="muted small" style="margin:0">Pick a life, then split every paycheck. Some choices come back months later.</p></div>
       </header>
       <div class="life" id="life-root" data-focus-root></div>
     </section>
@@ -175,9 +174,28 @@
     <!-- Market -->
     <section class="game-panel" id="game-market" hidden style="padding:0">
       <header>
-        <div><h2>🎢 Market Rollercoaster</h2><p class="muted small" style="margin:0">You start with $10,000 invested in an index fund. Sell to cash whenever you're scared, buy back when you're brave.</p></div>
+        <div><h2>Market Rollercoaster</h2><p class="muted small" style="margin:0">Build a $10,000 portfolio, then ride 20 years. Sell to cash whenever you're scared, buy back when you're brave. <span class="key">Space</span> sell/buy · <span class="key">P</span> pause</p></div>
       </header>
       <div class="card" id="market-root" data-focus-root>
+        <div class="mk-setup" id="mk-setup">
+          <div class="field">
+            <label for="mk-mix" class="small"><strong>Mix:</strong> <span id="mk-mix-out">80% stocks / 20% bonds</span></label>
+            <input type="range" id="mk-mix" min="0" max="100" step="10" value="80">
+            <span class="small muted">Stocks grow faster but fall harder. Bonds cushion crashes.</span>
+          </div>
+          <div class="field">
+            <label for="mk-add" class="small"><strong>Add every month</strong></label>
+            <select class="select" id="mk-add"><option value="0">$0, just the $10,000</option><option value="100">$100</option><option value="300" selected>$300</option><option value="500">$500</option></select>
+          </div>
+          <div class="field">
+            <label for="mk-fund" class="small"><strong>Fund</strong></label>
+            <select class="select" id="mk-fund"><option value="0.0005">Index fund (0.05% yearly fee)</option><option value="0.01">Managed fund (1.00% yearly fee)</option></select>
+          </div>
+          <div class="field">
+            <label for="mk-speed" class="small"><strong>Speed</strong></label>
+            <select class="select" id="mk-speed"><option value="140">Slow</option><option value="70" selected>Normal</option><option value="25">Fast</option></select>
+          </div>
+        </div>
         <div class="stats">
           <div class="stat hero"><div class="label">Your portfolio</div><div class="value" id="mk-you">$10,000</div></div>
           <div class="stat"><div class="label">Buy &amp; hold</div><div class="value" id="mk-hold">$10,000</div></div>
@@ -189,9 +207,11 @@
           <span><i style="background:var(--series-1)"></i>Buy &amp; hold</span>
         </div>
         <div class="chart chart-wrap" id="mk-chart"></div>
+        <div id="mk-report"></div>
         <div class="market-controls">
           <button class="btn btn-primary" id="mk-start">▶ Start the ride</button>
           <button class="btn btn-sell" id="mk-toggle" hidden>😱 SELL everything</button>
+          <button class="btn btn-ghost" id="mk-pause" hidden>⏸ Pause</button>
           <span class="small muted" id="mk-status"></span>
         </div>
       </div>
@@ -199,7 +219,7 @@
     <!-- Salary Showdown -->
     <section class="game-panel" id="game-salary" hidden style="padding:0">
       <header>
-        <div><h2>💼 Salary Showdown</h2><p class="muted small" style="margin:0">Does the right side pay <strong>higher</strong> or <strong>lower</strong>? Real data from the NY Fed and BLS. Keys: <span class="key">↑</span> higher / <span class="key">↓</span> lower</p></div>
+        <div><h2>Salary Showdown</h2><p class="muted small" style="margin:0">Three modes, all with real pay data from the NY Fed and BLS. Higher or Lower keys: <span class="key">↑</span> higher / <span class="key">↓</span> lower</p></div>
         <div class="hud" style="position:static"><span class="pill" id="hl-streak">🔥 Streak 0</span></div>
       </header>
       <div class="card" id="hl-root" style="position:relative" data-focus-root></div>
@@ -207,7 +227,7 @@
     <!-- Price Time Machine -->
     <section class="game-panel" id="game-prices" hidden style="padding:0">
       <header>
-        <div><h2>🛒 Price Time Machine</h2><p class="muted small" style="margin:0">Guess today's price from the past one. Real U.S. average prices from the Bureau of Labor Statistics.</p></div>
+        <div><h2>Price Time Machine</h2><p class="muted small" style="margin:0">Guess today's price from the past one. Real U.S. average prices from the Bureau of Labor Statistics.</p></div>
       </header>
       <div class="card" id="ptm-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">Source: BLS Average Price Data and CPI-U. 2025 figures average 11 months (no October 2025 data was collected due to the government shutdown).</p>
@@ -215,7 +235,7 @@
     <!-- Credit Score Quest -->
     <section class="game-panel" id="game-credit" hidden style="padding:0">
       <header>
-        <div><h2>📊 Credit Score Quest</h2><p class="muted small" style="margin:0">You're 22 with a credit card and a student loan. Make a year of choices and watch your score move.</p></div>
+        <div><h2>Credit Score Quest</h2><p class="muted small" style="margin:0">You're 22 with a credit card and a student loan. Make a year of choices and watch your score move.</p></div>
       </header>
       <div id="cq-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">Illustrative model weighted by myFICO's published factor importance — not a real FICO score. APR: Federal Reserve G.19 (Aug 2026). Late payments are typically reported once 30 days past due, and most negative items can stay on a report up to 7 years (CFPB).</p>
@@ -223,7 +243,7 @@
     <!-- Envelope Budget -->
     <section class="game-panel" id="game-envelope" hidden style="padding:0">
       <header>
-        <div><h2>✉️ Envelope Budget</h2><p class="muted small" style="margin:0">Drag each expense into an envelope (or tap one). Keys: <span class="key">1</span> Needs <span class="key">2</span> Wants <span class="key">3</span> Savings <span class="key">S</span> Skip</p></div>
+        <div><h2>Envelope Budget</h2><p class="muted small" style="margin:0">Drag each expense into an envelope (or tap one). Keys: <span class="key">1</span> Needs <span class="key">2</span> Wants <span class="key">3</span> Savings <span class="key">S</span> Skip</p></div>
       </header>
       <div class="card" id="env-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">Sample budget for practice. The 50/30/20 guideline comes from Elizabeth Warren and Amelia Warren Tyagi's book <em>All Your Worth</em> (2005).</p>
@@ -231,7 +251,7 @@
     <!-- Spot the Scam -->
     <section class="game-panel" id="game-scam" hidden style="padding:0">
       <header>
-        <div><h2>🎣 Spot the Scam</h2><p class="muted small" style="margin:0">Read each message and decide: scam or legit? Keys: <span class="key">S</span> Scam <span class="key">L</span> Legit</p></div>
+        <div><h2>Spot the Scam</h2><p class="muted small" style="margin:0">Decide scam or legit, then tap the red flags in each scam. Keys: <span class="key">S</span> Scam <span class="key">L</span> Legit</p></div>
       </header>
       <div class="card" id="scam-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">All companies, people, numbers, and websites are made up. Scam patterns follow Federal Trade Commission consumer alerts; 2025 loss data from FTC testimony to Congress (March 2026). Report scams at ReportFraud.ftc.gov.</p>
@@ -239,7 +259,7 @@
     <!-- Fee Hunter -->
     <section class="game-panel" id="game-fees" hidden style="padding:0">
       <header>
-        <div><h2>🔎 Fee Hunter</h2><p class="muted small" style="margin:0">Tap (or Tab + Enter) every line that's a fee the bank charged, then check the statement.</p></div>
+        <div><h2>Fee Hunter</h2><p class="muted small" style="margin:0">Tap (or Tab + Enter) every line that's a fee the bank charged, check the statement, then pick how you'd avoid each fee.</p></div>
       </header>
       <div class="card" id="fee-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">Sample statements with made-up businesses. Overdraft ($26.77), insufficient funds ($16.82), and out-of-network ATM ($1.64 + $3.22 surcharge) amounts are averages from Bankrate's 2025 Checking Account and ATM Fee Study; other fee amounts are examples.</p>
@@ -247,7 +267,7 @@
     <!-- Plan Picker -->
     <section class="game-panel" id="game-plans" hidden style="padding:0">
       <header>
-        <div><h2>☂️ Plan Picker</h2><p class="muted small" style="margin:0">Read about each person, pick the plan you think costs them less this year, then see the bills.</p></div>
+        <div><h2>Plan Picker</h2><p class="muted small" style="margin:0">Three plans, one person at a time. Pick the plan that's cheapest on average, then see one real year and 4,000 simulated ones.</p></div>
       </header>
       <div class="card" id="plan-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">Plans, people, and bills are illustrative, and the prices are what the plan allows. Plan designs stay within 2026 limits: out-of-pocket maximums can't exceed $10,600 for one person (HHS). Most plans cover preventive care such as yearly checkups at no cost (Affordable Care Act).</p>
@@ -255,7 +275,7 @@
     <!-- Beat the Book -->
     <section class="game-panel" id="game-betting" hidden style="padding:0">
       <header>
-        <div><h2>🎲 Beat the Book</h2><p class="muted small" style="margin:0">Pick a bet (or skip) each round. Keys: <span class="key">1</span>–<span class="key">4</span>. XP is the same whether you win or lose.</p></div>
+        <div><h2>Beat the Book</h2><p class="muted small" style="margin:0">Pick a bet size and a bet (or skip) each round. Keys: <span class="key">1</span>–<span class="key">4</span> to bet, <span class="key">←</span> <span class="key">→</span> for bet size. XP is the same whether you win or lose.</p></div>
       </header>
       <div class="card" id="bet-root" data-focus-root></div>
       <p class="small muted" style="margin-top:8px">A math simulation, not real betting. Each game is treated as a fair coin flip, so the only edge comes from how the bets are priced (−110 singles, a 4-leg parlay at about 12.3-to-1, and +500 on a 1-in-7 shot). Real sportsbooks kept about 10% of all money bet in 2025 (American Gaming Association). Need help? Call or text 1-800-MY-RESET (National Problem Gambling Helpline).</p>
@@ -264,13 +284,14 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span>© <span data-year></span> MoneyExplained. For educational purposes only — not financial advice.</span>
       <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
   <script src="js/site-config.js"></script>
   <script src="js/site.js"></script>
+  <script src="js/i18n.js" data-dict="js/i18n/play.es.js js/i18n/college.es.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/games/catcher.js"></script>
   <script src="js/games/sorter.js"></script>

@@ -2,7 +2,7 @@
 // earnings for YOUR habits, ranked. Three modes: credit cards, savings, checking. Offers persist in
 // this browser; the Account Matchmaker (js/tools/match.js) opens it in the matching mode.
 const OfferCompare = (() => {
-  const { $, num, money, esc, store, listEditor } = ToolKit;
+  const { $, num, money, esc, store, listEditor, t } = ToolKit;
 
   // Yearly cost of a card: annual fee + interest on any balance you carry − rewards on spending.
   const cardCost = (o, u) => o.fee + (u.payfull ? 0 : u.carry * (o.apr / 100)) - u.spend * 12 * (o.rewards / 100);
@@ -92,28 +92,34 @@ const OfferCompare = (() => {
   function calc() {
     const u = usage(), rows = editors[mode].rows().filter((o) => o.name || Object.values(o).some((v) => v));
     $("cp-carry-field").hidden = mode !== "card" || u.payfull;
-    if (!rows.length) { $("cp-result").innerHTML = `<p class="muted">Add at least one offer to compare.</p>`; $("cp-insight").textContent = ""; return; }
-    const name = (o, i) => esc(o.name || `Offer ${i + 1}`);
+    if (!rows.length) { $("cp-result").innerHTML = `<p class="muted">${t("Add at least one offer to compare.")}</p>`; $("cp-insight").textContent = ""; return; }
+    const name = (o, i) => esc(o.name || t("Offer {n}", { n: i + 1 }));
     let scored, head, cells, verdict;
     if (mode === "card") {
       scored = rows.map((o, i) => ({ o, i, v: cardCost(o, u) })).sort((a, b) => a.v - b.v);
-      head = ["Offer", "Yearly cost", "Annual fee", "Interest", "Rewards"];
-      cells = ({ o, v }) => [`<strong>${v <= 0 ? `${money(-v)} back` : money(v)}</strong>`, money(o.fee), money(u.payfull ? 0 : u.carry * o.apr / 100), money(-u.spend * 12 * o.rewards / 100)];
+      head = ["Offer", "Yearly cost", "Annual fee", "Interest", "Rewards"].map((h) => t(h));
+      cells = ({ o, v }) => [`<strong>${v <= 0 ? t("{amount} back", { amount: money(-v) }) : money(v)}</strong>`, money(o.fee), money(u.payfull ? 0 : u.carry * o.apr / 100), money(-u.spend * 12 * o.rewards / 100)];
       const best = scored[0], worst = scored[scored.length - 1];
-      verdict = `<strong>${name(best.o, best.i)}</strong> is the best fit for how you'd use it${scored.length > 1 ? `, about ${money(worst.v - best.v)} a year better than ${name(worst.o, worst.i)}` : ""}.` +
-        (u.payfull ? " Because you pay in full, APR doesn't matter to you, so the fee and rewards decide it." : ` Carrying ${money(u.carry)} costs ${money(u.carry * best.o.apr / 100)} a year in interest on this card, which outweighs most rewards. Paying in full is the biggest win.`);
+      verdict = (scored.length > 1
+        ? t("<strong>{best}</strong> is the best fit for how you'd use it, about {diff} a year better than {worst}.", { best: name(best.o, best.i), diff: money(worst.v - best.v), worst: name(worst.o, worst.i) })
+        : t("<strong>{best}</strong> is the best fit for how you'd use it.", { best: name(best.o, best.i) })) + " " +
+        (u.payfull ? t("Because you pay in full, APR doesn't matter to you, so the fee and rewards decide it.") : t("Carrying {carry} costs {interest} a year in interest on this card, which outweighs most rewards. Paying in full is the biggest win.", { carry: money(u.carry), interest: money(u.carry * best.o.apr / 100) }));
     } else if (mode === "savings") {
       scored = rows.map((o, i) => ({ o, i, r: savingsNet(o, u) })).map((x) => ({ ...x, v: -x.r.net })).sort((a, b) => a.v - b.v);
-      head = ["Offer", "Net in 1 year", "Interest", "Fees"];
+      head = ["Offer", "Net in 1 year", "Interest", "Fees"].map((h) => t(h));
       cells = ({ r }) => [`<strong>${money(r.net)}</strong>`, money(r.interest), money(-r.fees)];
       const best = scored[0], worst = scored[scored.length - 1];
-      verdict = `<strong>${name(best.o, best.i)}</strong> earns you the most: about ${money(best.r.net)} in a year${scored.length > 1 ? `, ${money(best.r.net - worst.r.net)} more than ${name(worst.o, worst.i)}` : ""}. A higher APY only matters if fees don't eat it.`;
+      verdict = (scored.length > 1
+        ? t("<strong>{best}</strong> earns you the most: about {net} in a year, {diff} more than {worst}.", { best: name(best.o, best.i), net: money(best.r.net), diff: money(best.r.net - worst.r.net), worst: name(worst.o, worst.i) })
+        : t("<strong>{best}</strong> earns you the most: about {net} in a year.", { best: name(best.o, best.i), net: money(best.r.net) })) + " " + t("A higher APY only matters if fees don't eat it.");
     } else {
       scored = rows.map((o, i) => ({ o, i, v: checkingCost(o, u) })).sort((a, b) => a.v - b.v);
-      head = ["Offer", "Yearly cost", "Monthly fees", "Overdrafts", "ATM fees"];
+      head = ["Offer", "Yearly cost", "Monthly fees", "Overdrafts", "ATM fees"].map((h) => t(h));
       cells = ({ o, v }) => [`<strong>${money(v)}</strong>`, money(o.ddwaive && u.dd ? 0 : o.fee * 12), money(o.od * u.overdrafts), money(o.atm * u.atm * 12)];
       const best = scored[0], worst = scored[scored.length - 1];
-      verdict = `<strong>${name(best.o, best.i)}</strong> costs the least for your habits: ${money(best.v)} a year${scored.length > 1 ? `, versus ${money(worst.v)} for ${name(worst.o, worst.i)}` : ""}.` + (u.overdrafts ? " Turning off overdraft coverage for debit and ATM purchases means a declined card instead of a fee." : "");
+      verdict = (scored.length > 1
+        ? t("<strong>{best}</strong> costs the least for your habits: {cost} a year, versus {worstCost} for {worst}.", { best: name(best.o, best.i), cost: money(best.v), worstCost: money(worst.v), worst: name(worst.o, worst.i) })
+        : t("<strong>{best}</strong> costs the least for your habits: {cost} a year.", { best: name(best.o, best.i), cost: money(best.v) })) + (u.overdrafts ? " " + t("Turning off overdraft coverage for debit and ATM purchases means a declined card instead of a fee.") : "");
     }
     $("cp-result").innerHTML = `<div class="table-scroll" style="max-height:none"><table><thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead><tbody>${scored.map((s, rank) =>
       `<tr${rank === 0 ? ' class="cp-best"' : ""}><td>${rank === 0 ? "🏆 " : ""}${name(s.o, s.i)}</td>${cells(s).map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
@@ -134,6 +140,7 @@ const OfferCompare = (() => {
   root.addEventListener("change", (e) => { if (e.target.closest(".cp-usage")) calc(); });
   $("cp-reset").addEventListener("click", () => editors[mode].reset());
   document.addEventListener("comparemode", (e) => setMode(e.detail));
+  document.addEventListener("langchange", calc);
   setMode(mode);
   return { cardCost, savingsNet, checkingCost };
 })();

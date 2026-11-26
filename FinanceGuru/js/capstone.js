@@ -82,8 +82,8 @@ const Capstone = (() => {
   // Yearly paycheck math: 401(k) lowers income taxes but not FICA.
   function paycheck(pct) {
     const k = SALARY * pct, match = SALARY * Math.min(pct, MATCH_UP_TO);
-    const fed = federalTax("single", SALARY - k).tax;
-    const f = TAX_2026.fica, fica = Math.min(SALARY, f.ssWageBase) * f.ssRate + SALARY * f.medicare;
+    const fed = federalTax("single", SALARY - k, TAX_YEAR_NOW).tax;
+    const f = TAX_NOW.fica, fica = Math.min(SALARY, f.ssWageBase) * f.ssRate + SALARY * f.medicare;
     const state = (SALARY - k) * STATE_RATE;
     return { k, match, fed, fica, state, takeHome: SALARY - k - fed - fica - state };
   }

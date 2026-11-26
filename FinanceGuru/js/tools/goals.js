@@ -1,7 +1,7 @@
 // Savings Goals: monthly deposit needed for each goal by its date, with monthly compounding at the
 // chosen APY, compared with 0% to show what interest contributes. Goals persist in this browser.
 (function () {
-  const { $, num, money, esc, listEditor } = ToolKit;
+  const { $, num, money, esc, listEditor, t } = ToolKit;
   if (!$("panel-goals")) return;
 
   const monthsUntil = (date) => {
@@ -46,12 +46,12 @@
       total += p; flat += p0; left += Math.max(0, g.target - g.saved);
       const pct = g.target ? Math.min(100, (g.saved / g.target) * 100) : 0;
       const plan = g.target > g.saved ? `plan.html?goal=${/move/i.test(g.name) ? "move" : "buffer"}&target=${g.target}&saved=${g.saved}&months=${Math.min(120, Math.max(1, n))}` : "";
-      return `<tr><td>${esc(g.name || "Untitled goal")}<div class="goal-bar"><i style="width:${pct}%"></i></div></td><td>${n ? `${n} mo` : "Due now"}</td><td>${money(p)}</td><td>${plan ? `<a href="${esc(plan)}" class="small">Use in my plan →</a>` : "✅"}</td></tr>`;
+      return `<tr><td>${esc(g.name || t("Untitled goal"))}<div class="goal-bar"><i style="width:${pct}%"></i></div></td><td>${n ? t("{n} mo", { n }) : t("Due now")}</td><td>${money(p)}</td><td>${plan ? `<a href="${esc(plan)}" class="small">${t("Use in my plan →")}</a>` : "✅"}</td></tr>`;
     });
     $("sg-total").textContent = money(total);
     $("sg-left").textContent = money(left);
-    $("sg-interest").textContent = `${money((flat - total))}/mo`;
-    $("sg-table").innerHTML = rows.length ? `<thead><tr><th scope="col">Goal</th><th scope="col">Time left</th><th scope="col">Per month</th><th scope="col"><span class="sr-only">Plan</span></th></tr></thead><tbody>${lines.join("")}</tbody>` : "";
+    $("sg-interest").textContent = t("{amount}/mo", { amount: money(flat - total) });
+    $("sg-table").innerHTML = rows.length ? `<thead><tr><th scope="col">${t("Goal")}</th><th scope="col">${t("Time left")}</th><th scope="col">${t("Per month")}</th><th scope="col"><span class="sr-only">${t("Plan")}</span></th></tr></thead><tbody>${lines.join("")}</tbody>` : "";
   }
 
   $("sg-apy").addEventListener("input", () => calc());

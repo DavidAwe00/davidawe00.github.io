@@ -65,6 +65,19 @@ const Checkup = (() => {
     return { pre, post: pre && ok(s.post) };
   };
   const scoreOf = (answers) => answers.filter((a, i) => a === QUESTIONS[i].answer).length;
+  // Per-unit score (out of 2) for one attempt.
+  const byUnit = (ans) => UNITS.map((u, n) => {
+    const idx = QUESTIONS.map((q, i) => (q.unit === n ? i : -1)).filter((i) => i >= 0);
+    return { unit: u, n, right: idx.filter((i) => ans[i] === QUESTIONS[i].answer).length, of: idx.length };
+  });
+  // Where to focus next: the lowest-scoring unit on the latest check-up among units that still have
+  // unfinished lessons (ties go to the earlier unit). Null when there's no check-up or nothing left.
+  function recommendedUnit(done = {}) {
+    const { pre, post } = state(), latest = post || pre;
+    if (!latest) return null;
+    const open = byUnit(latest.answers).filter((r) => r.unit.lessons.some((id) => !done[id]));
+    return open.length ? open.reduce((w, r) => (r.right < w.right ? r : w)) : null;
+  }
 
   function render(host) {
     let phase = null, step = 0, answers = [], lang = "en";
@@ -80,12 +93,6 @@ const Checkup = (() => {
     const date = (iso) => new Date(iso).toLocaleDateString(t().locale, { month: "short", day: "numeric", year: "numeric" });
     const lessonsDone = () => Object.keys(FG.getProgress().done).filter((id) => LESSONS.some((l) => l.id === id)).length;
 
-    // Per-unit score (out of 2) for one attempt.
-    const byUnit = (ans) => UNITS.map((u, n) => {
-      const idx = QUESTIONS.map((q, i) => (q.unit === n ? i : -1)).filter((i) => i >= 0);
-      return { unit: u, n, right: idx.filter((i) => ans[i] === QUESTIONS[i].answer).length, of: idx.length };
-    });
-
     function unitBars(pre, post) {
       const a = byUnit(pre.answers), b = post ? byUnit(post.answers) : null;
       return `<div class="checkup-units">${a.map((r, k) => `
@@ -93,7 +100,7 @@ const Checkup = (() => {
           <div class="small"><strong>${r.unit.icon} ${t().unit(r.n + 1, unitTitle(r.unit))}</strong>
             <span class="muted">· ${t().before} ${r.right}/${r.of}${b ? ` · ${t().after} ${b[k].right}/${b[k].of}` : ""}</span></div>
           <div class="meter" aria-hidden="true"><span style="width:${(r.right / r.of) * 100}%;background:var(--muted)"></span></div>
-          ${b ? `<div class="meter" aria-hidden="true"><span style="width:${(b[k].right / b[k].of) * 100}%;background:var(--brand)"></span></div>` : ""}
+          ${b ? `<div class="meter" aria-hidden="true"><span style="width:${(b[k].right / b[k].of) * 100}%;background:var(--good)"></span></div>` : ""}
         </div>`).join("")}</div>`;
     }
 
@@ -189,7 +196,7 @@ const Checkup = (() => {
       const title = document.getElementById("checkup-title"), intro = document.getElementById("checkup-intro");
       if (title) title.textContent = t().title;
       if (intro) intro.innerHTML = t().intro;
-      document.title = `${t().title.replace("🩺 ", "")} — FinanceGuru`;
+      document.title = `${t().title.replace("🩺 ", "")} — MoneyExplained`;
       FG.setChromeLang(lang);
       host.lang = lang;
       const sw = document.getElementById("checkup-lang");
@@ -239,5 +246,5 @@ const Checkup = (() => {
 
   const host = document.getElementById("checkup");
   if (host) render(host);
-  return { state, scoreOf, QUESTIONS };
+  return { state, scoreOf, byUnit, recommendedUnit, QUESTIONS };
 })();

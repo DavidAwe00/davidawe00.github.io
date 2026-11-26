@@ -3,6 +3,7 @@
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
   const pct = (v, d = 1) => (v * 100).toFixed(d) + "%";
+  const t = I18N.t;
   ["tb-year", "pc-year"].forEach((id) => { $(id).value = String(TAX_YEAR_NOW); });
 
   /* ---------- Brackets as buckets ---------- */
@@ -22,14 +23,15 @@
       return `<div class="bucket-row ${p.inBucket ? "" : "empty"}">
         <span class="bucket-rate">${pct(p.rate, 0)}</span>
         <div><div class="bucket-track"><span style="width:${fill}%"></span></div>
-          <div class="small muted">${FG.money(p.lo)}${p.hi === Infinity ? "+" : "–" + FG.money(p.hi)} of taxable income</div></div>
-        <span class="bucket-val">${p.inBucket ? `${FG.money(p.inBucket)} → <strong>${FG.money(p.tax)}</strong>` : "empty"}</span>
+          <div class="small muted">${t("{range} of taxable income", { range: FG.money(p.lo) + (p.hi === Infinity ? "+" : "–" + FG.money(p.hi)) })}</div></div>
+        <span class="bucket-val">${p.inBucket ? `${FG.money(p.inBucket)} → <strong>${FG.money(p.tax)}</strong>` : t("empty")}</span>
       </div>`;
     }).join("");
     const extraTax = 1000 * r.marginal, takeHome = 1000 - extraTax - 1000 * (F.ssRate + F.medicare);
     $("tb-raise").innerHTML = r.taxable > 0
-      ? `<strong>Myth buster:</strong> a $1,000 raise adds about ${FG.money(extraTax)} in federal income tax (your ${pct(r.marginal, 0)} bucket) plus ${FG.money(1000 * (F.ssRate + F.medicare))} in Social Security and Medicare — you still keep about <strong>${FG.money(takeHome)}</strong> before state tax. A raise never lowers your take-home pay.`
-      : `<strong>No federal income tax:</strong> income below the standard deduction (${FG.money(T.stdDed[status])} in ${year}) isn't taxed. You'd still pay 7.65% for Social Security and Medicare on wages.`;
+      ? t("<strong>Myth buster:</strong> a $1,000 raise adds about {fed} in federal income tax (your {rate} bucket) plus {fica} in Social Security and Medicare — you still keep about <strong>{keep}</strong> before state tax. A raise never lowers your take-home pay.",
+          { fed: FG.money(extraTax), rate: pct(r.marginal, 0), fica: FG.money(1000 * (F.ssRate + F.medicare)), keep: FG.money(takeHome) })
+      : t("<strong>No federal income tax:</strong> income below the standard deduction ({ded} in {year}) isn't taxed. You'd still pay 7.65% for Social Security and Medicare on wages.", { ded: FG.money(T.stdDed[status]), year });
   }
   ["tb-year", "tb-status", "tb-income"].forEach((id) => $(id).addEventListener("input", brackets));
 
@@ -67,19 +69,20 @@
     $("pc-net").textContent = FG.money(per(p.net));
     $("pc-keep").textContent = salary ? pct(p.net / salary, 0) : "—";
     const shown = PARTS.filter((x) => p[x.key] > 0.5);
-    $("pc-bar").innerHTML = shown.map((x) => `<div style="flex:${p[x.key]};background:var(${x.color})" title="${x.name}"></div>`).join("");
-    $("pc-bar").setAttribute("aria-label", shown.map((x) => `${x.name} ${FG.money(per(p[x.key]))}`).join(", "));
+    $("pc-bar").innerHTML = shown.map((x) => `<div style="flex:${p[x.key]};background:var(${x.color})" title="${t(x.name)}"></div>`).join("");
+    $("pc-bar").setAttribute("aria-label", shown.map((x) => `${t(x.name)} ${FG.money(per(p[x.key]))}`).join(", "));
     $("pc-list").innerHTML = shown.map((x) => `
-      <div class="pc-row"><span><i style="background:var(${x.color})"></i>${x.name}</span>
-        <span>${FG.money(per(p[x.key]))}<small class="muted"> /check</small></span>
-        <span class="muted">${FG.money(p[x.key])}/yr</span></div>`).join("");
+      <div class="pc-row"><span><i style="background:var(${x.color})"></i>${t(x.name)}</span>
+        <span>${FG.money(per(p[x.key]))}<small class="muted"> ${t("/check")}</small></span>
+        <span class="muted">${t("{amount}/yr", { amount: FG.money(p[x.key]) })}</span></div>`).join("");
     const no401 = paycheckFor(year, salary, status, 0, health, stateRate);
     const saved = (no401.fed + no401.state) - (p.fed + p.state);
     $("pc-insight").innerHTML = p.k401 > 0
-      ? `<strong>Pre-tax power:</strong> your ${FG.money(p.k401)} 401(k) contribution only shrinks take-home pay by ${FG.money(p.k401 - saved)} a year, because it cuts your income taxes by about ${FG.money(saved)}.`
-      : `<strong>Tip:</strong> try a pre-tax 401(k). Every dollar you contribute lowers your federal and state income tax.`;
+      ? t("<strong>Pre-tax power:</strong> your {k401} 401(k) contribution only shrinks take-home pay by {cost} a year, because it cuts your income taxes by about {saved}.", { k401: FG.money(p.k401), cost: FG.money(p.k401 - saved), saved: FG.money(saved) })
+      : t("<strong>Tip:</strong> try a pre-tax 401(k). Every dollar you contribute lowers your federal and state income tax.");
   }
   ["pc-year", "pc-salary", "pc-freq", "pc-status", "pc-401k", "pc-health", "pc-state"].forEach((id) => $(id).addEventListener("input", paycheck));
 
+  document.addEventListener("langchange", () => { brackets(); paycheck(); });
   brackets(); paycheck();
 })();

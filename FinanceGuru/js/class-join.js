@@ -19,6 +19,10 @@
     const ids = m ? UNITS.flatMap((u) => u.lessons).filter((id) => ClassSync.assigned().includes(id)) : [];
     const done = FG.getProgress().done;
     $("class-assigned").hidden = !ids.length;
+    const left = ids.filter((id) => !done[id]).length;
+    $("class-due").hidden = !ClassSync.assignedDue();
+    $("class-due").textContent = !left ? `All done, due ${ClassSync.dueLabel()}. Nice work.`
+      : ClassSync.pastDue() ? `Was due ${ClassSync.dueLabel()}. ${left} still to finish.` : `Due ${ClassSync.dueLabel()}. ${left} to go.`;
     $("class-assigned-list").innerHTML = ids.map((id) => {
       const l = LESSONS.find((x) => x.id === id);
       return `<li class="${done[id] ? "done" : ""}"><span aria-hidden="true">${done[id] ? "✅" : "⬜"}</span>

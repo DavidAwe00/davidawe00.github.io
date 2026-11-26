@@ -1,38 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-es>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Money Tools — FinanceGuru</title>
+  <title>Money Tools — MoneyExplained</title>
   <meta name="description" content="Free calculators: compound growth, 50/30/20 budget planner, debt payoff (avalanche vs snowball), and emergency fund target.">
   <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231d5bbf'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0e7a4e">
+  <meta name="theme-color" content="#1d5bbf">
   <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/tools.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:site_name" content="MoneyExplained">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/tools.html">
-  <meta property="og:title" content="Money Tools — FinanceGuru">
+  <meta property="og:title" content="Money Tools — MoneyExplained">
   <meta property="og:description" content="Free calculators: compound growth, 50/30/20 budget planner, debt payoff (avalanche vs snowball), and emergency fund target.">
-  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/moneyexplained.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta property="og:image:alt" content="MoneyExplained — free money lessons, quizzes, games, and tools">
   <meta name="twitter:card" content="summary_large_image">
   <!-- publishing-meta:end -->
 </head>
 <body>
   <header class="site-header">
     <nav class="container nav">
-      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">MoneyExplained</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
         <details class="nav-menu">
@@ -54,9 +51,9 @@
     </nav>
   </header>
 
-  <main class="container" style="padding-top:32px;padding-bottom:48px">
-    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Money tools</h1>
-    <p class="muted">Plug in your own numbers. Nothing you type leaves your browser.</p>
+  <main class="container page-main">
+    <header class="page-head"><span class="eyebrow">Free calculators</span><h1>Money tools</h1><p class="lead">Plug in your own numbers. Nothing you type leaves your browser.</p>
+      <div class="page-lang chips" role="group" aria-label="Language"><button type="button" class="chip" data-page-lang="en" lang="en" data-i18n-skip aria-pressed="true">English</button><button type="button" class="chip" data-page-lang="es" lang="es" data-i18n-skip aria-pressed="false">Español</button></div></header>
 
     <!-- Every tool is listed here once; js/tools.js reads the options, and each option needs a #panel-<value>. -->
     <div class="tool-picker-bar">
@@ -103,7 +100,7 @@
     <!-- Account matchmaker (rendered by js/tools/match.js) -->
     <section id="panel-match" role="tabpanel" style="padding:0" hidden>
       <div id="mm-root"></div>
-      <p class="small muted" style="margin-top:8px">FinanceGuru doesn't name, rank, or get paid by any bank or card. These are general account types, not advice for your situation. Savings rates: FDIC national rate and Bankrate (Sept 2026). Overdraft fee: Bankrate 2025. Card APR: Federal Reserve G.19 (Aug 2026). Under-21 card rule: Credit CARD Act of 2009.</p>
+      <p class="small muted" style="margin-top:8px">MoneyExplained doesn't name, rank, or get paid by any bank or card. These are general account types, not advice for your situation. Savings rates: FDIC national rate and Bankrate (Sept 2026). Overdraft fee: Bankrate 2025. Card APR: Federal Reserve G.19 (Aug 2026). Under-21 card rule: Credit CARD Act of 2009.</p>
     </section>
 
     <!-- Offer comparer (js/tools/compare.js) -->
@@ -243,7 +240,7 @@
           <details class="table-view"><summary>How this works &amp; sources</summary>
             <ul class="small muted">
               <li>All amounts are in today's dollars; growth uses your after-inflation return. Contributions assume your salary keeps pace with inflation.</li>
-              <li><strong>Social Security</strong> is a rough estimate: it treats your current salary (capped at the 2026 taxable maximum, $184,500) as your average indexed earnings and applies SSA's 2026 formula — 90% of the first $1,286/month, 32% up to $7,749, 15% above — then adjusts for claiming age (full retirement age is 67 if born 1960 or later; claiming at 62 cuts benefits 30%, waiting to 70 adds 24%). Get your real estimate at ssa.gov/myaccount.</li>
+              <li><strong>Social Security</strong> is a rough estimate: it treats your current salary (capped at the <span data-tax="year">2026</span> taxable maximum, <span data-tax="ssWageBase">$184,500</span>) as your average indexed earnings and applies SSA's <span data-tax="year">2026</span> formula — 90% of the first <span data-tax="bend1">$1,286</span>/month, 32% up to <span data-tax="bend2">$7,749</span>, 15% above — then adjusts for claiming age (full retirement age is 67 if born 1960 or later; claiming at 62 cuts benefits 30%, waiting to 70 adds 24%). Get your real estimate at ssa.gov/myaccount.</li>
               <li><strong>Savings needed</strong> = (spending − Social Security) ÷ withdrawal rate. The "4% rule" comes from William Bengen's 1994 research; the success rates here are recomputed from 1928–2025 data (60% S&amp;P 500 / 40% 10-year Treasuries, rebalanced yearly, inflation-adjusted withdrawals, 30-year retirements).</li>
               <li><strong>Benchmarks</strong>: Fidelity's guideline of saving 1× salary by 30, 3× by 40, 6× by 50, 8× by 60, and 10× by 67.</li>
             </ul>
@@ -258,14 +255,14 @@
         <div class="card">
           <div class="field"><label for="rv-status">Filing status</label><select class="select" id="rv-status"><option value="single">Single</option><option value="mfj">Married filing jointly</option></select></div>
           <div class="field"><label for="rv-income">Income (before the standard deduction)</label><div class="input-wrap"><span>$</span><input id="rv-income" type="number" min="0" value="65000"></div></div>
-          <div class="field"><label for="rv-contrib">Yearly contribution</label><div class="input-wrap"><span>$</span><input id="rv-contrib" type="number" min="0" value="7500"></div><span class="hint">2026 IRA limit: $7,500. 401(k): $24,500.</span></div>
+          <div class="field"><label for="rv-contrib">Yearly contribution</label><div class="input-wrap"><span>$</span><input id="rv-contrib" type="number" min="0" value="7500"></div><span class="hint"><span data-tax="year">2026</span> IRA limit: <span data-tax="ira">$7,500</span>. 401(k): <span data-tax="k401">$24,500</span>.</span></div>
           <div class="field"><label for="rv-later">Expected tax rate in retirement</label><select class="select" id="rv-later"><option value="0.10">10%</option><option value="0.12" selected>12%</option><option value="0.22">22%</option><option value="0.24">24%</option><option value="0.32">32%</option><option value="0.35">35%</option><option value="0.37">37%</option></select><span class="hint">Nobody knows future tax rates — try a few.</span></div>
           <div class="field"><label for="rv-years">Years until retirement: <span id="rv-years-l">35</span></label><input type="range" id="rv-years" min="1" max="45" value="35"></div>
           <div class="field"><label for="rv-return">Annual return</label><div class="input-wrap"><input id="rv-return" type="number" step="0.1" value="7"><span>%</span></div></div>
         </div>
         <div class="card">
           <div class="stats">
-            <div class="stat"><div class="label">Your 2026 tax bracket now</div><div class="value" id="rv-now">—</div></div>
+            <div class="stat"><div class="label">Your <span data-tax="year">2026</span> tax bracket now</div><div class="value" id="rv-now">—</div></div>
             <div class="stat"><div class="label">Roth: spendable in retirement</div><div class="value" id="rv-roth">—</div></div>
             <div class="stat"><div class="label">Traditional: spendable in retirement</div><div class="value" id="rv-trad">—</div></div>
           </div>
@@ -576,13 +573,14 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span>© <span data-year></span> MoneyExplained. For educational purposes only — not financial advice.</span>
       <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
   <script src="js/site-config.js"></script>
   <script src="js/site.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/data/market-history.js"></script>
   <script src="js/data/inflation.js"></script>

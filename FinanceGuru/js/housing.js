@@ -2,6 +2,7 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
+  const t = I18N.t;
 
   function inputs() {
     const price = num("m-price"), down = num("m-down") / 100;
@@ -34,7 +35,7 @@
     const { pi, months } = schedule(p);
     const tax = (p.price * p.tax) / 12, ins = p.ins / 12, pmi = months[0].pmi;
     const total = pi + tax + ins + pmi;
-    const totalInterest = months.reduce((t, m) => t + m.interest, 0);
+    const totalInterest = months.reduce((sum, m) => sum + m.interest, 0);
     const share = p.income ? (total * 12) / p.income : 0;
     $("m-pay").textContent = FG.money(total);
     $("m-cash").textContent = FG.money(p.price * p.down + p.price * p.closing);
@@ -46,29 +47,30 @@
       ["Principal & interest", pi, "--series-1"], ["Property tax", tax, "--series-2"],
       ["Home insurance", ins, "--series-3"], ["Mortgage insurance (PMI)", pmi, "--series-4"],
     ].filter(([, v]) => v > 0.5);
-    $("m-bar").innerHTML = parts.map(([n, v, c]) => `<div style="flex:${v};background:var(${c})" title="${n}"></div>`).join("");
-    $("m-bar").setAttribute("aria-label", parts.map(([n, v]) => `${n} ${FG.money(v)}`).join(", "));
-    $("m-list").innerHTML = parts.map(([n, v, c]) => `<div class="pc-row"><span><i style="background:var(${c})"></i>${n}</span><span>${FG.money(v)}<small class="muted"> /mo</small></span><span class="muted">${FG.money(v * 12)}/yr</span></div>`).join("");
+    $("m-bar").innerHTML = parts.map(([n, v, c]) => `<div style="flex:${v};background:var(${c})" title="${t(n)}"></div>`).join("");
+    $("m-bar").setAttribute("aria-label", parts.map(([n, v]) => `${t(n)} ${FG.money(v)}`).join(", "));
+    $("m-list").innerHTML = parts.map(([n, v, c]) => `<div class="pc-row"><span><i style="background:var(${c})"></i>${t(n)}</span><span>${FG.money(v)}<small class="muted"> ${t("/mo")}</small></span><span class="muted">${t("{amount}/yr", { amount: FG.money(v * 12) })}</span></div>`).join("");
 
     // Yearly principal vs interest
     const yrs = [], ints = [], prins = [];
     for (let y = 0; y < p.years; y++) {
       const slice = months.slice(y * 12, y * 12 + 12);
       yrs.push(y + 1);
-      ints.push(slice.reduce((t, m) => t + m.interest, 0));
-      prins.push(slice.reduce((t, m) => t + m.principal, 0));
+      ints.push(slice.reduce((sum, m) => sum + m.interest, 0));
+      prins.push(slice.reduce((sum, m) => sum + m.principal, 0));
     }
     const cross = prins.findIndex((v, i) => v > ints[i]);
     Charts.line($("m-chart"), {
-      x: yrs, xFormat: (y) => `Yr ${y}`, label: "Interest vs principal paid each year",
-      series: [{ name: "Interest", color: "--series-2", values: ints }, { name: "Principal (your equity)", color: "--series-1", values: prins }],
-      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => `Year ${yrs[i]}`,
-      markers: cross > 0 ? [{ i: cross, label: `Tipping point: year ${cross + 1}` }] : [],
+      x: yrs, xFormat: (y) => t("Yr {n}", { n: y }), label: t("Interest vs principal paid each year"),
+      series: [{ name: t("Interest"), color: "--series-2", values: ints }, { name: t("Principal (your equity)"), color: "--series-1", values: prins }],
+      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => t("Year {n}", { n: yrs[i] }),
+      markers: cross > 0 ? [{ i: cross, label: t("Tipping point: year {n}", { n: cross + 1 }) }] : [],
     });
     const pmiEnd = months.findIndex((m) => m.pmi === 0);
-    $("m-insight").innerHTML = `In year 1, about <strong>${Math.round((ints[0] / (ints[0] + prins[0])) * 100)}%</strong> of your principal-and-interest payments go to interest. Over ${p.years} years you'd pay <strong>${FG.money(totalInterest)}</strong> in interest on a ${FG.money(p.loan)} loan.`
-      + (pmi > 0 ? ` PMI (${FG.money(pmi)}/mo) would drop off automatically after about <strong>${Math.ceil(pmiEnd / 12)} years</strong>.` : "")
-      + (share > 0.3 ? ` <br>⚠️ This takes ${Math.round(share * 100)}% of your income — above the 30% level HUD calls "cost-burdened."` : "");
+    $("m-insight").innerHTML = t("In year 1, about <strong>{pct}%</strong> of your principal-and-interest payments go to interest. Over {years} years you'd pay <strong>{interest}</strong> in interest on a {loan} loan.",
+        { pct: Math.round((ints[0] / (ints[0] + prins[0])) * 100), years: p.years, interest: FG.money(totalInterest), loan: FG.money(p.loan) })
+      + (pmi > 0 ? " " + t("PMI ({pmi}/mo) would drop off automatically after about <strong>{years} years</strong>.", { pmi: FG.money(pmi), years: Math.ceil(pmiEnd / 12) }) : "")
+      + (share > 0.3 ? " <br>" + t("⚠️ This takes {pct}% of your income — above the 30% level HUD calls \"cost-burdened.\"", { pct: Math.round(share * 100) }) : "");
     rentBuy();
   }
   ["m-price", "m-down", "m-rate", "m-term", "m-income", "m-tax", "m-ins", "m-pmi", "m-closing"].forEach((id) => $(id).addEventListener("input", mortgage));
@@ -100,25 +102,26 @@
     }
     const b = buyNW[N], r = rentNW[N];
     const be = buyNW.findIndex((v, i) => i > 0 && v >= rentNW[i]);
-    $("rb-winner-l").textContent = `Ahead after ${N} year${N > 1 ? "s" : ""}`;
-    $("rb-winner").textContent = b >= r ? `Buying +${FG.compact(b - r)}` : `Renting +${FG.compact(r - b)}`;
+    $("rb-winner-l").textContent = t(N > 1 ? "Ahead after {n} years" : "Ahead after {n} year", { n: N });
+    $("rb-winner").textContent = b >= r ? t("Buying +{amount}", { amount: FG.compact(b - r) }) : t("Renting +{amount}", { amount: FG.compact(r - b) });
     $("rb-buy").textContent = FG.money(b);
     $("rb-renter").textContent = FG.money(r);
     Charts.line($("rb-chart"), {
-      x: xs, xFormat: (y) => `Yr ${y}`, label: "Net worth: buyer vs renter",
-      series: [{ name: "Buyer (home equity after selling costs + investments)", color: "--series-1", values: buyNW }, { name: "Renter (investments)", color: "--series-2", values: rentNW }],
-      yFormat: (v) => (v < 0 ? "−" : "") + FG.compact(Math.abs(v)), tipFormat: (v) => (v < 0 ? "−" : "") + FG.money(Math.abs(v)), tipTitle: (i) => `After ${xs[i]} year${xs[i] === 1 ? "" : "s"}`,
-      markers: be > 0 ? [{ i: be, label: `Buying pulls ahead: year ${be}` }] : [], minZero: false,
+      x: xs, xFormat: (y) => t("Yr {n}", { n: y }), label: t("Net worth: buyer vs renter"),
+      series: [{ name: t("Buyer (home equity after selling costs + investments)"), color: "--series-1", values: buyNW }, { name: t("Renter (investments)"), color: "--series-2", values: rentNW }],
+      yFormat: (v) => (v < 0 ? "−" : "") + FG.compact(Math.abs(v)), tipFormat: (v) => (v < 0 ? "−" : "") + FG.money(Math.abs(v)), tipTitle: (i) => t(xs[i] === 1 ? "After {n} year" : "After {n} years", { n: xs[i] }),
+      markers: be > 0 ? [{ i: be, label: t("Buying pulls ahead: year {n}", { n: be }) }] : [], minZero: false,
     });
     $("rb-insight").innerHTML = be > 0
-      ? `With these assumptions, buying comes out ahead after about <strong>${be} year${be > 1 ? "s" : ""}</strong>. Before that, closing and selling costs outweigh the equity you've built.`
-      : `With these assumptions, <strong>renting stays ahead</strong> for the whole ${N}-year period — the renter's invested down payment and lower costs beat the buyer's equity. Try a longer stay, a lower rate, or higher rent.`;
+      ? t(be > 1 ? "With these assumptions, buying comes out ahead after about <strong>{n} years</strong>. Before that, closing and selling costs outweigh the equity you've built." : "With these assumptions, buying comes out ahead after about <strong>{n} year</strong>. Before that, closing and selling costs outweigh the equity you've built.", { n: be })
+      : t("With these assumptions, <strong>renting stays ahead</strong> for the whole {n}-year period — the renter's invested down payment and lower costs beat the buyer's equity. Try a longer stay, a lower rate, or higher rent.", { n: N });
   }
   ["rb-rent", "rb-years", "rb-app", "rb-rentg", "rb-ret", "rb-maint", "rb-sell"].forEach((id) => $(id).addEventListener("input", rentBuy));
 
   mortgage();
-  let t;
-  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(mortgage, 150); });
+  let resizeTimer;
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(mortgage, 150); });
+  document.addEventListener("langchange", mortgage);
   document.addEventListener("themechange", mortgage);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", mortgage);
 })();

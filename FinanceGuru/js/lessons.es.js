@@ -399,11 +399,11 @@ const LESSONS_ES = {
                <p>Esos beneficios importan mucho: a lo largo de décadas, no pagar impuestos sobre el crecimiento puede sumar <strong>decenas o cientos de miles de dólares</strong>.</p>`,
       },
       {
-        heading: "Las tres grandes (EE. UU., límites de 2026)",
+        heading: "Las tres grandes (EE. UU., límites de 2026 y 2027)",
         html: `<ul>
-                 <li><strong>401(k)</strong> del trabajo: hasta <strong>$24,500 al año</strong>. Muchos empleadores <em>igualan</em> parte de lo que aportas; eso es dinero gratis.</li>
-                 <li><strong>IRA</strong> que abres por tu cuenta: hasta <strong>$7,500 al año</strong>.</li>
-                 <li><strong>HSA</strong> con un plan de salud de deducible alto: hasta <strong>$4,400</strong> (individual) o <strong>$8,750</strong> (familiar).</li>
+                 <li><strong>401(k)</strong> del trabajo: hasta <strong>$24,500 al año</strong> en 2026 y <strong>$25,500</strong> en 2027. Muchos empleadores <em>igualan</em> parte de lo que aportas; eso es dinero gratis.</li>
+                 <li><strong>IRA</strong> que abres por tu cuenta: hasta <strong>$7,500 al año</strong> (igual en 2026 y 2027).</li>
+                 <li><strong>HSA</strong> con un plan de salud de deducible alto: hasta <strong>$4,400</strong> (individual) o <strong>$8,750</strong> (familiar) en 2026; <strong>$4,500</strong> o <strong>$9,000</strong> en 2027.</li>
                </ul>
                <div class="callout"><strong>Compara todas las cuentas:</strong> mira la <a href="invest.html#accounts">guía de cuentas</a> en el Investing Hub.</div>`,
       },
@@ -412,14 +412,14 @@ const LESSONS_ES = {
         html: `<p><strong>Tradicional:</strong> no pagas impuestos ahora; los pagas cuando retiras el dinero en la jubilación.</p>
                <p><strong>Roth:</strong> pagas impuestos ahora y luego el dinero crece y sale <strong>libre de impuestos</strong>.</p>
                <p>Regla general: si esperas una tasa de impuestos <em>más alta</em> en el futuro (común en jóvenes al inicio de su carrera), la Roth suele ganar.</p>
-               <div class="callout"><strong>Pruébalo:</strong> la calculadora <a href="tools.html#roth">Roth vs Traditional</a> usa los tramos de impuestos de 2026, y <a href="tools.html#retire">Retirement Check</a> te muestra si vas por buen camino.</div>`,
+               <div class="callout"><strong>Pruébalo:</strong> la calculadora <a href="tools.html#roth">Roth vs Traditional</a> usa los tramos de impuestos de este año, y <a href="tools.html#retire">Retirement Check</a> te muestra si vas por buen camino.</div>`,
       },
     ],
     quiz: [
       {
-        q: "¿Cuál es el límite de aportación a una IRA en 2026 (menores de 50 años)?",
+        q: "¿Cuál es el límite anual de aportación a una IRA en 2026 y 2027 (menores de 50 años)?",
         choices: ["$2,000", "$7,500", "$24,500", "No hay límite"],
-        why: "$7,500 en 2026, compartido entre la IRA tradicional y la Roth.",
+        why: "$7,500 tanto en 2026 como en 2027, compartido entre la IRA tradicional y la Roth.",
       },
       {
         q: "Con una cuenta Roth, ¿cuándo pagas impuestos?",
@@ -479,18 +479,18 @@ const LESSONS_ES = {
     cards: [
       {
         heading: "Los tramos son cubetas",
-        html: `<p>En 2026, EE. UU. tiene siete tasas federales de impuesto sobre la renta, del <strong>10% al 37%</strong>. Pero no todo tu ingreso paga la misma tasa.</p>
+        html: `<p>En 2026 y 2027, EE. UU. tiene siete tasas federales de impuesto sobre la renta, del <strong>10% al 37%</strong>. Pero no todo tu ingreso paga la misma tasa.</p>
                <p>Imagina cubetas: los primeros dólares llenan la cubeta del 10%, los siguientes la del 12%, y así sucesivamente. La tasa de cada cubeta se aplica <strong>solo a los dólares que hay dentro</strong>. Así que pasar a un tramo más alto solo grava los dólares <em>extra</em> con la tasa más alta: un aumento nunca puede bajar tu sueldo neto.</p>
                <div class="callout"><strong>Míralo:</strong> mueve tu ingreso en la gráfica de <a href="taxes.html#brackets">cubetas de impuestos</a>.</div>`,
       },
       {
         heading: "Las deducciones reducen el ingreso gravable",
-        html: `<p>Antes de aplicar los tramos, restas las deducciones. La mayoría usa la <strong>deducción estándar</strong>: <strong>$16,100</strong> para personas solteras y <strong>$32,200</strong> para matrimonios que declaran en conjunto en 2026.</p>
+        html: `<p>Antes de aplicar los tramos, restas las deducciones. La mayoría usa la <strong>deducción estándar</strong>: <strong>$16,100</strong> para personas solteras y <strong>$32,200</strong> para matrimonios que declaran en conjunto en 2026 (<strong>$16,600</strong> y <strong>$33,200</strong> en 2027).</p>
                <p>Las aportaciones antes de impuestos al 401(k) y las primas de seguro médico también reducen tu ingreso gravable; por eso ahorrar para la jubilación desde el trabajo cuesta menos de lo que parece.</p>`,
       },
       {
         heading: "FICA: el otro impuesto de tu cheque",
-        html: `<p>Además del impuesto sobre la renta, casi todos los cheques de pago pagan <strong>FICA</strong>: <strong>6.2%</strong> para el Seguro Social (sobre salarios de hasta $184,500 en 2026) y <strong>1.45%</strong> para Medicare. Tu empleador paga una cantidad igual.</p>
+        html: `<p>Además del impuesto sobre la renta, casi todos los cheques de pago pagan <strong>FICA</strong>: <strong>6.2%</strong> para el Seguro Social (sobre salarios de hasta $184,500 en 2026 y $192,300 en 2027) y <strong>1.45%</strong> para Medicare. Tu empleador paga una cantidad igual.</p>
                <p>Tu formulario W-4 le dice a tu empleador cuánto impuesto sobre la renta retener. Un reembolso enorme no es dinero gratis: es tu propio dinero, devuelto sin intereses.</p>
                <div class="callout"><strong>Pruébalo:</strong> el <a href="taxes.html#paycheck">desglose del cheque de pago</a> muestra adónde va cada dólar.</div>`,
       },
@@ -502,9 +502,9 @@ const LESSONS_ES = {
         why: "Los tramos son marginales: solo los dólares dentro de la cubeta del 22% pagan el 22%.",
       },
       {
-        q: "¿Cuál es la deducción estándar de 2026 para una persona soltera?",
-        choices: ["$5,000", "$12,400", "$16,100", "$32,200"],
-        why: "$16,100 para personas solteras ($32,200 para matrimonios que declaran en conjunto). $12,400 es donde termina el tramo del 10%.",
+        q: "¿Cuál es la deducción estándar para una persona soltera en 2026 y 2027?",
+        choices: ["$5,000 ambos años", "$12,400 en 2026, $12,800 en 2027", "$16,100 en 2026, $16,600 en 2027", "$32,200 en 2026, $33,200 en 2027"],
+        why: "$16,100 en 2026 y $16,600 en 2027 para personas solteras. $12,400/$12,800 es donde termina el tramo del 10%, y $32,200/$33,200 es la deducción para matrimonios que declaran en conjunto.",
       },
       {
         q: "¿Qué paga el FICA?",
@@ -1122,6 +1122,196 @@ const LESSONS_ES = {
         q: "Tu compañero de cuarto se va sin pagar su parte. Si los dos firmaron el contrato, ¿qué suele pasar?",
         choices: ["El dueño solo le puede cobrar a tu compañero", "Se cancela el contrato", "Podrías deber la renta completa", "La renta baja a la mitad"],
         why: "Los contratos normalmente hacen a todos los que firmaron responsables de toda la renta, no solo de su parte.",
+      },
+    ],
+  },
+  "investing-hype": {
+    title: "La moda de invertir: cripto, acciones meme e influencers",
+    summary: "Distingue una inversión real de una promoción en redes sociales, y ve por qué el FOMO sale caro.",
+    cards: [
+      {
+        heading: "Dónde aprenden los inversionistas jóvenes",
+        html: `<p>En una encuesta de 2023 a inversionistas de EE. UU. de 18 a 25 años, el <strong>48%</strong> dijo que aprende sobre inversiones principalmente en <strong>redes sociales</strong>. La mitad había hecho una inversión por <strong>FOMO</strong> (miedo a quedarse fuera), y su inversión más común eran las <strong>criptomonedas</strong>.</p>
+               <p>Las redes sociales pueden ser un buen lugar para empezar a aprender. Son un lugar riesgoso para recibir órdenes.</p>
+               <p class="small muted">Fuente: FINRA Investor Education Foundation y CFA Institute, <em>Gen Z and Investing</em> (24 de mayo de 2023).</p>`,
+      },
+      {
+        heading: "A muchos influencers les pagan",
+        html: `<p>A muchos "finfluencers" les pagan por promocionar una moneda, una app o un curso. La FTC exige que se diga cuando una recomendación es pagada, pero no todos lo hacen.</p>
+               <p>En 2022, la SEC acusó a Kim Kardashian de promocionar un token cripto en Instagram sin decir que le pagaron $250,000 por hacerlo. Pagó <strong>$1.26 millones</strong> para llegar a un acuerdo.</p>
+               <p>Antes de seguir un consejo, pregunta: <strong>¿Quién le paga?</strong> ¿Qué gana si compro? ¿Tiene licencia? Puedes buscar corredores y asesores gratis en <strong>BrokerCheck</strong> de FINRA.</p>`,
+      },
+      {
+        heading: "Cripto: grandes subidas y bajadas, pocas protecciones",
+        html: `<p>Los precios de las criptomonedas pueden moverse muchísimo. El bitcoin perdió cerca de <strong>tres cuartas partes</strong> de su valor entre noviembre de 2021 y noviembre de 2022. Ese mismo mes, la plataforma cripto FTX colapsó y sus clientes no pudieron sacar su dinero.</p>
+               <p>Las criptomonedas no están aseguradas por la <strong>FDIC</strong>. Si una plataforma quiebra o hackean tu cuenta, puede que nadie te devuelva el dinero.</p>
+               <p>Si compras algo, que sea una parte pequeña de dinero que podrías perder por completo.</p>`,
+      },
+      {
+        heading: "Acciones meme y esquemas de inflar y vender",
+        html: `<p>Las <strong>acciones meme</strong> suben por el ruido en internet, no por los resultados del negocio. Quienes compran tarde muchas veces compran cerca del punto más alto.</p>
+               <p>En un esquema de <strong>inflar y vender</strong> (pump-and-dump), los promotores inflan una acción o moneda barata, venden sus propias acciones a la gente que convencieron y el precio se desploma.</p>
+               <p>En 2025, la gente reportó haber perdido más de <strong>$7,900 millones</strong> en estafas de inversión, con una pérdida típica (mediana) de más de <strong>$10,000</strong>. Las estafas de inversión que empezaron en redes sociales costaron <strong>$1,100 millones</strong>. Señales de alerta: ganancias garantizadas, "actúa ya", chats privados y presión para reclutar amigos.</p>
+               <p class="small muted">Fuentes: alerta al consumidor de la FTC (16 de abril de 2026) y comunicado de prensa (27 de abril de 2026), datos de Consumer Sentinel de 2025.</p>
+               <div class="callout"><strong>Practica:</strong> detecta las señales de alerta en el juego <a href="play.html#scam">Spot the Scam</a>.</div>`,
+      },
+      {
+        heading: "El plan aburrido que funciona",
+        html: `<ul>
+                 <li>Primero arma tu <strong>fondo de emergencia</strong>.</li>
+                 <li>Invierte a largo plazo en <strong>fondos indexados diversificados y de bajo costo</strong>, de forma automática, cada mes.</li>
+                 <li>No pongas en la bolsa el dinero que vas a necesitar en unos cinco años.</li>
+                 <li>Trata cualquier apuesta de moda como dinero para entretenimiento, del tamaño de un boleto de concierto, no como tus ahorros.</li>
+               </ul>
+               <p>Si algo es seguro, pregúntate por qué un desconocido te lo está contando.</p>
+               <div class="callout"><strong>Míralo:</strong> compara riesgo y rendimiento en el <a href="invest.html#portfolio">portfolio dial</a> y lee <a href="learn.html#investing">Inversión 101</a>.</div>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Un finfluencer dice que una moneda nueva \"se multiplicará por 10 para el viernes\" y publica un enlace para comprarla. ¿Qué deberías preguntar primero?",
+        choices: ["¿Cuántos seguidores tiene?", "¿Le pagan por promocionarla y qué gana si yo compro?", "¿Puedo pedir dinero prestado para comprar más?", "¿La moneda tiene un logo profesional?"],
+        why: "Los promotores pagados ganan aunque tú no ganes. Los seguidores y los logos no dicen nada sobre la inversión.",
+      },
+      {
+        q: "¿Qué pasa en un esquema de inflar y vender?",
+        choices: ["Una empresa paga un dividendo", "Los promotores inflan un activo, venden al precio alto y el precio se desploma", "Un fondo se reequilibra una vez al año", "El gobierno recompra acciones"],
+        why: "Las ventas de los promotores son las que tumban el precio, y quienes compraron por la moda se quedan con las pérdidas.",
+      },
+      {
+        q: "¿Dónde debe estar el dinero que vas a necesitar para un auto en dos años?",
+        choices: ["En cripto", "En una acción meme", "En una cuenta de ahorros de alto rendimiento", "En opciones"],
+        why: "El dinero que necesitas pronto no debe estar expuesto a grandes cambios de precio. Una cuenta de ahorros de alto rendimiento lo mantiene seguro y gana intereses.",
+      },
+    ],
+  },
+  "first-tax-return": {
+    title: "Cómo presentar tu primera declaración de impuestos",
+    summary: "Si tienes que declarar, qué formularios juntar, formas gratis de hacerlo y cómo recibir tu reembolso.",
+    cards: [
+      {
+        heading: "¿Tienes que declarar?",
+        html: `<p>Por los ingresos de 2026 (la declaración que presentas en 2027), una persona soltera en general tiene que declarar si ganó más que la deducción estándar de <strong>$16,100</strong>. Eso aplica aunque tus padres te declaren como dependiente, siempre que todo tu ingreso haya venido de un trabajo.</p>
+               <p>Hay otras reglas si, como dependiente, tuviste más de <strong>$1,350</strong> de ingresos de inversiones (como intereses), o si ganaste <strong>$400</strong> o más por trabajo por cuenta propia (mira la lección <a href="learn.html#side-hustle">Trabajos extra</a>).</p>
+               <p><strong>Aunque no tengas que declarar,</strong> hazlo si te retuvieron impuesto sobre la renta de tus cheques de pago. Declarar es la única forma de recuperar ese dinero.</p>
+               <p class="small muted">Fuente: IRS, Rev. Proc. 2025-32 y Publicación 501. El Asistente Tributario Interactivo de IRS.gov revisa tu situación.</p>`,
+      },
+      {
+        heading: "Junta tus formularios",
+        html: `<ul>
+                 <li>El <strong>W-2</strong> de cada empleador. Deben enviarlo a más tardar el <strong>31 de enero</strong>.</li>
+                 <li>El <strong>1099-NEC</strong> si un negocio te pagó $2,000 o más como trabajador independiente en 2026, y el <strong>1099-INT</strong> si un banco te pagó $10 o más de intereses.</li>
+                 <li>El <strong>1098-T</strong> si pagaste matrícula universitaria (puede darte créditos por educación).</li>
+                 <li>Tu número de Seguro Social y los <strong>números de ruta y de cuenta de tu banco</strong> para el reembolso.</li>
+               </ul>
+               <p>¿No recibiste formulario por algún ingreso? Igual tienes que reportarlo.</p>`,
+      },
+      {
+        heading: "Declara gratis",
+        html: `<ul>
+                 <li><strong>IRS Free File</strong>: software guiado gratis si tu ingreso está por debajo del límite del IRS (<strong>$95,000</strong> o menos, según IRS.gov en noviembre de 2026). Abre en enero de 2027.</li>
+                 <li><strong>Free File Fillable Forms</strong>: gratis con cualquier ingreso, si te sientes cómodo llenando los formularios tú mismo.</li>
+                 <li><strong>VITA</strong>: ayuda gratis de voluntarios certificados por el IRS para personas que en general ganan unos <strong>$70,244</strong> o menos. Busca un sitio con el VITA Locator en IRS.gov.</li>
+               </ul>
+               <p>Cuidado con los anuncios "gratis" que luego te cobran la declaración estatal o extras. El programa Direct File del propio IRS ya terminó.</p>
+               <p class="small muted">Fuente: páginas de Free File y de preparación gratuita de impuestos de IRS.gov (revisadas en noviembre de 2026).</p>`,
+      },
+      {
+        heading: "Cómo recibir tu reembolso",
+        html: `<p>El IRS empezó a eliminar los cheques de reembolso en papel en septiembre de 2025. Ahora, para recibir un reembolso en general necesitas dar los <strong>números de ruta y de cuenta</strong> de tu banco para un <strong>depósito directo</strong>. Si declaras por internet, la mayoría de los reembolsos llegan en <strong>21 días</strong>.</p>
+               <p>La fecha límite para las declaraciones de 2026 es el <strong>15 de abril de 2027</strong>. Si debes, paga para esa fecha: una prórroga te da más tiempo para declarar, no para pagar.</p>
+               <p>El IRS no inicia el contacto por mensaje de texto, correo electrónico o redes sociales para pedir datos personales o bancarios. Los mensajes que prometen un reembolso son una estafa común (mira la lección <a href="learn.html#scams">Cómo detectar estafas</a>).</p>
+               <p class="small muted">Fuente: IRS, anuncio de la temporada de impuestos de 2026.</p>`,
+      },
+      {
+        heading: "Después de declarar",
+        html: `<ul>
+                 <li>Guarda una copia de tu declaración y tus formularios por lo menos <strong>tres años</strong>.</li>
+                 <li>¿Recibiste un reembolso enorme o debiste mucho? Ajusta tu <strong>W-4</strong> con tu empleador para que el próximo año te retengan algo más cercano a lo correcto.</li>
+                 <li>La mayoría de los estados también tiene su propia declaración de impuestos. Muchas opciones gratis presentan las dos.</li>
+               </ul>
+               <div class="callout"><strong>Pruébalo:</strong> revisa tu retención con el <a href="tools.html#stub">Pay Stub Reader</a> y lo básico del <a href="taxes.html#w4">W-4</a>.</div>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Tienes 17 años, tus padres te declaran como dependiente y ganaste $4,000 en un trabajo de verano con $150 de impuesto federal retenido. ¿Deberías declarar?",
+        choices: ["No, no tienes permitido declarar", "Sí. No estás obligado, pero declarar es la única forma de recuperar los $150", "Solo si ganaste más de $50,000", "Solo tus padres pueden declarar ese ingreso"],
+        why: "Tu ingreso estuvo por debajo del requisito para declarar, pero los $150 retenidos solo regresan si presentas una declaración.",
+      },
+      {
+        q: "¿Para cuándo deben enviarte el W-2 tus empleadores?",
+        choices: ["El 31 de enero", "El 1 de marzo", "El 15 de abril", "Cuando lo pidas"],
+        why: "Los empleadores deben enviar los W-2 a más tardar el 31 de enero, para que tengas tiempo de declarar antes de la fecha límite de abril.",
+      },
+      {
+        q: "¿Cómo recibe ahora la mayoría de la gente su reembolso de impuestos federales?",
+        choices: ["Un cheque en papel por correo", "Un depósito directo en una cuenta bancaria", "Una tarjeta de regalo", "En efectivo en una oficina del IRS"],
+        why: "El IRS empezó a eliminar los cheques de reembolso en papel en 2025, así que en general necesitarás los números de ruta y de cuenta de tu banco.",
+      },
+    ],
+  },
+  "money-relationships": {
+    title: "El dinero y tus relaciones: compañeros de cuarto, pareja y préstamos",
+    summary: "Divide gastos de forma justa, presta sin perder amistades y entiende qué significa ser codeudor.",
+    cards: [
+      {
+        heading: "Hablar de dinero incomoda. Hazlo de todos modos.",
+        html: `<p>Cerca de <strong>7 de cada 10</strong> adultos en EE. UU. han prestado dinero o pagado un gasto de grupo esperando que se lo devolvieran. A más de la mitad algo les salió mal: el <strong>44%</strong> perdió dinero y el <strong>26%</strong> dijo que se dañó la relación.</p>
+               <p>La mayoría de estos problemas empiezan con un acuerdo poco claro. Una conversación de cinco minutos al principio evita casi todos.</p>
+               <p class="small muted">Fuente: Encuesta Financial Taboos de Bankrate (YouGov, septiembre de 2025; publicada el 27 de octubre de 2025).</p>`,
+      },
+      {
+        heading: "Compañeros de cuarto: pónganse de acuerdo antes de mudarse",
+        html: `<p>Escriban un <strong>acuerdo de compañeros de cuarto</strong> sencillo antes del día de la mudanza:</p>
+               <ul>
+                 <li>Cómo se divide la renta (un cuarto más grande o con baño propio suele pagar más).</li>
+                 <li>Quién paga cada cuenta (luz, internet, streaming) y para qué fecha.</li>
+                 <li>La comida y los artículos compartidos, las visitas y las horas de silencio.</li>
+                 <li>Qué pasa si alguien se muda antes de tiempo.</li>
+               </ul>
+               <p>Recuerda: si todos firmaron el contrato, normalmente el dueño puede cobrarle la <strong>renta completa</strong> a cualquiera (mira la lección <a href="learn.html#first-apartment">Cómo rentar tu primer apartamento</a>).</p>
+               <div class="callout"><strong>Pruébalo:</strong> la herramienta <a href="tools.html#apartment">First Apartment budget</a> divide la renta y los costos de mudanza entre compañeros.</div>`,
+      },
+      {
+        heading: "Prestarles a amigos y familiares",
+        html: `<ul>
+                 <li>Presta solo lo que podrías darte el lujo de <strong>no recuperar nunca</strong>. Si no puedes, no es dinero de sobra.</li>
+                 <li>Considera regalar una cantidad más pequeña. Sin deuda y sin recordatorios incómodos.</li>
+                 <li>Si es un préstamo, <strong>déjalo por escrito</strong>: la cantidad y cuándo te lo van a pagar. Un mensaje de texto que los dos contesten cuenta.</li>
+                 <li>Nunca prestes dinero que necesitas para tu propia renta o tus cuentas.</li>
+               </ul>
+               <p>Está bien decir que no: "Ahora no puedo, pero te ayudo a armar un plan".</p>`,
+      },
+      {
+        heading: "Ser codeudor significa que la deuda es tuya",
+        html: `<p>Cuando eres <strong>codeudor</strong> (cosigner) de un préstamo, una tarjeta de crédito o un contrato de renta, prometes pagar si la otra persona no paga. La FTC advierte que podrías tener que pagar <strong>la cantidad completa</strong>, más cargos por atraso o costos de cobranza, y la deuda puede aparecer en <strong>tu historial de crédito</strong>.</p>
+               <p>Por ley, para muchos préstamos el prestamista debe darle al codeudor un "Aviso al codeudor" (Notice to Cosigner). Su mensaje es directo: si quien pidió el préstamo no paga, tendrás que pagar tú.</p>
+               <p>Sé codeudor solo si podrías pagar todo tú solo. Y nunca compartas tu número de Seguro Social ni tus contraseñas "solo por esta vez", ni siquiera con familiares.</p>
+               <p class="small muted">Fuente: Comisión Federal de Comercio (FTC), "Cosigning a Loan FAQs".</p>`,
+      },
+      {
+        heading: "En pareja: lo tuyo, lo mío y lo nuestro",
+        html: `<p>Antes de juntar dinero con tu pareja, hablen de ingresos, <strong>deudas</strong>, crédito, metas y forma de gastar. Muchas parejas usan una combinación: una <strong>cuenta conjunta</strong> para las cuentas compartidas y <strong>cuentas separadas</strong> para los gastos personales.</p>
+               <p>Mantén algo de ahorro y de crédito a tu nombre. Señales de control económico: que una persona se quede con todo el dinero, exija tus contraseñas o acumule deudas a tu nombre.</p>
+               <p>Si te está pasando, la Línea Nacional sobre la Violencia Doméstica (1-800-799-7233, thehotline.org) ofrece ayuda gratis y confidencial, también en español.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "Un amigo te pide $300 prestados para la renta. ¿Cuál es la forma más segura de manejarlo?",
+        choices: ["Prestárselos de tu propio dinero de la renta", "Prestar solo lo que podrías no recuperar nunca y dejar por escrito cómo te lo pagará", "Prestárselos sin plan para que no sea incómodo", "Ponerlo en una tarjeta de crédito y esperar que te pague"],
+        why: "Prestar solo lo que puedes perder protege tus propias cuentas, y dejar el plan por escrito evita la mayoría de los malentendidos.",
+      },
+      {
+        q: "Eres codeudor del préstamo del auto de un amigo y deja de pagar. ¿Qué puede pasar?",
+        choices: ["Nada; solo él debe el dinero", "El prestamista cancela el préstamo", "Podrías tener que pagar la cantidad completa y puede afectar tu crédito", "Lo paga el seguro de tu amigo"],
+        why: "El codeudor es totalmente responsable de la deuda, incluidos los cargos por atraso, y el préstamo puede aparecer en su historial de crédito.",
+      },
+      {
+        q: "¿Cuándo deben ponerse de acuerdo los compañeros de cuarto sobre cómo dividir la renta y las cuentas?",
+        choices: ["Después de que la primera cuenta llegue tarde", "Antes de mudarse, por escrito", "Solo si hay una pelea", "Cuando termine el contrato"],
+        why: "Ponerse de acuerdo desde el principio, por escrito, evita la mayoría de los pleitos de dinero entre compañeros.",
       },
     ],
   },

@@ -2,6 +2,7 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
+  const t = I18N.t;
   const H = MARKET_HISTORY;
   const YEARS = H.map((r) => r[0]);
   const pct = (v, d = 1) => (v >= 0 ? "" : "−") + Math.abs(v * 100).toFixed(d) + "%";
@@ -43,13 +44,13 @@
       const s = summarize(series(a.key));
       return `<button class="card asset-card" data-asset="${a.key}" aria-pressed="${a.key === activeAsset}">
         <div class="card-icon">${a.emoji}</div>
-        <h3 style="margin:0">${a.name}</h3>
-        <div class="small muted">${a.sub}</div>
-        <div class="asset-big">${pct(s.cagr)}<small> / yr</small></div>
-        <p class="small muted" style="margin:0 0 8px">${a.text}</p>
-        <div class="small">Worst year: <strong>${pct(s.worst)}</strong> (${s.worstYear})</div>
-        <div class="small">Down years: <strong>${s.losses} of ${H.length}</strong></div>
-        <div class="small">$1,000 in 1928 → <strong>${FG.money(1000 * s.growth)}</strong>${real ? " <span class='muted'>(1928 dollars)</span>" : ""}</div>
+        <h3 style="margin:0">${t(a.name)}</h3>
+        <div class="small muted">${t(a.sub)}</div>
+        <div class="asset-big">${pct(s.cagr)}<small> ${t("/ yr")}</small></div>
+        <p class="small muted" style="margin:0 0 8px">${t(a.text)}</p>
+        <div class="small">${t("Worst year: <strong>{pct}</strong> ({year})", { pct: pct(s.worst), year: s.worstYear })}</div>
+        <div class="small">${t("Down years: <strong>{n} of {total}</strong>", { n: s.losses, total: H.length })}</div>
+        <div class="small">${t("$1,000 in 1928 → <strong>{amount}</strong>", { amount: FG.money(1000 * s.growth) })}${real ? ` <span class='muted'>${t("(1928 dollars)")}</span>` : ""}</div>
       </button>`;
     }).join("");
     drawAssetChart();
@@ -57,12 +58,12 @@
   function drawAssetChart() {
     const a = ASSETS.find((x) => x.key === activeAsset);
     const rs = series(a.key);
-    $("asset-chart-title").textContent = `${a.emoji} ${a.name}: ${real ? "after-inflation " : ""}return every year, 1928–2025`;
-    $("asset-chart-note").textContent = "Blue = gain, orange = loss. Hover a bar for the exact year.";
+    $("asset-chart-title").textContent = `${a.emoji} ${t(real ? "{name}: after-inflation return every year, 1928–2025" : "{name}: return every year, 1928–2025", { name: t(a.name) })}`;
+    $("asset-chart-note").textContent = t("Blue = gain, orange = loss. Hover a bar for the exact year.");
     Charts.bars($("asset-chart"), {
-      x: YEARS, values: rs, name: a.name, yFormat: (v) => Math.round(v * 100) + "%",
+      x: YEARS, values: rs, name: t(a.name), yFormat: (v) => Math.round(v * 100) + "%",
       tipTitle: (i) => String(YEARS[i]), highlight: new Set(rs.map((r, i) => (r < 0 ? i : -1))),
-      label: `${a.name} annual returns 1928 to 2025`,
+      label: t("{name} annual returns 1928 to 2025", { name: t(a.name) }),
     });
   }
   $("asset-cards").addEventListener("click", (e) => {
@@ -89,11 +90,11 @@
     const amt = num("inf-amount"), a = +$("inf-from").value, b = +$("inf-to").value;
     const ratio = CPI_ANNUAL[b] / CPI_ANNUAL[a];
     const yrs = Math.abs(b - a), avg = yrs ? Math.pow(ratio, 1 / (b - a)) - 1 : 0;
-    $("inf-label").textContent = `${FG.money(amt)} in ${a} has the same buying power as`;
-    $("inf-result").textContent = `${FG.money(amt * ratio, amt * ratio < 100 ? 2 : 0)} in ${b}`;
+    $("inf-label").textContent = t("{amount} in {year} has the same buying power as", { amount: FG.money(amt), year: a });
+    $("inf-result").textContent = t("{amount} in {year}", { amount: FG.money(amt * ratio, amt * ratio < 100 ? 2 : 0), year: b });
     $("inf-detail").textContent = yrs
-      ? `Prices ${ratio >= 1 ? "rose" : "fell"} ${Math.abs(Math.round((ratio - 1) * 100))}% over ${yrs} years (${(avg * 100).toFixed(1)}% a year on average).`
-      : "Same year — no change.";
+      ? t(ratio >= 1 ? "Prices rose {pct}% over {years} years ({avg}% a year on average)." : "Prices fell {pct}% over {years} years ({avg}% a year on average).", { pct: Math.abs(Math.round((ratio - 1) * 100)), years: yrs, avg: (avg * 100).toFixed(1) })
+      : t("Same year — no change.");
   }
   ["inf-amount", "inf-from", "inf-to"].forEach((id) => $(id).addEventListener("input", inflationCalc));
 
@@ -107,6 +108,7 @@
       { name: "Cash (T-bills)", key: COL.cash, color: "--series-3" },
       { name: "Under the mattress", key: null, color: "--series-4" },
     ].map((l) => {
+      l = { ...l, label: t(l.name) };
       let v = 10000;
       const vals = [v];
       for (let i = si; i < H.length; i++) {
@@ -114,16 +116,19 @@
         v *= (1 + nominal) / (1 + INFLATION[i][1]);
         vals.push(v);
       }
-      return { ...l, values: vals };
+      return { ...l, name: l.label, key0: l.name, values: vals };
     });
     $("inf-start-label").textContent = infStart;
     Charts.line($("inf-chart"), {
-      x: xs, xFormat: (y) => (y === infStart - 1 ? `Start` : y), label: "Buying power of $10,000 after inflation",
+      x: xs, xFormat: (y) => (y === infStart - 1 ? t("Start") : y), label: t("Buying power of $10,000 after inflation"),
       series: lines, yFormat: FG.compact, tipFormat: (v) => FG.money(v),
-      tipTitle: (i) => (i === 0 ? `Start of ${infStart}` : `End of ${xs[i]}`),
+      tipTitle: (i) => (i === 0 ? t("Start of {year}", { year: infStart }) : t("End of {year}", { year: xs[i] })),
     });
-    const end = (n) => lines.find((l) => l.name === n).values.at(-1);
-    $("inf-insight").innerHTML = `<strong>Since ${infStart}:</strong> cash hidden under a mattress kept only <strong>${FG.money(end("Under the mattress"))}</strong> of buying power. T-bills roughly ${end("Cash (T-bills)") >= 10000 ? "kept pace" : "fell behind"} (${FG.money(end("Cash (T-bills)"))}), while stocks grew to <strong>${FG.money(end("Stocks"))}</strong> in ${infStart} dollars. Safe-feeling money can quietly lose value.`;
+    const end = (n) => lines.find((l) => l.key0 === n).values.at(-1);
+    const vars = { start: infStart, mattress: FG.money(end("Under the mattress")), bills: FG.money(end("Cash (T-bills)")), stocks: FG.money(end("Stocks")) };
+    $("inf-insight").innerHTML = t(end("Cash (T-bills)") >= 10000
+      ? "<strong>Since {start}:</strong> cash hidden under a mattress kept only <strong>{mattress}</strong> of buying power. T-bills roughly kept pace ({bills}), while stocks grew to <strong>{stocks}</strong> in {start} dollars. Safe-feeling money can quietly lose value."
+      : "<strong>Since {start}:</strong> cash hidden under a mattress kept only <strong>{mattress}</strong> of buying power. T-bills roughly fell behind ({bills}), while stocks grew to <strong>{stocks}</strong> in {start} dollars. Safe-feeling money can quietly lose value.", vars);
   }
   $("inf-presets").addEventListener("click", (e) => {
     const b = e.target.closest("[data-inf-start]");
@@ -134,9 +139,9 @@
   });
   function inflationBars() {
     Charts.bars($("inf-bars"), {
-      x: INFLATION.map((r) => r[0]), values: INFLATION.map((r) => r[1]), name: "Inflation",
+      x: INFLATION.map((r) => r[0]), values: INFLATION.map((r) => r[1]), name: t("Inflation"),
       yFormat: (v) => Math.round(v * 100) + "%", highlight: new Set(INFLATION.map((r, i) => (r[1] > 0.05 ? i : -1))),
-      tipTitle: (i) => String(INFLATION[i][0]), label: "U.S. inflation by year, 1928 to 2025", height: 200,
+      tipTitle: (i) => String(INFLATION[i][0]), label: t("U.S. inflation by year, 1928 to 2025"), height: 200,
     });
   }
 
@@ -151,18 +156,20 @@
     const lossShare = w.filter((x) => x < 0).length / w.length;
     $("pf-cagr").textContent = pct(st.cagr);
     $("pf-worst").textContent = `${pct(st.worst)} (${st.worstYear})`;
-    $("pf-loss").textContent = `${st.losses} of ${rs.length}`;
-    $("pf-hold-label").textContent = `Chance of loss over ${n} yr${n > 1 ? "s" : ""}`;
+    $("pf-loss").textContent = t("{n} of {total}", { n: st.losses, total: rs.length });
+    $("pf-hold-label").textContent = t(n > 1 ? "Chance of loss over {n} yrs" : "Chance of loss over {n} yr", { n });
     $("pf-holdloss").textContent = Math.round(lossShare * 100) + "%";
-    $("pf-chart-title").textContent = n === 1 ? "Every single year since 1928" : `Every ${n}-year period since 1928`;
+    $("pf-chart-title").textContent = n === 1 ? t("Every single year since 1928") : t("Every {n}-year period since 1928", { n });
     const sorted = [...w].sort((a, b) => a - b);
     Charts.bars($("pf-chart"), {
-      x: YEARS.slice(0, w.length), values: w, name: "Avg. yearly return",
+      x: YEARS.slice(0, w.length), values: w, name: t("Avg. yearly return"),
       yFormat: (v) => Math.round(v * 100) + "%", highlight: new Set(w.map((r, i) => (r < 0 ? i : -1))),
-      tipTitle: (i) => n === 1 ? String(YEARS[i]) : `${YEARS[i]}–${YEARS[i + n - 1]}`, label: "Rolling period returns",
+      tipTitle: (i) => n === 1 ? String(YEARS[i]) : `${YEARS[i]}–${YEARS[i + n - 1]}`, label: t("Rolling period returns"),
     });
     const worstI = w.indexOf(sorted[0]);
-    $("pf-insight").innerHTML = `<strong>What history says:</strong> across ${w.length} different ${n}-year periods, the worst averaged <strong>${pct(sorted[0])}/yr</strong> (${YEARS[worstI]}–${YEARS[worstI + n - 1]}), the middle outcome was <strong>${pct(sorted[Math.floor(sorted.length / 2)])}/yr</strong>, and the best was <strong>${pct(sorted[sorted.length - 1])}/yr</strong>. ${lossShare === 0 ? "Not one of them lost money. Time is the great risk reducer." : `${Math.round(lossShare * 100)}% lost money — try a longer hold time and watch that number shrink.`}`;
+    $("pf-insight").innerHTML = t("<strong>What history says:</strong> across {count} different {n}-year periods, the worst averaged <strong>{worst}/yr</strong> ({from}–{to}), the middle outcome was <strong>{mid}/yr</strong>, and the best was <strong>{best}/yr</strong>.",
+      { count: w.length, n, worst: pct(sorted[0]), from: YEARS[worstI], to: YEARS[worstI + n - 1], mid: pct(sorted[Math.floor(sorted.length / 2)]), best: pct(sorted[sorted.length - 1]) }) + " " +
+      (lossShare === 0 ? t("Not one of them lost money. Time is the great risk reducer.") : t("{pct}% lost money — try a longer hold time and watch that number shrink.", { pct: Math.round(lossShare * 100) }));
   }
   ["mix", "hold"].forEach((id) => $(id).addEventListener("input", portfolio));
 
@@ -178,7 +185,7 @@
     if (+$("tm-years").value > maxYears) $("tm-years").value = maxYears;
     const n = +$("tm-years").value, s = +$("tm-mix").value / 100;
     $("tm-years-label").textContent = `${n} (${start}–${start + n - 1})`;
-    $("tm-mix-label").textContent = s === 1 ? "100% stocks" : s === 0 ? "100% bonds" : `${Math.round(s * 100)}% stocks / ${Math.round((1 - s) * 100)}% bonds`;
+    $("tm-mix-label").textContent = s === 1 ? t("100% stocks") : s === 0 ? t("100% bonds") : t("{s}% stocks / {b}% bonds", { s: Math.round(s * 100), b: Math.round((1 - s) * 100) });
     const init = num("tm-initial"), yearly = num("tm-yearly");
     let bal = 0, put = 0, idx = 1, peak = 1, maxDD = 0, ddYear = null;
     const vals = [], ins = [], xs = [];
@@ -192,17 +199,18 @@
     }
     $("tm-final").textContent = FG.money(bal);
     $("tm-in").textContent = FG.money(put);
-    $("tm-dd").textContent = maxDD > 0.001 ? `−${Math.round(maxDD * 100)}% (${ddYear})` : "None";
+    $("tm-dd").textContent = maxDD > 0.001 ? `−${Math.round(maxDD * 100)}% (${ddYear})` : t("None");
     Charts.line($("tm-chart"), {
-      x: xs, label: "Portfolio value over time",
-      series: [{ name: "Your portfolio", color: "--series-1", values: vals }, { name: "Money you put in", color: "--series-2", values: ins, dash: true }],
-      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => `End of ${xs[i]}`,
-      tipExtra: (i) => (EVENTS[xs[i]] ? `<div class="small muted" style="margin-top:4px">📰 ${EVENTS[xs[i]]}</div>` : ""),
+      x: xs, label: t("Portfolio value over time"),
+      series: [{ name: t("Your portfolio"), color: "--series-1", values: vals }, { name: t("Money you put in"), color: "--series-2", values: ins, dash: true }],
+      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => t("End of {year}", { year: xs[i] }),
+      tipExtra: (i) => (EVENTS[xs[i]] ? `<div class="small muted" style="margin-top:4px">📰 ${t(EVENTS[xs[i]])}</div>` : ""),
     });
     const gain = bal - put;
     $("tm-story").innerHTML = gain >= 0
-      ? `Starting in ${start} and adding ${FG.money(yearly)} a year, your money grew ${FG.money(gain)} beyond what you put in${maxDD > 0.2 ? ` — even after a ${Math.round(maxDD * 100)}% drop along the way. Investors who kept buying through the crash were rewarded.` : "."}`
-      : `Starting in ${start}, you'd be down ${FG.money(-gain)} after ${n} year${n > 1 ? "s" : ""}. Short periods can be brutal — try extending the years and watch what happens.`;
+      ? t(maxDD > 0.2 ? "Starting in {start} and adding {yearly} a year, your money grew {gain} beyond what you put in — even after a {drop}% drop along the way. Investors who kept buying through the crash were rewarded." : "Starting in {start} and adding {yearly} a year, your money grew {gain} beyond what you put in.",
+          { start, yearly: FG.money(yearly), gain: FG.money(gain), drop: Math.round(maxDD * 100) })
+      : t("Starting in {start}, you'd be down {loss} after {n} year|Starting in {start}, you'd be down {loss} after {n} years", { start, loss: FG.money(-gain), n }) + " " + t("Short periods can be brutal — try extending the years and watch what happens.");
   }
   ["tm-start", "tm-years", "tm-initial", "tm-yearly", "tm-mix"].forEach((id) => $(id).addEventListener("input", timeMachine));
   $("tm-presets").addEventListener("click", (e) => {
@@ -229,31 +237,39 @@
     $("fee-a").textContent = FG.money(a[n]);
     $("fee-b").textContent = FG.money(b[n]);
     Charts.line($("fee-chart"), {
-      x: a.map((_, i) => i), xFormat: (v) => `Yr ${v}`, label: "Balance with low vs high fees",
-      series: [{ name: `Low-cost (${$("fee-low").value}%)`, color: "--series-1", values: a }, { name: `Higher-cost (${$("fee-high").value}%)`, color: "--series-2", values: b }],
-      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => `Year ${i}`,
-      tipExtra: (i) => `<div class="row" style="border-top:1px solid var(--border);margin-top:4px;padding-top:4px"><span>Lost to fees</span><strong>${FG.money(a[i] - b[i])}</strong></div>`,
+      x: a.map((_, i) => i), xFormat: (v) => t("Yr {n}", { n: v }), label: t("Balance with low vs high fees"),
+      series: [{ name: t("Low-cost ({pct}%)", { pct: $("fee-low").value }), color: "--series-1", values: a }, { name: t("Higher-cost ({pct}%)", { pct: $("fee-high").value }), color: "--series-2", values: b }],
+      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => t("Year {n}", { n: i }),
+      tipExtra: (i) => `<div class="row" style="border-top:1px solid var(--border);margin-top:4px;padding-top:4px"><span>${t("Lost to fees")}</span><strong>${FG.money(a[i] - b[i])}</strong></div>`,
     });
   }
   ["fee-monthly", "fee-years", "fee-return", "fee-low", "fee-high"].forEach((id) => $(id).addEventListener("input", fees));
 
   /* ---------- Accounts ---------- */
+  const L = TAX_NOW.limits, usd = (n) => "$" + n.toLocaleString("en-US");
   const ACCOUNTS = [
-    { e: "🏢", n: "401(k) / 403(b)", lim: "$24,500/yr (+$8,000 if 50+)", tax: "Pre-tax (traditional) or Roth option", best: "Employer match = free money. Automatic payroll saving.", watch: "Limited fund menu; withdrawals before 59½ usually penalized." },
-    { e: "🌱", n: "Roth IRA", lim: "$7,500/yr (+$1,100 if 50+)", tax: "Pay tax now, grows and withdraws tax-free", best: "Young earners in lower tax brackets. Contributions can come out anytime.", watch: "Income limits apply. Earnings locked until 59½ (with exceptions)." },
-    { e: "🏦", n: "Traditional IRA", lim: "Shares the $7,500 IRA limit", tax: "May be tax-deductible now, taxed on withdrawal", best: "Higher earners expecting a lower tax rate in retirement.", watch: "Deduction phases out if you have a workplace plan and higher income." },
-    { e: "🩺", n: "HSA", lim: "$4,400 self / $8,750 family", tax: "Triple tax advantage: in, growth, and out (for medical)", best: "Anyone with a high-deductible health plan. Can be invested.", watch: "Only available with an HSA-eligible health plan." },
+    { e: "🏢", n: "401(k) / 403(b)", lim: `${usd(L.k401)}/yr (+${usd(L.k401Catch50)} if 50+)`, tax: "Pre-tax (traditional) or Roth option", best: "Employer match = free money. Automatic payroll saving.", watch: "Limited fund menu; withdrawals before 59½ usually penalized." },
+    { e: "🌱", n: "Roth IRA", lim: `${usd(L.ira)}/yr (+${usd(L.iraCatch50)} if 50+)`, tax: "Pay tax now, grows and withdraws tax-free", best: "Young earners in lower tax brackets. Contributions can come out anytime.", watch: "Income limits apply. Earnings locked until 59½ (with exceptions)." },
+    { e: "🏦", n: "Traditional IRA", lim: `Shares the ${usd(L.ira)} IRA limit`, tax: "May be tax-deductible now, taxed on withdrawal", best: "Higher earners expecting a lower tax rate in retirement.", watch: "Deduction phases out if you have a workplace plan and higher income." },
+    { e: "🩺", n: "HSA", lim: `${usd(L.hsaSelf)} self / ${usd(L.hsaFamily)} family`, tax: "Triple tax advantage: in, growth, and out (for medical)", best: "Anyone with a high-deductible health plan. Can be invested.", watch: "Only available with an HSA-eligible health plan." },
     { e: "📊", n: "Taxable brokerage", lim: "No limit", tax: "Taxed on dividends and gains (long-term gains get lower rates)", best: "Goals before retirement; extra money after maxing other accounts.", watch: "No tax break — use tax-efficient index funds." },
     { e: "🎓", n: "529 plan", lim: "No annual IRS limit (state caps apply)", tax: "Tax-free growth for education", best: "Saving for a child's college or trade school. Some states add a tax deduction.", watch: "Non-education withdrawals owe tax + 10% penalty on earnings." },
   ];
-  $("account-cards").innerHTML = ACCOUNTS.map((a) => `
+  // Limits are filled in after lookup, so the dictionary keys stay the same when the figures change.
+  const accounts = () => { $("account-cards").innerHTML = ACCOUNTS.map((a, i) => `
     <div class="card">
-      <div class="card-icon">${a.e}</div><h3>${a.n}</h3>
-      <div class="kv"><span>2026 limit</span><strong>${a.lim}</strong></div>
-      <div class="kv"><span>Taxes</span><span>${a.tax}</span></div>
-      <p class="small" style="margin:8px 0 4px">✅ ${a.best}</p>
-      <p class="small muted" style="margin:0">⚠️ ${a.watch}</p>
-    </div>`).join("");
+      <div class="card-icon">${a.e}</div><h3>${t(a.n)}</h3>
+      <div class="kv"><span>${t("{year} limit", { year: TAX_YEAR_NOW })}</span><strong>${i < 4 ? [
+        t("{limit}/yr (+{catch} if 50+)", { limit: usd(L.k401), catch: usd(L.k401Catch50) }),
+        t("{limit}/yr (+{catch} if 50+)", { limit: usd(L.ira), catch: usd(L.iraCatch50) }),
+        t("Shares the {limit} IRA limit", { limit: usd(L.ira) }),
+        t("{self} self / {family} family", { self: usd(L.hsaSelf), family: usd(L.hsaFamily) }),
+      ][i] : t(a.lim)}</strong></div>
+      <div class="kv"><span>${t("Taxes")}</span><span>${t(a.tax)}</span></div>
+      <p class="small" style="margin:8px 0 4px">✅ ${t(a.best)}</p>
+      <p class="small muted" style="margin:0">⚠️ ${t(a.watch)}</p>
+    </div>`).join(""); };
+  accounts();
 
   /* ---------- Risk quiz ---------- */
   const QUIZ = [
@@ -268,34 +284,34 @@
     const box = $("risk-quiz");
     if (qi < QUIZ.length) {
       const q = QUIZ[qi];
-      box.innerHTML = `<div class="small muted">Question ${qi + 1} of ${QUIZ.length}</div>
+      box.innerHTML = `<div class="small muted">${t("Question {n} of {total}", { n: qi + 1, total: QUIZ.length })}</div>
         <div class="step-dots">${QUIZ.map((_, i) => `<span class="${i <= qi ? "on" : ""}"></span>`).join("")}</div>
-        <p class="quiz-q">${q.q}</p>
-        <div class="choices">${q.a.map(([t, v], i) => `<button class="choice" data-qa="${i}">${t}</button>`).join("")}</div>`;
+        <p class="quiz-q">${t(q.q)}</p>
+        <div class="choices">${q.a.map(([text], i) => `<button class="choice" data-qa="${i}">${t(text)}</button>`).join("")}</div>`;
       return;
     }
     const score = answers.reduce((s, v) => s + v, 0); // 0..18
     let stocks = Math.round((20 + (score / 18) * 80) / 10) * 10;
     if (answers[0] === 0) stocks = Math.min(stocks, 30); // short horizon caps risk
-    const style = stocks <= 30 ? ["🛡️", "Conservative"] : stocks <= 60 ? ["⚖️", "Moderate"] : stocks <= 80 ? ["🌱", "Growth"] : ["🚀", "Aggressive growth"];
+    const style = stocks <= 30 ? ["🛡️", t("Conservative")] : stocks <= 60 ? ["⚖️", t("Moderate")] : stocks <= 80 ? ["🌱", t("Growth")] : ["🚀", t("Aggressive growth")];
     const st = summarize(mixReturns(stocks / 100));
     box.innerHTML = `<div class="result" style="padding:8px">
       <div class="card-icon" style="font-size:2.4rem">${style[0]}</div>
-      <h3>Your style: ${style[1]}</h3>
-      <div class="big">${stocks}% stocks / ${100 - stocks}% bonds</div>
-      <p class="muted">Historically this mix averaged <strong>${pct(st.cagr)}/yr</strong>, with a worst year of <strong>${pct(st.worst)}</strong> (${st.worstYear}).</p>
+      <h3>${t("Your style: {style}", { style: style[1] })}</h3>
+      <div class="big">${t("{s}% stocks / {b}% bonds", { s: stocks, b: 100 - stocks })}</div>
+      <p class="muted">${t("Historically this mix averaged <strong>{avg}/yr</strong>, with a worst year of <strong>{worst}</strong> ({year}).", { avg: pct(st.cagr), worst: pct(st.worst), year: st.worstYear })}</p>
       <div class="hero-actions" style="justify-content:center">
-        <button class="btn btn-primary" data-load="${stocks}">Load into portfolio builder ↑</button>
-        <button class="btn btn-ghost" data-retake>Retake quiz</button>
+        <button class="btn btn-primary" data-load="${stocks}">${t("Load into portfolio builder ↑")}</button>
+        <button class="btn btn-ghost" data-retake>${t("Retake quiz")}</button>
       </div>
-      <p class="small muted" style="margin-top:12px">Sample only. Target-date funds handle this mix automatically and get more conservative as you age.</p>
+      <p class="small muted" style="margin-top:12px">${t("Sample only. Target-date funds handle this mix automatically and get more conservative as you age.")}</p>
     </div>`;
   }
   $("risk-quiz").addEventListener("click", (e) => {
     const a = e.target.closest("[data-qa]");
     if (a) { answers.push(QUIZ[qi].a[+a.dataset.qa][1]); qi++; renderQuiz(); return; }
     const l = e.target.closest("[data-load]");
-    if (l) { $("mix").value = l.dataset.load; portfolio(); FG.scrollTo($("portfolio")); FG.toast("Mix loaded into the portfolio builder"); return; }
+    if (l) { $("mix").value = l.dataset.load; portfolio(); FG.scrollTo($("portfolio")); FG.toast(t("Mix loaded into the portfolio builder")); return; }
     if (e.target.closest("[data-retake]")) { qi = 0; answers = []; renderQuiz(); }
   });
 
@@ -314,15 +330,17 @@
     ["Compound interest", "Earning returns on your past returns. The engine of long-term wealth."],
     ["Volatility", "How much and how fast prices swing. Not the same as permanent loss — unless you sell at the bottom."],
   ];
-  $("glossary-list").innerHTML = TERMS.map(([t, d]) => `<details class="card"><summary><strong>${t}</strong></summary><p class="muted" style="margin:8px 0 0">${d}</p></details>`).join("");
+  const glossary = () => { $("glossary-list").innerHTML = TERMS.map(([term, d]) => `<details class="card"><summary><strong>${t(term)}</strong></summary><p class="muted" style="margin:8px 0 0">${t(d)}</p></details>`).join(""); };
+  glossary();
 
   /* ---------- Init & redraw ---------- */
   function all() { drawAssetChart(); inflationChart(); inflationBars(); portfolio(); timeMachine(); fees(); }
   renderAssets();
   inflationCalc(); inflationChart(); inflationBars();
   portfolio(); timeMachine(); fees(); renderQuiz();
-  let t;
-  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(all, 150); });
+  let resizeTimer;
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(all, 150); });
   document.addEventListener("themechange", all);
+  document.addEventListener("langchange", () => { renderAssets(); inflationCalc(); all(); accounts(); renderQuiz(); glossary(); });
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", all);
 })();

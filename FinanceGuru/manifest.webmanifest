@@ -1,12 +1,12 @@
 {
-  "name": "FinanceGuru",
-  "short_name": "FinanceGuru",
+  "name": "MoneyExplained",
+  "short_name": "MoneyExplained",
   "description": "Free money lessons, quizzes, games, and tools for teens and new earners.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#fbfaf7",
-  "theme_color": "#0e7a4e",
+  "theme_color": "#1d5bbf",
   "icons": [
     { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },

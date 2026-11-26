@@ -4,6 +4,8 @@ const ToolKit = (() => {
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
   const money = (v) => (v < 0 ? "−" : "") + FG.money(Math.abs(Math.round(v)));
+  // Spanish when the page has it (js/i18n.js); plain English where I18N isn't loaded (Node tests).
+  const t = (s, vars) => (typeof I18N === "object" ? I18N.t(s, vars) : s);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
   // Local storage that never throws (private windows, blocked storage); data stays in this browser.
@@ -15,21 +17,23 @@ const ToolKit = (() => {
   // Editable rows. fields: [{ key, label, type: "text"|"number"|"date"|"select"|"check", options?, prefix?, width? }].
   // Calls onChange(rows) after every edit; rows persist under storeKey.
   function listEditor({ host, addBtn, storeKey, fields, defaults, blank, onChange }) {
-    let rows = store.get(storeKey, null) || defaults.map((r) => ({ ...r }));
+    // Example rows are shown in the page's language; once saved they are the visitor's own data.
+  const examples = () => defaults.map((r) => ({ ...r, ...(typeof r.name === "string" ? { name: t(r.name) } : {}) }));
+  let rows = store.get(storeKey, null) || examples();
     const cell = (f, r, i) => {
       const id = `${storeKey}-${f.key}-${i}`, v = r[f.key] ?? "";
-      const label = `<label class="sr-only" for="${id}">${esc(f.label)} ${i + 1}</label>`;
-      if (f.type === "select") return `${label}<select class="select" id="${id}" data-i="${i}" data-k="${f.key}">${f.options.map(([val, txt]) => `<option value="${val}"${val === v ? " selected" : ""}>${esc(txt)}</option>`).join("")}</select>`;
-      if (f.type === "check") return `<label class="row-check"><input type="checkbox" id="${id}" data-i="${i}" data-k="${f.key}"${v ? " checked" : ""}> ${esc(f.label)}</label>`;
+      const label = `<label class="sr-only" for="${id}">${esc(t(f.label))} ${i + 1}</label>`;
+      if (f.type === "select") return `${label}<select class="select" id="${id}" data-i="${i}" data-k="${f.key}">${f.options.map(([val, txt]) => `<option value="${val}"${val === v ? " selected" : ""}>${esc(t(txt))}</option>`).join("")}</select>`;
+      if (f.type === "check") return `<label class="row-check"><input type="checkbox" id="${id}" data-i="${i}" data-k="${f.key}"${v ? " checked" : ""}> ${esc(t(f.label))}</label>`;
       const input = `<input id="${id}" data-i="${i}" data-k="${f.key}" type="${f.type}" value="${esc(v)}"${f.type === "number" ? ' min="0" step="any"' : ""}>`;
       return `${label}${f.prefix ? `<div class="input-wrap"><span>${f.prefix}</span>${input}</div>` : `<div class="input-wrap">${input}</div>`}`;
     };
     const cols = `--cols:${fields.map((f) => f.width || "1fr").join(" ")} 38px`;
     function render() {
       host.innerHTML = rows.length
-        ? `<div class="list-head" aria-hidden="true" style="${cols}">${fields.map((f) => `<span>${f.type === "check" ? "" : esc(f.label)}</span>`).join("")}<span></span></div>` +
-          rows.map((r, i) => `<div class="list-row" style="${cols}">${fields.map((f) => `<div data-label="${f.type === "check" ? "" : esc(f.label)}">${cell(f, r, i)}</div>`).join("")}<button type="button" class="icon-btn" data-del="${i}" aria-label="Remove row ${i + 1}">✕</button></div>`).join("")
-        : `<p class="small muted">Nothing here yet. Add one below.</p>`;
+        ? `<div class="list-head" aria-hidden="true" style="${cols}">${fields.map((f) => `<span>${f.type === "check" ? "" : esc(t(f.label))}</span>`).join("")}<span></span></div>` +
+          rows.map((r, i) => `<div class="list-row" style="${cols}">${fields.map((f) => `<div data-label="${f.type === "check" ? "" : esc(t(f.label))}">${cell(f, r, i)}</div>`).join("")}<button type="button" class="icon-btn" data-del="${i}" aria-label="${esc(t("Remove row {n}", { n: i + 1 }))}">✕</button></div>`).join("")
+        : `<p class="small muted">${t("Nothing here yet. Add one below.")}</p>`;
       changed();
     }
     function changed() { store.set(storeKey, rows); onChange(rows); }
@@ -51,8 +55,13 @@ const ToolKit = (() => {
       if (inputs[0]) inputs[0].focus();
     });
     render();
-    return { rows: () => rows, reset() { rows = defaults.map((r) => ({ ...r })); render(); } };
+    // Labels and the empty-list note follow the language; untouched English examples become Spanish ones.
+    document.addEventListener("langchange", () => {
+      if (JSON.stringify(rows) === JSON.stringify(defaults)) rows = examples();
+      render();
+    });
+    return { rows: () => rows, reset() { rows = examples(); render(); } };
   }
 
-  return { $, num, money, esc, store, listEditor };
+  return { $, num, money, esc, store, listEditor, t };
 })();

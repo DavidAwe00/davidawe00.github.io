@@ -1,7 +1,7 @@
 // HSA / FSA Savings: income tax (federal via federalTax, plus state) and payroll tax avoided on
 // contributions, with IRS limits for 2026 or 2027 and the FSA use-it-or-lose-it rule.
 (function () {
-  const { $, num, money } = ToolKit;
+  const { $, num, money, t } = ToolKit;
   if (!$("panel-hsa")) return;
   // Limits by plan year. null = not announced yet, so the previous year's figure is used and labeled.
   // 2026: HSA Rev. Proc. 2025-19, FSA Rev. Proc. 2025-32. 2027: HSA Rev. Proc. 2026-24 (June 1, 2026),
@@ -23,27 +23,28 @@
     $("hs-payroll").disabled = isFsa;
     $("hs-spend-wrap").hidden = !isFsa;
     const amt = Math.min(num("hs-amt"), limit), income = num("hs-income"), status = $("hs-status").value;
-    $("hs-limit").textContent = (announced(year, type) ? `${year} limit: ${money(limit)}` : `${year} limit not announced yet; using ${year - 1}'s ${money(limit)}`)
-      + (num("hs-amt") > limit ? `. Counting only ${money(limit)}.` : ".");
+    $("hs-limit").textContent = (announced(year, type) ? t("{year} limit: {limit}", { year, limit: money(limit) }) : t("{year} limit not announced yet; using {prev}'s {limit}", { year, prev: year - 1, limit: money(limit) }))
+      + (num("hs-amt") > limit ? t(". Counting only {limit}.", { limit: money(limit) }) : ".");
     const fed = federalTax(status, income, year).tax - federalTax(status, Math.max(0, income - amt), year).tax;
     const state = (num("hs-state") / 100) * amt;
     // Payroll contributions also skip Social Security (only on wages under the wage base) and Medicare.
-    const F = TAX_2026.fica, base = pick(year, "wageBase");
+    const F = TAX_YEARS[year].fica, base = pick(year, "wageBase");
     const fica = $("hs-payroll").checked ? F.ssRate * (Math.min(income, base) - Math.min(Math.max(0, income - amt), base)) + F.medicare * amt : 0;
     const saved = fed + state + fica;
     const rate = amt ? saved / amt : 0;
     $("hs-save").textContent = money(saved);
     $("hs-per").textContent = amt ? money(100 * (1 - rate)) : "—";
     const risk = isFsa ? Math.max(0, amt - num("hs-spend") - FSA_CARRYOVER) : 0;
-    $("hs-risk-label").textContent = isFsa ? "At risk of forfeiting" : "Unused money";
-    $("hs-risk").textContent = isFsa ? money(risk) : "Rolls over";
-    $("hs-insight").innerHTML = !amt ? "Enter a contribution to see the savings." :
-      `Putting in ${money(amt)} saves about <strong>${money(saved)}</strong> in taxes, so every $100 of care costs you about ${money(100 * (1 - rate))}. ` +
+    $("hs-risk-label").textContent = isFsa ? t("At risk of forfeiting") : t("Unused money");
+    $("hs-risk").textContent = isFsa ? money(risk) : t("Rolls over");
+    $("hs-insight").innerHTML = !amt ? t("Enter a contribution to see the savings.") :
+      t("Putting in {amt} saves about <strong>{saved}</strong> in taxes, so every $100 of care costs you about {per}.", { amt: money(amt), saved: money(saved), per: money(100 * (1 - rate)) }) + " " +
       (isFsa
-        ? (risk > 0 ? `⚠️ You plan to put in ${money(risk)} more than you expect to spend (after the ${money(FSA_CARRYOVER)} carryover, if your plan offers it). Health FSA money left over is generally lost, so contribute only what you're confident you'll use.` : "Your contribution fits your expected spending, so you're unlikely to lose any.")
-        : "HSA money is yours to keep: it rolls over every year, goes with you if you change jobs, and can be invested. Some states, including California and New Jersey, still tax HSA contributions.");
+        ? (risk > 0 ? t("⚠️ You plan to put in {risk} more than you expect to spend (after the {carry} carryover, if your plan offers it). Health FSA money left over is generally lost, so contribute only what you're confident you'll use.", { risk: money(risk), carry: money(FSA_CARRYOVER) }) : t("Your contribution fits your expected spending, so you're unlikely to lose any."))
+        : t("HSA money is yours to keep: it rolls over every year, goes with you if you change jobs, and can be invested. Some states, including California and New Jersey, still tax HSA contributions."));
   }
 
   ["hs-year", "hs-type", "hs-amt", "hs-income", "hs-status", "hs-state", "hs-spend", "hs-payroll"].forEach((id) => $(id).addEventListener("input", calc));
+  document.addEventListener("langchange", calc);
   calc();
 })();

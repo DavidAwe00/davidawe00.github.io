@@ -3,7 +3,7 @@
 // an endorsement. Each result hands off to the Offer Comparer (js/tools/compare.js). Answers persist
 // in this browser. Rates/fees come from the Banking Basics lesson (FDIC, Bankrate).
 const AccountMatch = (() => {
-  const { $, store } = ToolKit;
+  const { $, store, t } = ToolKit;
   const root = $("mm-root");
   const KEY = "fg-tool-match";
   const Q = [
@@ -44,23 +44,23 @@ const AccountMatch = (() => {
   function render() {
     const picks = answers.need === "all" ? [checking, savings, card] : [{ checking, savings, card }[answers.need]];
     const recs = picks.map((f) => f(answers));
-    const label = { checking: "🏦 Checking", savings: "🐷 Savings", card: "💳 First credit card" };
+    const label = { checking: t("🏦 Checking"), savings: t("🐷 Savings"), card: t("💳 First credit card") };
     root.innerHTML = `
       <div class="card mm-quiz">${Q.map((q) => `
-        <fieldset class="mm-q"><legend>${q.q}</legend><div class="chips">${q.opts.map(([v, t]) =>
-          `<button type="button" class="chip" data-q="${q.id}" data-v="${v}" aria-pressed="${answers[q.id] === v}">${t}</button>`).join("")}</div></fieldset>`).join("")}
+        <fieldset class="mm-q"><legend>${t(q.q)}</legend><div class="chips">${q.opts.map(([v, text]) =>
+          `<button type="button" class="chip" data-q="${q.id}" data-v="${v}" aria-pressed="${answers[q.id] === v}">${t(text)}</button>`).join("")}</div></fieldset>`).join("")}
       </div>
       <div class="mm-results" aria-live="polite">${recs.map((r) => `
         <article class="card mm-rec">
           <div class="small muted">${label[r.mode]}</div>
-          <h3>${r.title}</h3>
-          <p>${r.why}</p>
-          ${r.also ? `<p class="small muted">${r.also}</p>` : ""}
+          <h3>${t(r.title)}</h3>
+          <p>${t(r.why)}</p>
+          ${r.also ? `<p class="small muted">${t(r.also)}</p>` : ""}
           <div class="mm-lists">
-            <div><strong class="small">Look for</strong><ul class="small">${r.look.map((x) => `<li>${x}</li>`).join("")}</ul></div>
-            <div><strong class="small">Red flags</strong><ul class="small">${r.flags.map((x) => `<li>${x}</li>`).join("")}</ul></div>
+            <div><strong class="small">${t("Look for")}</strong><ul class="small">${r.look.map((x) => `<li>${t(x)}</li>`).join("")}</ul></div>
+            <div><strong class="small">${t("Red flags")}</strong><ul class="small">${r.flags.map((x) => `<li>${t(x)}</li>`).join("")}</ul></div>
           </div>
-          <a class="btn btn-ghost" href="#compare" data-compare="${r.mode}">Compare ${r.mode === "card" ? "card" : r.mode} offers you've found →</a>
+          <a class="btn btn-ghost" href="#compare" data-compare="${r.mode}">${t(`Compare ${r.mode} offers you've found →`)}</a>
         </article>`).join("")}
       </div>`;
   }
@@ -82,6 +82,7 @@ const AccountMatch = (() => {
         document.dispatchEvent(new CustomEvent("comparemode", { detail: c.dataset.compare }));
       }
     });
+    document.addEventListener("langchange", render);
     render();
   }
   return { checking, savings, card, DEFAULTS };

@@ -3,36 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Progress — FinanceGuru</title>
-  <meta name="description" content="Your FinanceGuru level, daily challenge streak, and badges.">
+  <title>My Progress — MoneyExplained</title>
+  <meta name="description" content="Your MoneyExplained level, daily challenge streak, and badges.">
   <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231d5bbf'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0e7a4e">
+  <meta name="theme-color" content="#1d5bbf">
   <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/badges.html">
   <meta name="robots" content="noindex,follow">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:site_name" content="MoneyExplained">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/badges.html">
-  <meta property="og:title" content="My Progress — FinanceGuru">
-  <meta property="og:description" content="Your FinanceGuru level, daily challenge streak, and badges.">
-  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:title" content="My Progress — MoneyExplained">
+  <meta property="og:description" content="Your MoneyExplained level, daily challenge streak, and badges.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/moneyexplained.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta property="og:image:alt" content="MoneyExplained — free money lessons, quizzes, games, and tools">
   <meta name="twitter:card" content="summary_large_image">
   <!-- publishing-meta:end -->
 </head>
 <body>
   <header class="site-header">
     <nav class="container nav">
-      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">MoneyExplained</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
         <details class="nav-menu">
@@ -54,9 +51,8 @@
     </nav>
   </header>
 
-  <main class="container" style="padding-top:32px;padding-bottom:48px">
-    <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">My progress</h1>
-    <p class="muted">Your level, streak, and badges. Progress is saved in this browser.</p>
+  <main class="container page-main">
+    <header class="page-head"><span class="eyebrow">Your progress</span><h1>My progress</h1><p class="lead">Your level, streak, and badges. Progress is saved in this browser.</p></header>
 
     <div class="tool" style="margin-top:16px">
       <div class="card" id="lvl"></div>
@@ -65,11 +61,11 @@
 
     <section class="class-join-section" id="class-join" hidden aria-labelledby="class-title">
       <div class="card class-card">
-        <h2 id="class-title">🏫 Your class</h2>
+        <h2 id="class-title">Your class</h2>
         <div id="class-member" hidden>
           <p>You're in <strong id="class-name"></strong> as <strong id="class-nick"></strong>. Your lesson quiz scores and Money Check-up scores share with your teacher automatically.</p>
           <p class="small muted" id="class-synced"></p>
-          <div id="class-assigned" hidden><h3>Assigned by your teacher</h3><ul class="class-assigned" id="class-assigned-list"></ul></div>
+          <div id="class-assigned" hidden><h3>Assigned by your teacher</h3><p class="small" id="class-due" hidden></p><ul class="class-assigned" id="class-assigned-list"></ul></div>
           <button type="button" class="btn btn-ghost" id="class-leave">Leave class</button>
         </div>
         <form id="class-form" hidden novalidate>
@@ -87,7 +83,7 @@
 
     <section style="padding:24px 0 0">
       <div class="card cert-cta">
-        <div><strong>🎓 FinanceGuru Fundamentals certificate</strong><div class="small muted" id="cert-status"></div></div>
+        <div><strong>🎓 MoneyExplained Fundamentals certificate</strong><div class="small muted" id="cert-status"></div></div>
         <a class="btn btn-primary" href="certificate.html" id="cert-link">View certificate →</a>
       </div>
     </section>
@@ -108,13 +104,13 @@
     </section>
 
     <section style="padding:32px 0 0">
-      <div class="section-head" style="margin-bottom:12px"><h2>🏅 Badges</h2><p class="muted" id="badge-count"></p></div>
+      <div class="section-head" style="margin-bottom:12px"><h2>Badges</h2><p class="muted" id="badge-count"></p></div>
       <div class="badge-grid" id="badge-grid"></div>
     </section>
 
     <section style="padding:32px 0 0" id="backup">
       <div class="card">
-        <h2 style="margin-top:0;font-size:1.3rem">💾 Move your progress to another device</h2>
+        <h2 style="margin-top:0;font-size:1.3rem">Move your progress to another device</h2>
         <p class="muted">Progress is saved in this browser only. Download a backup here, then restore it on your other device (for example, a school Chromebook and your phone). The file includes lessons, XP, streaks, badges, high scores, and your saved tool entries.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
           <button class="btn btn-primary" type="button" id="backup-export">Download a backup</button>
@@ -128,7 +124,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span>© <span data-year></span> MoneyExplained. For educational purposes only — not financial advice.</span>
       <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>

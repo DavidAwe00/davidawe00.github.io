@@ -10,11 +10,26 @@ const Daily = (() => {
   const dayKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   const yesterdayKey = () => { const d = new Date(); d.setDate(d.getDate() - 1); return dayKey(d); };
 
-  const POOL = LESSONS.flatMap((l) => l.quiz.map((q) => ({ ...q, lesson: l })));
+  const POOL = LESSONS.flatMap((l) => l.quiz.map((q, i) => ({ ...q, lesson: l, i })));
+  // Today's question, fixed for the day once it's first shown. Two days in three, someone who has
+  // finished lessons reviews one of them (lessons with a missed quiz question first: spaced retrieval);
+  // the third day, and for newcomers, it's any question in the course.
   function todaysQuestion() {
+    const s = load(), day = dayKey();
+    const pinned = s.pick && s.pick.day === day && LESSONS.find((l) => l.id === s.pick.lesson);
+    if (pinned && pinned.quiz[s.pick.i]) return { ...pinned.quiz[s.pick.i], lesson: pinned, i: s.pick.i, review: Boolean(s.pick.review) };
     let h = 0;
-    for (const ch of dayKey()) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-    return POOL[h % POOL.length];
+    for (const ch of day) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    const pickIndex = Math.imul(h ^ (h >>> 15), 2654435761) >>> 0;  // separate from h % 3 below
+    const done = typeof FG === "object" ? FG.getProgress().done : {};
+    const finished = LESSONS.filter((l) => done[l.id]);
+    const missed = finished.filter((l) => done[l.id].score < done[l.id].total);
+    const reviewFrom = missed.length ? missed : finished;
+    const review = reviewFrom.length > 0 && h % 3 !== 0;
+    const pool = review ? POOL.filter((q) => reviewFrom.includes(q.lesson)) : POOL;
+    const q = pool[pickIndex % pool.length];
+    save({ ...s, pick: { day, lesson: q.lesson.id, i: q.i, review } });
+    return { ...q, review };
   }
 
   function state() {
@@ -25,9 +40,10 @@ const Daily = (() => {
   }
 
   function answer(choice) {
-    const s = load(), st = state();
+    const st = state();
     if (st.today) return st.today; // already answered today
-    const q = todaysQuestion(), ok = choice === q.answer;
+    const q = todaysQuestion(), ok = choice === q.answer;  // pins today's pick before we load and save
+    const s = load();
     s.streak = st.streak + 1;
     s.best = Math.max(st.best, s.streak);
     s.last = dayKey();
@@ -41,12 +57,12 @@ const Daily = (() => {
 
   const T = {
     en: {
-      title: "Daily challenge", from: "from", locale: undefined, streakTip: "Answer every day to grow your streak",
+      title: "Daily challenge", from: "from", reviewTag: "Review", locale: undefined, streakTip: "Answer every day to grow your streak",
       days: (n) => `${n} day${n === 1 ? "" : "s"}`, right: "✅ Correct! +15 XP", wrong: "❌ Not quite. +5 XP for showing up",
       tomorrow: "Come back tomorrow to keep your streak.", review: "Review the lesson →", other: "Español", otherLang: "es", otherLabel: "Ver el reto en español",
     },
     es: {
-      title: "Reto diario", from: "de", locale: "es", streakTip: "Responde cada día para hacer crecer tu racha",
+      title: "Reto diario", from: "de", reviewTag: "Repaso", locale: "es", streakTip: "Responde cada día para hacer crecer tu racha",
       days: (n) => `${n} día${n === 1 ? "" : "s"}`, right: "✅ ¡Correcto! +15 XP", wrong: "❌ No exactamente. +5 XP por participar",
       tomorrow: "Vuelve mañana para mantener tu racha.", review: "Repasa la lección →", other: "English", otherLang: "en", otherLabel: "Show the challenge in English",
     },
@@ -59,12 +75,12 @@ const Daily = (() => {
     }
     const base = todaysQuestion(), st = state(), t = T[lang];
     const lesson = lang === "es" ? localizeLesson(base.lesson, "es") : base.lesson;
-    const q = { ...base, ...lesson.quiz[base.lesson.quiz.findIndex((x) => x.q === base.q)], lesson };
+    const q = { ...base, ...lesson.quiz[base.i], lesson };
     const done = st.today;
     host.lang = lang;
     host.innerHTML = `
       <div class="daily-head">
-        <div><span class="eyebrow" style="margin:0">${t.title}</span><div class="small muted">${new Date().toLocaleDateString(t.locale, { weekday: "long", month: "long", day: "numeric" })} · ${t.from} “${q.lesson.title}”</div></div>
+        <div><span class="eyebrow" style="margin:0">${t.title}</span><div class="small muted">${new Date().toLocaleDateString(t.locale, { weekday: "long", month: "long", day: "numeric" })} · ${t.from} “${q.lesson.title}”${base.review ? ` · <span class="daily-review">${t.reviewTag}</span>` : ""}</div></div>
         <div class="daily-tools">
           <button type="button" class="chip" data-daily-lang="${t.otherLang}" lang="${t.otherLang}" aria-label="${t.otherLabel}">${t.other}</button>
           <div class="streak-pill" title="${t.streakTip}">🔥 ${t.days(st.streak)}</div>
@@ -93,5 +109,5 @@ const Daily = (() => {
     return Promise.resolve();
   }
 
-  return { state, render, todaysQuestion, dayKey };
+  return { state, render, answer, todaysQuestion, dayKey };
 })();

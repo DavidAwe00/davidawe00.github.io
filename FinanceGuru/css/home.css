@@ -9,28 +9,28 @@
 .home-page .hero-actions .btn { padding:14px 20px; font-size:.9rem; }
 .home-page .hero-actions .btn-primary span { margin-left:16px; font-size:1.2rem; }
 .home-page .hero-proof { font-size:.75rem; gap:10px 16px; margin-top:26px; }
-.home-page .hero-card { background:#113c30; color:#f5f7ee; padding:28px; border:1px solid #31594b; border-radius:24px; box-shadow:0 24px 60px -26px #102e2b70; position:relative; }
+.home-page .hero-card { background:#12294a; color:#f5f7ee; padding:28px; border:1px solid #2f4a73; border-radius:24px; box-shadow:0 24px 60px -26px #102e2b70; position:relative; }
 .growth-heading { display:flex; gap:10px; align-items:center; margin-bottom:32px; }
-.growth-icon { display:grid; place-items:center; width:38px; height:38px; border:1px solid #59776a; border-radius:12px; color:#c5e4c7; font-size:1.5rem; flex-shrink:0; }
+.growth-icon { display:grid; place-items:center; width:38px; height:38px; border:1px solid #5d7699; border-radius:12px; color:#c3d8f5; font-size:1.5rem; flex-shrink:0; }
 .growth-kicker { font-size:.56rem; letter-spacing:.13em; color:#bed0c5; }
 .growth-heading h2 { font:500 .8rem var(--font); letter-spacing:0; margin:3px 0 0; }
-.growth-live { margin-left:auto; border:1px solid #59776a; border-radius:30px; font-size:.6rem; padding:5px 9px; color:#d4e8d9; }
+.growth-live { margin-left:auto; border:1px solid #5d7699; border-radius:30px; font-size:.6rem; padding:5px 9px; color:#d4e1f3; }
 .growth-label { font-size:.75rem; color:#c0d5c7; margin-bottom:8px; }
 .home-page .hero-number { font-family:var(--font); font-size:clamp(2.6rem,4vw,3.5rem); color:#f6f8ee; font-weight:500; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
 .growth-caption { font-size:.75rem; color:#b9d1c2; margin:10px 0 0; }
 .growth-caption strong { color:#e0ebdb; font-weight:500; }
 .growth-chart { display:block; width:100%; margin-top:20px; overflow:visible; }
-.growth-grid { stroke:#416052; stroke-width:1; stroke-dasharray:3 5; fill:none; }
-.growth-line { stroke:#b6e3b1; stroke-width:3; fill:none; stroke-linecap:round; }
+.growth-grid { stroke:#3d5579; stroke-width:1; stroke-dasharray:3 5; fill:none; }
+.growth-line { stroke:#a9c9f5; stroke-width:3; fill:none; stroke-linecap:round; }
 .growth-contributions { stroke:#a7b9af; stroke-width:2; stroke-dasharray:5 5; fill:none; }
 .growth-axis { display:flex; justify-content:space-between; color:#bacdc1; font-size:.6rem; margin-top:4px; }
 .growth-legend { display:flex; gap:18px; font-size:.6rem; color:#d3dfd5; margin:16px 0 20px; }
 .growth-legend span::before { content:''; display:inline-block; width:7px; height:7px; background:#a7b9af; border-radius:50%; margin-right:6px; }
-.growth-legend span+span::before { background:#b6e3b1; }
-.growth-controls { display:grid; grid-template-columns:1fr 1fr; gap:22px; border-top:1px solid #416052; padding-top:18px; }
+.growth-legend span+span::before { background:#a9c9f5; }
+.growth-controls { display:grid; grid-template-columns:1fr 1fr; gap:22px; border-top:1px solid #3d5579; padding-top:18px; }
 .growth-controls label { display:flex; justify-content:space-between; gap:8px; font-size:.75rem; color:#c7dace; }
 .growth-controls strong { color:#f5f7ee; font-weight:600; white-space:nowrap; }
-.growth-controls input[type=range] { accent-color:#b6e3b1; margin:12px 0 6px; width:100%; }
+.growth-controls input[type=range] { accent-color:#a9c9f5; margin:12px 0 6px; width:100%; }
 .growth-note { font-size:.7rem; line-height:1.6; color:#b9cfc0; margin:16px 0 0; }
 .start-section { border-top:1px solid var(--border); padding:48px 0 60px; }
 .start-heading { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:26px; }
@@ -46,9 +46,143 @@
 .start-link { display:flex; justify-content:space-between; gap:12px; font-size:.76rem; font-weight:600; margin-top:auto; color:var(--brand); }
 .start-link span { font-size:1.1rem; }
 .home-page .daily-section { padding-top:0; }
+/* "Why it matters": cited figures from the lessons, then the Check-up as the next step. */
+.why-section { border-top:1px solid var(--border); padding:48px 0 52px; }
+.why-grid { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+.why-card { display:flex; flex-direction:column; padding:22px; border:1px solid var(--border); border-radius:18px; background:var(--surface); }
+.why-num { font-family:var(--font-display); font-size:clamp(2rem,3.4vw,2.6rem); line-height:1; letter-spacing:-.03em; color:var(--brand); font-variant-numeric:tabular-nums; }
+.why-card p { color:var(--text-2); font-size:.86rem; line-height:1.7; margin:12px 0 16px; }
+.why-card a { margin-top:auto; font-size:.72rem; font-weight:600; color:var(--text-2); }
+.why-card a:hover { color:var(--brand); }
+.why-cta { display:flex; align-items:center; justify-content:space-between; gap:16px 24px; flex-wrap:wrap; margin-top:22px; padding:18px 22px; border-radius:18px; background:var(--brand-soft); }
+.why-cta p { margin:0; max-width:46em; font-size:.92rem; }
+/* FAQ: native <details>, so it works without JavaScript and with the keyboard. */
+.faq-section { border-top:1px solid var(--border); }
+.faq-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:40px; align-items:start; }
+.faq-layout h2 { font-size:clamp(1.6rem,3vw,2rem); margin:0 0 10px; }
+.faq-list { border-top:1px solid var(--border); }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-item summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:16px; padding:18px 0; font-weight:600; }
+.faq-item summary::-webkit-details-marker { display:none; }
+.faq-item summary::after { content:"+"; color:var(--brand); font-size:1.3rem; line-height:1; flex-shrink:0; }
+.faq-item[open] summary::after { content:"−"; }
+.faq-item p { margin:0 0 18px; color:var(--text-2); line-height:1.75; max-width:46em; }
+@media(max-width:900px) { .why-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .faq-layout { grid-template-columns:1fr; gap:20px; } }
+@media(max-width:460px) { .why-grid { grid-template-columns:1fr; } .why-cta .btn { width:100%; justify-content:center; } }
 .home-page .section-drop { box-shadow:none; }
 @media(min-width:1100px) { .home-page .container { max-width:1200px; padding-left:32px; padding-right:32px; } }
 @media(max-width:900px) { .home-page .hero-grid { gap:32px; }.home-page .hero h1 { font-size:3.3rem; }.home-page .hero-card { padding:22px; }.start-card { padding:20px; }.start-heading p { display:none; } }
 @media(max-width:760px) { .home-page .hero { padding:40px 0; }.home-page .hero-grid { grid-template-columns:1fr; gap:34px; }.home-page .hero h1 { font-size:clamp(2.8rem,9vw,4rem); }.home-page .hero .lead { max-width:35em; }.home-page .hero-card { max-width:560px; width:100%; }.start-grid { grid-template-columns:1fr; }.start-card { display:grid; grid-template-columns:44px 1fr; gap:0 16px; }.start-number { grid-column:1/-1; margin-bottom:18px; }.start-card svg { grid-row:2/4; margin:0; }.start-card h3 { margin:0; max-width:none; }.start-card p { margin:8px 0 20px; }.start-link { grid-column:2; }.start-section { padding:34px 0; } }
 @media(prefers-reduced-motion:reduce) { .start-card:hover { transform:none; } }
 @media(max-width:360px) { .growth-controls { grid-template-columns:1fr; gap:12px; }.growth-live { display:none; } }
+
+/* ===== Lower half: one editorial system with the hero, "Why it matters" and "Start where you are".
+   Hairlines instead of tinted panels, serif headings, accent color kept to small marks. ===== */
+.home-page { --hair: var(--border); }
+
+/* Daily challenge: a quiet framed module, not a striped card. */
+.home-page .daily-section { padding:8px 0 56px; }
+.home-page .daily-card { border:1px solid var(--hair); border-radius:20px; box-shadow:none; padding:30px 32px; background:var(--surface); }
+.home-page .daily-card::before { display:none; }
+.home-page .daily-card .quiz-q { font:600 clamp(1.25rem,2.2vw,1.55rem)/1.35 var(--font-display); letter-spacing:-.01em; margin-top:18px !important; }
+.home-page .daily-card .choices { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.home-page .daily-card .choice { border-radius:12px; box-shadow:none; background:var(--bg); }
+.home-page .daily-card .choice:hover:not([disabled]) { transform:none; box-shadow:none; background:var(--surface); border-color:var(--text); }
+.home-page .streak-pill { font-weight:600; font-size:.8rem; background:transparent; border:1px solid var(--hair); color:var(--text-2); padding:5px 12px; }
+.home-page .daily-section > .container > p { margin-top:14px !important; }
+
+/* Section dropdowns become an editorial index: hairline rows, serif titles, a thin +/− control. */
+.home-page main > section:has(> .container > .section-drop) { padding:0; }
+.home-page main > section:has(> .container > .section-drop[data-section="hubs"]) { border-top:1px solid var(--hair); padding-top:12px; }
+.home-page .section-drop { border:0; border-bottom:1px solid var(--hair); border-radius:0; background:none; box-shadow:none; overflow:visible; }
+.home-page .section-drop::before { display:none; }
+.home-page .section-drop > summary { background:none; padding:30px 0; gap:24px; align-items:center; }
+.home-page .section-drop > summary:hover { background:none; }
+.home-page .section-drop[open] > summary { border-bottom:0; padding-bottom:22px; }
+.home-page .section-icon { width:52px; height:52px; border-radius:14px; background:none; border:1px solid var(--hair); color:var(--accent-ink); transition:border-color .2s, background .2s; }
+.home-page .section-icon .line-icon { width:24px; height:24px; stroke-width:1.5; }
+.home-page .section-drop > summary:hover .section-icon { border-color:var(--accent); background:color-mix(in srgb, var(--accent) 6%, transparent); }
+.home-page .section-eyebrow { font-size:.62rem; font-weight:600; letter-spacing:.14em; color:var(--muted); display:flex; align-items:center; gap:10px; }
+.home-page .section-eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.home-page .section-text { gap:6px; }
+.home-page .section-text h2 { font-size:clamp(1.45rem,2.6vw,1.9rem); letter-spacing:-.02em; line-height:1.15; transition:color .2s; }
+.home-page .section-drop > summary:hover h2 { color:var(--accent-ink); }
+.home-page .section-text > .muted { font-size:.9rem; }
+.home-page .section-count { background:none; border:0; padding:0; font-size:.75rem; font-weight:500; color:var(--muted); font-variant-numeric:tabular-nums; letter-spacing:.02em; }
+.home-page .section-drop > summary::after { content:"+"; width:40px; height:40px; border:1px solid var(--hair); background:none; color:var(--text); font-size:1.25rem; font-weight:300; transform:none; transition:background .2s, color .2s, border-color .2s; }
+.home-page .section-drop[open] > summary::after { content:"−"; transform:none; }
+.home-page .section-drop > summary:hover::after { background:var(--text); color:var(--bg); border-color:var(--text); }
+.home-page .section-body { padding:0 0 40px 76px; }
+
+/* Cards inside sections: flat and hairline, with a precise hover instead of a lift-and-glow. */
+.home-page .section-body .card { box-shadow:none; border-color:var(--hair); border-radius:16px; padding:22px 22px 18px; }
+.home-page .section-body a.card:hover { transform:none; border-color:var(--text); box-shadow:none; }
+.home-page .section-body .card h3 { font-size:1rem; letter-spacing:-.005em; line-height:1.35; }
+.home-page .section-body .card-meta { border-top:1px solid var(--hair); padding-top:12px; margin-top:16px; font-size:.75rem; }
+.home-page .section-body .badge { box-shadow:none; background:none; padding:0; font-weight:600; font-size:.7rem; color:var(--muted); }
+.home-page .section-body .badge.done { color:var(--brand); }
+
+/* Learning path: progress as a thin rule; units as a hairline list instead of grey pills. */
+.home-page .path-bar { margin-bottom:20px; }
+.home-page .path-progress .progress { height:3px; background:var(--hair); }
+.home-page .path-actions a, .home-page .path-actions .link-btn { color:var(--text-2); text-decoration:none; font-weight:500; }
+.home-page .path-actions a:hover, .home-page .path-actions .link-btn:hover { color:var(--brand); }
+.home-page .path-note { background:none; border:1px solid var(--hair); border-left:2px solid var(--brand); border-radius:0 10px 10px 0; color:var(--text-2); }
+.home-page .units { gap:0; border-top:1px solid var(--hair); }
+.home-page .unit { background:none; border:0; border-bottom:1px solid var(--hair); border-radius:0; }
+.home-page .unit[open] { background:none; }
+.home-page .unit > summary { padding:16px 4px; border-radius:0; }
+.home-page .unit > summary:hover { background:none; }
+.home-page .unit > summary:hover strong { color:var(--brand); }
+.home-page .unit > summary::after { content:"+"; font-size:1.1rem; font-weight:300; color:var(--muted); transform:none; }
+.home-page .unit[open] > summary::after { content:"−"; transform:none; }
+.home-page .unit-icon, .home-page .unit[open] .unit-icon { background:none; width:36px; height:36px; border:1px solid var(--hair); border-radius:10px; }
+.home-page .unit-icon .line-icon { width:20px; height:20px; }
+.home-page .unit-status { background:none; padding:0; font-weight:500; font-size:.75rem; color:var(--muted); }
+.home-page .unit-status.done { background:none; }
+.home-page .unit.recommended > summary { box-shadow:none; }
+.home-page .rec-badge { background:none; border:1px solid color-mix(in srgb, var(--brand) 40%, transparent); font-weight:600; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; }
+.home-page .unit > .grid { padding:4px 0 24px 50px; }
+
+/* Teachers: a quiet split row with an outline icon. */
+.home-page .teach-section { padding:56px 0 8px; }
+.home-page a.card.cert-cta { border:1px solid var(--hair); border-radius:20px; box-shadow:none; padding:24px 28px; gap:20px 28px; flex-wrap:nowrap; }
+.home-page a.card.cert-cta:hover { transform:none; border-color:var(--text); box-shadow:none; }
+.teach-text { display:flex; gap:18px; align-items:center; }
+.teach-icon { flex:none; display:grid; place-items:center; width:48px; height:48px; border-radius:14px; border:1px solid var(--hair); color:var(--gold); }
+.teach-icon svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.teach-text strong { display:block; font:600 1.15rem/1.3 var(--font-display); margin-bottom:4px; }
+.home-page .cert-cta .btn { flex:none; }
+
+/* Closing band: the hero card's deep navy, a serif headline, and faint ruled lines for texture. */
+.home-page .cta-band { position:relative; overflow:hidden; background:#12294a; color:#f5f7ee; border:1px solid #2f4a73; border-radius:28px; padding:56px; box-shadow:0 24px 60px -30px #102e2b80; }
+.home-page .cta-band::before { content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(#ffffff0a 1px, transparent 1px) 0 0/100% 44px, radial-gradient(520px 260px at 92% 10%, #b6e3b126, transparent 70%); }
+.home-page .cta-band > * { position:relative; }
+.home-page .cta-band h2 { font-size:clamp(1.8rem,3.4vw,2.6rem); letter-spacing:-.03em; line-height:1.1; color:#f6f8ee; margin-bottom:12px; }
+.home-page .cta-band p { color:#c0d5c7; opacity:1 !important; }
+.home-page .cta-band > a.btn, .home-page .cta-band button.btn { background:#f5f7ee; color:#12294a; padding:14px 22px; }
+.home-page .cta-band > a.btn:hover, .home-page .cta-band button.btn:hover { background:#fff; color:#12294a; }
+.home-page .cta-band a:not(.btn) { color:#d4e1f3; }
+:root[data-theme="dark"] .home-page .cta-band { background:#0f1f38; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .home-page .cta-band { background:#0f1f38; } }
+
+/* FAQ: serif questions to match the headings. */
+.home-page .faq-item summary { font:600 1.05rem/1.4 var(--font-display); padding:20px 0; }
+.home-page .faq-item summary:hover { color:var(--brand); }
+.home-page .faq-item summary::after { font-family:var(--font); font-weight:300; }
+
+@media (max-width:760px) {
+  .home-page .section-body { padding:0 0 28px; }
+  .home-page .unit > .grid { padding:4px 0 20px; }
+  .home-page .daily-card { padding:22px 20px; }
+  .home-page .daily-card .choices { grid-template-columns:1fr; }
+  .home-page a.card.cert-cta { flex-wrap:wrap; padding:22px; }
+  .home-page .cta-band { padding:34px 26px; border-radius:22px; }
+}
+@media (max-width:560px) {
+  .home-page .section-drop > summary { padding:24px 0; gap:14px; }
+  .home-page .section-icon { width:42px; height:42px; }
+  .home-page .section-drop > summary::after { width:34px; height:34px; }
+  .teach-icon { display:none; }
+}

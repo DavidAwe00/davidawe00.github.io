@@ -13,7 +13,7 @@
   function showPicker() {
     deck = null;
     $("deck").hidden = true; $("picker").hidden = false;
-    document.title = "Lesson slides — FinanceGuru";
+    document.title = "Lesson slides — MoneyExplained";
     $("picker-list").innerHTML = LESSONS.map((l, i) => `
       <li><a class="card slide-pick" href="#${l.id}"><span class="plan-num">${i + 1}</span><span><strong>${l.icon} ${l.title}</strong><span class="small muted">${Slides.build(l, PLANS[l.id], i).length} slides · ${l.summary}</span></span></a></li>`).join("");
   }
@@ -25,7 +25,7 @@
     deck = Slides.build(l, PLANS[l.id], lessonIndex);
     $("picker").hidden = true; $("deck").hidden = false;
     $("deck-title").textContent = `${l.icon} ${l.title}`;
-    document.title = `${l.title} slides — FinanceGuru`;
+    document.title = `${l.title} slides — MoneyExplained`;
     go(Math.min(n, deck.length - 1), false);
   }
 

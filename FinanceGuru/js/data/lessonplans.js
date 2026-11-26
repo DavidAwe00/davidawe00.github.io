@@ -269,4 +269,40 @@ const PLANS = {
     discuss: ["When is a roommate worth it, and what should you agree on before signing?", "Why should you never send a deposit before seeing a place?"],
     home: { talk: ["What did your first apartment or rental cost, and what surprised you?", "Have we ever had trouble getting a deposit back? What would we do differently?"], try: "Read a sample lease together (many are online) and highlight the fees and the rules about breaking it early." },
   },
+  "investing-hype": {
+    areas: ["Investing", "Managing Risk"],
+    objectives: ["Identify who profits when an investment is promoted online", "Explain why crypto and meme stocks are volatile and lightly protected", "Recognize the red flags of a pump-and-dump or investment scam", "Contrast hype bets with a diversified, long-term plan"],
+    warmup: "Think of a money tip you saw online in the last month. Who posted it, and what might they get if you followed it?",
+    activity: {
+      title: "Spot the pitch + portfolio dial",
+      links: [["Spot the Scam game", "play.html#scam"], ["Portfolio dial", "invest.html#portfolio"]],
+      steps: ["In pairs, students find (or the teacher shows) two real investing posts from social media and fill in: who posted it, how they are paid, what they claim, and any red flags.", "Play Spot the Scam and note which red flags repeat.", "Use the portfolio dial to compare an all-stock portfolio with a balanced one over the worst historical year. Discuss how a single coin or meme stock would compare."],
+    },
+    discuss: ["Why do hype investments spread so fast on social media?", "Is it ever reasonable to buy crypto? What rules would you set for yourself first?"],
+    home: { talk: ["Have we ever bought something because everyone else was?", "How would we check whether an investment tip is legitimate?"], try: "Look up one financial influencer together on FINRA's BrokerCheck and check whether they're registered." },
+  },
+  "first-tax-return": {
+    areas: ["Earning Income"],
+    objectives: ["Decide whether a first-time earner needs to file, and why filing can still pay off", "List the forms needed and the January 31 W-2 deadline", "Compare free ways to file", "Explain direct deposit refunds, the April deadline, and IRS impersonation scams"],
+    warmup: "Your summer job withheld $150 in federal income tax, but you earned less than the filing requirement. Is that money gone? Write your guess.",
+    activity: {
+      title: "Read a W-2 + Pay Stub Reader",
+      links: [["Pay Stub Reader", "tools.html#stub"], ["Paycheck breakdown", "taxes.html#paycheck"]],
+      steps: ["Give students a sample W-2 (IRS.gov has the form) and have them find wages (box 1), federal tax withheld (box 2), and Social Security and Medicare (boxes 4 and 6).", "Decide with the lesson's rules whether this person must file, and whether they should file anyway.", "Enter a sample stub in the Pay Stub Reader and discuss whether the withholding looks right, and what a W-4 change would do."],
+    },
+    discuss: ["Why might someone skip filing even when they're owed a refund?", "How can you tell a real IRS message from a scam?"],
+    home: { talk: ["Who in our family files taxes, and how do they do it?", "Where do we keep tax forms and old returns?"], try: "Gather this year's tax forms together in one folder as they arrive in January." },
+  },
+  "money-relationships": {
+    areas: ["Spending", "Managing Credit", "Managing Risk"],
+    objectives: ["Draft a roommate agreement that splits rent and bills fairly", "Decide when and how to lend money without risking your own bills", "Explain a co-signer's legal responsibility", "Compare joint and separate accounts and recognize signs of financial control"],
+    warmup: "Has a friend ever owed you money, or you owed a friend? Without names, write what made it easy or awkward.",
+    activity: {
+      title: "Roommate agreement + First Apartment budget",
+      links: [["First Apartment budget", "tools.html#apartment"], ["Budget Planner", "tools.html#budget"]],
+      steps: ["In groups of three, pick a real listing and enter it in the First Apartment budget with three roommates.", "Write a one-page roommate agreement: rent split (with a reason), who pays which bills and when, shared supplies, guests, and what happens if someone leaves early.", "Swap agreements with another group and find one situation it doesn't cover."],
+    },
+    discuss: ["When is giving money better than lending it?", "Why might a parent or friend ask you to co-sign, and how could you say no kindly?"],
+    home: { talk: ["How did our family handle lending money to relatives or friends?", "Have we ever co-signed for anyone? What happened?"], try: "Role-play saying no to a loan request, then saying yes with a written payback plan." },
+  },
 };

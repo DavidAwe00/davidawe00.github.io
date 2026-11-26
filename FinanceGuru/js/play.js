@@ -1,13 +1,17 @@
 // Game hub: picks a game from the cards or the URL hash (#catcher, #sorter, #life, #market).
 (function () {
   const names = ["catcher", "sorter", "life", "market", "salary", "prices", "credit", "envelope", "scam", "fees", "plans", "betting"];
-  const fmt = { catcher: (v) => FG.money(v), sorter: (v) => v + " pts", life: (v) => FG.money(v) + " net worth", market: (v) => FG.money(v), salary: (v) => v + " in a row", prices: (v) => v + "/8 correct", credit: (v) => "score " + v, envelope: (v) => v + " pts", scam: (v) => v + "/10 correct", fees: (v) => v + " pts", plans: (v) => v + "/5 cheaper picks", betting: (v) => "kept " + FG.money(v) };
+  const t = I18N.t;
+  const fmt = { catcher: (v) => FG.money(v), sorter: (v) => t("{n} pts", { n: v }), life: (v) => t("{amount} net worth", { amount: FG.money(v) }), market: (v) => FG.money(v),
+    salary: (v) => t("{n} correct", { n: v }), prices: (v) => (v > 8 ? t("{n}/800 pts", { n: v }) : t("{n}/8 correct", { n: v })), credit: (v) => t("score {n}", { n: v }),
+    envelope: (v) => t("{n} pts", { n: v }), scam: (v) => t("{n}/10 correct", { n: v }), fees: (v) => t("{n} pts", { n: v }), plans: (v) => t("{n}/5 cheaper picks", { n: v }),
+    betting: (v) => t("kept {amount}", { amount: FG.money(v) }) };
   let current = null;
 
   Games.refreshBest = () => {
     document.querySelectorAll("[data-best]").forEach((el) => {
       const b = FG.getBest(el.dataset.best);
-      el.textContent = b ? "🏆 Best: " + fmt[el.dataset.best](b) : "Not played yet";
+      el.textContent = b ? t("🏆 Best: {score}", { score: fmt[el.dataset.best](b) }) : t("Not played yet");
     });
   };
 
@@ -26,11 +30,18 @@
 
   // Phones get a dropdown (built from the cards) instead of a long wall of game cards.
   const picker = document.getElementById("game-picker");
-  picker.innerHTML = names.map((n) => {
-    const card = document.querySelector(`[data-game="${n}"]`);
-    const title = card.querySelector("h3").firstChild.textContent.trim();
-    return `<option value="${n}">${card.querySelector(".card-icon").textContent} ${title}</option>`;
-  }).join("");
+  const fillPicker = () => {
+    const v = picker.value;
+    picker.innerHTML = names.map((n) => {
+      const card = document.querySelector(`[data-game="${n}"]`);
+      const title = card.querySelector("h3").firstChild.textContent.trim();
+      return `<option value="${n}">${card.querySelector(".card-icon").textContent} ${title}</option>`;
+    }).join("");
+    if (v) picker.value = v;
+  };
+  fillPicker();
+  // The cards are translated after this runs, so rebuild the phone dropdown and best scores in the new language.
+  document.addEventListener("langchange", () => { fillPicker(); Games.refreshBest(); });
   picker.addEventListener("change", () => { history.replaceState(null, "", "#" + picker.value); open(picker.value, false); });
 
   document.querySelector(".game-hub").addEventListener("click", (e) => {

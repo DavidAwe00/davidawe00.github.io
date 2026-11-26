@@ -3,36 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Taxes 101 — FinanceGuru</title>
+  <title>Taxes 101 — MoneyExplained</title>
   <meta name="description" content="How tax brackets really work, where your paycheck goes (federal tax, Social Security, Medicare), and how to fill out a W-4 — with 2026 IRS numbers.">
   <script>try{var t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230e7a4e'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231d5bbf'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0e7a4e">
+  <meta name="theme-color" content="#1d5bbf">
   <link rel="apple-touch-icon" href="images/icon-180.png">
   <!-- publishing-meta:start -->
   <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/taxes.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="FinanceGuru">
+  <meta property="og:site_name" content="MoneyExplained">
   <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/taxes.html">
-  <meta property="og:title" content="Taxes 101 — FinanceGuru">
+  <meta property="og:title" content="Taxes 101 — MoneyExplained">
   <meta property="og:description" content="How tax brackets really work, where your paycheck goes (federal tax, Social Security, Medicare), and how to fill out a W-4 — with 2026 IRS numbers.">
-  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/financeguru.png">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/moneyexplained.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="FinanceGuru — free money lessons, quizzes, games, and tools">
+  <meta property="og:image:alt" content="MoneyExplained — free money lessons, quizzes, games, and tools">
   <meta name="twitter:card" content="summary_large_image">
   <!-- publishing-meta:end -->
 </head>
 <body>
   <header class="site-header">
     <nav class="container nav">
-      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">FinanceGuru</span></a>
+      <a class="logo" href="index.html"><span class="logo-mark">$</span><span class="logo-text">MoneyExplained</span></a>
       <div class="nav-links">
         <a href="learn.html">Learn</a>
         <details class="nav-menu">
@@ -59,19 +56,20 @@
       <div class="container">
         <span class="eyebrow">Taxes 101</span>
         <h1>Taxes, finally explained.</h1>
-        <p class="lead muted">Why a raise never lowers your take-home pay, where every dollar of your paycheck goes, and how to fill out a W-4 — with 2026 IRS numbers.</p>
+        <p class="lead muted">Why a raise never lowers your take-home pay, where every dollar of your paycheck goes, and how to fill out a W-4 — with <span data-tax="year">2026</span> IRS numbers.</p>
+        <div class="page-lang chips" role="group" aria-label="Language"><button type="button" class="chip" data-page-lang="en" lang="en" data-i18n-skip aria-pressed="true">English</button><button type="button" class="chip" data-page-lang="es" lang="es" data-i18n-skip aria-pressed="false">Español</button></div>
         <div class="stats" style="margin-top:20px">
-          <div class="stat hero"><div class="label">Federal tax brackets</div><div class="value">10%–37%</div><div class="small muted">Seven brackets in 2026</div></div>
+          <div class="stat hero"><div class="label">Federal tax brackets</div><div class="value">10%–37%</div><div class="small muted">Seven brackets in <span data-tax="year">2026</span></div></div>
           <div class="stat"><div class="label">Standard deduction</div><div class="value">$16,100</div><div class="small muted">Single · $32,200 married jointly</div></div>
           <div class="stat"><div class="label">FICA payroll tax</div><div class="value">7.65%</div><div class="small muted">6.2% Social Security + 1.45% Medicare</div></div>
-          <div class="stat"><div class="label">Social Security wage cap</div><div class="value">$184,500</div><div class="small muted">2026</div></div>
+          <div class="stat"><div class="label">Social Security wage cap</div><div class="value" data-tax="ssWageBase">$184,500</div><div class="small muted" data-tax="year">2026</div></div>
         </div>
         <nav class="jump" aria-label="On this page">
-          <a href="#brackets">🪣 How brackets work</a>
-          <a href="#paycheck">🧾 Paycheck breakdown</a>
-          <a href="#gig">🛵 Side hustle taxes</a>
-          <a href="#w4">📝 W-4 basics</a>
-          <a href="#new">🆕 New deductions</a>
+          <a href="#brackets">How brackets work</a>
+          <a href="#paycheck">Paycheck breakdown</a>
+          <a href="#gig">Side hustle taxes</a>
+          <a href="#w4">W-4 basics</a>
+          <a href="#new">New deductions</a>
         </nav>
       </div>
     </section>
@@ -80,7 +78,7 @@
     <section id="brackets">
       <div class="container">
         <div class="section-head">
-          <h2>🪣 How tax brackets <em>really</em> work</h2>
+          <h2>How tax brackets <em>really</em> work</h2>
           <p class="muted">Think of brackets as buckets. Your income fills the 10% bucket first, then the 12% bucket, and so on. <strong>Only the dollars inside each bucket</strong> are taxed at that bucket's rate — so moving into a higher bracket never taxes all your income at the higher rate.</p>
         </div>
         <div class="tool">
@@ -107,7 +105,7 @@
     <section id="paycheck">
       <div class="container">
         <div class="section-head">
-          <h2>🧾 Where does my paycheck go?</h2>
+          <h2>Where does my paycheck go?</h2>
           <p class="muted">Your salary isn't your take-home pay. See what comes out of each check — and how pre-tax savings lower your income tax.</p>
         </div>
         <div class="tool">
@@ -139,7 +137,7 @@
     <section id="gig">
       <div class="container">
         <div class="section-head">
-          <h2>🛵 Side hustle taxes: how much to set aside</h2>
+          <h2>Side hustle taxes: how much to set aside</h2>
           <p class="muted">Delivery, rideshare, freelancing, reselling, tutoring: nobody withholds taxes from gig pay. Find out what to save from every dollar.</p>
         </div>
         <div class="tool">
@@ -162,7 +160,7 @@
             <p class="callout small" id="g-insight" style="margin-bottom:0"></p>
           </div>
         </div>
-        <p class="small muted" style="margin-top:8px">Estimate only. Self-employment tax is 15.3% (12.4% Social Security up to the $184,500 wage base, shared with your W-2 wages, plus 2.9% Medicare) on 92.35% of net profit, and it applies once net earnings reach $400. You can deduct half of it, and the qualified business income deduction (20% of qualified profit) is included in simplified form. Mileage rates: IRS Notice 2026-10 and Announcement 2026-11. Ignores credits, the additional Medicare tax, and other deductions.</p>
+        <p class="small muted" style="margin-top:8px">Estimate only. Self-employment tax is 15.3% (12.4% Social Security up to the <span data-tax="ssWageBase">$184,500</span> wage base, shared with your W-2 wages, plus 2.9% Medicare) on 92.35% of net profit, and it applies once net earnings reach $400. You can deduct half of it, and the qualified business income deduction (20% of qualified profit) is included in simplified form. Mileage rates: IRS Notice 2026-10 and Announcement 2026-11. Ignores credits, the additional Medicare tax, and other deductions.</p>
       </div>
     </section>
 
@@ -170,7 +168,7 @@
     <section id="w4">
       <div class="container">
         <div class="section-head">
-          <h2>📝 Filling out a W-4 (new job checklist)</h2>
+          <h2>Filling out a W-4 (new job checklist)</h2>
           <p class="muted">The W-4 tells your employer how much federal tax to withhold. Since 2020 it has no "allowances" — just five steps. Only Steps 1 and 5 are required.</p>
         </div>
         <div class="grid">
@@ -187,7 +185,7 @@
     <!-- New -->
     <section id="new">
       <div class="container">
-        <div class="section-head"><h2>🆕 New deductions for 2025–2028</h2><p class="muted">The One Big Beautiful Bill Act added temporary deductions you can take even if you don't itemize.</p></div>
+        <div class="section-head"><h2>New deductions for 2025–2028</h2><p class="muted">The One Big Beautiful Bill Act added temporary deductions you can take even if you don't itemize.</p></div>
         <div class="grid">
           <div class="card"><div class="card-icon">💵</div><h3>No tax on tips</h3><p class="muted small">Deduct up to <strong>$25,000</strong> of qualified tips per year (tax years 2025–2028), if your job is on Treasury's list of tipped occupations. Phases out above $150,000 of modified AGI ($300,000 joint). Social Security and Medicare tax still apply.</p></div>
           <div class="card"><div class="card-icon">⏱️</div><h3>No tax on overtime</h3><p class="muted small">Deduct up to <strong>$12,500</strong> ($25,000 joint) of qualified overtime — only the extra "half" of FLSA-required time-and-a-half pay. Same income phase-out. Payroll taxes still apply.</p></div>
@@ -205,13 +203,14 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span>© <span data-year></span> FinanceGuru. For educational purposes only — not financial advice.</span>
+      <span>© <span data-year></span> MoneyExplained. For educational purposes only — not financial advice.</span>
       <span><a href="learn.html">Learn</a> · <a href="invest.html">Invest</a> · <a href="college.html">College</a> · <a href="credit.html">Credit</a> · <a href="taxes.html">Taxes</a> · <a href="housing.html">Housing</a> · <a href="play.html">Play</a> · <a href="tools.html">Tools</a> · <a href="teachers.html">Teachers &amp; parents</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
   <script src="js/site-config.js"></script>
   <script src="js/site.js"></script>
+  <script src="js/i18n.js" data-dict="js/i18n/taxes.es.js"></script>
   <script src="js/data/tax2026.js"></script>
   <script src="js/taxes.js"></script>
   <script src="js/sidehustle.js"></script>

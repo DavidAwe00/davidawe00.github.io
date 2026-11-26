@@ -33,7 +33,7 @@
     const key = l.quiz.map((q) => `<li><strong>${LETTERS[q.answer]}. ${q.choices[q.answer]}</strong> — ${q.why}</li>`).join("");
     return `
       <div class="print-sheet">
-        <div class="plan-head"><div><div class="small muted">FinanceGuru · Lesson ${i + 1} exit ticket</div><h3>${l.icon} ${l.title}</h3></div></div>
+        <div class="plan-head"><div><div class="small muted">MoneyExplained · Lesson ${i + 1} exit ticket</div><h3>${l.icon} ${l.title}</h3></div></div>
         <p>Name: ______________________________ &nbsp; Date: ______________</p>
         <ol class="quiz-print">${qs}</ol>
       </div>
@@ -60,6 +60,7 @@
             <button class="btn btn-ghost" data-print="quiz">📝 Print quiz + answer key</button>
             <button class="btn btn-ghost" data-print="worksheet">📄 Print student worksheet</button>
             <button class="btn btn-ghost" data-copy>🔗 Copy student link</button>
+            <a class="btn btn-ghost" href="https://classroom.google.com/share?url=${encodeURIComponent(studentLink(l.id))}&amp;title=${encodeURIComponent(`MoneyExplained: ${l.title}`)}" target="_blank" rel="noopener">🏫 Share to Google Classroom</a>
           </div>
         </div>
       </details>`).join("") || `<p class="muted">No lessons in this area yet.</p>`;
@@ -155,7 +156,7 @@
     return `
       <p class="state-status ${status}"><strong>${statusText(s)}</strong></p>
       <p>${lead}</p>
-      <h3 class="small">FinanceGuru lessons by national standards area</h3>
+      <h3 class="small">MoneyExplained lessons by national standards area</h3>
       <div class="chips">${counts.map(([a, n]) => `<button type="button" class="chip" data-state-area="${a}">${a} · ${n}</button>`).join("")}</div>`;
   }
 

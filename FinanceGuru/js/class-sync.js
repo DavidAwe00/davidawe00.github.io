@@ -18,6 +18,8 @@ const ClassSync = (() => {
   // Classes are available when the API answers and reports them turned on.
   let available = null;
   function isAvailable() {
+    // The static site with no apiOrigin has no class service to ask.
+    if (!api && typeof SITE_CONFIG === "object" && SITE_CONFIG.staticSite) available ||= Promise.resolve(false);
     available ||= fetch(`${api}/api/config`, { credentials: "omit" }).then((r) => (r.ok ? r.json() : {})).then((c) => c.classes === true).catch(() => false);
     return available;
   }
@@ -50,11 +52,20 @@ const ClassSync = (() => {
       const r = await post("status", { token: m.token });
       if (!r.member) { clear(); document.dispatchEvent(new Event("classchange")); return; }
       const assigned = Array.isArray(r.assigned) ? r.assigned.filter((id) => typeof id === "string") : [];
-      save({ ...load(), className: r.className, assigned, checkedAt: Date.now() });
+      const assignedDue = typeof r.assignedDue === "string" && /^\d{4}-\d{2}-\d{2}$/.test(r.assignedDue) ? r.assignedDue : null;
+      save({ ...load(), className: r.className, assigned, assignedDue, checkedAt: Date.now() });
       document.dispatchEvent(new Event("classchange"));
     } catch { /* offline: keep the last list */ }
   }
   const assigned = () => (load()?.assigned || []);
+  // The due date as the teacher set it (a calendar date, so it's shown in UTC to avoid shifting a day).
+  const assignedDue = () => (load()?.assignedDue || null);
+  const dueLabel = (lang = "en") => {
+    const due = assignedDue();
+    return due ? new Date(`${due}T00:00:00Z`).toLocaleDateString(lang === "es" ? "es-US" : "en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" }) : "";
+  };
+  const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+  const pastDue = () => Boolean(assignedDue()) && today() > assignedDue();
 
   async function join(code, nickname) {
     const r = await post("join", { code, nickname });
@@ -75,5 +86,5 @@ const ClassSync = (() => {
   document.addEventListener("progresschange", sync);
   sync();
   refresh();
-  return { load, join, leave, sync, refresh, assigned, isAvailable };
+  return { load, join, leave, sync, refresh, assigned, assignedDue, dueLabel, pastDue, isAvailable };
 })();

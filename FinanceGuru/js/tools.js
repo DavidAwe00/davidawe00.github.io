@@ -3,6 +3,7 @@
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
   const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+  const t = I18N.t;
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
   /* ---------- Tool picker (grouped dropdown; the options are the list of tools) ---------- */
@@ -15,7 +16,7 @@
     $("tool-desc").textContent = picker.selectedOptions[0].dataset.desc || "";
     if (name === "compound") compound(); // chart needs a visible container to measure
     document.dispatchEvent(new CustomEvent("tabshow", { detail: name }));
-    FG.feedback($("tool-feedback"), `tool/${name}`, picker.selectedOptions[0].textContent.trim());
+    FG.feedback($("tool-feedback"), `tool/${name}`, picker.selectedOptions[0].textContent.trim(), I18N.lang());
   }
   // The visible tool name is in the picker, so give each panel a screen-reader heading with that name.
   [...picker.options].forEach((o) => {
@@ -55,7 +56,7 @@
     $("c-contrib").textContent = FG.money(last.contrib);
     $("c-growth").textContent = FG.money(last.growth);
     drawChart(rows);
-    $("c-table").innerHTML = `<table><thead><tr><th>Year</th><th>Contributions</th><th>Growth</th><th>Balance</th></tr></thead><tbody>${
+    $("c-table").innerHTML = `<table><thead><tr><th>${t("Year")}</th><th>${t("Contributions")}</th><th>${t("Growth")}</th><th>${t("Balance")}</th></tr></thead><tbody>${
       rows.map((r) => `<tr><td>${r.year}</td><td>${FG.money(r.contrib)}</td><td>${FG.money(r.growth)}</td><td>${FG.money(r.total)}</td></tr>`).join("")
     }</tbody></table>`;
   }
@@ -71,7 +72,7 @@
     const c1 = css("--series-1"), c2 = css("--series-2"), surf = css("--surface");
     const rad = Math.min(4, bw / 2);
 
-    let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Stacked bar chart of contributions and growth by year">`;
+    let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${t("Stacked bar chart of contributions and growth by year")}">`;
     for (let i = 0; i <= 4; i++) {
       const v = (max / 4) * i, yy = y(v);
       svg += `<line class="gridline" x1="${m.l}" x2="${W - m.r}" y1="${yy}" y2="${yy}"/>`;
@@ -90,7 +91,7 @@
         svg += `<path d="M${x},${yC - 2} V${yT + rr} Q${x},${yT} ${x + rr},${yT} H${x + bw - rr} Q${x + bw},${yT} ${x + bw},${yT + rr} V${yC - 2} Z" fill="${c2}"/>`;
         svg += `<rect x="${x}" y="${yC - 2}" width="${bw}" height="2" fill="${surf}"/>`;
       }
-      if ((i + 1) % every === 0 || i === 0) svg += `<g class="axis"><text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">Yr ${r.year}</text></g>`;
+      if ((i + 1) % every === 0 || i === 0) svg += `<g class="axis"><text x="${x + bw / 2}" y="${H - 8}" text-anchor="middle">${t("Yr {n}", { n: r.year })}</text></g>`;
       svg += `<rect class="hit" data-i="${i}" x="${m.l + i * slot}" y="${m.t}" width="${slot}" height="${ih}" fill="transparent"/>`;
     });
     svg += `<line x1="${m.l}" x2="${W - m.r}" y1="${m.t + ih}" y2="${m.t + ih}" stroke="${css("--border")}"/>`;
@@ -102,10 +103,10 @@
       h.addEventListener("mouseenter", () => {
         const r = rows[+h.dataset.i];
         h.setAttribute("fill", "color-mix(in srgb, currentColor 6%, transparent)");
-        tip.innerHTML = `<strong>Year ${r.year}</strong>
-          <div class="row"><span><i style="background:${c2}"></i>Growth</span><span>${FG.money(r.growth)}</span></div>
-          <div class="row"><span><i style="background:${c1}"></i>Contributions</span><span>${FG.money(r.contrib)}</span></div>
-          <div class="row" style="border-top:1px solid var(--border);margin-top:4px;padding-top:4px"><span>Total</span><strong>${FG.money(r.total)}</strong></div>`;
+        tip.innerHTML = `<strong>${t("Year {n}", { n: r.year })}</strong>
+          <div class="row"><span><i style="background:${c2}"></i>${t("Growth")}</span><span>${FG.money(r.growth)}</span></div>
+          <div class="row"><span><i style="background:${c1}"></i>${t("Contributions")}</span><span>${FG.money(r.contrib)}</span></div>
+          <div class="row" style="border-top:1px solid var(--border);margin-top:4px;padding-top:4px"><span>${t("Total")}</span><strong>${FG.money(r.total)}</strong></div>`;
         tip.style.opacity = 1;
         const bx = (+h.getAttribute("x") / W) * host.clientWidth;
         const left = bx + 12 + 180 > host.clientWidth ? bx - 190 : bx + 12;
@@ -139,11 +140,11 @@
     $("b-save-out").textContent = FG.money(inc * save / 100);
     $("b-bar").innerHTML = [[needs, "--series-1"], [wants, "--series-2"], [save, "--series-3"]]
       .filter(([p]) => p > 0).map(([p, c]) => `<div style="flex:${p};background:var(${c})"></div>`).join("");
-    $("b-bar").setAttribute("aria-label", `Needs ${needs}%, wants ${wants}%, savings ${save}%`);
+    $("b-bar").setAttribute("aria-label", t("Needs {needs}%, wants {wants}%, savings {save}%", { needs, wants, save }));
     const yearly = inc * save / 100 * 12;
     $("b-insight").innerHTML = save >= 20
-      ? `Saving <strong>${FG.money(yearly)}</strong> a year. Invested at 7% for 20 years, that habit could grow to about <strong>${FG.money(fv(inc * save / 100, 0.07, 20))}</strong>.`
-      : `You're saving ${save}% — under the 20% guideline. Even moving 5% from wants to savings adds <strong>${FG.money(inc * 0.05 * 12)}</strong> a year.`;
+      ? t("Saving <strong>{yearly}</strong> a year. Invested at 7% for 20 years, that habit could grow to about <strong>{grown}</strong>.", { yearly: FG.money(yearly), grown: FG.money(fv(inc * save / 100, 0.07, 20)) })
+      : t("You're saving {save}% — under the 20% guideline. Even moving 5% from wants to savings adds <strong>{more}</strong> a year.", { save, more: FG.money(inc * 0.05 * 12) });
   }
   const fv = (pmt, annual, years) => { const r = annual / 12, n = years * 12; return pmt * ((Math.pow(1 + r, n) - 1) / r); };
   ["b-income", "b-needs", "b-wants"].forEach((id) => $(id).addEventListener("input", () => budget(id)));
@@ -155,15 +156,16 @@
     { name: "Car loan", balance: 9000, apr: 7, min: 250 },
     { name: "Store card", balance: 800, apr: 18, min: 35 },
   ];
+  const debtExamples = debts.map((d) => d.name);
 
   function renderDebts() {
     $("d-list").innerHTML = debts.map((d, i) => `
       <div class="debt-row" data-i="${i}">
-        <input class="name" data-k="name" value="${esc(d.name)}" aria-label="Debt name">
-        <input data-k="balance" type="number" min="0" value="${d.balance}" aria-label="Balance">
-        <input data-k="apr" type="number" min="0" step="0.1" value="${d.apr}" aria-label="APR">
-        <input data-k="min" type="number" min="0" value="${d.min}" aria-label="Minimum payment">
-        <button data-remove aria-label="Remove debt">✕</button>
+        <input class="name" data-k="name" value="${esc(d.name)}" aria-label="${t("Debt name")}">
+        <input data-k="balance" type="number" min="0" value="${d.balance}" aria-label="${t("Balance")}">
+        <input data-k="apr" type="number" min="0" step="0.1" value="${d.apr}" aria-label="${t("APR")}">
+        <input data-k="min" type="number" min="0" value="${d.min}" aria-label="${t("Minimum payment")}">
+        <button data-remove aria-label="${t("Remove debt")}">✕</button>
       </div>`).join("");
   }
   $("d-list").addEventListener("input", (e) => {
@@ -176,7 +178,7 @@
     debts.splice(+e.target.closest(".debt-row").dataset.i, 1);
     renderDebts(); debt();
   });
-  $("d-add").addEventListener("click", () => { if (debts.length >= 10) { FG.toast('Add up to ten debts.'); return; } debts.push({ name: "New debt", balance: 1000, apr: 15, min: 40 }); renderDebts(); debt(); });
+  $("d-add").addEventListener("click", () => { if (debts.length >= 10) { FG.toast(t('Add up to ten debts.')); return; } debts.push({ name: t("New debt"), balance: 1000, apr: 15, min: 40 }); renderDebts(); debt(); });
   $("d-extra").addEventListener("input", debt);
 
   // Month-by-month simulation. Freed-up minimums roll into the next target debt.
@@ -186,30 +188,30 @@
 
   const fmtMonths = (m) => {
     const y = Math.floor(m / 12), mo = m % 12;
-    return [y ? `${y} yr` : "", mo ? `${mo} mo` : ""].filter(Boolean).join(" ") || "0 mo";
+    return [y ? t("{n} yr", { n: y }) : "", mo ? t("{n} mo", { n: mo }) : ""].filter(Boolean).join(" ") || t("{n} mo", { n: 0 });
   };
-  const freeDate = (m) => { const d = new Date(); d.setMonth(d.getMonth() + m); return d.toLocaleDateString(undefined, { month: "long", year: "numeric" }); };
+  const freeDate = (m) => { const d = new Date(); d.setMonth(d.getMonth() + m); return d.toLocaleDateString(I18N.locale(), { month: "long", year: "numeric" }); };
 
   function debt() {
     let av, sn, minOnly;
     try { av = simulate('avalanche'); sn = simulate('snowball'); minOnly = simulate('avalanche', 0); }
-    catch (error) { $("d-results").textContent = error.message; return; }
+    catch (error) { $("d-results").textContent = t(error.message); return; }
     const card = (title, r, note) => `
       <div class="card">
         <h3>${title}</h3>
-        ${r.stuck ? `<p style="color:var(--bad)"><strong>Not paid off within 50 years.</strong> Review the rates, minimums, and extra payment.</p>` : `
+        ${r.stuck ? `<p style="color:var(--bad)">${t("<strong>Not paid off within 50 years.</strong> Review the rates, minimums, and extra payment.")}</p>` : `
         <div class="stats" style="grid-template-columns:1fr 1fr">
-          <div class="stat hero"><div class="label">Debt-free in</div><div class="value">${fmtMonths(r.months)}</div></div>
-          <div class="stat"><div class="label">Total interest</div><div class="value">${FG.money(r.interest)}</div></div>
+          <div class="stat hero"><div class="label">${t("Debt-free in")}</div><div class="value">${fmtMonths(r.months)}</div></div>
+          <div class="stat"><div class="label">${t("Total interest")}</div><div class="value">${FG.money(r.interest)}</div></div>
         </div>
-        <p class="small muted">Estimated debt-free by <strong>${freeDate(r.months)}</strong>. Payoff order: ${r.order.map(esc).join(" → ")}</p>`}
+        <p class="small muted">${t("Estimated debt-free by <strong>{date}</strong>. Payoff order: {order}", { date: freeDate(r.months), order: r.order.map(esc).join(" → ") })}</p>`}
         <p class="small muted" style="margin:0">${note}</p>
       </div>`;
     const saved = minOnly.stuck || av.stuck ? null : minOnly.interest - av.interest;
     $("d-results").innerHTML =
-      card("🏔️ Avalanche (highest APR first)", av, "Mathematically cheapest.") +
-      card("⛄ Snowball (smallest balance first)", sn, "Fastest early wins for motivation.") +
-      card("🐢 Minimums only", minOnly, saved && saved > 0 ? `Your extra ${FG.money(num("d-extra"))}/mo saves <strong>${FG.money(saved)}</strong> in interest with avalanche.` : "The slow, expensive path.");
+      card(t("🏔️ Avalanche (highest APR first)"), av, t("Mathematically cheapest.")) +
+      card(t("⛄ Snowball (smallest balance first)"), sn, t("Fastest early wins for motivation.")) +
+      card(t("🐢 Minimums only"), minOnly, saved && saved > 0 ? t("Your extra {extra}/mo saves <strong>{saved}</strong> in interest with avalanche.", { extra: FG.money(num("d-extra")), saved: FG.money(saved) }) : t("The slow, expensive path."));
   }
 
   /* ---------- Emergency fund ---------- */
@@ -219,13 +221,13 @@
     const gap = Math.max(0, target - saved), pct = target ? Math.min(100, (saved / target) * 100) : 0;
     $("e-target").textContent = FG.money(target);
     $("e-gap").textContent = FG.money(gap);
-    $("e-time").textContent = gap === 0 ? "Done! 🎉" : monthly > 0 ? fmtMonths(Math.ceil(gap / monthly)) : "—";
+    $("e-time").textContent = gap === 0 ? t("Done! 🎉") : monthly > 0 ? fmtMonths(Math.ceil(gap / monthly)) : "—";
     $("e-bar").style.width = pct + "%";
-    $("e-pct").textContent = `${pct.toFixed(0)}% funded`;
+    $("e-pct").textContent = t("{pct}% funded", { pct: pct.toFixed(0) });
     $("e-insight").innerHTML = gap === 0
-      ? "You're fully funded. Next step: invest additional savings for long-term growth."
-      : saved < 1000 ? "Tip: hit a <strong>$1,000 starter fund</strong> first, then build toward the full target."
-      : "Keep it in a high-yield savings account so it earns interest while it waits.";
+      ? t("You're fully funded. Next step: invest additional savings for long-term growth.")
+      : saved < 1000 ? t("Tip: hit a <strong>$1,000 starter fund</strong> first, then build toward the full target.")
+      : t("Keep it in a high-yield savings account so it earns interest while it waits.");
     const months = Math.min(120, Math.max(1, monthly > 0 ? Math.ceil(gap / monthly) : 12));
     $("e-plan").hidden = gap === 0;
     $("e-plan").href = `plan.html?goal=buffer&target=${target}&saved=${saved}&months=${months}`;
@@ -238,4 +240,14 @@
   debt();
   emergency();
   showTab(location.hash.slice(1));
+
+  // Spanish (js/i18n/tools.es.js) when the visitor chose it; every tool redraws on "langchange".
+  document.addEventListener("langchange", () => {
+    debts.forEach((d, i) => { if (d.name === debtExamples[i]) d.name = t(d.name); }); // untouched examples
+    // The screen-reader panel headings were made from the option names before they were translated.
+    [...picker.options].forEach((o) => { const h = $("panel-title-" + o.value); if (h) h.textContent = o.textContent.trim(); });
+    renderDebts(); budget(); debt(); emergency(); showTab(picker.value);
+  });
+  I18N.switcher(document.querySelector(".page-lang"));
+  I18N.init("js/i18n/tools.es.js");
 })();

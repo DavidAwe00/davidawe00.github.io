@@ -14,6 +14,8 @@ const Worksheet = (() => {
   const SKIP = {
     budgeting: ["63% of U.S. adults", "$2,400 a month"], "compound-interest": ["Alex", "Sam"],
     "financial-aid": ["StudentAid.gov", "September 23, 2026"], "first-apartment": ["Length", "Application fees"],
+    "investing-hype": ["48%", "$1.26 million", "three-quarters"], "first-tax-return": ["$1,350", "$400"],
+    "money-relationships": ["7 in 10", "44%", "26%"],
   };
   const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
   // Labels ("Deductible:"), tool prompts ("Try it:"), long phrases, and formulas make poor blanks.
@@ -50,7 +52,7 @@ const Worksheet = (() => {
   function build(lesson, plan, i) {
     const { cards, terms } = notes(lesson);
     const bank = [...terms].sort((a, b) => a.localeCompare(b));
-    const head = (label) => `<div class="plan-head"><div><div class="small muted">FinanceGuru · Lesson ${i + 1} · ${label}</div><h3>${lesson.icon} ${lesson.title}</h3></div></div>`;
+    const head = (label) => `<div class="plan-head"><div><div class="small muted">MoneyExplained · Lesson ${i + 1} · ${label}</div><h3>${lesson.icon} ${lesson.title}</h3></div></div>`;
     return `
       <div class="print-sheet worksheet">
         ${head("Student worksheet")}

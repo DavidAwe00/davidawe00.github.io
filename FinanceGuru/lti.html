@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Opening MoneyExplained from your course.">
+  <title>Opening MoneyExplained</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/class.css">
+  <script src="js/plan-theme.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231d5bbf'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'>$</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1d5bbf">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <!-- publishing-meta:start -->
+  <link rel="canonical" href="https://davidawe00.github.io/FinanceGuru/lti.html">
+  <meta name="robots" content="noindex,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MoneyExplained">
+  <meta property="og:url" content="https://davidawe00.github.io/FinanceGuru/lti.html">
+  <meta property="og:title" content="Opening MoneyExplained">
+  <meta property="og:description" content="Opening MoneyExplained from your course.">
+  <meta property="og:image" content="https://davidawe00.github.io/FinanceGuru/images/social/moneyexplained.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MoneyExplained — free money lessons, quizzes, games, and tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- publishing-meta:end -->
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav">
+      <a class="logo" href="index.html" target="_blank" rel="noopener"><span class="logo-mark">$</span><span class="logo-text">MoneyExplained</span></a>
+    </nav>
+  </header>
+
+  <main class="container class-page lti-page" id="main">
+    <p id="notice" class="class-notice" role="status" aria-live="polite">Opening MoneyExplained…</p>
+
+    <section id="problem" class="card" hidden>
+      <h1>MoneyExplained couldn't open</h1>
+      <p id="problem-text"></p>
+    </section>
+
+    <section id="framed" class="card" hidden>
+      <h1 id="framed-title">Open MoneyExplained</h1>
+      <p id="framed-text">Lessons work best in their own tab, and your progress is saved there.</p>
+      <p><a id="framed-link" class="btn btn-primary" target="_blank" rel="noopener" href="#">Open in a new tab ↗</a></p>
+      <p class="small muted">13 or older? Use <strong>Sign in</strong> at the top of that tab to keep your progress on every device. You don't need an account for the assignment.</p>
+    </section>
+
+    <section id="link" class="card" hidden aria-labelledby="link-title">
+      <h1 id="link-title">Connect this course to MoneyExplained</h1>
+      <p>Students who open MoneyExplained assignments in <strong data-course></strong> will join this class automatically, and their quiz scores go to your gradebook. You only do this once per course.</p>
+      <div class="field"><label for="link-class">MoneyExplained class</label>
+        <div class="input-wrap"><select id="link-class"></select></div></div>
+      <button type="button" class="btn btn-primary" id="link-save">Connect course</button>
+    </section>
+
+    <section id="signin" class="card" hidden aria-labelledby="signin-title">
+      <h1 id="signin-title">Sign in to connect this course</h1>
+      <p>Connecting <strong data-course></strong> to a class needs a MoneyExplained teacher account. It's free; new here? Create one below.</p>
+      <form id="auth-form" novalidate>
+        <div class="field"><label for="auth-email">Email</label><div class="input-wrap"><input id="auth-email" type="email" autocomplete="email" required maxlength="254"></div></div>
+        <div class="field"><label for="auth-password">Password</label><div class="input-wrap"><input id="auth-password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required></div><span class="hint">At least 12 characters.</span></div>
+        <label class="row-check"><input type="checkbox" id="adult-consent"> I'm 18 or older and agree to the <a href="privacy.html" target="_blank" rel="noopener">privacy terms</a> (needed to create an account).</label>
+        <div class="hero-actions"><button class="btn btn-primary" type="submit" id="signin-submit">Sign in</button><button class="btn btn-ghost" type="button" id="signup">Create account</button></div>
+      </form>
+      <p class="small muted" id="auth-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="linked-elsewhere" class="card" hidden>
+      <h1>Connect this course in a new tab</h1>
+      <p><strong data-course></strong> isn't connected to a MoneyExplained class yet. Open MoneyExplained in a new tab, sign in, and connect it. Then come back here and continue.</p>
+      <div class="hero-actions">
+        <a id="connect-tab" class="btn btn-primary" target="_blank" rel="noopener" href="#">Connect in a new tab ↗</a>
+        <button type="button" class="btn btn-ghost" id="connect-done">I've connected it, continue</button>
+      </div>
+    </section>
+
+    <section id="pick" class="card" hidden aria-labelledby="pick-title">
+      <h1 id="pick-title">Add MoneyExplained lessons</h1>
+      <p>Each lesson becomes an assignment in <strong data-course></strong>, worth 100 points. Students open it, read the lesson, and take the quiz; their score goes to your gradebook. Students in <strong id="pick-class"></strong> see them as assigned.</p>
+      <p class="small muted">Quiz scores come from the student's browser, so use them for practice and completion grades, not tests.</p>
+      <form id="pick-form">
+        <div class="assign-units" id="pick-units"></div>
+        <button type="submit" class="btn btn-primary" id="pick-save">Add lessons</button>
+      </form>
+    </section>
+
+    <section id="teacher" class="card" hidden aria-labelledby="teacher-title">
+      <h1 id="teacher-title">This is a MoneyExplained assignment</h1>
+      <p id="teacher-text"></p>
+      <p><a class="btn btn-primary" href="class.html" target="_blank" rel="noopener">Open the class dashboard ↗</a></p>
+    </section>
+
+    <form id="return-form" method="post" hidden><input type="hidden" name="JWT" id="return-jwt"></form>
+  </main>
+  <script src="js/site-config.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/lti.js"></script>
+</body>
+</html>

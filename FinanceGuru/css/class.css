@@ -23,6 +23,8 @@
 .roster tbody th { font-weight: 600; }
 .roster .unit-col { text-align: center; }
 .roster td.unit-done { color: var(--good); font-weight: 600; }
+.roster td.assign-late { color: var(--bad); font-weight: 600; }
+.assign-due { max-width: 14rem; margin: 0 0 12px; }
 .roster .icon-btn { width: 32px; height: 32px; }
 .by-lesson summary { cursor: pointer; font-weight: 600; margin-top: 8px; }
 .assign { margin: 12px 0; }

@@ -3,6 +3,8 @@
 // tax year 2027 inflation adjustments (Rev. Proc. 2026-35, IR-2026-133, Nov. 5, 2026).
 // FICA: Social Security 6.2% up to the wage base ($184,500 in 2026, $192,300 in 2027; SSA); Medicare 1.45% on all wages,
 // plus 0.9% Additional Medicare Tax withheld on wages over $200,000 (IRS Form 8959 / Topic 751).
+// Retirement limits & Roth IRA phase-outs: IRS Notice 2025-67 (2026) and Notice 2026-66 / IR-2026-136, Nov. 12, 2026 (2027).
+// Social Security PIA bend points: SSA (2026: $1,286 / $7,749; 2027: $1,340 / $8,077, ssa.gov/oact/cola/piaformula.html).
 const TAX_2026 = {
   year: 2026,
   stdDed: { single: 16100, mfj: 32200 },
@@ -13,9 +15,10 @@ const TAX_2026 = {
   },
   fica: { ssRate: 0.062, ssWageBase: 184500, medicare: 0.0145, addlMedicare: 0.009, addlThreshold: 200000 },
   rothPhaseout: { single: [153000, 168000], mfj: [242000, 252000] }, // IRS Notice 2025-67
+  limits: { k401: 24500, k401Catch50: 8000, k401Catch6063: 11250, ira: 7500, iraCatch50: 1100, hsaSelf: 4400, hsaFamily: 8750 },
+  ssBend: [1286, 7749],
 };
 
-// 2027 Roth IRA phase-outs come in the IRS retirement-limits notice (not out yet), so 2026's are kept.
 const TAX_2027 = {
   year: 2027,
   stdDed: { single: 16600, mfj: 33200 },
@@ -24,12 +27,29 @@ const TAX_2027 = {
     mfj: [[0, 0.10], [25600, 0.12], [104050, 0.22], [218250, 0.24], [416650, 0.32], [529100, 0.35], [793650, 0.37]],
   },
   fica: { ...TAX_2026.fica, ssWageBase: 192300 },
-  rothPhaseout: TAX_2026.rothPhaseout,
+  rothPhaseout: { single: [158000, 173000], mfj: [250000, 260000] }, // IRS Notice 2026-66
+  limits: { k401: 25500, k401Catch50: 8500, k401Catch6063: 11750, ira: 7500, iraCatch50: 1100, hsaSelf: 4500, hsaFamily: 9000 },
+  ssBend: [1340, 8077],
 };
 
 const TAX_YEARS = { 2026: TAX_2026, 2027: TAX_2027 };
 // The year paychecks are using today; new years' figures are switched on here once they're added above.
 const TAX_YEAR_NOW = Math.min(2027, Math.max(2026, new Date().getFullYear()));
+const TAX_NOW = TAX_YEARS[TAX_YEAR_NOW];
+
+// Pages mark year-dependent figures with data-tax="<key>"; the HTML keeps 2026 values as the
+// no-JavaScript fallback, and this swaps in the current year's figure once the page loads.
+if (typeof document !== "undefined" && typeof document.querySelectorAll === "function") {
+  const usd = (n) => "$" + n.toLocaleString("en-US");
+  const text = {
+    year: String(TAX_YEAR_NOW), k401: usd(TAX_NOW.limits.k401), ira: usd(TAX_NOW.limits.ira),
+    ssWageBase: usd(TAX_NOW.fica.ssWageBase), bend1: usd(TAX_NOW.ssBend[0]), bend2: usd(TAX_NOW.ssBend[1]),
+  };
+  const fill = () => document.querySelectorAll("[data-tax]").forEach((el) => {
+    if (text[el.dataset.tax]) el.textContent = text[el.dataset.tax];
+  });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fill); else fill();
+}
 
 // Federal income tax on gross income after the standard deduction. Returns per-bracket detail.
 function federalTax(status, income, year = 2026) {

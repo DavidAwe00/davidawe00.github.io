@@ -1,4 +1,4 @@
-/* FinanceGuru First Paycheck Plan. No credentials or session tokens in browser storage. */
+/* MoneyExplained First Paycheck Plan. No credentials or session tokens in browser storage. */
 (() => {
   'use strict';
   // Email confirmation can return auth fragments. Sign-in is explicit; do not keep tokens in URLs.
@@ -90,6 +90,35 @@
     if (p.goalGap === 0) return 'Your entered savings already cover this target.';
     return p.timelineFeasible ? `Your ${p.profile.targetMonths}-month savings target fits the entered budget.` : `Your target needs more time or more room in the budget.${p.goalMonthsAtCapacity ? ` At your full monthly surplus, it would take about ${p.goalMonthsAtCapacity} months.` : ' There is no monthly surplus available for the goal yet.'}`;
   }
+  // "Keep this plan going": the three things that make a plan last, shown right after it's built.
+  // Each step clicks the existing control, so behavior stays in one place. Progress is remembered on this device.
+  const NEXT = 'fg-plan-next';
+  function nextState() { try { return JSON.parse(localStorage.getItem(NEXT)) || {}; } catch { return {}; } }
+  function markNext(key) { try { localStorage.setItem(NEXT, JSON.stringify({ ...nextState(), [key]: true })); } catch { /* storage blocked */ } renderNextSteps(); }
+  function renderNextSteps() {
+    const box = $('next-steps'), s = nextState();
+    let saved = false; try { saved = Boolean(localStorage.getItem(KEY)); } catch { /* storage blocked */ }
+    const steps = [
+      ['save-local', 'Save it on this device', 'So it’s here the next time you open MoneyExplained.', saved],
+      ['reminder', 'Add a weekly reminder', 'A 10-minute check-in on your calendar, the same day each week.', s.reminder],
+      ['export', 'Keep a private copy', 'A file you control, in case this browser’s data is cleared.', s.copy],
+    ];
+    if (!current || s.dismissed || steps.every((x) => x[3])) { box.hidden = true; box.replaceChildren(); return; }
+    const head = el('div', undefined, 'next-steps-head'), title = el('h3', 'Keep this plan going'); title.id = 'next-steps-title';
+    const hide = el('button', 'Hide', 'link-btn small'); hide.type = 'button';
+    hide.addEventListener('click', () => { markNext('dismissed'); $('plan-title').focus(); });
+    head.append(title, hide);
+    const list = el('ol', undefined, 'next-steps-list');
+    steps.forEach(([target, name, detail, done], i) => {
+      const li = el('li', undefined, done ? 'is-done' : undefined), btn = el('button', undefined, 'next-step'); btn.type = 'button';
+      const text = el('span', undefined, 'next-step-text'); text.append(el('strong', name), el('span', done ? 'Done' : detail, 'small muted'));
+      btn.append(el('span', done ? '✓' : String(i + 1), 'next-step-mark'), text);
+      btn.disabled = Boolean(done); btn.addEventListener('click', () => $(target).click());
+      li.append(btn); list.append(li);
+    });
+    box.replaceChildren(head, el('p', saved ? 'Saved here. Two more steps make it stick:' : 'Your plan isn’t saved until you choose to. Three quick steps:', 'small muted'), list);
+    box.hidden = false;
+  }
   function render() {
     const p = current; $('onboarding').hidden = true; $('dashboard').hidden = false;
     $('workspace-nav').hidden = false; $('setup-guide').hidden = true;
@@ -133,7 +162,7 @@
     $('scenario-housing').value = p.profile.expenses.housing; $('scenario-wants').value = p.profile.expenses.wants;
     $('scenario-result').replaceChildren(); $('apply-scenario').hidden = true; scenario = null;
     $('coach-result').replaceChildren(); $('save-status').textContent = 'Changes are not saved until you choose a save option.';
-    renderHistory(); updateAccount();
+    renderHistory(); updateAccount(); renderNextSteps();
   }
   function renderHistory() {
     $('checkin-history').replaceChildren();
@@ -148,14 +177,16 @@
     $('save-cloud').disabled = !current;
     $('account-status').textContent = account ? `Signed in as ${account.email}.` : config.accounts ? 'Sign in to save a cloud copy and try AI coaching.' : 'Account sync is not available here yet. You can save on this device.';
     $('coach-form').hidden = !config.coaching || !account;
-    $('coach-availability').textContent = !config.coaching ? 'AI coaching is not available here yet. Your calculated plan and action list are ready to use.' : !account ? 'Sign in to try an AI explanation of your plan.' : 'Your numbers come from the calculator. AI explains them using FinanceGuru lessons. Check the explanation before acting.';
+    if (config.aiProvider) document.querySelectorAll('[data-ai-provider]').forEach((el) => { el.textContent = config.aiProvider; });
+    const teen = account?.ageGroup === 'teen';
+    $('coach-availability').textContent = !config.coaching ? 'AI coaching is not available here yet. Your calculated plan and action list are ready to use.' : !account ? 'Sign in to try an AI explanation of your plan.' : teen ? 'AI coaching is for adult accounts. Your calculated plan and action list are ready to use.' : 'Your numbers come from the calculator. AI explains them using MoneyExplained lessons. Check the explanation before acting.';
     const paid = account?.program?.active;
-    $('checkout').disabled = !config.checkout || Boolean(paid);
-    $('checkout').textContent = paid ? 'Your program is active' : !config.checkout ? 'Enrollment isn’t open yet' : account ? 'Start 30 days · $29' : 'Sign in to enroll';
+    $('checkout').disabled = !config.checkout || Boolean(paid) || teen;
+    $('checkout').textContent = paid ? 'Your program is active' : !config.checkout ? 'Enrollment isn’t open yet' : teen ? 'Enrollment is for adults' : account ? 'Start 30 days · $29' : 'Sign in to enroll';
     if (paid) $('program-status').textContent = `Access through ${new Date(account.program.validUntil).toLocaleDateString()}. No automatic renewal.`;
     else if (!new URLSearchParams(location.search).has('checkout')) $('program-status').textContent = '';
   }
-  async function refreshAccount() { account = await api('/me'); updateAccount(); }
+  async function refreshAccount() { account = await api('/me'); FG.account.remember(account); updateAccount(); }
   $('next').addEventListener('click', () => { if ($('plan-form').reportValidity()) showStep(step + 1); });
   $('back').addEventListener('click', () => showStep(step - 1));
   $('goal').addEventListener('change', goalFields);
@@ -171,7 +202,7 @@
     catch (error) { $('form-error').textContent = error.message; }
   });
   $('edit').addEventListener('click', () => { populate(current.profile); $('onboarding').hidden = false; $('dashboard').hidden = true; $('workspace-nav').hidden = true; $('setup-guide').hidden = false; showStep(0); $('onboarding').scrollIntoView({ block: 'start', behavior: 'instant' }); });
-  $('save-local').addEventListener('click', () => { if (persist()) say('Your plan and check-ins are saved on this device.'); });
+  $('save-local').addEventListener('click', () => { if (persist()) say('Your plan and check-ins are saved on this device.'); renderNextSteps(); });
   // Weekly check-in reminder as a calendar file: this weekday, 6 pm local, starting next week and repeating.
   // No plan figures inside. Lines over 75 octets are folded (RFC 5545).
   function reminderIcs(now = new Date()) {
@@ -179,22 +210,22 @@
     const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7);
     const stamp = now.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
     const link = new URL('plan.html#review', location.href).href;
-    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//FinanceGuru//First Paycheck Plan//EN', 'BEGIN:VEVENT',
-      `UID:${stamp}-${Math.random().toString(36).slice(2)}@financeguru`, `DTSTAMP:${stamp}`,
+    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//MoneyExplained//First Paycheck Plan//EN', 'BEGIN:VEVENT',
+      `UID:${stamp}-${Math.random().toString(36).slice(2)}@moneyexplained`, `DTSTAMP:${stamp}`,
       `DTSTART:${day.getFullYear()}${pad(day.getMonth() + 1)}${pad(day.getDate())}T180000`, 'DURATION:PT10M', 'RRULE:FREQ=WEEKLY',
-      'SUMMARY:Weekly money check-in', `DESCRIPTION:Log last week's spending and savings in your FinanceGuru plan: ${link}`, `URL:${link}`,
+      'SUMMARY:Weekly money check-in', `DESCRIPTION:Log last week's spending and savings in your MoneyExplained plan: ${link}`, `URL:${link}`,
       'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:Weekly money check-in', 'TRIGGER:PT0M', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR']
       .map((line) => line.match(/.{1,74}/g).join('\r\n ')).join('\r\n') + '\r\n';
   }
   $('reminder').addEventListener('click', () => {
     const url = URL.createObjectURL(new Blob([reminderIcs()], { type: 'text/calendar' }));
-    const a = el('a'); a.href = url; a.download = 'financeguru-weekly-check-in.ics'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-    say('Open the downloaded file to add the weekly reminder to your calendar app.');
+    const a = el('a'); a.href = url; a.download = 'moneyexplained-weekly-check-in.ics'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    say('Open the downloaded file to add the weekly reminder to your calendar app.'); markNext('reminder');
   });
   $('export').addEventListener('click', () => {
     const url = URL.createObjectURL(new Blob([JSON.stringify({ ...savedData(), calculated: current }, null, 2)], { type: 'application/json' }));
-    const a = el('a'); a.href = url; a.download = 'financeguru-plan.json'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-    say('Your download contains financial information. Keep it somewhere private.');
+    const a = el('a'); a.href = url; a.download = 'moneyexplained-plan.json'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    say('Your download contains financial information. Keep it somewhere private.'); markNext('copy');
   });
   $('scenario-form').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -228,7 +259,7 @@
   }
   $('auth-form').addEventListener('submit', (e) => { e.preventDefault(); authenticate(false, e.submitter || $('auth-form').querySelector('[type=submit]')); });
   $('signup').addEventListener('click', () => authenticate(true, $('signup')));
-  $('logout').addEventListener('click', () => busy($('logout'), async () => { await api('/auth/logout', 'POST', {}); account = null; $('coach-result').replaceChildren(); say('Signed out. A plan saved on this device remains here until you clear it.'); }));
+  $('logout').addEventListener('click', () => busy($('logout'), async () => { await api('/auth/logout', 'POST', {}); account = null; FG.account.remember(null); $('coach-result').replaceChildren(); say('Signed out. A plan saved on this device remains here until you clear it.'); }));
   $('save-cloud').addEventListener('click', () => busy($('save-cloud'), async () => { await api('/plan', 'PUT', savedData()); $('save-status').textContent = 'Saved to your account. Your device copy is separate.'; say('Plan and check-ins saved to your account.'); }));
   $('load-cloud').addEventListener('click', () => busy($('load-cloud'), async () => {
     const result = await api('/plan'); if (!result.saved) { say('Your account has no saved plan yet.'); return; }
@@ -238,7 +269,7 @@
   $('delete-cloud').addEventListener('click', () => { if (confirm('Delete your account’s saved plan and check-ins? This cannot be undone. Your device copy will remain.')) busy($('delete-cloud'), async () => { await api('/plan', 'DELETE', {}); say('Cloud plan deleted. Device copies and payment records are separate.'); }); });
   $('clear-local').addEventListener('click', () => {
     if (!confirm('Clear this device’s saved plan and the plan shown here? Cloud copies remain.')) return;
-    try { localStorage.removeItem(KEY); } catch { say('This browser did not allow us to clear storage. Use your browser’s site-data settings.'); return; }
+    try { localStorage.removeItem(KEY); localStorage.removeItem(NEXT); } catch { say('This browser did not allow us to clear storage. Use your browser’s site-data settings.'); return; }
     current = null; checkins = []; $('plan-form').reset(); $('debts').replaceChildren(); $('example-note').hidden = true; goalFields(); $('dashboard').hidden = true; $('onboarding').hidden = false; $('workspace-nav').hidden = true; $('setup-guide').hidden = false; showStep(0); updateAccount(); say('This device’s plan has been cleared.');
   });
   $('coach-form').addEventListener('submit', (e) => {
@@ -306,7 +337,7 @@
     }
   }
   (async () => {
-    try { config = await api('/config', 'GET', undefined, false); if (config.accounts) { try { await refreshAccount(); } catch (e) { if (e.status !== 401) say(e.message); } } }
+    try { config = await FG.features(); if (config.accounts) { try { await refreshAccount(); } catch (e) { if (e.status !== 401) say(e.message); } } }
     catch { config = {}; }
     updateAccount();
     const checkout = new URLSearchParams(location.search).get('checkout');

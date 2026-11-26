@@ -450,11 +450,11 @@ const LESSONS = [
                <p>Those perks are a big deal: over decades, avoiding taxes on growth can add up to <strong>tens or hundreds of thousands of dollars</strong>.</p>`,
       },
       {
-        heading: "The big three (U.S., 2026 limits)",
+        heading: "The big three (U.S., 2026 and 2027 limits)",
         html: `<ul>
-                 <li><strong>401(k)</strong> through work: up to <strong>$24,500/yr</strong>. Many employers <em>match</em> part of what you put in — that's free money.</li>
-                 <li><strong>IRA</strong> you open yourself: up to <strong>$7,500/yr</strong>.</li>
-                 <li><strong>HSA</strong> with a high-deductible health plan: up to <strong>$4,400</strong> (self) or <strong>$8,750</strong> (family).</li>
+                 <li><strong>401(k)</strong> through work: up to <strong>$24,500/yr</strong> in 2026, <strong>$25,500</strong> in 2027. Many employers <em>match</em> part of what you put in — that's free money.</li>
+                 <li><strong>IRA</strong> you open yourself: up to <strong>$7,500/yr</strong> (same in 2026 and 2027).</li>
+                 <li><strong>HSA</strong> with a high-deductible health plan: up to <strong>$4,400</strong> (self) or <strong>$8,750</strong> (family) in 2026; <strong>$4,500</strong> or <strong>$9,000</strong> in 2027.</li>
                </ul>
                <div class="callout"><strong>Compare all accounts:</strong> see the <a href="invest.html#accounts">account guide</a> in the Investing Hub.</div>`,
       },
@@ -463,15 +463,15 @@ const LESSONS = [
         html: `<p><strong>Traditional:</strong> skip taxes now, pay them when you withdraw in retirement.</p>
                <p><strong>Roth:</strong> pay taxes now, then the money grows and comes out <strong>tax-free</strong>.</p>
                <p>Rule of thumb: if you expect a <em>higher</em> tax rate later (common for young people early in their careers), Roth often wins.</p>
-               <div class="callout"><strong>Try it:</strong> the <a href="tools.html#roth">Roth vs Traditional calculator</a> uses 2026 tax brackets, and the <a href="tools.html#retire">Retirement Check</a> shows if you're on track.</div>`,
+               <div class="callout"><strong>Try it:</strong> the <a href="tools.html#roth">Roth vs Traditional calculator</a> uses this year's tax brackets, and the <a href="tools.html#retire">Retirement Check</a> shows if you're on track.</div>`,
       },
     ],
     quiz: [
       {
-        q: "What's the 2026 contribution limit for an IRA (under age 50)?",
+        q: "What's the yearly contribution limit for an IRA in 2026 and 2027 (under age 50)?",
         choices: ["$2,000", "$7,500", "$24,500", "No limit"],
         answer: 1,
-        why: "$7,500 for 2026, shared across traditional and Roth IRAs.",
+        why: "$7,500 in both 2026 and 2027, shared across traditional and Roth IRAs.",
       },
       {
         q: "With a Roth account, when do you pay taxes?",
@@ -542,18 +542,18 @@ const LESSONS = [
     cards: [
       {
         heading: "Brackets are buckets",
-        html: `<p>The U.S. has seven federal income tax rates in 2026, from <strong>10% to 37%</strong>. But your income isn't all taxed at one rate.</p>
+        html: `<p>The U.S. has seven federal income tax rates in 2026 and 2027, from <strong>10% to 37%</strong>. But your income isn't all taxed at one rate.</p>
                <p>Picture buckets: the first dollars fill the 10% bucket, the next fill the 12% bucket, and so on. Each bucket's rate applies <strong>only to the dollars inside it</strong>. So moving into a higher bracket only taxes the <em>extra</em> dollars at the higher rate — a raise can never lower your take-home pay.</p>
                <div class="callout"><strong>See it:</strong> slide your income in the <a href="taxes.html#brackets">bracket buckets</a> visual.</div>`,
       },
       {
         heading: "Deductions shrink taxable income",
-        html: `<p>Before the brackets apply, you subtract deductions. Most people take the <strong>standard deduction</strong>: <strong>$16,100</strong> for single filers and <strong>$32,200</strong> for married couples filing jointly in 2026.</p>
+        html: `<p>Before the brackets apply, you subtract deductions. Most people take the <strong>standard deduction</strong>: <strong>$16,100</strong> for single filers and <strong>$32,200</strong> for married couples filing jointly in 2026 (<strong>$16,600</strong> and <strong>$33,200</strong> in 2027).</p>
                <p>Pre-tax 401(k) contributions and health premiums also lower your taxable income — which is why saving for retirement through work costs less than it looks.</p>`,
       },
       {
         heading: "FICA: the other paycheck tax",
-        html: `<p>On top of income tax, almost every paycheck pays <strong>FICA</strong>: <strong>6.2%</strong> for Social Security (on wages up to $184,500 in 2026) and <strong>1.45%</strong> for Medicare. Your employer pays a matching amount.</p>
+        html: `<p>On top of income tax, almost every paycheck pays <strong>FICA</strong>: <strong>6.2%</strong> for Social Security (on wages up to $184,500 in 2026 and $192,300 in 2027) and <strong>1.45%</strong> for Medicare. Your employer pays a matching amount.</p>
                <p>Your W-4 form tells your employer how much income tax to withhold. A giant refund isn't free money — it's your own money, returned without interest.</p>
                <div class="callout"><strong>Try it:</strong> the <a href="taxes.html#paycheck">paycheck breakdown</a> shows where every dollar goes.</div>`,
       },
@@ -566,10 +566,10 @@ const LESSONS = [
         why: "Brackets are marginal: only the dollars inside the 22% bucket are taxed at 22%.",
       },
       {
-        q: "What's the 2026 standard deduction for a single filer?",
-        choices: ["$5,000", "$12,400", "$16,100", "$32,200"],
+        q: "What's the standard deduction for a single filer in 2026 and 2027?",
+        choices: ["$5,000 both years", "$12,400 in 2026, $12,800 in 2027", "$16,100 in 2026, $16,600 in 2027", "$32,200 in 2026, $33,200 in 2027"],
         answer: 2,
-        why: "$16,100 for single filers ($32,200 for married filing jointly). $12,400 is where the 10% bracket ends.",
+        why: "$16,100 in 2026 and $16,600 in 2027 for single filers. $12,400/$12,800 is where the 10% bracket ends, and $32,200/$33,200 is the married-filing-jointly deduction.",
       },
       {
         q: "What does FICA pay for?",
@@ -1257,17 +1257,225 @@ const LESSONS = [
       },
     ],
   },
+  {
+    id: "investing-hype",
+    icon: "📣",
+    title: "Investing Hype: Crypto, Meme Stocks & Finfluencers",
+    summary: "Tell a real investment from a social-media pitch, and see why FOMO gets expensive.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "Where young investors learn",
+        html: `<p>In a 2023 survey of U.S. investors ages 18 to 25, <strong>48%</strong> said they learn about investing mainly through <strong>social media</strong>. Half had made an investment driven by <strong>FOMO</strong> (fear of missing out), and their most common investment was <strong>crypto</strong>.</p>
+               <p>Social media can be a fine place to start learning. It's a risky place to take orders.</p>
+               <p class="small muted">Source: FINRA Investor Education Foundation and CFA Institute, <em>Gen Z and Investing</em> (May 24, 2023).</p>`,
+      },
+      {
+        heading: "Finfluencers often get paid",
+        html: `<p>Many "finfluencers" are paid to promote a coin, app, or course. The FTC requires paid endorsements to be disclosed, but not everyone does it.</p>
+               <p>In 2022 the SEC charged Kim Kardashian for promoting a crypto token on Instagram without saying she was paid $250,000 to do it. She paid <strong>$1.26 million</strong> to settle.</p>
+               <p>Before you act on a tip, ask: <strong>Who's paying them?</strong> What do they get if I buy? Are they licensed? You can look up brokers and advisers for free on FINRA's <strong>BrokerCheck</strong>.</p>`,
+      },
+      {
+        heading: "Crypto: big swings, few protections",
+        html: `<p>Crypto prices can move wildly. Bitcoin lost about <strong>three-quarters</strong> of its value between November 2021 and November 2022. That same month, the crypto exchange FTX collapsed and customers couldn't get their money out.</p>
+               <p>Crypto isn't <strong>FDIC-insured</strong>. If an exchange fails or your account is hacked, there may be no one to make you whole.</p>
+               <p>If you buy any, keep it to a small slice of money you could afford to lose completely.</p>`,
+      },
+      {
+        heading: "Meme stocks and pump-and-dumps",
+        html: `<p><strong>Meme stocks</strong> jump on online buzz, not business results. People who buy late often buy near the top.</p>
+               <p>In a <strong>pump-and-dump</strong>, promoters hype a cheap stock or coin, sell their own shares to the people they convinced, and the price crashes.</p>
+               <p>In 2025, people reported losing more than <strong>$7.9 billion</strong> to investment scams, with a typical (median) loss over <strong>$10,000</strong>. Investment scams that started on social media cost <strong>$1.1 billion</strong>. Red flags: guaranteed returns, "act now," private group chats, and pressure to recruit friends.</p>
+               <p class="small muted">Sources: FTC consumer alert (April 16, 2026) and press release (April 27, 2026), 2025 Consumer Sentinel data.</p>
+               <div class="callout"><strong>Practice:</strong> spot the red flags in the <a href="play.html#scam">Spot the Scam game</a>.</div>`,
+      },
+      {
+        heading: "The boring plan that works",
+        html: `<ul>
+                 <li>Build your <strong>emergency fund</strong> first.</li>
+                 <li>Invest for the long run in <strong>low-cost, diversified index funds</strong>, automatically, every month.</li>
+                 <li>Keep money you'll need within about five years out of the stock market.</li>
+                 <li>Treat any hype bet as entertainment money, sized like a concert ticket, not your savings.</li>
+               </ul>
+               <p>If something is a sure thing, ask why a stranger is telling you about it.</p>
+               <div class="callout"><strong>See it:</strong> compare risk and return in the <a href="invest.html#portfolio">portfolio dial</a>, then read <a href="learn.html#investing">Investing 101</a>.</div>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "A finfluencer says a new coin will \"10x by Friday\" and posts a link to buy it. What should you ask first?",
+        choices: ["How many followers do they have?", "Are they being paid to promote it, and what do they get if I buy?", "Can I borrow money to buy more?", "Does the coin have a professional logo?"],
+        answer: 1,
+        why: "Paid promoters profit whether or not you do. Follower counts and logos say nothing about the investment.",
+      },
+      {
+        q: "What happens in a pump-and-dump?",
+        choices: ["A company pays a dividend", "Promoters hype an asset, sell at the high price, and the price crashes", "A fund rebalances once a year", "The government buys back stock"],
+        answer: 1,
+        why: "The promoters' selling is what crashes the price, and the people who bought on the hype are left with the losses.",
+      },
+      {
+        q: "Where does money you'll need for a car in two years belong?",
+        choices: ["Crypto", "A meme stock", "A high-yield savings account", "Options trading"],
+        answer: 2,
+        why: "Money you need soon shouldn't ride big price swings. A high-yield savings account keeps it safe and still earns interest.",
+      },
+    ],
+  },
+  {
+    id: "first-tax-return",
+    icon: "📨",
+    title: "Filing Your First Tax Return",
+    summary: "Whether you need to file, which forms to gather, free ways to file, and how to get your refund.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "Do you have to file?",
+        html: `<p>For 2026 income (the return you file in 2027), a single person generally has to file if their income was more than the <strong>$16,100</strong> standard deduction. That's true even if a parent claims you as a dependent, as long as your income was all from a job.</p>
+               <p>Different rules apply if you had more than <strong>$1,350</strong> of investment income (like interest) as a dependent, or <strong>$400</strong> or more of self-employment profit (see <a href="learn.html#side-hustle">Side Hustles</a>).</p>
+               <p><strong>Even if you don't have to file,</strong> file anyway if income tax was withheld from your paychecks. Filing is the only way to get that money back.</p>
+               <p class="small muted">Source: IRS, Rev. Proc. 2025-32 and Publication 501. The IRS's Interactive Tax Assistant on IRS.gov checks your situation.</p>`,
+      },
+      {
+        heading: "Gather your forms",
+        html: `<ul>
+                 <li><strong>W-2</strong> from every employer. They must send it by <strong>January 31</strong>.</li>
+                 <li><strong>1099-NEC</strong> if a business paid you $2,000 or more as a freelancer in 2026, and <strong>1099-INT</strong> if a bank paid you $10 or more in interest.</li>
+                 <li><strong>1098-T</strong> if you paid college tuition (it can unlock education credits).</li>
+                 <li>Your Social Security number and your <strong>bank routing and account numbers</strong> for your refund.</li>
+               </ul>
+               <p>No form for some income? You still report it.</p>`,
+      },
+      {
+        heading: "File for free",
+        html: `<ul>
+                 <li><strong>IRS Free File</strong>: free guided software if your income is under the IRS limit (<strong>$95,000</strong> or less, per IRS.gov in November 2026). It opens in January 2027.</li>
+                 <li><strong>Free File Fillable Forms</strong>: free at any income if you're comfortable doing the forms yourself.</li>
+                 <li><strong>VITA</strong>: free help from IRS-certified volunteers for people who generally make about <strong>$70,244</strong> or less. Find a site with the VITA Locator on IRS.gov.</li>
+               </ul>
+               <p>Watch for "free" ads that charge you later for a state return or extras. The IRS's own Direct File program has ended.</p>
+               <p class="small muted">Source: IRS.gov Free File and free tax preparation pages (checked November 2026).</p>`,
+      },
+      {
+        heading: "Getting your refund",
+        html: `<p>The IRS began phasing out paper refund checks in September 2025. To get a refund now, you generally need to give your bank's <strong>routing and account numbers</strong> for <strong>direct deposit</strong>. File electronically and most refunds arrive within <strong>21 days</strong>.</p>
+               <p>The deadline for 2026 returns is <strong>April 15, 2027</strong>. If you owe, pay by then: an extension gives you more time to file, not to pay.</p>
+               <p>The IRS doesn't start contact by text, email, or social media asking for personal or bank information. Messages promising a refund are a common scam (see <a href="learn.html#scams">Spotting Scams</a>).</p>
+               <p class="small muted">Source: IRS, 2026 filing season announcement.</p>`,
+      },
+      {
+        heading: "After you file",
+        html: `<ul>
+                 <li>Keep a copy of your return and forms for at least <strong>three years</strong>.</li>
+                 <li>Got a huge refund, or owed a lot? Adjust your <strong>W-4</strong> with your employer so next year's paychecks withhold closer to the right amount.</li>
+                 <li>Most states also have their own income tax return. Many free options file both.</li>
+               </ul>
+               <div class="callout"><strong>Try it:</strong> check your withholding with the <a href="tools.html#stub">Pay Stub Reader</a> and the <a href="taxes.html#w4">W-4 basics</a>.</div>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "You're 17, a parent claims you, and you earned $4,000 at a summer job with $150 of federal income tax withheld. Should you file?",
+        choices: ["No, you aren't allowed to file", "Yes. You don't have to, but filing is the only way to get the $150 back", "Only if you earned over $50,000", "Only your parent can file for that income"],
+        answer: 1,
+        why: "Your income was under the filing requirement, but the withheld $150 only comes back if you file a return.",
+      },
+      {
+        q: "By when must employers send your W-2?",
+        choices: ["January 31", "March 1", "April 15", "Whenever you ask for it"],
+        answer: 0,
+        why: "Employers must send W-2s by January 31, so you have time to file by the April deadline.",
+      },
+      {
+        q: "How do most people get their federal tax refund now?",
+        choices: ["A paper check in the mail", "Direct deposit to a bank account", "A gift card", "Cash at an IRS office"],
+        answer: 1,
+        why: "The IRS began phasing out paper refund checks in 2025, so you'll generally need bank routing and account numbers.",
+      },
+    ],
+  },
+  {
+    id: "money-relationships",
+    icon: "🤝",
+    title: "Money & Relationships: Roommates, Partners & Lending",
+    summary: "Split costs fairly, lend without losing friends, and know what co-signing really means.",
+    minutes: 5,
+    cards: [
+      {
+        heading: "Money is awkward. Talk anyway.",
+        html: `<p>About <strong>7 in 10</strong> U.S. adults have lent money or covered a group expense expecting to be paid back. More than half of them had something go wrong: <strong>44%</strong> lost money and <strong>26%</strong> said it damaged the relationship.</p>
+               <p>Most of these problems start with an unclear deal. A five-minute conversation up front prevents most of them.</p>
+               <p class="small muted">Source: Bankrate Financial Taboos Survey (YouGov, September 2025; published October 27, 2025).</p>`,
+      },
+      {
+        heading: "Roommates: agree before you move in",
+        html: `<p>Put a simple <strong>roommate agreement</strong> in writing before move-in day:</p>
+               <ul>
+                 <li>How rent is split (a bigger room or private bathroom often pays more).</li>
+                 <li>Who pays which bills (electricity, internet, streaming) and by what date.</li>
+                 <li>Shared groceries and supplies, guests, and quiet hours.</li>
+                 <li>What happens if someone moves out early.</li>
+               </ul>
+               <p>Remember: if you're all on the lease, the landlord can usually collect the <strong>full rent</strong> from any of you (see <a href="learn.html#first-apartment">Renting Your First Apartment</a>).</p>
+               <div class="callout"><strong>Try it:</strong> the <a href="tools.html#apartment">First Apartment budget</a> splits rent and move-in costs with roommates.</div>`,
+      },
+      {
+        heading: "Lending to friends and family",
+        html: `<ul>
+                 <li>Only lend what you could afford to <strong>never get back</strong>. If you can't, it isn't extra money.</li>
+                 <li>Consider giving a smaller amount as a <strong>gift</strong> instead. No debt, no awkward reminders.</li>
+                 <li>If it's a loan, <strong>write it down</strong>: the amount and when it will be paid back. A text message that both of you reply to counts.</li>
+                 <li>Never lend money you need for your own rent or bills.</li>
+               </ul>
+               <p>It's okay to say no: "I can't swing that right now, but I can help you figure out a plan."</p>`,
+      },
+      {
+        heading: "Co-signing means it's your debt",
+        html: `<p>When you <strong>co-sign</strong> a loan, credit card, or lease, you promise to pay if the other person doesn't. The FTC warns you may have to pay <strong>the full amount</strong>, plus late fees or collection costs, and the debt can show up on <strong>your credit report</strong>.</p>
+               <p>By law, lenders must give co-signers a "Notice to Cosigner" for many loans. Its message is blunt: if the borrower doesn't pay, you will have to.</p>
+               <p>Only co-sign if you could pay the whole thing yourself. And never share your Social Security number or account logins "just this once," even with family.</p>
+               <p class="small muted">Source: Federal Trade Commission, "Cosigning a Loan FAQs."</p>`,
+      },
+      {
+        heading: "Partners: yours, mine, and ours",
+        html: `<p>Before you combine money with a partner, talk about income, <strong>debts</strong>, credit, goals, and spending style. Many couples use a mix: a <strong>joint account</strong> for shared bills plus <strong>separate accounts</strong> for personal spending.</p>
+               <p>Keep some savings and credit in your own name. Warning signs of financial control include one person taking all the money, demanding your passwords, or running up debt in your name.</p>
+               <p>If that's happening to you, the National Domestic Violence Hotline (1-800-799-7233, thehotline.org) offers free, confidential help.</p>`,
+      },
+    ],
+    quiz: [
+      {
+        q: "A friend asks to borrow $300 for rent. What's the safest way to handle it?",
+        choices: ["Lend it from your own rent money", "Lend only what you could afford never to get back, and write down the payback plan", "Lend it with no plan so it doesn't feel awkward", "Put it on a credit card and hope they pay you back"],
+        answer: 1,
+        why: "Lending only what you can afford to lose protects your own bills, and writing down the plan prevents most misunderstandings.",
+      },
+      {
+        q: "You co-sign a friend's car loan and they stop paying. What can happen?",
+        choices: ["Nothing; only the borrower owes it", "The lender cancels the loan", "You may have to pay the full amount, and it can hurt your credit", "Your friend's insurance pays it"],
+        answer: 2,
+        why: "A co-signer is fully responsible for the debt, including late fees, and the loan can appear on the co-signer's credit report.",
+      },
+      {
+        q: "When should roommates agree on how to split rent and bills?",
+        choices: ["After the first bill is late", "Before moving in, in writing", "Only if there's an argument", "When the lease ends"],
+        answer: 1,
+        why: "Agreeing up front, in writing, prevents most roommate money fights before they start.",
+      },
+    ],
+  },
 ];
 
 // The learning path: lessons grouped into units. LESSONS is sorted into this order below, so the
 // Learn page, homepage, lesson pages, and certificate all number lessons the same way.
 // Every lesson id must appear in exactly one unit (scripts/build-seo.test.js checks this).
 const UNITS = [
-  { id: "earn", icon: "💵", title: "Earn & spend", blurb: "Budgets, bank accounts, paychecks, and side hustles.", lessons: ["budgeting", "banking", "taxes-101", "side-hustle"] },
+  { id: "earn", icon: "💵", title: "Earn & spend", blurb: "Budgets, bank accounts, paychecks, filing taxes, and side hustles.", lessons: ["budgeting", "banking", "taxes-101", "first-tax-return", "side-hustle"] },
   { id: "protect", icon: "🛡️", title: "Save & protect", blurb: "Emergency funds, insurance, scams, and betting.", lessons: ["emergency-fund", "insurance", "scams", "betting"] },
-  { id: "borrow", icon: "💳", title: "Borrow wisely", blurb: "Debt, credit scores, and student loans.", lessons: ["debt", "credit", "bnpl-payday", "student-loans-2026"] },
-  { id: "grow", icon: "📈", title: "Grow your money", blurb: "Compounding, investing, inflation, and retirement.", lessons: ["compound-interest", "investing", "inflation", "risk-time", "retirement-accounts"] },
-  { id: "decide", icon: "🧭", title: "Big decisions", blurb: "College and how to pay for it, your first apartment, housing, and cars.", lessons: ["college-roi", "financial-aid", "first-apartment", "rent-vs-buy", "car-buying"] },
+  { id: "borrow", icon: "💳", title: "Borrow wisely", blurb: "Debt, credit scores, buy now pay later, payday loans, and student loans.", lessons: ["debt", "credit", "bnpl-payday", "student-loans-2026"] },
+  { id: "grow", icon: "📈", title: "Grow your money", blurb: "Compounding, investing, hype and crypto, inflation, and retirement.", lessons: ["compound-interest", "investing", "investing-hype", "inflation", "risk-time", "retirement-accounts"] },
+  { id: "decide", icon: "🧭", title: "Big decisions", blurb: "Paying for college, your first apartment, money with roommates and partners, housing, and cars.", lessons: ["college-roi", "financial-aid", "first-apartment", "money-relationships", "rent-vs-buy", "car-buying"] },
 ];
 (() => {
   const order = UNITS.flatMap((u) => u.lessons);

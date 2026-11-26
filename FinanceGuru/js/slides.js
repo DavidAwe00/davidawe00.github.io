@@ -12,7 +12,7 @@ const Slides = (() => {
     const add = (kind, heading, body, extra = {}) => slides.push({ kind, heading, body, ...extra });
     add("title", `${lesson.icon} ${lesson.title}`, `
       <p class="slide-lead">${lesson.summary}</p>
-      ${plan ? `<h3>Today you'll be able to</h3>${list(plan.objectives)}` : ""}`, { eyebrow: `Lesson ${i + 1} · FinanceGuru` });
+      ${plan ? `<h3>Today you'll be able to</h3>${list(plan.objectives)}` : ""}`, { eyebrow: `Lesson ${i + 1} · MoneyExplained` });
     if (plan) add("prompt", "Warm-up", `<p class="slide-lead">${plan.warmup}</p>`, { eyebrow: "5 min · Think, then share" });
     lesson.cards.forEach((c, n) => add("card", c.heading, card(c.html), { eyebrow: `Lesson · ${n + 1} of ${lesson.cards.length}` }));
     if (plan) {

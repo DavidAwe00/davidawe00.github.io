@@ -2,10 +2,11 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const num = (id) => Math.max(0, parseFloat($(id).value) || 0);
+  const t = I18N.t;
 
-  /* ---------- Shared 2026 figures (sources cited on the page) ---------- */
-  const SS = { bend1: 1286, bend2: 7749, wageMax: 184500, fra: 67 }; // SSA 2026 PIA bend points & taxable max
-  const ROTH_PHASEOUT = TAX_2026.rothPhaseout; // brackets & deduction live in js/data/tax2026.js
+  /* ---------- This year's figures (js/data/tax2026.js; sources cited on the page) ---------- */
+  const SS = { bend1: TAX_NOW.ssBend[0], bend2: TAX_NOW.ssBend[1], wageMax: TAX_NOW.fica.ssWageBase, fra: 67 };
+  const ROTH_PHASEOUT = TAX_NOW.rothPhaseout;
   const FIDELITY = [[30, 1], [40, 3], [50, 6], [60, 8], [67, 10]];
 
   /* ---------- Social Security (rough) ---------- */
@@ -70,34 +71,34 @@
 
     $("rt-proj").textContent = FG.money(p.end);
     $("rt-need").textContent = FG.money(need);
-    $("rt-ss").textContent = FG.money(ss) + "/mo";
+    $("rt-ss").textContent = t("{amount}/mo", { amount: FG.money(ss) });
     const bm = benchmark(age);
-    $("rt-bench").textContent = bm === null ? "1× by 30" : `${bm.toFixed(1)}× salary`;
+    $("rt-bench").textContent = bm === null ? t("1× by 30") : t("{x}× salary", { x: bm.toFixed(1) });
 
-    const status = ratio >= 1 ? ["🎉", "On track", "var(--good)"] : ratio >= 0.75 ? ["🙂", "Getting close", "var(--gold)"] : ["⚠️", "Behind — but fixable", "var(--bad)"];
-    $("rt-status").innerHTML = `<div class="gauge-top"><div><div class="small muted">Retirement readiness</div><div class="gauge-num">${Math.round(Math.min(ratio, 9.99) * 100)}%</div></div>
+    const status = ratio >= 1 ? ["🎉", t("On track"), "var(--good)"] : ratio >= 0.75 ? ["🙂", t("Getting close"), "var(--gold)"] : ["⚠️", t("Behind — but fixable"), "var(--bad)"];
+    $("rt-status").innerHTML = `<div class="gauge-top"><div><div class="small muted">${t("Retirement readiness")}</div><div class="gauge-num">${Math.round(Math.min(ratio, 9.99) * 100)}%</div></div>
       <span class="badge" style="font-size:.9rem;color:${status[2]}">${status[0]} ${status[1]}</span></div>
       <div class="meter" style="height:12px;margin-top:12px"><span style="width:${Math.min(100, ratio * 100)}%;background:${status[2]}"></span></div>`;
 
     Charts.line($("rt-chart"), {
-      x: p.ages, xFormat: (a) => `Age ${a}`, label: "Projected retirement savings vs. target",
-      series: [{ name: "Projected savings", color: "--series-1", values: p.vals }, { name: "What you'll need", color: "--series-2", values: p.ages.map(() => need), dash: true }],
-      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => `Age ${p.ages[i]}`,
+      x: p.ages, xFormat: (a) => t("Age {n}", { n: a }), label: t("Projected retirement savings vs. target"),
+      series: [{ name: t("Projected savings"), color: "--series-1", values: p.vals }, { name: t("What you'll need"), color: "--series-2", values: p.ages.map(() => need), dash: true }],
+      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => t("Age {n}", { n: p.ages[i] }),
     });
 
     const sr = successRate(wr);
-    const have = bm !== null && salary > 0 ? ` You have ${(saved / salary).toFixed(1)}× your salary saved today.` : "";
+    const have = bm !== null && salary > 0 ? " " + t("You have {x}× your salary saved today.", { x: (saved / salary).toFixed(1) }) : "";
     $("rt-insight").innerHTML = (ratio >= 1
-      ? `<strong>Nice!</strong> At ${Math.round(rate * 100)}% you're projected to reach your target by ${retireAge}.`
-      : `<strong>To get on track</strong>, save about <strong>${Math.round(needRate * 100)}%</strong> of pay instead of ${Math.round(rate * 100)}% — or retire a bit later, which also raises Social Security.`)
-      + have + ` <strong>History check:</strong> withdrawing ${(wr * 100).toFixed(1)}% a year (raised with inflation) from a 60/40 portfolio lasted 30 years in ${Math.round(sr.rate * 100)}% of the ${sr.n} periods since 1928.`;
+      ? t("<strong>Nice!</strong> At {rate}% you're projected to reach your target by {age}.", { rate: Math.round(rate * 100), age: retireAge })
+      : t("<strong>To get on track</strong>, save about <strong>{need}%</strong> of pay instead of {rate}% — or retire a bit later, which also raises Social Security.", { need: Math.round(needRate * 100), rate: Math.round(rate * 100) }))
+      + have + " " + t("<strong>History check:</strong> withdrawing {wr}% a year (raised with inflation) from a 60/40 portfolio lasted 30 years in {pct}% of the {n} periods since 1928.", { wr: (wr * 100).toFixed(1), pct: Math.round(sr.rate * 100), n: sr.n });
   }
   ["rt-age", "rt-salary", "rt-saved", "rt-rate", "rt-retire", "rt-spend", "rt-return", "rt-wr"].forEach((id) => $(id).addEventListener("input", retire));
   $("rt-salary").addEventListener("change", () => { $("rt-spend").value = Math.round(num("rt-salary") * 0.8); retire(); });
 
   /* ---------- Roth vs Traditional ---------- */
   function bracketFor(status, income) {
-    const { taxable, marginal } = federalTax(status, income);
+    const { taxable, marginal } = federalTax(status, income, TAX_YEAR_NOW);
     return { rate: marginal, taxable };
   }
   function roth() {
@@ -109,22 +110,22 @@
     const yrs = Array.from({ length: n + 1 }, (_, i) => i);
     const tradVals = yrs.map((y) => fv(c, y) * (1 - later));
     const rothVals = yrs.map((y) => fv(c * (1 - now), y));
-    const t = tradVals[n], ro = rothVals[n];
+    const tr = tradVals[n], ro = rothVals[n];
     $("rv-now").textContent = Math.round(now * 100) + "%";
     $("rv-roth").textContent = FG.money(ro);
-    $("rv-trad").textContent = FG.money(t);
+    $("rv-trad").textContent = FG.money(tr);
     Charts.line($("rv-chart"), {
-      x: yrs, xFormat: (y) => `Yr ${y}`, label: "After-tax value: Roth vs Traditional",
-      series: [{ name: "Roth (tax-free)", color: "--series-1", values: rothVals }, { name: `Traditional (after ${Math.round(later * 100)}% tax)`, color: "--series-2", values: tradVals }],
-      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => `After ${i} year${i === 1 ? "" : "s"}`,
+      x: yrs, xFormat: (y) => t("Yr {n}", { n: y }), label: t("After-tax value: Roth vs Traditional"),
+      series: [{ name: t("Roth (tax-free)"), color: "--series-1", values: rothVals }, { name: t("Traditional (after {pct}% tax)", { pct: Math.round(later * 100) }), color: "--series-2", values: tradVals }],
+      yFormat: FG.compact, tipFormat: (v) => FG.money(v), tipTitle: (i) => t(i === 1 ? "After {n} year" : "After {n} years", { n: i }),
     });
     const [p0, p1] = ROTH_PHASEOUT[status];
     const winner = Math.abs(now - later) < 0.001 ? "tie" : now < later ? "roth" : "trad";
-    $("rv-insight").innerHTML = `Your taxable income is about ${FG.money(taxable)}, putting you in the <strong>${Math.round(now * 100)}%</strong> bracket today. `
-      + (winner === "tie" ? "Same tax rate now and later — <strong>Roth and Traditional come out even</strong>. Roth gives more flexibility; Traditional lowers today's tax bill."
-        : winner === "roth" ? `You expect a <strong>higher</strong> rate later (${Math.round(later * 100)}%), so <strong>Roth wins</strong> by about ${FG.money(ro - t)}: pay tax now while it's cheap.`
-        : `You expect a <strong>lower</strong> rate later (${Math.round(later * 100)}%), so <strong>Traditional wins</strong> by about ${FG.money(t - ro)}: take the deduction now.`)
-      + (income > p0 ? ` <br>⚠️ Heads-up: Roth IRA contributions phase out between ${FG.money(p0)} and ${FG.money(p1)} of modified AGI for your filing status (a Roth 401(k) has no income limit).` : "");
+    $("rv-insight").innerHTML = t("Your taxable income is about {taxable}, putting you in the <strong>{rate}%</strong> bracket today.", { taxable: FG.money(taxable), rate: Math.round(now * 100) }) + " "
+      + (winner === "tie" ? t("Same tax rate now and later — <strong>Roth and Traditional come out even</strong>. Roth gives more flexibility; Traditional lowers today's tax bill.")
+        : winner === "roth" ? t("You expect a <strong>higher</strong> rate later ({later}%), so <strong>Roth wins</strong> by about {diff}: pay tax now while it's cheap.", { later: Math.round(later * 100), diff: FG.money(ro - tr) })
+        : t("You expect a <strong>lower</strong> rate later ({later}%), so <strong>Traditional wins</strong> by about {diff}: take the deduction now.", { later: Math.round(later * 100), diff: FG.money(tr - ro) }))
+      + (income > p0 ? " <br>" + t("⚠️ Heads-up: Roth IRA contributions phase out between {p0} and {p1} of modified AGI for your filing status (a Roth 401(k) has no income limit).", { p0: FG.money(p0), p1: FG.money(p1) }) : "");
   }
   ["rv-status", "rv-income", "rv-contrib", "rv-later", "rv-years", "rv-return"].forEach((id) => $(id).addEventListener("input", roth));
 
@@ -134,4 +135,5 @@
   let tm;
   addEventListener("resize", () => { clearTimeout(tm); tm = setTimeout(() => { retire(); roth(); }, 150); });
   document.addEventListener("themechange", () => { retire(); roth(); });
+  document.addEventListener("langchange", () => { retire(); roth(); });
 })();
